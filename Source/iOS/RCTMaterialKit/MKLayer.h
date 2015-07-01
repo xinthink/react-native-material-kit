@@ -38,7 +38,10 @@ typedef NS_ENUM(short, MKRippleLocation) {
 #define MKTimingEaseOut [MKTimingFunction easeOut]
 
 
-@interface MKLayer : NSObject
+@interface RCTMKLayer : NSObject
+
+extern NSString *const RCTPasteboardChangedNotification;
+extern NSString *const RCTPasteboardWatcherWillExpireNotification;
 
 @property MKRippleLocation rippleLocation;
 @property float ripplePercent;

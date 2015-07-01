@@ -13,11 +13,12 @@
 #import "MKLayer.h"
 
 @interface MKButton : UIButton {
-    MKLayer *_mkLayer;
+    RCTMKLayer *_mkLayer;
 }
 
 @property BOOL maskEnabled;
 @property MKRippleLocation rippleLocation;
+@property NSString *rippleLocationByName;
 @property float ripplePercent;
 @property float backgroundLayerCornerRadius;
 @property float cornerRadius;
@@ -29,6 +30,7 @@
 @property float backgroundAniDuration;
 @property float shadowAniDuration;
 @property MKTimingFunction *rippleAniTimingFunction;
+@property NSString *rippleAniTimingFunctionByName;
 @property MKTimingFunction *backgroundAniTimingFunction;
 @property MKTimingFunction *shadowAniTimingFunction;
 
@@ -36,7 +38,8 @@
 @property UIColor *rippleLayerColor;
 @property UIColor *backgroundLayerColor;
 
-- (MKLayer *)mkLayer;
+- (RCTMKLayer *)mkLayer;
+- (void)setBounds:(CGRect)bounds;
 
 @end
 

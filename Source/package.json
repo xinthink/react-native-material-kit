@@ -1,0 +1,24 @@
+{
+  "name": "react-native-material-kit",
+  "version": "0.1.0",
+  "description": "Material Design components for React Native",
+  "main": "Lib/index.ios.js",
+  "author": "Yingxin Wu <yingxinwu.g@gmail.com>",
+  "keywords": [
+    "react",
+    "native",
+    "react-native",
+    "react-native-component",
+    "material design",
+    "MaterialKit"
+  ],
+  "homepage": "https://github.com/xinthink/react-native-material-kit",
+  "bugs": "https://github.com/xinthink/react-native-material-kit/issues",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/xinthink/react-native-material-kit.git"
+  },
+  "peerDependencies": {
+    "react-native": "^0.4.4"
+  }
+}

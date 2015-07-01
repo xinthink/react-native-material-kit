@@ -12,12 +12,14 @@
 
 @synthesize maskEnabled;
 @synthesize rippleLocation;
+@synthesize rippleLocationByName;
 @synthesize ripplePercent;
 @synthesize backgroundLayerCornerRadius;
 @synthesize cornerRadius;
 @synthesize backgroundAniEnabled;
 @synthesize rippleLayerColor;
 @synthesize backgroundLayerColor;
+@synthesize rippleAniTimingFunctionByName;
 
 - (instancetype)init {
     if (self = [super init]) {
@@ -80,6 +82,24 @@
     return rippleLocation;
 }
 
+- (void)setRippleLocationByName:(NSString *)name {
+    if ([@"tapLocation" isEqual:name]) {
+        self.rippleLocation = MKRippleTapLocation;
+    } else if ([@"center" isEqual:name]) {
+        self.rippleLocation = MKRippleCenter;
+    } else if ([@"left" isEqual:name]) {
+        self.rippleLocation = MKRippleLeft;
+    } else if ([@"right" isEqual:name]) {
+        self.rippleLocation = MKRippleRight;
+    } else {
+        NSLog(@"unknown ripple location: %@", name);
+    }
+}
+
+- (NSString*)rippleLocationByName {
+    return nil;
+}
+
 - (void)setRipplePercent:(float)percent {
     ripplePercent = percent;
     self.mkLayer.ripplePercent = percent;
@@ -98,9 +118,9 @@
     return backgroundLayerCornerRadius;
 }
 
-- (MKLayer *)mkLayer {
+- (RCTMKLayer *)mkLayer {
     if (!_mkLayer) {
-        _mkLayer = [[MKLayer alloc] initWithSuperLayer:self.layer];
+        _mkLayer = [[RCTMKLayer alloc] initWithSuperLayer:self.layer];
     }
     
     return _mkLayer;
@@ -117,8 +137,26 @@
     return backgroundAniEnabled;
 }
 
+- (void)setRippleAniTimingFunctionByName:(NSString *)name {
+    if ([@"linear" isEqual:name]) {
+        self.rippleAniTimingFunction = MKTimingLinear;
+    } else if ([@"easeIn" isEqual:name]) {
+        self.rippleAniTimingFunction = MKTimingEaseIn;
+    } else if ([@"easeOut" isEqual:name]) {
+        self.rippleAniTimingFunction = MKTimingEaseOut;
+    } else {
+        NSLog(@"unkonwn timing function name: %@", name);
+    }
+}
+
+- (NSString*)rippleAniTimingFunctionByName {
+    return self.rippleAniTimingFunction.name;
+}
+
 - (void)setCornerRadius:(float)radius {
     cornerRadius = radius;
+    self.layer.cornerRadius = radius;
+    self.backgroundLayerCornerRadius = radius;
     [self.mkLayer setMaskLayerCornerRadius:radius];
 }
 
