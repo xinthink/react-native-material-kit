@@ -4,7 +4,7 @@
 
 This is a port of [MaterialKit](https://github.com/nghialv/MaterialKit) (written in Swift) to Objective-C, so that it can be used in [React Native](https://facebook.github.io/react-native) projects, as a static library.
 
-Thanks to [@nghialv](https://github.com/nghialv) for the great work!
+Thanks to the great work of [@nghialv](https://github.com/nghialv)!
 
 
 ## Ready components
