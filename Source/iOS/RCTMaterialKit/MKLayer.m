@@ -133,6 +133,10 @@ static MKTimingFunction *_easeOut = nil;
     return self;
 }
 
+- (void)dealloc {
+    [_superLayer removeObserver:self forKeyPath:@"bounds"];
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary *)change
