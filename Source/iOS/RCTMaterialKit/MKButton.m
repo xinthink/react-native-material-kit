@@ -8,18 +8,9 @@
 
 #import "MKButton.h"
 
-@implementation MKButton
-
-@synthesize maskEnabled;
-@synthesize rippleLocation;
-@synthesize rippleLocationByName;
-@synthesize ripplePercent;
-@synthesize backgroundLayerCornerRadius;
-@synthesize cornerRadius;
-@synthesize backgroundAniEnabled;
-@synthesize rippleLayerColor;
-@synthesize backgroundLayerColor;
-@synthesize rippleAniTimingFunctionByName;
+@implementation MKButton {
+    MKLayerSupport *_mkLayerSupport;
+}
 
 - (instancetype)init {
     if (self = [super init]) {
@@ -43,14 +34,15 @@
 }
 
 - (void)setupLayer {
+    _mkLayerSupport = [[MKLayerSupport alloc] initWithUIView:self];
     self.adjustsImageWhenHighlighted = false;
-    
+
     // default properties
     self.maskEnabled = true;
     self.ripplePercent = 0.9;
     self.rippleLocation = MKRippleTapLocation;
     self.cornerRadius = 2.5;
-    
+
     self.shadowAniEnabled = true;
     self.backgroundAniEnabled = true;
     self.rippleAniDuration = 0.75;
@@ -59,160 +51,122 @@
     self.rippleAniTimingFunction = MKTimingLinear;
     self.backgroundAniTimingFunction = MKTimingLinear;
     self.shadowAniTimingFunction = MKTimingEaseOut;
-    
+
     self.rippleLayerColor = [UIColor colorWithWhite:0.45 alpha:0.5];
     self.backgroundLayerColor = [UIColor colorWithWhite:0.75 alpha:0.25];
 }
 
+
 - (void)setMaskEnabled:(BOOL)enabled {
-    maskEnabled = enabled;
-    [self.mkLayer enableMask:enabled];
+    _mkLayerSupport.maskEnabled = enabled;
 }
 
 - (BOOL)maskEnabled {
-    return maskEnabled;
+    return _mkLayerSupport.maskEnabled;
 }
 
 - (void)setRippleLocation:(MKRippleLocation)location {
-    rippleLocation = location;
-    self.mkLayer.rippleLocation = location;
+    _mkLayerSupport.rippleLocation = location;
 }
 
 - (MKRippleLocation)rippleLocation {
-    return rippleLocation;
+    return _mkLayerSupport.rippleLocation;
 }
 
 - (void)setRippleLocationByName:(NSString *)name {
-    if ([@"tapLocation" isEqual:name]) {
-        self.rippleLocation = MKRippleTapLocation;
-    } else if ([@"center" isEqual:name]) {
-        self.rippleLocation = MKRippleCenter;
-    } else if ([@"left" isEqual:name]) {
-        self.rippleLocation = MKRippleLeft;
-    } else if ([@"right" isEqual:name]) {
-        self.rippleLocation = MKRippleRight;
-    } else {
-        NSLog(@"unknown ripple location: %@", name);
-    }
+    _mkLayerSupport.rippleLocationByName = name;
 }
 
 - (NSString*)rippleLocationByName {
-    return nil;
+    return _mkLayerSupport.rippleLocationByName;
 }
 
 - (void)setRipplePercent:(float)percent {
-    ripplePercent = percent;
-    self.mkLayer.ripplePercent = percent;
+    _mkLayerSupport.ripplePercent = percent;
 }
 
 - (float)ripplePercent {
-    return ripplePercent;
+    return _mkLayerSupport.ripplePercent;
 }
 
 - (void)setBackgroundLayerCornerRadius:(float)radius {
-    backgroundLayerCornerRadius = radius;
-    [self.mkLayer setBackgroundLayerCornerRadius:radius];
+    _mkLayerSupport.backgroundLayerCornerRadius = radius;
 }
 
 - (float)backgroundLayerCornerRadius {
-    return backgroundLayerCornerRadius;
-}
-
-- (RCTMKLayer *)mkLayer {
-    if (!_mkLayer) {
-        _mkLayer = [[RCTMKLayer alloc] initWithSuperLayer:self.layer];
-    }
-    
-    return _mkLayer;
+    return _mkLayerSupport.backgroundLayerCornerRadius;
 }
 
 - (void)setBackgroundAniEnabled:(BOOL)enabled {
-    backgroundAniEnabled = enabled;
-    if (!backgroundAniEnabled) {
-        [self.mkLayer enableOnlyCircleLayer];
-    }
+    _mkLayerSupport.backgroundAniEnabled = enabled;
 }
 
 - (BOOL)backgroundAniEnabled {
-    return backgroundAniEnabled;
+    return _mkLayerSupport.backgroundAniEnabled;
 }
 
 - (void)setRippleAniTimingFunctionByName:(NSString *)name {
-    if ([@"linear" isEqual:name]) {
-        self.rippleAniTimingFunction = MKTimingLinear;
-    } else if ([@"easeIn" isEqual:name]) {
-        self.rippleAniTimingFunction = MKTimingEaseIn;
-    } else if ([@"easeOut" isEqual:name]) {
-        self.rippleAniTimingFunction = MKTimingEaseOut;
-    } else {
-        NSLog(@"unkonwn timing function name: %@", name);
-    }
+    _mkLayerSupport.rippleAniTimingFunctionByName = name;
 }
 
 - (NSString*)rippleAniTimingFunctionByName {
-    return self.rippleAniTimingFunction.name;
+    return _mkLayerSupport.rippleAniTimingFunctionByName;
 }
 
 - (void)setCornerRadius:(float)radius {
-    cornerRadius = radius;
-    self.layer.cornerRadius = radius;
-    self.backgroundLayerCornerRadius = radius;
-    [self.mkLayer setMaskLayerCornerRadius:radius];
+    _mkLayerSupport.cornerRadius = radius;
 }
 
 - (float)cornerRadius {
-    return cornerRadius;
+    return _mkLayerSupport.cornerRadius;
 }
 
 - (void)setRippleLayerColor:(UIColor *)color {
-    rippleLayerColor = color;
-    [self.mkLayer setCircleLayerColor:color];
+    _mkLayerSupport.rippleLayerColor = color;
 }
 
-- (UIColor *)rippleLayerColor { return rippleLayerColor; }
+- (UIColor *)rippleLayerColor {
+    return _mkLayerSupport.rippleLayerColor;
+}
 
 - (void)setBackgroundLayerColor:(UIColor *)color {
-    backgroundLayerColor = color;
-    [self.mkLayer setBackgroundLayerColor:color];
+    _mkLayerSupport.backgroundLayerColor = color;
 }
 
-- (UIColor *)backgroundLayerColor { return backgroundLayerColor; }
-
-- (void)setBounds:(CGRect)bounds {
-    [super setBounds:bounds];
-    [self.mkLayer superLayerDidResize];
+- (UIColor *)backgroundLayerColor {
+    return _mkLayerSupport.backgroundLayerColor;
 }
 
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch
                      withEvent:(UIEvent *)event {
-    if (rippleLocation == MKRippleTapLocation) {
-        [self.mkLayer didChangeTapLocation:[touch locationInView:self]];
+    if (self.rippleLocation == MKRippleTapLocation) {
+        [_mkLayerSupport.mkLayer didChangeTapLocation:[touch locationInView:self]];
     }
-    
+
     // rippleLayer animation
-    [self.mkLayer animateScaleForCircleLayer:@0.45
+    [_mkLayerSupport.mkLayer animateScaleForCircleLayer:@0.45
                                      toScale:@1.0
                               timingFunction:self.rippleAniTimingFunction
                                     duration:self.rippleAniDuration];
-    
+
     // backgroundLayer animation
-    if (backgroundAniEnabled) {
-        [self.mkLayer animateAlphaForBackgroundLayer:self.backgroundAniTimingFunction
+    if (self.backgroundAniEnabled) {
+        [_mkLayerSupport.mkLayer animateAlphaForBackgroundLayer:self.backgroundAniTimingFunction
                                             duration:self.backgroundAniDuration];
     }
-    
+
     // shadow animation for self
     if (self.shadowAniEnabled) {
         id shadowRadius = [NSNumber numberWithDouble:self.layer.shadowRadius];
         id shadowOpacity = [NSNumber numberWithDouble:self.layer.shadowOpacity];
-        [self.mkLayer animateSuperLayerShadow:@10
+        [_mkLayerSupport.mkLayer animateSuperLayerShadow:@10
                                      toRadius:shadowRadius
                                   fromOpacity:@0
                                     toOpacity:shadowOpacity
                                timingFunction:self.shadowAniTimingFunction
                                      duration:self.shadowAniDuration];
     }
-    
+
     return [super beginTrackingWithTouch:touch withEvent:event];
 }
 

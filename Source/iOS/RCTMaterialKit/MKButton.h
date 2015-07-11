@@ -12,9 +12,7 @@
 @import UIKit;
 #import "MKLayer.h"
 
-@interface MKButton : UIButton {
-    RCTMKLayer *_mkLayer;
-}
+@interface MKButton : UIButton
 
 @property BOOL maskEnabled;
 @property MKRippleLocation rippleLocation;
@@ -37,9 +35,6 @@
 // color
 @property UIColor *rippleLayerColor;
 @property UIColor *backgroundLayerColor;
-
-- (RCTMKLayer *)mkLayer;
-- (void)setBounds:(CGRect)bounds;
 
 @end
 

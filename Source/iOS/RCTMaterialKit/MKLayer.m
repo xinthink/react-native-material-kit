@@ -336,3 +336,164 @@ static MKTimingFunction *_easeOut = nil;
 }
 
 @end
+
+
+@implementation MKLayerSupport {
+    UIView *_view;
+}
+
+@synthesize mkLayer = _mkLayer;
+@synthesize maskEnabled;
+@synthesize rippleLocation;
+@synthesize rippleLocationByName;
+@synthesize ripplePercent;
+@synthesize backgroundLayerCornerRadius;
+@synthesize cornerRadius;
+@synthesize backgroundAniEnabled;
+@synthesize rippleLayerColor;
+@synthesize backgroundLayerColor;
+@synthesize rippleAniTimingFunctionByName;
+
+- (instancetype)initWithUIView:(UIView *)view {
+    if (self = [super init]) {
+        _view = view;
+        [self setupLayer];
+    }
+    return self;
+}
+
+- (void)setupLayer {
+    // default properties
+    self.maskEnabled = true;
+    self.ripplePercent = 1;
+    self.rippleLocation = MKRippleTapLocation;
+    self.cornerRadius = 2.5;
+    
+    self.shadowAniEnabled = true;
+    self.backgroundAniEnabled = true;
+    self.rippleAniDuration = 0.75;
+    self.backgroundAniDuration = 1;
+    self.shadowAniDuration = 0.65;
+    self.rippleAniTimingFunction = MKTimingLinear;
+    self.backgroundAniTimingFunction = MKTimingLinear;
+    self.shadowAniTimingFunction = MKTimingEaseOut;
+    
+    self.rippleLayerColor = [UIColor colorWithWhite:0.45 alpha:0.5];
+    self.backgroundLayerColor = [UIColor colorWithWhite:0.75 alpha:0.25];
+}
+
+- (RCTMKLayer *)mkLayer {
+    if (!_mkLayer) {
+        _mkLayer = [[RCTMKLayer alloc] initWithSuperLayer:_view.layer];
+    }
+    
+    return _mkLayer;
+}
+
+- (void)setMaskEnabled:(BOOL)enabled {
+    maskEnabled = enabled;
+    [self.mkLayer enableMask:enabled];
+}
+
+- (BOOL)maskEnabled {
+    return maskEnabled;
+}
+
+- (void)setRippleLocation:(MKRippleLocation)location {
+    rippleLocation = location;
+    self.mkLayer.rippleLocation = location;
+}
+
+- (MKRippleLocation)rippleLocation {
+    return rippleLocation;
+}
+
+- (void)setRippleLocationByName:(NSString *)name {
+    if ([@"tapLocation" isEqual:name]) {
+        self.rippleLocation = MKRippleTapLocation;
+    } else if ([@"center" isEqual:name]) {
+        self.rippleLocation = MKRippleCenter;
+    } else if ([@"left" isEqual:name]) {
+        self.rippleLocation = MKRippleLeft;
+    } else if ([@"right" isEqual:name]) {
+        self.rippleLocation = MKRippleRight;
+    } else {
+        NSLog(@"unknown ripple location: %@", name);
+    }
+}
+
+- (NSString*)rippleLocationByName {
+    return nil;
+}
+
+- (void)setRipplePercent:(float)percent {
+    ripplePercent = percent;
+    self.mkLayer.ripplePercent = percent;
+}
+
+- (float)ripplePercent {
+    return ripplePercent;
+}
+
+- (void)setBackgroundLayerCornerRadius:(float)radius {
+    backgroundLayerCornerRadius = radius;
+    [self.mkLayer setBackgroundLayerCornerRadius:radius];
+}
+
+- (float)backgroundLayerCornerRadius {
+    return backgroundLayerCornerRadius;
+}
+
+- (void)setBackgroundAniEnabled:(BOOL)enabled {
+    backgroundAniEnabled = enabled;
+    if (!backgroundAniEnabled) {
+        [self.mkLayer enableOnlyCircleLayer];
+    }
+}
+
+- (BOOL)backgroundAniEnabled {
+    return backgroundAniEnabled;
+}
+
+- (void)setRippleAniTimingFunctionByName:(NSString *)name {
+    if ([@"linear" isEqual:name]) {
+        self.rippleAniTimingFunction = MKTimingLinear;
+    } else if ([@"easeIn" isEqual:name]) {
+        self.rippleAniTimingFunction = MKTimingEaseIn;
+    } else if ([@"easeOut" isEqual:name]) {
+        self.rippleAniTimingFunction = MKTimingEaseOut;
+    } else {
+        NSLog(@"unkonwn timing function name: %@", name);
+    }
+}
+
+- (NSString*)rippleAniTimingFunctionByName {
+    return self.rippleAniTimingFunction.name;
+}
+
+- (void)setCornerRadius:(float)radius {
+    cornerRadius = radius;
+    _view.layer.cornerRadius = radius;
+    self.backgroundLayerCornerRadius = radius;
+    [self.mkLayer setMaskLayerCornerRadius:radius];
+}
+
+- (float)cornerRadius {
+    return cornerRadius;
+}
+
+- (void)setRippleLayerColor:(UIColor *)color {
+    rippleLayerColor = color;
+    [self.mkLayer setCircleLayerColor:color];
+}
+
+- (UIColor *)rippleLayerColor { return rippleLayerColor; }
+
+- (void)setBackgroundLayerColor:(UIColor *)color {
+    backgroundLayerColor = color;
+    [self.mkLayer setBackgroundLayerColor:color];
+}
+
+- (UIColor *)backgroundLayerColor { return backgroundLayerColor; }
+
+@end

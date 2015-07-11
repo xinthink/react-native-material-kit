@@ -73,4 +73,38 @@ extern NSString *const RCTPasteboardWatcherWillExpireNotification;
 - (void)animateMaskLayerShadow;
 @end
 
+
+/*
+ * Utils to help maintaining layers
+ */
+@interface MKLayerSupport : NSObject
+
+- (instancetype)initWithUIView:(UIView*)view;
+
+@property (readonly) RCTMKLayer *mkLayer;
+
+@property BOOL maskEnabled;
+@property MKRippleLocation rippleLocation;
+@property NSString *rippleLocationByName;
+@property float ripplePercent;
+@property float backgroundLayerCornerRadius;
+@property float cornerRadius;
+
+// animations
+@property BOOL shadowAniEnabled;
+@property BOOL backgroundAniEnabled;
+@property float rippleAniDuration;
+@property float backgroundAniDuration;
+@property float shadowAniDuration;
+@property MKTimingFunction *rippleAniTimingFunction;
+@property NSString *rippleAniTimingFunctionByName;
+@property MKTimingFunction *backgroundAniTimingFunction;
+@property MKTimingFunction *shadowAniTimingFunction;
+
+// color
+@property UIColor *rippleLayerColor;
+@property UIColor *backgroundLayerColor;
+
+@end
+
 #endif
