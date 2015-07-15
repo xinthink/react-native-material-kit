@@ -9,5 +9,22 @@
 #ifndef RCTMaterialKit_MKUtils_h
 #define RCTMaterialKit_MKUtils_h
 
+@import Foundation;
+
+static inline NSString* trim(NSString *str) {
+    return [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+}
+
+static inline BOOL isBlank(NSString *str) {
+    return str == Nil || trim(str).length == 0;
+}
+
+static inline BOOL isNotBlank(NSString *str) {
+    return !isBlank(str);
+}
+
+static inline BOOL isEqual(CGFloat a, CGFloat b) {
+    return fabs(a - b) <= 1E-6;
+}
 
 #endif

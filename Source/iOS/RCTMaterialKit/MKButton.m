@@ -38,22 +38,7 @@
     self.adjustsImageWhenHighlighted = false;
 
     // default properties
-    self.maskEnabled = true;
     self.ripplePercent = 0.9;
-    self.rippleLocation = MKRippleTapLocation;
-    self.cornerRadius = 2.5;
-
-    self.shadowAniEnabled = true;
-    self.backgroundAniEnabled = true;
-    self.rippleAniDuration = 0.75;
-    self.backgroundAniDuration = 1;
-    self.shadowAniDuration = 0.65;
-    self.rippleAniTimingFunction = MKTimingLinear;
-    self.backgroundAniTimingFunction = MKTimingLinear;
-    self.shadowAniTimingFunction = MKTimingEaseOut;
-
-    self.rippleLayerColor = [UIColor colorWithWhite:0.45 alpha:0.5];
-    self.backgroundLayerColor = [UIColor colorWithWhite:0.75 alpha:0.25];
 }
 
 

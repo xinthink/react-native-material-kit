@@ -90,6 +90,7 @@ static MKTimingFunction *_easeOut = nil;
     CALayer *_backgroundLayer;
     CALayer *_rippleLayer;
     CAShapeLayer *_maskLayer;
+    MKLayerResizedCallback _resizedCallback;
 }
 
 @synthesize rippleLocation;
@@ -135,6 +136,7 @@ static MKTimingFunction *_easeOut = nil;
 
 - (void)dealloc {
     [_superLayer removeObserver:self forKeyPath:@"bounds"];
+    _resizedCallback = Nil;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -146,6 +148,10 @@ static MKTimingFunction *_easeOut = nil;
     if ([@"bounds" isEqual:keyPath]) {
         [self superLayerDidResize];
     }
+}
+
+- (void)onResized:(MKLayerResizedCallback)callback {
+    _resizedCallback = callback;
 }
 
 - (void)setRippleLocation:(MKRippleLocation)location {
@@ -223,6 +229,10 @@ static MKTimingFunction *_easeOut = nil;
     [self updateRippleLocation];
 //    [self setCircleLayerLocationAt:CGPointMake(_superLayer.bounds.size.width / 2,
 //                                               _superLayer.bounds.size.height / 2)];
+    
+    if (_resizedCallback) {
+        _resizedCallback(_superLayer.bounds);
+    }
 }
 
 - (void)enableOnlyCircleLayer {

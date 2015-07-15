@@ -5,6 +5,7 @@
 
 var React = require('react-native');
 var { requireNativeComponent } = React;
+var MKPropTypes = require('./MKPropTypes');
 
 class MKButton extends React.Component {
   render() {
@@ -13,34 +14,7 @@ class MKButton extends React.Component {
 }
 
 MKButton.propTypes = {
-
-  shadowColor: React.PropTypes.string,
-  shadowOffset: React.PropTypes.objectOf({
-    width: React.PropTypes.number,
-    height: React.PropTypes.number,
-  }),
-  shadowOpacity: React.PropTypes.number,
-  shadowRadius: React.PropTypes.number,
-
-  cornerRadius: React.PropTypes.number,
-  maskEnabled: React.PropTypes.bool,
-  backgroundColor: React.PropTypes.string,
-  backgroundLayerColor: React.PropTypes.string,
-  backgroundLayerCornerRadius: React.PropTypes.number,
-  backgroundAniEnabled: React.PropTypes.bool,
-  ripplePercent: React.PropTypes.number,
-  rippleLayerColor: React.PropTypes.string,
-  rippleAniTimingFunction: React.PropTypes.oneOf([
-    'linear',
-    'easeIn',
-    'easeOut',
-  ]),
-  rippleLocation: React.PropTypes.oneOf([
-    'tapLocation',
-    'center',
-    'left',
-    'right',
-  ]),
+  ...MKPropTypes,
 };
 
 var NativeButton = requireNativeComponent('MKButton', MKButton);

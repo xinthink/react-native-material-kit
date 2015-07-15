@@ -38,6 +38,8 @@ typedef NS_ENUM(short, MKRippleLocation) {
 #define MKTimingEaseOut [MKTimingFunction easeOut]
 
 
+typedef void (^MKLayerResizedCallback)(CGRect);
+
 @interface RCTMKLayer : NSObject
 
 extern NSString *const RCTPasteboardChangedNotification;
@@ -71,6 +73,7 @@ extern NSString *const RCTPasteboardWatcherWillExpireNotification;
                  timingFunction:(MKTimingFunction*)timingFunction
                        duration:(CFTimeInterval)duration;
 - (void)animateMaskLayerShadow;
+- (void)onResized:(MKLayerResizedCallback)callback;
 @end
 
 
