@@ -19,4 +19,9 @@ It's the very begining of the project, few components are ready for now.
 
 ![float-buttons](https://cloud.githubusercontent.com/assets/390805/8467915/4da90948-2097-11e5-9f4a-bc02da152774.gif)
 
+### Text Fields
+
+![textfields](https://cloud.githubusercontent.com/assets/390805/8715858/2f420854-2bbb-11e5-8ec9-9ff35b6fdeed.gif)
+
+
 There is more work to be done, contributions are welcome!
