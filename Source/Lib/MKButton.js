@@ -4,17 +4,33 @@
 'use strict';
 
 var React = require('react-native');
-var { requireNativeComponent } = React;
+var {
+  requireNativeComponent,
+  TouchableWithoutFeedback,
+} = React;
 var MKPropTypes = require('./MKPropTypes');
 
 class MKButton extends React.Component {
   render() {
-    return <NativeButton {...this.props} />;
+    var touchableProps = {};
+    if (!this.props.disabled) {
+      touchableProps.onPress = this.props.onPress;
+      touchableProps.onPressIn = this.props.onPressIn;
+      touchableProps.onPressOut = this.props.onPressOut;
+      touchableProps.onLongPress = this.props.onLongPress;
+    }
+
+    return (
+      <TouchableWithoutFeedback {...touchableProps}>
+        <NativeButton {...this.props} />
+      </TouchableWithoutFeedback>
+    );
   }
 }
 
 MKButton.propTypes = {
   ...MKPropTypes,
+  disabled: React.PropTypes.bool,
 };
 
 var NativeButton = requireNativeComponent('MKButton', MKButton);

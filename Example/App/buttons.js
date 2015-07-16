@@ -29,6 +29,9 @@ var Buttons = React.createClass({
           shadowColor="gray"
           shadowOffset={{width:0, height:2.5}}
           style={styles.button}
+          onPress={() => {
+            console.log('hi, raised button!');
+          }}
           >
           <Text pointerEvents="none" style={{color: 'white'}}>
             RAISED BUTTON
