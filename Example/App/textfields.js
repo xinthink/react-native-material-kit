@@ -14,6 +14,7 @@ var {
 
 var {
   MKTextField,
+  MKColor,
 } = require('react-native-material-kit');
 
 var TextFields = React.createClass({
@@ -31,20 +32,20 @@ var TextFields = React.createClass({
           style={styles.textField}
           placeholder="Floating hint"
           cornerRadius={0}
-          tintColor="#2196F3"
-          rippleLayerColor="#03A9F4"
+          tintColor={MKColor.Blue}
+          rippleLayerColor={MKColor.LightBlue}
           rippleLocation="right"
           floatingPlaceholderEnabled={true}
           />
         <MKTextField
           style={[styles.textField, {
             borderWidth: 1,
-            borderColor: '#4CAF50'
+            borderColor: MKColor.Green,
           }]}
           placeholder="Floating hint"
           cornerRadius={1}
-          tintColor="#8BC34A"
-          rippleLayerColor="#8BC34A"
+          tintColor={MKColor.LightGreen}
+          rippleLayerColor={MKColor.LightGreen}
           rippleLocation="left"
           floatingPlaceholderEnabled={true}
           />
@@ -52,12 +53,12 @@ var TextFields = React.createClass({
           style={styles.textField}
           placeholder="Floating hint"
           cornerRadius={1}
-          tintColor="#00BCD4"
-          rippleLayerColor="#009688"
+          tintColor={MKColor.Cyan}
+          rippleLayerColor={MKColor.Teal}
           floatingPlaceholderEnabled={true}
-          floatingLabelTextColor="teal"
+          floatingLabelTextColor={MKColor.Teal}
           bottomBorderEnabled={true}
-          bottomBorderColor="teal"
+          bottomBorderColor={MKColor.Teal}
           />
       </ScrollView>
     );

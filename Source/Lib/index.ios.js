@@ -3,3 +3,4 @@
  */
 exports.MKButton = require('./MKButton');
 exports.MKTextField = require('./MKTextField');
+exports.MKColor = require('./MKColor');

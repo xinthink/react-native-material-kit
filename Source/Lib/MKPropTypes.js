@@ -3,14 +3,25 @@
  */
 var { PropTypes } = require('react-native');
 
-module.exports = {
+var dimen = PropTypes.objectOf({
+  width: PropTypes.number,
+  height: PropTypes.number,
+});
+
+var aniTimingFunc = PropTypes.oneOf([
+  'linear',
+  'easeIn',
+  'easeOut',
+]);
+
+var mkLayerPropTypes = {
+  // FIXME naming conflicts with built-in properties, such as shadowOffset
+  // lead to runtime warning: Failed propType: typeChecker is not a function Check the render method of xxx
   shadowColor: PropTypes.string,
-  shadowOffset: PropTypes.objectOf({
-    width: PropTypes.number,
-    height: PropTypes.number,
-  }),
+  shadowOffset: dimen,
   shadowOpacity: PropTypes.number,
   shadowRadius: PropTypes.number,
+  shadowPathEnabled: PropTypes.bool,
 
   cornerRadius: PropTypes.number,
   maskEnabled: PropTypes.bool,
@@ -20,15 +31,16 @@ module.exports = {
   backgroundAniEnabled: PropTypes.bool,
   ripplePercent: PropTypes.number,
   rippleLayerColor: PropTypes.string,
-  rippleAniTimingFunction: PropTypes.oneOf([
-    'linear',
-    'easeIn',
-    'easeOut',
-  ]),
+  rippleAniTimingFunction: aniTimingFunc,
   rippleLocation: PropTypes.oneOf([
     'tapLocation',
     'center',
     'left',
     'right',
   ]),
-}
+};
+
+
+exports.dimen = dimen;
+exports.aniTimingFunc = aniTimingFunc;
+exports.mkLayerPropTypes = mkLayerPropTypes;

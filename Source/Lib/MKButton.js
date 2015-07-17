@@ -29,7 +29,7 @@ class MKButton extends React.Component {
 }
 
 MKButton.propTypes = {
-  ...MKPropTypes,
+  ...MKPropTypes.mkLayerPropTypes,
   disabled: React.PropTypes.bool,
 };
 

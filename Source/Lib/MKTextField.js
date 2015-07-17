@@ -16,14 +16,11 @@ class MKTextField extends React.Component {
 }
 
 MKTextField.propTypes = {
-  ...MKPropTypes,
+  ...MKPropTypes.mkLayerPropTypes,
 
   text: PropTypes.string,
   placeholder: PropTypes.string,
-  padding: PropTypes.objectOf({
-    width: PropTypes.number,
-    height: PropTypes.number,
-  }),
+  padding: MKPropTypes.dimen,
   floatingPlaceholderEnabled: PropTypes.bool,
   floatingLabelBottomMargin: PropTypes.number,
   floatingLabelTextColor: PropTypes.string,
