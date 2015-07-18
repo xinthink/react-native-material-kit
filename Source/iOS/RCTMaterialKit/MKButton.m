@@ -50,6 +50,14 @@
     return _mkLayerSupport.maskEnabled;
 }
 
+- (void)setShadowPathEnabled:(BOOL)enabled {
+    _mkLayerSupport.shadowPathEnabled = enabled;
+}
+
+- (BOOL)shadowPathEnabled {
+    return _mkLayerSupport.shadowPathEnabled;
+}
+
 - (void)setRippleLocation:(MKRippleLocation)location {
     _mkLayerSupport.rippleLocation = location;
 }

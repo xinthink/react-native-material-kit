@@ -20,6 +20,7 @@
 @property float ripplePercent;
 @property float backgroundLayerCornerRadius;
 @property float cornerRadius;
+@property BOOL shadowPathEnabled;  // avoid shadow under text when there's a translucent background
 
 // animations
 @property BOOL shadowAniEnabled;

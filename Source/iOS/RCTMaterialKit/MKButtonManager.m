@@ -25,6 +25,7 @@ RCT_REMAP_VIEW_PROPERTY(shadowColor, layer.shadowColor, CGColor);
 RCT_REMAP_VIEW_PROPERTY(shadowOffset, layer.shadowOffset, CGSize);
 RCT_REMAP_VIEW_PROPERTY(shadowOpacity, layer.shadowOpacity, float);
 RCT_REMAP_VIEW_PROPERTY(shadowRadius, layer.shadowRadius, CGFloat);
+RCT_EXPORT_VIEW_PROPERTY(shadowPathEnabled, BOOL);
 
 RCT_EXPORT_VIEW_PROPERTY(cornerRadius, float);
 RCT_EXPORT_VIEW_PROPERTY(maskEnabled, BOOL);

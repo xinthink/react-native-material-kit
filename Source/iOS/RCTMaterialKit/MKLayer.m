@@ -134,6 +134,16 @@ static MKTimingFunction *_easeOut = nil;
     return self;
 }
 
+- (void)updateShadow {
+    if (!self.shadowPathEnabled) {
+        return;
+    }
+    
+    // TODO support box-shadow
+    CGRect shadowRect = CGRectMake(0, CGRectGetHeight(_superLayer.bounds), CGRectGetWidth(_superLayer.bounds), 1);
+    _superLayer.shadowPath = CGPathCreateWithRect(shadowRect, NULL);
+}
+
 - (void)dealloc {
     [_superLayer removeObserver:self forKeyPath:@"bounds"];
     _resizedCallback = Nil;
@@ -144,7 +154,7 @@ static MKTimingFunction *_easeOut = nil;
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-    NSLog(@"value changed %@ %@", keyPath, change);
+//    NSLog(@"value changed %@ %@", keyPath, change);
     if ([@"bounds" isEqual:keyPath]) {
         [self superLayerDidResize];
     }
@@ -227,8 +237,7 @@ static MKTimingFunction *_easeOut = nil;
     [self setMaskLayerCornerRadius:_superLayer.cornerRadius];
     [CATransaction commit];
     [self updateRippleLocation];
-//    [self setCircleLayerLocationAt:CGPointMake(_superLayer.bounds.size.width / 2,
-//                                               _superLayer.bounds.size.height / 2)];
+    [self updateShadow];
     
     if (_resizedCallback) {
         _resizedCallback(_superLayer.bounds);
@@ -385,9 +394,9 @@ static MKTimingFunction *_easeOut = nil;
     
     self.shadowAniEnabled = true;
     self.backgroundAniEnabled = true;
-    self.rippleAniDuration = 0.75;
+    self.rippleAniDuration = 1;
     self.backgroundAniDuration = 1;
-    self.shadowAniDuration = 0.65;
+    self.shadowAniDuration = 0.8;
     self.rippleAniTimingFunction = MKTimingLinear;
     self.backgroundAniTimingFunction = MKTimingLinear;
     self.shadowAniTimingFunction = MKTimingEaseOut;
@@ -411,6 +420,14 @@ static MKTimingFunction *_easeOut = nil;
 
 - (BOOL)maskEnabled {
     return maskEnabled;
+}
+
+- (void)setShadowPathEnabled:(BOOL)enabled {
+    self.mkLayer.shadowPathEnabled = enabled;
+}
+
+- (BOOL)shadowPathEnabled {
+    return self.mkLayer.shadowPathEnabled;
 }
 
 - (void)setRippleLocation:(MKRippleLocation)location {

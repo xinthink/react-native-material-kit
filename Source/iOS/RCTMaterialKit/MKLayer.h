@@ -47,6 +47,7 @@ extern NSString *const RCTPasteboardWatcherWillExpireNotification;
 
 @property MKRippleLocation rippleLocation;
 @property float ripplePercent;
+@property BOOL shadowPathEnabled;  // avoid shadow under text when there's a translucent background
 
 - (id)initWithSuperLayer:(CALayer *)superLayer;
 
@@ -92,6 +93,7 @@ extern NSString *const RCTPasteboardWatcherWillExpireNotification;
 @property float ripplePercent;
 @property float backgroundLayerCornerRadius;
 @property float cornerRadius;
+@property BOOL shadowPathEnabled;
 
 // animations
 @property BOOL shadowAniEnabled;
