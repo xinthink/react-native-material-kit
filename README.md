@@ -44,7 +44,7 @@ var ColoredRaisedButton = MKButton.coloredButton()
 <ColoredRaisedButton/>
 ```
 
-Or you can definitely build customized buttons from scratch.
+And you can definitely build customized buttons from scratch.
 
 with builder:
 
@@ -69,7 +69,7 @@ var CustomButton = new MKButton.Builder()
 <CustomButton/>
 ```
 
-equivalent jsx:
+jsx equivalent:
 
 ```jsx
 <MKButton
@@ -89,7 +89,7 @@ equivalent jsx:
 </MKButton>
 ```
 
-Please refer to [the complete example](https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/textfields.js) for details.
+Please refer to [the complete example](https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/buttons.js) for details.
 
 
 ### Text Fields
