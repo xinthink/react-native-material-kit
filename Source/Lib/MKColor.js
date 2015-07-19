@@ -24,5 +24,6 @@ module.exports = {
   Grey: '#9E9E9E',
   BlueGrey: '#607D8B',
 
+  Transparent: 'rgba(0,0,0,0)',
   Silver: '#EAEAEA',  // opacity plain button background
 };

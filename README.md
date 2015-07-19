@@ -1,15 +1,20 @@
 # [Material Design](http://www.google.com/design/spec/material-design/introduction.html) components for [React Native](https://facebook.github.io/react-native)
 
-[![DUB](https://img.shields.io/dub/l/vibe-d.svg)](https://raw.githubusercontent.com/xinthink/react-native-material-kit/master/LICENSE.md)
+[![react-native](https://img.shields.io/badge/react--native-v0.7.1-05A5D1.svg)](https://facebook.github.io/react-native "tested react-native version")
+[![DUB](https://img.shields.io/dub/l/vibe-d.svg)](https://raw.githubusercontent.com/xinthink/react-native-material-kit/master/LICENSE.md "MIT")
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/xinthink/react-native-material-kit/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 This is a port of [MaterialKit](https://github.com/nghialv/MaterialKit) (written in Swift) to Objective-C, so that it can be used in [React Native](https://facebook.github.io/react-native) projects, as a static library.
 
 Thanks to the great work of [@nghialv](https://github.com/nghialv)!
 
+<script data-gratipay-username="xinthink"
+        data-gratipay-widget="button"
+        src="//grtp.co/v1.js"></script>
 
 ## Getting Started
 
-`CD` to your React Native project,
+`cd` to your React Native project,
 
 1. `npm i -S react-native-material-kit`
 2. Add `node_modules/react-native-material-kit/iOS/RCTMaterialKit.xcodeproj` to your xcode project, usually under the `Libraries` group
@@ -20,55 +25,71 @@ Thanks to the great work of [@nghialv](https://github.com/nghialv)!
 
 ## Components
 
-It's the very begining of the project, few components are ready for now.
-
 ### Buttons
 
-![buttons](https://cloud.githubusercontent.com/assets/390805/8454632/a65ec8ae-2031-11e5-93ba-f95874aa3fa3.gif)
+![buttons-mdl](https://cloud.githubusercontent.com/assets/390805/8761525/08593298-2d88-11e5-98dc-6180a5122b1f.gif)
 
-[Example code](https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/buttons.js):
+Apply [Material Design Buttons](http://www.getmdl.io/components/index.html#buttons-section) with minimum codes, using pre-defined builders, which comply with [Material Design Lite default theme](http://www.getmdl.io/customize/index.html).
+
+```jsx
+// colored button with default theme (configurable)
+var ColoredRaisedButton = MKButton.coloredButton()
+  .withText('BUTTON')
+  .withOnPress(() => {
+    console.log("Hi, it's a colored button!");
+  })
+  .build();
+
+...
+<ColoredRaisedButton/>
+```
+
+Or you can definitely build customized buttons from scratch.
+
+with builder:
+
+```jsx
+var CustomButton = new MKButton.Builder()
+  .withBackgroundColor(MKColor.Teal)
+  .withShadowRadius(2)
+  .withShadowOffset({width:0, height:2})
+  .withShadowOpacity(.7)
+  .withShadowColor('black')
+  .withOnPress(() => {
+    console.log('hi, raised button!');
+  })
+  .withTextStyle({
+    color: 'white',
+    fontWeight: 'bold',
+  })
+  .withText('RAISED BUTTON')
+  .build();
+
+...
+<CustomButton/>
+```
+
+equivalent jsx:
 
 ```jsx
 <MKButton
-  backgroundColor={"#3E50B4"}
-  cornerRadius={3.0}
-  shadowRadius={3.0}
-  shadowOpacity={0.55}
-  shadowColor="gray"
-  shadowOffset={{width:0, height:2.5}}
-  style={styles.button}
+  backgroundColor={MKColor.Teal}
+  shadowRadius={2}
+  shadowOffset={{width:0, height:2}}
+  shadowOpacity={.7}
+  shadowColor="black"
   onPress={() => {
     console.log('hi, raised button!');
   }}
   >
-  <Text pointerEvents="none" style={{color: 'white'}}>
+  <Text pointerEvents="none"
+        style={{color: 'white', fontWeight: 'bold',}}>
     RAISED BUTTON
   </Text>
 </MKButton>
 ```
 
-
-### Floating Buttons
-
-![float-buttons](https://cloud.githubusercontent.com/assets/390805/8467915/4da90948-2097-11e5-9f4a-bc02da152774.gif)
-
-[Example code](https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/buttons.js):
-
-```jsx
-<MKButton
-  backgroundColor={"#009688"}
-  cornerRadius={24}
-  shadowRadius={3.5}
-  shadowOpacity={0.75}
-  shadowColor="black"
-  shadowOffset={{width:1, height:5.5}}
-  style={styles.floatButton}
-  >
-  <Text pointerEvents="none" style={styles.textPlus}>
-    +
-  </Text>
-</MKButton>
-```
+Please refer to [the complete example](https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/textfields.js) for details.
 
 
 ### Text Fields
@@ -89,4 +110,4 @@ It's the very begining of the project, few components are ready for now.
 ```
 
 
-There is more work to be done, contributions are welcome!
+It's the very begining of the project, more work to be done, contributions are welcome!

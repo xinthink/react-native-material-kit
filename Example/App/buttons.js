@@ -4,95 +4,116 @@
 'use strict';
 
 var React = require('react-native');
+var MK = require('react-native-material-kit');
 
 var {
   StyleSheet,
   Text,
   View,
   ScrollView,
+  Image,
 } = React;
 
 var {
   MKButton,
-} = require('react-native-material-kit');
+  MKColor,
+} = MK;
+
+// customize the material design theme
+// MK.setTheme({
+//   primaryColor: MKColor.Teal,
+//   accentColor: MKColor.Purple,
+// });
 
 var Buttons = React.createClass({
   render: function() {
+    var ColoredRaisedButton = MKButton.coloredButton()
+      .withText('BUTTON')
+      .withOnPress(() => {
+        console.log("Hi, it's a colored button!");
+      })
+      .build();
+    var AccentColoredRaisedButton = MKButton.accentColoredButton()
+      .build();
+    var PlainRaisedButton = MKButton.button()
+      .withText('BUTTON')
+      .build();
+    var FlatButton = MKButton.flatButton()
+      .withText('BUTTON')
+      .build();
+    var ColoredFlatButton = MKButton.coloredFlatButton()
+      .withText('BUTTON')
+      .build();
+    var AccentColoredFlatButton = MKButton.accentColoredFlatButton()
+      .withText('BUTTON')
+      .build();
+
+    var ColoredFab = MKButton.coloredFab()
+      .withStyle(styles.fab)
+      .withCornerRadius(21)  // cannot get style by id since react-native 0.7, set corner radius explicitly
+      .build();
+    var AccentColoredFab = MKButton.accentColoredFab()
+      .withStyle(styles.fab)
+      .withCornerRadius(21)  // cannot get style by id since react-native 0.7, set corner radius explicitly
+      .build();
+    var PlainFab = MKButton.plainFab()
+      .withStyle(styles.fab)
+      .withCornerRadius(21)  // cannot get style by id since react-native 0.7, set corner radius explicitly
+      .build();
+
     return (
       <ScrollView style={styles.scrollView}
                   contentContainerStyle={styles.container}>
-        <MKButton
-          backgroundColor={"#3E50B4"}
-          cornerRadius={3.0}
-          shadowRadius={3.0}
-          shadowOpacity={0.55}
-          shadowColor="gray"
-          shadowOffset={{width:0, height:2.5}}
-          style={styles.button}
-          onPress={() => {
-            console.log('hi, raised button!');
-          }}
-          >
-          <Text pointerEvents="none" style={{color: 'white'}}>
-            RAISED BUTTON
-          </Text>
-        </MKButton>
-        <MKButton
-          backgroundLayerColor={"cyan"}
-          cornerRadius={3.0}
-          backgroundColor={'rgba(0, 0, 0, 0)'}
-          shadowRadius={3.0}
-          shadowOpacity={0.5}
-          shadowColor="black"
-          shadowOffset={{width:0, height:2.5}}
-          style={styles.button}
-          >
-          <Text pointerEvents="none" style={{fontWeight: 'bold', color: '#3E50B4'}}>
-            FLAT BUTTON
-          </Text>
-        </MKButton>
-        <MKButton
-          backgroundAniEnabled={false}
-          maskEnabled={false}
-          ripplePercent={0.3}
-          rippleLocation={'center'}
-          rippleAniTimingFunction={'easeOut'}
-          style={[styles.button, {marginTop: 15}]}
-          >
-          <Text pointerEvents="none" style={{fontWeight: 'bold', color: 'chartreuse'}}>
-            FLAT BUTTON
-          </Text>
-        </MKButton>
-        <MKButton
-          backgroundColor={"#009688"}
-          cornerRadius={24}
-          shadowRadius={3.5}
-          shadowOpacity={0.75}
-          shadowColor="black"
-          shadowOffset={{width:1, height:5.5}}
-          style={styles.floatButton}
-          >
-          <Text pointerEvents="none" style={styles.textPlus}>
-            +
-          </Text>
-        </MKButton>
-        <MKButton
-          backgroundColor={"#EF4481"}
-          cornerRadius={24}
-          backgroundLayerCornerRadius={24}
-          maskEnabled={false}
-          ripplePercent={1.75}
-          rippleLocation={'center'}
-          shadowRadius={3.5}
-          shadowOpacity={0.75}
-          shadowColor="black"
-          shadowOffset={{width:1, height:5.5}}
-          style={styles.floatButton}
-          >
-          <Text pointerEvents="none" style={styles.textPlus}>
-            +
-          </Text>
-        </MKButton>
+        <View style={styles.row}>
+          <View style={styles.col}>
+            <PlainRaisedButton/>
+            <Text style={styles.legendLabel}>Raised button</Text>
+          </View>
+          <View style={styles.col}>
+            <ColoredRaisedButton/>
+            <Text style={styles.legendLabel}>Colored</Text>
+          </View>
+          <View style={styles.col}>
+            <AccentColoredRaisedButton>
+              <Text pointerEvents="none" style={styles.buttonText}>BUTTON</Text>
+            </AccentColoredRaisedButton>
+            <Text style={styles.legendLabel}>Accent colored</Text>
+          </View>
+        </View>
+        <View style={styles.row}>
+          <View style={styles.col}>
+            <PlainFab>
+              <Image pointerEvents="none" source={require('image!plus-dark')} />
+            </PlainFab>
+            <Text style={styles.legendLabel}>Plain FAB</Text>
+          </View>
+          <View style={styles.col}>
+            <ColoredFab>
+              <Image pointerEvents="none" source={require('image!plus-white')} />
+            </ColoredFab>
+            <Text style={styles.legendLabel}>Colored</Text>
+          </View>
+          <View style={styles.col}>
+            <AccentColoredFab>
+              <Image pointerEvents="none" source={require('image!plus-white')} />
+            </AccentColoredFab>
+            <Text style={styles.legendLabel}>Accent colored</Text>
+          </View>
+        </View>
+        <View style={styles.row}>
+          <View style={styles.col}>
+            <FlatButton/>
+            <Text style={styles.legendLabel}>Flat button</Text>
+          </View>
+          <View style={styles.col}>
+            <ColoredFlatButton/>
+            <Text style={styles.legendLabel}>Colored</Text>
+          </View>
+          <View style={styles.col}>
+            <AccentColoredFlatButton/>
+            <Text style={styles.legendLabel}>Accent colored</Text>
+          </View>
+        </View>
       </ScrollView>
     );
   }
@@ -104,8 +125,18 @@ var styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: 'stretch',
     backgroundColor: '#F5FCFF',
+    padding: 20,
+  },
+  row: {
+    flexDirection: 'row',
+  },
+  col: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginLeft: 7, marginRight: 7,
   },
   welcome: {
     fontSize: 20,
@@ -115,29 +146,22 @@ var styles = StyleSheet.create({
   instructions: {
     textAlign: 'center',
     color: '#333333',
-    marginTop: 20, marginBottom: 0,
+    marginTop: 10, marginBottom: 20,
   },
-  button: {
-    width: 200,
-    marginTop: 25,
-    paddingLeft: 25, paddingRight: 25,
-    paddingTop: 15, paddingBottom: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
+  legendLabel: {
+    textAlign: 'center',
+    color: '#333333',
+    marginTop: 10, marginBottom: 20,
+    fontSize: 12,
   },
-  floatButton: {
-    marginTop: 25,
-    width: 48, height: 48,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textPlus: {
-    fontFamily: 'Arial',
-    fontSize: 26,
+  buttonText: {
+    fontSize: 14,
     fontWeight: 'bold',
     color: 'white',
-    textAlign: 'center',
   },
+  fab: {
+    width: 42, height: 42,
+  }
 });
 
 module.exports = Buttons;
