@@ -19,11 +19,9 @@
 @property CGFloat floatingLabelBottomMargin;
 @property BOOL floatingPlaceholderEnabled;
 @property UIFont *floatingLabelFont;
-@property UIColor *floatingLabelTextColor;
 @property BOOL bottomBorderEnabled;
 @property CGFloat bottomBorderWidth;
-@property CGFloat bottomBorderHighlightWidth;
-@property UIColor *bottomBorderColor;
+@property UIColor *highlightColor;
 
 
 // -------------------------------

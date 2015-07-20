@@ -28,9 +28,9 @@ RCT_EXPORT_VIEW_PROPERTY(floatingLabelBottomMargin, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(floatingLabelTextColor, UIColor)
 RCT_EXPORT_VIEW_PROPERTY(bottomBorderEnabled, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(bottomBorderWidth, CGFloat)
-RCT_EXPORT_VIEW_PROPERTY(bottomBorderHighlightWidth, CGFloat)
-RCT_EXPORT_VIEW_PROPERTY(bottomBorderColor, UIColor)
+RCT_EXPORT_VIEW_PROPERTY(highlightColor, UIColor)
 RCT_EXPORT_VIEW_PROPERTY(tintColor, UIColor)
+RCT_EXPORT_VIEW_PROPERTY(textColor, UIColor)
 
 // -----------------------------
 // common MKLayer properties

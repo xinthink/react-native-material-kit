@@ -26,9 +26,9 @@ MKTextField.propTypes = {
   floatingLabelTextColor: PropTypes.string,
   bottomBorderEnabled: PropTypes.bool,
   bottomBorderWidth: PropTypes.number,
-  bottomBorderHighlightWidth: PropTypes.number,
-  bottomBorderColor: PropTypes.string,
+  highlightColor: PropTypes.string,
   tintColor: PropTypes.string,
+  textColor: PropTypes.string,
 };
 
 var NativeTextField = requireNativeComponent('MKTextField', MKTextField);

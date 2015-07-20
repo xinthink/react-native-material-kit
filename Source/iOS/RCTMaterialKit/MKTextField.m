@@ -11,7 +11,7 @@
 @implementation MKTextField {
     MKLayerSupport *_mkLayerSupport;
     UILabel *_floatingLabel;
-    CALayer *_bottomBorderLayer;
+    CALayer *_bottomBorderLayer, *_bottomBorderHighlightLayer;
 }
 
 @synthesize padding;
@@ -41,24 +41,25 @@
 - (void)setupLayer {
     _mkLayerSupport = [[MKLayerSupport alloc] initWithUIView:self];
     [_mkLayerSupport.mkLayer onResized:^(CGRect bounds) {
-        [self updateBottomLayerSize:bounds];
+        [self resizeBottomBorder:bounds];
     }];
     
     // default properties
     self.layer.borderWidth = 1;
     self.borderStyle = UITextBorderStyleNone;
+    self.tintColor = [UIColor lightGrayColor];
+    self.rippleEnabled = false;
     
-    self.padding = CGSizeMake(5, 5);
+    self.padding = CGSizeMake(2, 2);
     self.floatingLabelBottomMargin = 2;
     self.floatingPlaceholderEnabled = false;
     self.bottomBorderWidth = 1;
-    self.bottomBorderHighlightWidth = 1.75;
-    self.bottomBorderColor = [UIColor lightGrayColor];
+    self.highlightColor = [UIColor blueColor];
+    self.bottomBorderEnabled = true;
     
     // floating label
     _floatingLabel = [[UILabel alloc] init];
     self.floatingLabelFont = [UIFont boldSystemFontOfSize:10];
-    self.floatingLabelTextColor = [UIColor lightGrayColor];
     _floatingLabel.alpha = 0.0;
     [self updateFloatingLabelText];
     [self addSubview:_floatingLabel];
@@ -70,11 +71,12 @@
     
     if (enabled) {
         _bottomBorderLayer = [[CALayer alloc] init];
-        CGRect initSize = CGRectMake(0, CGRectGetHeight(self.bounds) - 1, CGRectGetWidth(self.bounds), 1);
-        [self updateBottomLayerSize:initSize];
-//        _bottomBorderLayer?.backgroundColor = UIColor.MKColor.Grey.CGColor  // TODO MKColor
-        _bottomBorderLayer.backgroundColor = [[UIColor lightGrayColor] CGColor];
+        [self resizeBottomBorder:self.bounds];
+        _bottomBorderLayer.backgroundColor = self.tintColor.CGColor;
         [self.layer addSublayer:_bottomBorderLayer];
+        
+        _bottomBorderHighlightLayer = [[CALayer alloc] init];
+        [self.layer addSublayer:_bottomBorderHighlightLayer];
     }
 }
 
@@ -82,12 +84,40 @@
     return bottomBorderEnabled;
 }
 
-- (void)updateBottomLayerSize:(CGRect)bounds {
-    _bottomBorderLayer.frame = bounds;
+- (void)resizeBottomBorder:(CGRect)bounds {
+    _bottomBorderLayer.frame = CGRectMake(0, CGRectGetHeight(bounds) - self.bottomBorderWidth,
+                                          CGRectGetWidth(bounds), self.bottomBorderWidth);
+}
+
+- (void)animateBottomBorder {
+    BOOL isFirstRsp = [self isFirstResponder];
+    CGRect bounds = _bottomBorderLayer.frame;
+    CGRect destRect;
+    CGPoint center = CGPointMake(CGRectGetWidth(bounds)/2, bounds.origin.y);
+    
+    if (isFirstRsp) {
+        _bottomBorderHighlightLayer.frame = CGRectMake(center.x, center.y, 0, CGRectGetHeight(bounds));
+        destRect = bounds;
+    } else {
+        _bottomBorderHighlightLayer.frame = bounds;
+        destRect = CGRectMake(center.x, center.y, 0, CGRectGetHeight(bounds));
+    }
+    
+    _bottomBorderHighlightLayer.backgroundColor = self.highlightColor.CGColor;
+    [UIView animateWithDuration:1
+                          delay:0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         _bottomBorderHighlightLayer.frame = destRect;
+                     }
+                     completion: nil];
 }
 
 - (void)removeBottomLayer {
     if (_bottomBorderLayer) {
+        [_bottomBorderHighlightLayer removeFromSuperlayer];
+        _bottomBorderHighlightLayer = nil;
+        
         [_bottomBorderLayer removeFromSuperlayer];
         _bottomBorderLayer = nil;
     }
@@ -171,30 +201,20 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    if (!self.floatingPlaceholderEnabled) {
-        return;
-    }
-    
-    BOOL isFirstRsp = [self isFirstResponder];
-    if (isNotBlank(self.text)) {
-        _floatingLabel.textColor = isFirstRsp ? self.tintColor : self.floatingLabelTextColor;
-        if (isEqual(_floatingLabel.alpha, 0)) {
-            [self showFloatingLabel];
+    if (self.floatingPlaceholderEnabled) {
+        if (isNotBlank(self.text)) {
+            _floatingLabel.textColor = self.highlightColor;
+            if (isEqual(_floatingLabel.alpha, 0)) {
+                [self showFloatingLabel];
+            }
+        } else {
+            [self hideFloatingLabel];
         }
-    } else {
-        [self hideFloatingLabel];
     }
     
-    if (!_bottomBorderLayer) {
-        return;
+    if (_bottomBorderLayer) {
+        [self animateBottomBorder];
     }
-    _bottomBorderLayer.backgroundColor = isFirstRsp ? self.tintColor.CGColor : self.bottomBorderColor.CGColor;
-    CGFloat borderWidth = isFirstRsp ? self.bottomBorderHighlightWidth : self.bottomBorderWidth;
-    [self updateBottomLayerSize:CGRectMake(0,
-                                           CGRectGetHeight(self.layer.bounds) - borderWidth,
-                                           CGRectGetWidth(self.layer.bounds),
-                                           borderWidth)];
-    
 }
 
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch
