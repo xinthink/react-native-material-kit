@@ -17,8 +17,9 @@
 
 @property CGSize padding;
 @property CGFloat floatingLabelBottomMargin;
-@property BOOL floatingPlaceholderEnabled;
+@property BOOL floatingLabelEnabled;
 @property UIFont *floatingLabelFont;
+//@property UIFont *placeholderFont;
 @property BOOL bottomBorderEnabled;
 @property CGFloat bottomBorderWidth;
 @property UIColor *highlightColor;

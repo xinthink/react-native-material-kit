@@ -41,18 +41,18 @@
 - (void)setupLayer {
     _mkLayerSupport = [[MKLayerSupport alloc] initWithUIView:self];
     [_mkLayerSupport.mkLayer onResized:^(CGRect bounds) {
-        [self resizeBottomBorder:bounds];
+        [self onResized:bounds];
     }];
     
     // default properties
-    self.layer.borderWidth = 1;
+    self.layer.borderWidth = 0;
     self.borderStyle = UITextBorderStyleNone;
     self.tintColor = [UIColor lightGrayColor];
     self.rippleEnabled = false;
     
     self.padding = CGSizeMake(2, 2);
     self.floatingLabelBottomMargin = 2;
-    self.floatingPlaceholderEnabled = false;
+    self.floatingLabelEnabled = false;
     self.bottomBorderWidth = 1;
     self.highlightColor = [UIColor blueColor];
     self.bottomBorderEnabled = true;
@@ -61,8 +61,8 @@
     _floatingLabel = [[UILabel alloc] init];
     self.floatingLabelFont = [UIFont boldSystemFontOfSize:10];
     _floatingLabel.alpha = 0.0;
-    [self updateFloatingLabelText];
     [self addSubview:_floatingLabel];
+//    self.placeholderFont = [UIFont boldSystemFontOfSize:12];
 }
 
 - (void)setBottomBorderEnabled:(BOOL)enabled {
@@ -71,7 +71,7 @@
     
     if (enabled) {
         _bottomBorderLayer = [[CALayer alloc] init];
-        [self resizeBottomBorder:self.bounds];
+        [self onResized:self.bounds];
         _bottomBorderLayer.backgroundColor = self.tintColor.CGColor;
         [self.layer addSublayer:_bottomBorderLayer];
         
@@ -84,7 +84,8 @@
     return bottomBorderEnabled;
 }
 
-- (void)resizeBottomBorder:(CGRect)bounds {
+- (void)onResized:(CGRect)bounds {
+//    _placeholderBounds = [self placeholderRectForBounds:bounds];
     _bottomBorderLayer.frame = CGRectMake(0, CGRectGetHeight(bounds) - self.bottomBorderWidth,
                                           CGRectGetWidth(bounds), self.bottomBorderWidth);
 }
@@ -104,7 +105,7 @@
     }
     
     _bottomBorderHighlightLayer.backgroundColor = self.highlightColor.CGColor;
-    [UIView animateWithDuration:1
+    [UIView animateWithDuration:.3
                           delay:0
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
@@ -132,17 +133,19 @@
 }
 
 - (void)setPlaceholder:(NSString *)placeholder {
-    [super setPlaceholder:placeholder];
-    [self updateFloatingLabelText];
+     super.placeholder = placeholder;
+//    self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder
+//                                                                 attributes:@{NSForegroundColorAttributeName:[UIColor lightGrayColor],
+//                                                                              NSFontAttributeName: self.placeholderFont}];
+    [self updateFloatingLabelText:placeholder];
 }
 
-- (void)updateFloatingLabelText {
-    _floatingLabel.text = self.placeholder;
+- (void)updateFloatingLabelText:(NSString*)text {
+    _floatingLabel.text = text;
     [_floatingLabel sizeToFit];
-    [self setFloatingLabelOverlapTextField];
 }
 
-- (void)setFloatingLabelOverlapTextField {
+- (CGRect)getFloatingLabelFrame {
     CGRect textRect = [self textRectForBounds:self.bounds];
     CGFloat originX = textRect.origin.x;
     CGFloat textWidth = CGRectGetWidth(textRect);
@@ -155,27 +158,67 @@
         default:
             break;
     }
-    _floatingLabel.frame = CGRectMake(originX, padding.height,
-                                      CGRectGetWidth(_floatingLabel.frame),
-                                      CGRectGetHeight(_floatingLabel.frame));
+    return CGRectMake(originX, padding.height,
+                      CGRectGetWidth(_floatingLabel.frame),
+                      CGRectGetHeight(_floatingLabel.frame));
+}
+
+- (CGRect)getPlaceholderFrame {
+    CGRect textRect = [self placeholderRectForBounds:self.bounds];
+    CGFloat originX = textRect.origin.x;
+    CGFloat textHeight = CGRectGetHeight(textRect);
+    CGFloat labelHeight = CGRectGetHeight(_floatingLabel.bounds);
+    CGFloat originY = textHeight/2 - labelHeight/2;
+    return CGRectMake(originX, originY,
+                      CGRectGetWidth(_floatingLabel.frame),
+                      CGRectGetHeight(_floatingLabel.frame));
 }
 
 - (void)showFloatingLabel {
-    CGRect curFrame = _floatingLabel.frame;
-    _floatingLabel.frame = CGRectMake(curFrame.origin.x, CGRectGetHeight(self.bounds)/2,
-                                      CGRectGetWidth(curFrame), CGRectGetHeight(curFrame));
-    [UIView animateWithDuration:0.45
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseIn
+    if (isNotEqual(_floatingLabel.alpha, 0)) {
+        return;
+    }
+    
+    _floatingLabel.frame = [self getPlaceholderFrame];
+    _floatingLabel.textColor = [UIColor lightGrayColor];
+    [self setPlaceholderColor:[UIColor colorWithWhite:0 alpha:0]];
+    
+    [UIView animateWithDuration:.3
+                          delay:0
+                        options:UIViewAnimationOptionCurveLinear
                      animations:^{
-                         _floatingLabel.alpha = 1.0;
-                         _floatingLabel.frame = curFrame;
+                         _floatingLabel.alpha = 1;
+                         _floatingLabel.frame = [self getFloatingLabelFrame];
+                         _floatingLabel.textColor = self.highlightColor;
+//                         _floatingLabel.font = self.floatingLabelFont;
                      }
-                     completion: nil];
+                     completion:nil];
 }
 
 - (void)hideFloatingLabel {
-    _floatingLabel.alpha = 0.0;
+    if (isNotEqual(_floatingLabel.alpha, 1) || isNotBlank(self.text)) {
+        return;
+    }
+    
+    [UIView animateWithDuration:.3
+                          delay:0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         _floatingLabel.alpha = 0;
+                         _floatingLabel.frame = [self getPlaceholderFrame];
+                         _floatingLabel.textColor = [UIColor lightGrayColor];
+//                         _floatingLabel.font = self.placeholderFont;
+                     }
+                     completion:^(BOOL finished){
+                         if (finished) {
+                             [self setPlaceholderColor:[UIColor lightGrayColor]];
+                         }
+                     }];
+}
+
+- (void)setPlaceholderColor:(UIColor*)color {
+    self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.placeholder
+                                                                 attributes:@{NSForegroundColorAttributeName:color}];
 }
 
 - (CGRect)textRectForBounds:(CGRect)bounds {
@@ -183,14 +226,12 @@
     CGRect newRect = CGRectMake(rect.origin.x + padding.width, rect.origin.y,
                                 rect.size.width - 2 * padding.width, rect.size.height);
     
-    if (!_floatingPlaceholderEnabled) {
+    if (!_floatingLabelEnabled) {
         return newRect;
     }
     
-    if (isNotBlank(self.text)) {
-        CGFloat dTop = _floatingLabel.font.lineHeight + _floatingLabelBottomMargin;
-        newRect = UIEdgeInsetsInsetRect(newRect, UIEdgeInsetsMake(dTop, 0, 0, 0));
-    }
+    CGFloat dTop = _floatingLabel.font.lineHeight + _floatingLabelBottomMargin;
+    newRect = UIEdgeInsetsInsetRect(newRect, UIEdgeInsetsMake(dTop, 0, 0, 0));
     return newRect;
 }
 
@@ -200,20 +241,23 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
-    if (self.floatingPlaceholderEnabled) {
-        if (isNotBlank(self.text)) {
-            _floatingLabel.textColor = self.highlightColor;
-            if (isEqual(_floatingLabel.alpha, 0)) {
-                [self showFloatingLabel];
-            }
-        } else {
-            [self hideFloatingLabel];
-        }
-    }
+
+    [self layoutFloatingLabel];
     
     if (_bottomBorderLayer) {
         [self animateBottomBorder];
+    }
+}
+
+- (void)layoutFloatingLabel {
+    if (!self.floatingLabelEnabled) {
+        return;
+    }
+    
+    if ([self isFirstResponder]) {
+        [self showFloatingLabel];
+    } else {
+        [self hideFloatingLabel];
     }
 }
 

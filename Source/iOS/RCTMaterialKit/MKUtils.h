@@ -27,4 +27,8 @@ static inline BOOL isEqual(CGFloat a, CGFloat b) {
     return fabs(a - b) <= 1E-6;
 }
 
+static inline BOOL isNotEqual(CGFloat a, CGFloat b) {
+    return !isEqual(a, b);
+}
+
 #endif

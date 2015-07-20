@@ -21,7 +21,7 @@ MKTextField.propTypes = {
   text: PropTypes.string,
   placeholder: PropTypes.string,
   padding: MKPropTypes.dimen,
-  floatingPlaceholderEnabled: PropTypes.bool,
+  floatingLabelEnabled: PropTypes.bool,
   floatingLabelBottomMargin: PropTypes.number,
   floatingLabelTextColor: PropTypes.string,
   bottomBorderEnabled: PropTypes.bool,
