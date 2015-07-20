@@ -9,6 +9,7 @@ var theme = {
   accentColor: MKColor.Pink,
   bgPlain: 'rgba(158,158,158,.2)',
   bgDisabled: 'rgba(0,0,0,.12)',
+  fontColor: 'rgb(117, 117, 117)',
   fontSize: 14,
 };
 

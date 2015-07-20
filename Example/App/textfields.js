@@ -4,6 +4,7 @@
 'use strict';
 
 var React = require('react-native');
+var MK = require('react-native-material-kit');
 
 var {
   StyleSheet,
@@ -13,53 +14,57 @@ var {
 } = React;
 
 var {
+  setTheme,
   MKTextField,
   MKColor,
-} = require('react-native-material-kit');
+} = MK;
 
 var TextFields = React.createClass({
   render: function() {
+
+    var Textfield = MKTextField.textfield()
+      .withPlaceholder('Text...')
+      .withStyle(styles.textfield)
+      .build();
+
+    var TextfieldWithFloatingLabel = MKTextField.textfieldWithFloatingLabel()
+      .withPlaceholder('Text...')
+      .withStyle(styles.textfieldWithFloatingLabel)
+      .build();
+
+    var TextfieldWithRipple = MKTextField.textfieldWithRipple()
+      .withPlaceholder('Text...')
+      .withStyle(styles.textfield)
+      .build();
+
+    var TextfieldWithRippleAndFloatingLabel = MKTextField.textfieldWithRippleAndFloatingLabel()
+      .withPlaceholder('Text...')
+      .withStyle(styles.textfieldWithFloatingLabel)
+      .build();
+
     return (
       <ScrollView style={styles.scrollView}
                   contentContainerStyle={styles.container}>
-        <MKTextField
-          style={[styles.textField, {
-            backgroundColor: '#E0E0E0',
-          }]}
-          placeholder="Hint text"
-          />
-        <MKTextField
-          style={styles.textField}
-          placeholder="Floating hint"
-          cornerRadius={0}
-          tintColor={MKColor.Blue}
-          rippleLayerColor={MKColor.LightBlue}
-          rippleLocation="right"
-          floatingPlaceholderEnabled={true}
-          />
-        <MKTextField
-          style={[styles.textField, {
-            borderWidth: 1,
-            borderColor: MKColor.Green,
-          }]}
-          placeholder="Floating hint"
-          cornerRadius={1}
-          tintColor={MKColor.LightGreen}
-          rippleLayerColor={MKColor.LightGreen}
-          rippleLocation="left"
-          floatingPlaceholderEnabled={true}
-          />
-        <MKTextField
-          style={styles.textField}
-          placeholder="Floating hint"
-          cornerRadius={1}
-          tintColor={MKColor.Cyan}
-          rippleLayerColor={MKColor.Teal}
-          floatingPlaceholderEnabled={true}
-          floatingLabelTextColor={MKColor.Teal}
-          bottomBorderEnabled={true}
-          bottomBorderColor={MKColor.Teal}
-          />
+        <View style={styles.row}>
+          <View style={styles.col}>
+            <Textfield/>
+            <Text style={styles.legendLabel}>Textfiled</Text>
+          </View>
+          <View style={styles.col}>
+            <TextfieldWithRipple/>
+            <Text style={styles.legendLabel}>With ripple</Text>
+          </View>
+        </View>
+        <View style={styles.row}>
+          <View style={styles.col}>
+            <TextfieldWithFloatingLabel/>
+            <Text style={styles.legendLabel}>With floating label</Text>
+          </View>
+          <View style={styles.col}>
+            <TextfieldWithRippleAndFloatingLabel/>
+            <Text style={styles.legendLabel}>Ripple + floating label</Text>
+          </View>
+        </View>
       </ScrollView>
     );
   }
@@ -71,8 +76,18 @@ var styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: 'stretch',
     backgroundColor: '#F5FCFF',
+    padding: 20,
+  },
+  row: {
+    flexDirection: 'row',
+  },
+  col: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginLeft: 7, marginRight: 7,
   },
   welcome: {
     fontSize: 20,
@@ -82,34 +97,23 @@ var styles = StyleSheet.create({
   instructions: {
     textAlign: 'center',
     color: '#333333',
-    marginTop: 20, marginBottom: 0,
+    marginTop: 10, marginBottom: 20,
   },
-  button: {
-    width: 200,
-    marginTop: 25,
-    paddingLeft: 25, paddingRight: 25,
-    paddingTop: 15, paddingBottom: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  floatButton: {
-    marginTop: 25,
-    width: 48, height: 48,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textPlus: {
-    fontFamily: 'Arial',
-    fontSize: 26,
-    fontWeight: 'bold',
-    color: 'white',
+  legendLabel: {
     textAlign: 'center',
+    color: '#333333',
+    marginTop: 10, marginBottom: 10,
+    fontSize: 12,
   },
-  textField: {
-    width: 200,
+  textfield: {
+    width: 80,
     marginTop: 18,
-    height: 36,
-    borderWidth: 0,
+    height: 28,
+  },
+  textfieldWithFloatingLabel: {
+    width: 80,
+    marginTop: 18,
+    height: 38,
   },
 });
 

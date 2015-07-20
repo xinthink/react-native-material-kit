@@ -10,6 +10,10 @@ var getTheme = require('./theme').getTheme;
  * Base class of MK Component builder
  */
 class Builder {
+  constructor() {
+    this.getTheme = getTheme;
+  }
+
   withAccent(v) {
     this.accent = v;
     return this;
@@ -52,6 +56,11 @@ class Builder {
 
   withMaskEnabled(v) {
     this.maskEnabled = v;
+    return this;
+  }
+
+  withRippleEnabled(v) {
+    this.rippleEnabled = v;
     return this;
   }
 
@@ -121,28 +130,9 @@ class Builder {
   toProps() {
     this.mergeStyle();
     this.choseBackgroundColor();
-    return {
-      style: this.style,
-      shadowColor: this.shadowColor,
-      shadowOffset: this.shadowOffset,
-      shadowOpacity: this.shadowOpacity,
-      shadowRadius: this.shadowRadius,
-      shadowPathEnabled: this.shadowPathEnabled,
-      cornerRadius: this.cornerRadius,
-      maskEnabled: this.maskEnabled,
-      backgroundColor: this.backgroundColor,
-      backgroundLayerColor: this.backgroundLayerColor,
-      backgroundLayerCornerRadius: this.backgroundLayerCornerRadius,
-      backgroundAniEnabled: this.backgroundAniEnabled,
-      ripplePercent: this.ripplePercent,
-      rippleLayerColor: this.rippleLayerColor,
-      rippleAniTimingFunction: this.rippleAniTimingFunction,
-      rippleLocation: this.rippleLocation,
-      onPress: this.onPress,
-      onPressIn: this.onPressIn,
-      onPressOut: this.onPressOut,
-      onLongPress: this.onLongPress,
-    };
+    var props = {};
+    Object.assign(props, this);
+    return props;
   }
 
   getThemeColor() {

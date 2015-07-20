@@ -25,7 +25,7 @@ Thanks to the great work of [@nghialv](https://github.com/nghialv)!
 
 ![buttons-mdl](https://cloud.githubusercontent.com/assets/390805/8761525/08593298-2d88-11e5-98dc-6180a5122b1f.gif)
 
-Apply [Material Design Buttons](http://www.getmdl.io/components/index.html#buttons-section) with minimum codes, using pre-defined builders, which comply with [Material Design Lite default theme](http://www.getmdl.io/customize/index.html).
+Apply [Material Design Buttons](http://www.getmdl.io/components/index.html#buttons-section) with minimum codes using pre-defined builders, which comply with the [Material Design Lite default theme](http://www.getmdl.io/customize/index.html).
 
 ```jsx
 // colored button with default theme (configurable)
@@ -65,7 +65,7 @@ var CustomButton = new MKButton.Builder()
 <CustomButton/>
 ```
 
-jsx equivalent:
+the jsx equivalent:
 
 ```jsx
 <MKButton
@@ -90,20 +90,52 @@ Please refer to [the complete example](https://github.com/xinthink/react-native-
 
 ### Text Fields
 
-![textfields](https://cloud.githubusercontent.com/assets/390805/8715858/2f420854-2bbb-11e5-8ec9-9ff35b6fdeed.gif)
+Built-in textfields, which comply with [Material Design Lite](http://www.getmdl.io/components/#textfields-section).
 
-[Example code](https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/textfields.js):
+![textfields-mdl](https://cloud.githubusercontent.com/assets/390805/8770805/a00a853e-2eea-11e5-9801-4fc96ddb6e62.gif)
+
+
+```jsx
+// textfield with default theme (configurable)
+var Textfield = MKTextField.textfield()
+  .withPlaceholder('Text...')
+  .withStyle(styles.textfield)
+  .build();
+
+...
+<Textfield/>
+```
+
+Customizing textfields through builder:
+
+```jsx
+var CustomTexfield = new MKTextField.Builder()
+  .withBackgroundColor('rgba(158,158,158,.2)')
+  .withTintColor(MKColor.Teal)
+  .withTextColor(MKColor.Orange)
+  .withPlaceholder('Hint')
+  .withRippleEnabled(true)
+  .withStyle(styles.textfield)
+  .build();
+
+...
+<CustomTexfield/>
+```
+
+the jsx equivalent:
 
 ```jsx
 <MKTextField
-  style={styles.textField}
-  placeholder="Floating hint"
-  tintColor="#2196F3"
-  rippleLayerColor="#03A9F4"
-  rippleLocation="right"
-  floatingPlaceholderEnabled={true}
-/>
+  backgroundColor="rgba(158,158,158,.2)"
+  tintColor={MKColor.Teal}
+  textColor={MKColor.Orange}
+  placeholder="Hint"
+  rippleEnabled={true}
+  style={styles.textfield}/>
 ```
 
+Please refer to [the complete example](https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/textfields.js) for details.
 
-It's the very begining of the project, more work to be done, contributions are welcome!
+
+---
+It's the very begining of the project, lots of work to be done, contributions are welcome!
