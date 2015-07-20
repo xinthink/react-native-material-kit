@@ -25,6 +25,7 @@ var mkLayerPropTypes = {
 
   cornerRadius: PropTypes.number,
   maskEnabled: PropTypes.bool,
+  rippleEnabled: PropTypes.bool,
   backgroundColor: PropTypes.string,
   backgroundLayerColor: PropTypes.string,
   backgroundLayerCornerRadius: PropTypes.number,

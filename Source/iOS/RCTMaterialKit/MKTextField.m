@@ -224,6 +224,14 @@
     return _mkLayerSupport.maskEnabled;
 }
 
+- (void)setRippleEnabled:(BOOL)enabled {
+    _mkLayerSupport.rippleEnabled = enabled;
+}
+
+- (BOOL)rippleEnabled {
+    return _mkLayerSupport.rippleEnabled;
+}
+
 - (void)setRippleLocation:(MKRippleLocation)location {
     _mkLayerSupport.rippleLocation = location;
 }

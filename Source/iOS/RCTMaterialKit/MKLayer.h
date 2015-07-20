@@ -53,12 +53,12 @@ extern NSString *const RCTPasteboardWatcherWillExpireNotification;
 
 - (void)setCircleLayerLocationAt:(CGPoint)center;
 - (void)superLayerDidResize;
+- (void)enableRipple:(BOOL)enabled;
 - (void)enableOnlyCircleLayer;
 - (void)setBackgroundLayerColor:(UIColor*)color;
 - (void)setCircleLayerColor:(UIColor*)color;
 - (void)didChangeTapLocation:(CGPoint)location;
 - (void)setMaskLayerCornerRadius:(float)cornerRadius;
-- (void)enableMask;
 - (void)enableMask:(BOOL)enable;
 - (void)setBackgroundLayerCornerRadius:(CGFloat)cornerRadius;
 - (void)animateScaleForCircleLayer:(id)fromScale
@@ -88,6 +88,7 @@ extern NSString *const RCTPasteboardWatcherWillExpireNotification;
 @property (readonly) RCTMKLayer *mkLayer;
 
 @property BOOL maskEnabled;
+@property BOOL rippleEnabled;
 @property MKRippleLocation rippleLocation;
 @property NSString *rippleLocationByName;
 @property float ripplePercent;

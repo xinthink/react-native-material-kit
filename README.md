@@ -2,15 +2,11 @@
 
 [![react-native](https://img.shields.io/badge/react--native-v0.7.1-05A5D1.svg)](https://facebook.github.io/react-native "tested react-native version")
 [![DUB](https://img.shields.io/dub/l/vibe-d.svg)](https://raw.githubusercontent.com/xinthink/react-native-material-kit/master/LICENSE.md "MIT")
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/xinthink/react-native-material-kit/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 This is a port of [MaterialKit](https://github.com/nghialv/MaterialKit) (written in Swift) to Objective-C, so that it can be used in [React Native](https://facebook.github.io/react-native) projects, as a static library.
 
 Thanks to the great work of [@nghialv](https://github.com/nghialv)!
 
-<script data-gratipay-username="xinthink"
-        data-gratipay-widget="button"
-        src="//grtp.co/v1.js"></script>
 
 ## Getting Started
 

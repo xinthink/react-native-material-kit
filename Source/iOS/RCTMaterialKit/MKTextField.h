@@ -30,6 +30,7 @@
 // common properties of MKLayers
 
 @property BOOL maskEnabled;
+@property BOOL rippleEnabled;
 @property MKRippleLocation rippleLocation;
 @property NSString *rippleLocationByName;
 @property float ripplePercent;

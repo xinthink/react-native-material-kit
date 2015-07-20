@@ -106,32 +106,37 @@ static MKTimingFunction *_easeOut = nil;
                          options:NSKeyValueObservingOptionNew
                          context:nil];
 
-        CGFloat sw = CGRectGetWidth(superLayer.bounds);
-        CGFloat sh = CGRectGetHeight(superLayer.bounds);
-
-        // background layer
-        _backgroundLayer = [[CALayer alloc] init];
-        _backgroundLayer.frame = superLayer.bounds;
-        _backgroundLayer.opacity = 0.0;
-        _backgroundLayer.masksToBounds = true;
-        [_superLayer addSublayer:_backgroundLayer];
-
-        // ripple layer
-        _rippleLayer = [[CALayer alloc] init];
-        CGFloat circleSize = MAX(sw, sh) * self.ripplePercent;
-        CGFloat rippleCornerRadius = circleSize / 2;
-
-        _rippleLayer.opacity = 0.0;
-        _rippleLayer.cornerRadius = rippleCornerRadius;
-        [self setCircleLayerLocationAt:CGPointMake(sw / 2, sh / 2)];
-        [_backgroundLayer addSublayer:_rippleLayer];
-
-        // mask layer
-        [self setMaskLayerCornerRadius:superLayer.cornerRadius];
-        _backgroundLayer.mask = _maskLayer;
+        [self initRippleEffect:superLayer];
     }
 
     return self;
+}
+
+- (void) initRippleEffect:(CALayer*)superLayer {
+    CGFloat sw = CGRectGetWidth(superLayer.bounds);
+    CGFloat sh = CGRectGetHeight(superLayer.bounds);
+    
+    // background layer
+    _backgroundLayer = [[CALayer alloc] init];
+    _backgroundLayer.frame = superLayer.bounds;
+    _backgroundLayer.opacity = 0.0;
+    _backgroundLayer.masksToBounds = true;
+    [_superLayer addSublayer:_backgroundLayer];
+    
+    // ripple layer
+    _rippleLayer = [[CALayer alloc] init];
+    CGFloat circleSize = MAX(sw, sh) * self.ripplePercent;
+    CGFloat rippleCornerRadius = circleSize / 2;
+    
+    _rippleLayer.opacity = 0.0;
+    _rippleLayer.cornerRadius = rippleCornerRadius;
+    [self setCircleLayerLocationAt:CGPointMake(sw / 2, sh / 2)];
+    [_backgroundLayer addSublayer:_rippleLayer];
+    
+    // mask layer
+    _maskLayer = [[CAShapeLayer alloc] init];
+    [self setMaskLayerCornerRadius:superLayer.cornerRadius];
+    _backgroundLayer.mask = _maskLayer;
 }
 
 - (void)updateShadow {
@@ -194,7 +199,7 @@ static MKTimingFunction *_easeOut = nil;
 
 - (void)setRipplePercent:(float)percent {
     ripplePercent = percent;
-    if (ripplePercent > 0) {
+    if (_rippleLayer && ripplePercent > 0) {
         CGFloat sw = CGRectGetWidth(_superLayer.bounds);
         CGFloat sh = CGRectGetHeight(_superLayer.bounds);
         CGFloat circleSize = MAX(sw, sh) * ripplePercent;
@@ -210,6 +215,10 @@ static MKTimingFunction *_easeOut = nil;
 }
 
 - (void)setCircleLayerLocationAt:(CGPoint)center {
+    if (!_rippleLayer) {
+        return;
+    }
+    
     CGRect bounds = _superLayer.bounds;
     CGFloat width = CGRectGetWidth(bounds);
     CGFloat height = CGRectGetHeight(bounds);
@@ -226,17 +235,24 @@ static MKTimingFunction *_easeOut = nil;
 }
 
 - (void)setMaskLayerCornerRadius:(float)cornerRadius {
-    _maskLayer.path = [UIBezierPath bezierPathWithRoundedRect:_backgroundLayer.bounds
-                                                 cornerRadius:cornerRadius].CGPath;
+    if (_maskLayer) {
+        _maskLayer.path = [UIBezierPath bezierPathWithRoundedRect:_backgroundLayer.bounds
+                                                     cornerRadius:cornerRadius].CGPath;
+    }
 }
 
 - (void)superLayerDidResize {
-    [CATransaction begin];
-    [CATransaction setDisableActions:true];
-    _backgroundLayer.frame = _superLayer.bounds;
-    [self setMaskLayerCornerRadius:_superLayer.cornerRadius];
-    [CATransaction commit];
-    [self updateRippleLocation];
+    if (_rippleLayer) {
+        [CATransaction begin];
+        [CATransaction setDisableActions:true];
+        if (_backgroundLayer) {
+            _backgroundLayer.frame = _superLayer.bounds;
+        }
+        [self setMaskLayerCornerRadius:_superLayer.cornerRadius];
+        [CATransaction commit];
+        [self updateRippleLocation];
+    }
+    
     [self updateShadow];
     
     if (_resizedCallback) {
@@ -244,17 +260,24 @@ static MKTimingFunction *_easeOut = nil;
     }
 }
 
+// has no effect if rippleLayer disabled
 - (void)enableOnlyCircleLayer {
-    [_backgroundLayer removeFromSuperlayer];
-    [_superLayer addSublayer:_rippleLayer];
+    if (_backgroundLayer) {
+        [_backgroundLayer removeFromSuperlayer];
+        [_superLayer addSublayer:_rippleLayer];
+    }
 }
 
 - (void)setBackgroundLayerColor:(UIColor*)color {
-    _backgroundLayer.backgroundColor = color.CGColor;
+    if (_backgroundLayer) {
+        _backgroundLayer.backgroundColor = color.CGColor;
+    }
 }
 
 - (void)setCircleLayerColor:(UIColor*)color {
-    _rippleLayer.backgroundColor = color.CGColor;
+    if (_rippleLayer) {
+        _rippleLayer.backgroundColor = color.CGColor;
+    }
 }
 
 - (void)didChangeTapLocation:(CGPoint)location {
@@ -263,17 +286,35 @@ static MKTimingFunction *_easeOut = nil;
     }
 }
 
-- (void)enableMask {
-    [self enableMask:true];
+- (void)enableRipple:(BOOL)enabled {
+    if (enabled) {
+        if (!_rippleLayer) {
+            [self initRippleEffect:_superLayer];
+        }
+        return;
+    }
+    
+    // disable ripple effect
+    [_rippleLayer removeFromSuperlayer];
+    _rippleLayer = nil;
+    
+    [_backgroundLayer removeFromSuperlayer];
+    _backgroundLayer = nil;
+    
+    _maskLayer = nil;
 }
 
 - (void)enableMask:(BOOL)enable {
-    _backgroundLayer.mask = enable ? _maskLayer : nil;
-    _backgroundLayer.masksToBounds = enable;
+    if (_backgroundLayer) {
+        _backgroundLayer.mask = enable ? _maskLayer : nil;
+        _backgroundLayer.masksToBounds = enable;
+    }
 }
 
 - (void)setBackgroundLayerCornerRadius:(CGFloat)cornerRadius {
-    _backgroundLayer.cornerRadius = cornerRadius;
+    if (_backgroundLayer) {
+        _backgroundLayer.cornerRadius = cornerRadius;
+    }
 }
 
 // MARK - Animation
@@ -281,6 +322,10 @@ static MKTimingFunction *_easeOut = nil;
                            toScale:(id)toScale
                     timingFunction:(MKTimingFunction*)timingFunction
                           duration:(CFTimeInterval)duration {
+    if (!_rippleLayer) {
+        return;
+    }
+    
     CABasicAnimation *rippleLayerAnim = [CABasicAnimation animation];
     rippleLayerAnim.keyPath = @"transform.scale";
     rippleLayerAnim.fromValue = fromScale;
@@ -303,6 +348,10 @@ static MKTimingFunction *_easeOut = nil;
 
 - (void)animateAlphaForBackgroundLayer:(MKTimingFunction*)timingFunction
                               duration:(CFTimeInterval)duration {
+    if (!_backgroundLayer) {
+        return;
+    }
+    
     CABasicAnimation *bgLayerAnim = [CABasicAnimation animation];
     bgLayerAnim.keyPath = @"opacity";
     bgLayerAnim.fromValue = @1.0;
@@ -367,6 +416,7 @@ static MKTimingFunction *_easeOut = nil;
 
 @synthesize mkLayer = _mkLayer;
 @synthesize maskEnabled;
+@synthesize rippleEnabled;
 @synthesize rippleLocation;
 @synthesize rippleLocationByName;
 @synthesize ripplePercent;
@@ -420,6 +470,15 @@ static MKTimingFunction *_easeOut = nil;
 
 - (BOOL)maskEnabled {
     return maskEnabled;
+}
+
+- (void)setRippleEnabled:(BOOL)enabled {
+    rippleEnabled = enabled;
+    [self.mkLayer enableRipple:enabled];
+}
+
+- (BOOL)rippleEnabled {
+    return rippleEnabled;
 }
 
 - (void)setShadowPathEnabled:(BOOL)enabled {

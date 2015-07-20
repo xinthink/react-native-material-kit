@@ -42,6 +42,7 @@ RCT_REMAP_VIEW_PROPERTY(shadowRadius, layer.shadowRadius, CGFloat)
 
 RCT_EXPORT_VIEW_PROPERTY(cornerRadius, float)
 RCT_EXPORT_VIEW_PROPERTY(maskEnabled, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(rippleEnabled, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(backgroundColor, UIColor)
 RCT_EXPORT_VIEW_PROPERTY(backgroundLayerColor, UIColor)
 RCT_EXPORT_VIEW_PROPERTY(backgroundLayerCornerRadius, float)
