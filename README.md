@@ -1,11 +1,12 @@
 # [Material Design](http://www.google.com/design/spec/material-design/introduction.html) components for [React Native](https://facebook.github.io/react-native)
 
+[![npm](https://img.shields.io/npm/v/react-native-material-kit.svg)](https://www.npmjs.com/package/react-native-material-kit)
 [![react-native](https://img.shields.io/badge/react--native-v0.7.1-05A5D1.svg)](https://facebook.github.io/react-native "tested react-native version")
 [![DUB](https://img.shields.io/dub/l/vibe-d.svg)](https://raw.githubusercontent.com/xinthink/react-native-material-kit/master/LICENSE.md "MIT")
 
 This is a port of [MaterialKit](https://github.com/nghialv/MaterialKit) (written in Swift) to Objective-C, so that it can be used in [React Native](https://facebook.github.io/react-native) projects, as a static library.
 
-Thanks to the great work of [@nghialv](https://github.com/nghialv)!
+Thanks to the great work of [@nghialv](https://github.com/nghialv)! :thumbsup:
 
 
 ## Getting Started
@@ -85,14 +86,14 @@ the jsx equivalent:
 </MKButton>
 ```
 
-Please refer to [the complete example](https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/buttons.js) for details.
+:point_right: [the complete example](https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/buttons.js)
 
 
 ### Text Fields
 
 Built-in textfields, which comply with [Material Design Lite](http://www.getmdl.io/components/#textfields-section).
 
-![textfields-mdl](https://cloud.githubusercontent.com/assets/390805/8770805/a00a853e-2eea-11e5-9801-4fc96ddb6e62.gif)
+![textfields-mdl](https://cloud.githubusercontent.com/assets/390805/8794770/26b24724-2fb9-11e5-9af4-abead1cd456b.gif)
 
 
 ```jsx
@@ -134,8 +135,8 @@ the jsx equivalent:
   style={styles.textfield}/>
 ```
 
-Please refer to [the complete example](https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/textfields.js) for details.
+:point_right: [the complete example](https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/textfields.js)
 
 
 ---
-It's the very begining of the project, lots of work to be done, contributions are welcome!
+It's the very begining of the project, lots of work to be done, contributions are welcome! :beer:

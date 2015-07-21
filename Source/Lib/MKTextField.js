@@ -2,14 +2,15 @@
  * Created by ywu on 15/7/16.
  */
 
-var React = require('react-native');
-var {
+const React = require('react-native');
+const {
   requireNativeComponent,
   PropTypes,
 } = React;
-var MKPropTypes = require('./MKPropTypes');
-var MKColor = require('./MKColor');
-var theme = require('./theme');
+
+const MKPropTypes = require('./MKPropTypes');
+const MKColor = require('./MKColor');
+
 
 class MKTextField extends React.Component {
   render() {
@@ -31,15 +32,16 @@ MKTextField.propTypes = {
   highlightColor: PropTypes.string,
   tintColor: PropTypes.string,
   textColor: PropTypes.string,
+  // TODO configurable fonts
 };
 
-var NativeTextField = requireNativeComponent('MKTextField', MKTextField);
+const NativeTextField = requireNativeComponent('MKTextField', MKTextField);
 
 
 // --------------------------
 // builders
 //
-var {
+const {
   Builder,
 } = require('./builder');
 
@@ -120,8 +122,7 @@ class MKTextFieldBuilder extends Builder {
   }
 
   build() {
-    var theBuilder = this;
-    var props = this.toProps();
+    const props = this.toProps();
     // console.log(props);
 
     return React.createClass({
@@ -137,21 +138,21 @@ class MKTextFieldBuilder extends Builder {
 /**
  * Built-in text field builders
  */
-var textfield = () => {
+function textfield() {
   return new MKTextFieldBuilder().withCornerRadius(1);
-};
+}
 
-var textfieldWithFloatingLabel = () => {
+function textfieldWithFloatingLabel() {
   return textfield().withFloatingLabelEnabled(true);
-};
+}
 
-var textfieldWithRipple = () => {
+function textfieldWithRipple() {
   return textfield().withRippleEnabled(true);
-};
+}
 
-var textfieldWithRippleAndFloatingLabel = () => {
+function textfieldWithRippleAndFloatingLabel() {
   return textfieldWithRipple().withFloatingLabelEnabled(true);
-};
+}
 
 
 module.exports = MKTextField;

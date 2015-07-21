@@ -48,7 +48,7 @@ var TextFields = React.createClass({
         <View style={styles.row}>
           <View style={styles.col}>
             <Textfield/>
-            <Text style={styles.legendLabel}>Textfiled</Text>
+            <Text style={styles.legendLabel}>Textfield</Text>
           </View>
           <View style={styles.col}>
             <TextfieldWithRipple/>

@@ -6,3 +6,4 @@ exports.MKTextField = require('./MKTextField');
 exports.MKColor = require('./MKColor');
 
 exports.setTheme = require('./theme').setTheme;
+exports.getTheme = require('./theme').getTheme;

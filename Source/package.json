@@ -1,6 +1,6 @@
 {
   "name": "react-native-material-kit",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Material Design components for React Native",
   "main": "Lib/index.ios.js",
   "author": "Yingxin Wu <yingxinwu.g@gmail.com>",
@@ -22,6 +22,6 @@
     "url": "git://github.com/xinthink/react-native-material-kit.git"
   },
   "peerDependencies": {
-    "react-native": "0.x"
+    "react-native": ">=0.6.0 <1.0.0"
   }
 }

@@ -1,20 +1,20 @@
 /**
  * Created by ywu on 15/7/16.
  */
-var { PropTypes } = require('react-native');
+const { PropTypes } = require('react-native');
 
-var dimen = PropTypes.objectOf({
+const dimen = PropTypes.objectOf({
   width: PropTypes.number,
   height: PropTypes.number,
 });
 
-var aniTimingFunc = PropTypes.oneOf([
+const aniTimingFunc = PropTypes.oneOf([
   'linear',
   'easeIn',
   'easeOut',
 ]);
 
-var mkLayerPropTypes = {
+const mkLayerPropTypes = {
   // FIXME naming conflicts with built-in properties, such as shadowOffset
   // lead to runtime warning: Failed propType: typeChecker is not a function Check the render method of xxx
   shadowColor: PropTypes.string,

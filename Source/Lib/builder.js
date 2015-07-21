@@ -2,8 +2,7 @@
  * Boilerplate for styling MK Components
  * Created by ywu on 15/7/16.
  */
-var MKColor = require('./MKColor');
-var getTheme = require('./theme').getTheme;
+const getTheme = require('./theme').getTheme;
 
 
 /**
@@ -130,7 +129,7 @@ class Builder {
   toProps() {
     this.mergeStyle();
     this.choseBackgroundColor();
-    var props = {};
+    const props = {};
     Object.assign(props, this);
     return props;
   }

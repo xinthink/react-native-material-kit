@@ -1,18 +1,17 @@
 /**
  * Created by ywu on 15/6/3.
  */
-'use strict';
 
-var React = require('react-native');
-var {
+const React = require('react-native');
+const {
   requireNativeComponent,
   TouchableWithoutFeedback,
 } = React;
 
-var MKPropTypes = require('./MKPropTypes');
-var MKColor = require('./MKColor');
-var getTheme = require('./theme').getTheme;
-var utils = require('./utils');
+const MKPropTypes = require('./MKPropTypes');
+const MKColor = require('./MKColor');
+const getTheme = require('./theme').getTheme;
+const utils = require('./utils');
 
 
 /**
@@ -41,13 +40,13 @@ MKButton.propTypes = {
   disabled: React.PropTypes.bool,
 };
 
-var NativeButton = requireNativeComponent('MKButton', MKButton);
+const NativeButton = requireNativeComponent('MKButton', MKButton);
 
 
 // --------------------------
 // builders
 //
-var {
+const {
   TextViewBuilder,
 } = require('./builder');
 
@@ -71,29 +70,29 @@ class MKButtonBuilder extends TextViewBuilder {
     if (this.style && !utils.isNumber(this.style)
         && (this.style.width > 0 || this.style.height > 0)) {
       // cannot get style by id since 0.7, use style object or explicit corner radius
-      var size = Math.min(this.style.width || 0, this.style.height || 0);
+      const size = Math.min(this.style.width || 0, this.style.height || 0);
       this.style.width = this.style.height = size;
       this.withCornerRadius(size / 2);
     }
 
     if (this.cornerRadius <= 0) {
-      console.warn('to build FABs correctly, width/height is required in style (object style, NOT stylesheet), or specify a cornerRadius');
+      console.warn('to build FABs correctly, width/height is required in style or specify a cornerRadius');
     }
   }
 
   build() {
-    var theBuilder = this;
-    var props = this.toProps();
+    const theBuilder = this;
+    const props = this.toProps();
     //console.log(props);
 
     return React.createClass({
       render: function () {
         // use a text or a custom content
-        var ChildTag = theBuilder.text ? (
+        const ChildTag = theBuilder.text ? (
           <React.Text pointerEvents="none" style={theBuilder.textStyle || {}}>
             {theBuilder.text}
           </React.Text>
-        ): this.props.children;
+        ) : this.props.children;
 
         return (
           <MKButton {...props}>
@@ -108,23 +107,23 @@ class MKButtonBuilder extends TextViewBuilder {
 /**
  * Built-in button builders
  */
-var coloredRaisedButton = () => {
+function coloredRaisedButton() {
   return new MKButtonBuilder()
     .withShadowRadius(2)
-    .withShadowOffset({width:0, height:2})
+    .withShadowOffset({width: 0, height: 2})
     .withShadowOpacity(.7)
     .withShadowColor('black')
     .withTextStyle({
       color: 'white',
       fontWeight: 'bold',
     });
-};
+}
 
-var accentColoredRaisedButton = () => {
+function accentColoredRaisedButton() {
   return coloredRaisedButton().withAccent(true);
-};
+}
 
-var plainRaisedButton = () => {
+function plainRaisedButton() {
   // FIXME doesn't support translucent bg, has shadow problems
   return coloredRaisedButton()
     //.withBackgroundColor(getTheme().bgPlain)
@@ -135,9 +134,9 @@ var plainRaisedButton = () => {
       color: 'black',
       fontWeight: 'bold',
     });
-};
+}
 
-var flatButton = () => {
+function flatButton() {
   return new MKButtonBuilder()
     .withBackgroundColor(MKColor.Transparent)
     .withBackgroundLayerColor(getTheme().bgPlain)
@@ -145,35 +144,35 @@ var flatButton = () => {
       color: 'black',
       fontWeight: 'bold',
     });
-};
+}
 
-var coloredFlatButton = () => {
+function coloredFlatButton() {
   return flatButton()
     .withTextStyle({
       color: getTheme().primaryColor,
       fontWeight: 'bold',
     });
-};
+}
 
-var accentColoredFlatButton = () => {
+function accentColoredFlatButton() {
   return flatButton()
     .withTextStyle({
       color: getTheme().accentColor,
       fontWeight: 'bold',
     });
-};
+}
 
-var coloredFab = () => {
+function coloredFab() {
   return coloredRaisedButton()
     .withFab(true)
     .withRippleLocation('center');
-};
+}
 
-var accentColoredFab = () => {
+function accentColoredFab() {
   return coloredFab().withAccent(true);
-};
+}
 
-var plainFab = () => {
+function plainFab() {
   // FIXME doesn't support translucent bg, has shadow problems
   return coloredFab()
     .withBackgroundColor(MKColor.Silver);

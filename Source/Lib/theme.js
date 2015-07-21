@@ -1,10 +1,10 @@
 /**
  * Created by ywu on 15/7/18.
  */
-var MKColor = require('./MKColor');
-var utils = require('./utils');
+const MKColor = require('./MKColor');
+const utils = require('./utils');
 
-var theme = {
+const theme = {
   primaryColor: MKColor.Indigo,
   accentColor: MKColor.Pink,
   bgPlain: 'rgba(158,158,158,.2)',
@@ -15,13 +15,7 @@ var theme = {
 
 /**
  * Set the default theme
- * @param theme {
- *  primaryColor
-    accentColor
-    bgPlain
-    bgDisabled
-    fontSize
- * }
+ * @param {Object} theme
  * @see http://www.getmdl.io/customize
  */
 exports.setTheme = (aTheme) => {
@@ -29,7 +23,7 @@ exports.setTheme = (aTheme) => {
 };
 
 /**
- * TODO make it immutable
+ * Retrieve the default theme
  */
 exports.getTheme = () => {
   return theme;

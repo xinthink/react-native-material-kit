@@ -1,0 +1,23 @@
+# Engine analysis on Code Climate Platform For an overview of the Code Climate Platform.
+# @see http://docs.codeclimate.com/article/300-the-codeclimate-platform
+
+# For a list of all available engines, see here:
+# http://docs.codeclimate.com/article/296-engines-available-engines
+
+engines:
+  eslint:
+    enabled: true
+
+# Engines can analyze files and report issues on them, but you can separately
+# decide which files will receive ratings based on those issues. This is
+# specified by path patterns under the ratings key.
+
+ratings:
+  paths:
+  - Source/**
+
+# You can globally exclude files from being analyzed by any engine using the
+# exclude_paths key.
+
+exclude_paths:
+- Example/**
