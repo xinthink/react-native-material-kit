@@ -88,6 +88,8 @@ the jsx equivalent:
 
 :point_right: [the complete example](https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/buttons.js)
 
+> Why builders? See the '[Builder vs. configuration object](https://github.com/xinthink/react-native-material-kit/issues/3)' discussion
+
 
 ### Text Fields
 
