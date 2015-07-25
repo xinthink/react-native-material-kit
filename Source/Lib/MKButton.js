@@ -130,6 +130,8 @@ function plainRaisedButton() {
     //.withShadowPathEnabled(true)
     //.withShadowOffset({width:.3, height:0})
     .withBackgroundColor(MKColor.Silver)
+    .withBackgroundLayerColor(getTheme().bgPlain)
+    .withRippleLayerColor(getTheme().bgPlain)
     .withTextStyle({
       color: 'black',
       fontWeight: 'bold',
@@ -140,6 +142,7 @@ function flatButton() {
   return new MKButtonBuilder()
     .withBackgroundColor(MKColor.Transparent)
     .withBackgroundLayerColor(getTheme().bgPlain)
+    .withRippleLayerColor(getTheme().bgPlain)
     .withTextStyle({
       color: 'black',
       fontWeight: 'bold',
@@ -148,6 +151,7 @@ function flatButton() {
 
 function coloredFlatButton() {
   return flatButton()
+    .withRippleLayerColor('rgba(255,255,255,0.2)')
     .withTextStyle({
       color: getTheme().primaryColor,
       fontWeight: 'bold',
@@ -156,6 +160,7 @@ function coloredFlatButton() {
 
 function accentColoredFlatButton() {
   return flatButton()
+    .withRippleLayerColor('rgba(255,255,255,0.2)')
     .withTextStyle({
       color: getTheme().accentColor,
       fontWeight: 'bold',
@@ -175,6 +180,8 @@ function accentColoredFab() {
 function plainFab() {
   // FIXME doesn't support translucent bg, has shadow problems
   return coloredFab()
+    .withBackgroundLayerColor(getTheme().bgPlain)
+    .withRippleLayerColor(getTheme().bgPlain)
     .withBackgroundColor(MKColor.Silver);
 }
 

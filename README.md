@@ -24,7 +24,7 @@ Thanks to the great work of [@nghialv](https://github.com/nghialv)! :thumbsup:
 
 ### Buttons
 
-![buttons-mdl](https://cloud.githubusercontent.com/assets/390805/8761525/08593298-2d88-11e5-98dc-6180a5122b1f.gif)
+![buttons-mdl](https://cloud.githubusercontent.com/assets/390805/8888853/69f8d9f8-32f2-11e5-9823-c235ab8c0dd2.gif)
 
 Apply [Material Design Buttons](http://www.getmdl.io/components/index.html#buttons-section) with minimum codes using pre-defined builders, which comply with the [Material Design Lite default theme](http://www.getmdl.io/customize/index.html).
 

@@ -326,39 +326,55 @@ static MKTimingFunction *_easeOut = nil;
         return;
     }
     
-    CABasicAnimation *rippleLayerAnim = [CABasicAnimation animation];
-    rippleLayerAnim.keyPath = @"transform.scale";
-    rippleLayerAnim.fromValue = fromScale;
-    rippleLayerAnim.toValue = toScale;
+    CABasicAnimation *anim = [CABasicAnimation animation];
+    anim.keyPath = @"transform.scale";
+    anim.fromValue = fromScale;
+    anim.toValue = toScale;
+    anim.duration = duration;
+    anim.timingFunction = [timingFunction function];
+    anim.removedOnCompletion = false;
+    anim.fillMode = kCAFillModeForwards;
 
-    CABasicAnimation *opacityAnim = [CABasicAnimation animation];
-    opacityAnim.keyPath = @"opacity";
-    opacityAnim.fromValue = @1.0;
-    opacityAnim.toValue = @0.0;
+    _rippleLayer.opacity = 1;
+    _backgroundLayer.opacity = 1;
 
-    CAAnimationGroup *groupAnim = [[CAAnimationGroup alloc] init];
-    groupAnim.duration = duration;
-    groupAnim.timingFunction = [timingFunction function];
-    groupAnim.removedOnCompletion = false;
-    groupAnim.fillMode = kCAFillModeForwards;
-    groupAnim.animations = @[rippleLayerAnim, opacityAnim];
+    [_rippleLayer addAnimation:anim forKey:nil];
+}
 
-    [_rippleLayer addAnimation:groupAnim forKey:nil];
+- (void)animateHideCircleLayer:(MKTimingFunction *)timingFunc
+                      duration:(CFTimeInterval)duration
+{
+    [self animateAlphaForLayer:_rippleLayer
+                    timingFunc:timingFunc
+                      duration:duration];
+    [self animateAlphaForLayer:_backgroundLayer
+                    timingFunc:timingFunc
+                      duration:duration];
+}
+
+- (void)animateAlphaForLayer:(CALayer *)layer
+                  timingFunc:(MKTimingFunction *)timingFunc
+                    duration:(CFTimeInterval)duration
+{
+    if (!layer) {
+        return;
+    }
+
+    layer.opacity = 0;
+    CABasicAnimation *anim = [CABasicAnimation animation];
+    anim.keyPath = @"opacity";
+    anim.fromValue = @1.0;
+    anim.toValue = @0.0;
+    anim.duration = duration;
+    anim.timingFunction = [timingFunc function];
+    [layer addAnimation:anim forKey:nil];
 }
 
 - (void)animateAlphaForBackgroundLayer:(MKTimingFunction*)timingFunction
                               duration:(CFTimeInterval)duration {
-    if (!_backgroundLayer) {
-        return;
-    }
-    
-    CABasicAnimation *bgLayerAnim = [CABasicAnimation animation];
-    bgLayerAnim.keyPath = @"opacity";
-    bgLayerAnim.fromValue = @1.0;
-    bgLayerAnim.toValue = @0.0;
-    bgLayerAnim.duration = duration;
-    bgLayerAnim.timingFunction = [timingFunction function];
-    [_backgroundLayer addAnimation:bgLayerAnim forKey:nil];
+    [self animateAlphaForLayer:_backgroundLayer
+                    timingFunc:timingFunction
+                      duration:duration];
 }
 
 - (void)animateSuperLayerShadow:(id)fromRadius
@@ -383,6 +399,9 @@ static MKTimingFunction *_easeOut = nil;
                     toOpacity:(id)toOpacity
                timingFunction:(MKTimingFunction*)timingFunction
                      duration:(CFTimeInterval)duration {
+    layer.shadowOpacity = ((NSNumber*) toOpacity).doubleValue;
+    layer.shadowRadius  = ((NSNumber*) toRadius).doubleValue;
+
     CABasicAnimation *radiusAnim = [CABasicAnimation animation];
     radiusAnim.keyPath = @"shadowRadius";
     radiusAnim.fromValue = fromRadius;
@@ -412,6 +431,7 @@ static MKTimingFunction *_easeOut = nil;
 
 @implementation MKLayerSupport {
     UIView *_view;
+    UIColor *_defaultRippleColor;
 }
 
 @synthesize mkLayer = _mkLayer;
@@ -436,23 +456,25 @@ static MKTimingFunction *_easeOut = nil;
 }
 
 - (void)setupLayer {
+    _defaultRippleColor = [UIColor colorWithWhite:1 alpha:0.125];
+
     // default properties
     self.maskEnabled = true;
-    self.ripplePercent = 1;
+    self.ripplePercent = 2;
     self.rippleLocation = MKRippleTapLocation;
-    self.cornerRadius = 2.5;
+    self.cornerRadius = 2;
     
     self.shadowAniEnabled = true;
     self.backgroundAniEnabled = true;
-    self.rippleAniDuration = 1;
-    self.backgroundAniDuration = 1;
-    self.shadowAniDuration = 0.8;
+    self.rippleAniDuration = 0.35;
+    self.backgroundAniDuration = 0.2;
+    self.shadowAniDuration = 0.2;
     self.rippleAniTimingFunction = MKTimingLinear;
     self.backgroundAniTimingFunction = MKTimingLinear;
     self.shadowAniTimingFunction = MKTimingEaseOut;
     
-    self.rippleLayerColor = [UIColor colorWithWhite:0.45 alpha:0.5];
-    self.backgroundLayerColor = [UIColor colorWithWhite:0.75 alpha:0.25];
+    self.rippleLayerColor = _defaultRippleColor;
+    self.backgroundLayerColor = _defaultRippleColor;
 }
 
 - (RCTMKLayer *)mkLayer {
@@ -475,8 +497,8 @@ static MKTimingFunction *_easeOut = nil;
 - (void)setRippleEnabled:(BOOL)enabled {
     rippleEnabled = enabled;
     [self.mkLayer enableRipple:enabled];
-    self.rippleLayerColor = [UIColor colorWithWhite:0.45 alpha:0.5];
-    self.backgroundLayerColor = [UIColor colorWithWhite:0.75 alpha:0.25];
+    self.rippleLayerColor = _defaultRippleColor;
+    self.backgroundLayerColor = _defaultRippleColor;
 }
 
 - (BOOL)rippleEnabled {
@@ -587,5 +609,53 @@ static MKTimingFunction *_easeOut = nil;
 }
 
 - (UIColor *)backgroundLayerColor { return backgroundLayerColor; }
+
+- (void)animateShowRippleAt:(CGPoint)location
+{
+    if (self.rippleLocation == MKRippleTapLocation) {
+        [self.mkLayer didChangeTapLocation:location];
+    }
+    
+    // rippleLayer animation
+    [self.mkLayer animateScaleForCircleLayer:@0.08
+                                     toScale:@1.0
+                              timingFunction:self.rippleAniTimingFunction
+                                    duration:self.rippleAniDuration];
+}
+
+- (void)animateHideRipple
+{
+    [self.mkLayer animateHideCircleLayer:self.rippleAniTimingFunction
+                                duration:self.rippleAniDuration];
+}
+
+- (void)animatePressedShadow
+{
+    [self animateShadowWithDiff:1.5 dOpacity:0.15];
+}
+
+- (void)animateRestoreShadow
+{
+    [self animateShadowWithDiff:-1.5 dOpacity:-0.15];
+}
+
+- (void)animateShadowWithDiff:(CGFloat)dRadius
+                     dOpacity:(CGFloat)dOpacity
+{
+    if (!self.shadowAniEnabled) {
+        return;
+    }
+    
+    CGFloat radius    = _view.layer.shadowRadius;
+    CGFloat toRadius  = radius + dRadius;
+    CGFloat opacity   = _view.layer.shadowOpacity;
+    CGFloat toOpacity = opacity + dOpacity;
+    [self.mkLayer animateSuperLayerShadow:[NSNumber numberWithDouble:radius]
+                                 toRadius:[NSNumber numberWithDouble:toRadius]
+                              fromOpacity:[NSNumber numberWithDouble:opacity]
+                                toOpacity:[NSNumber numberWithDouble:toOpacity]
+                           timingFunction:self.shadowAniTimingFunction
+                                 duration:self.shadowAniDuration];
+}
 
 @end

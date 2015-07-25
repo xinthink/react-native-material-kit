@@ -107,6 +107,11 @@ extern NSString *const RCTPasteboardWatcherWillExpireNotification;
 @property MKTimingFunction *backgroundAniTimingFunction;
 @property MKTimingFunction *shadowAniTimingFunction;
 
+- (void)animateShowRippleAt:(CGPoint)location;
+- (void)animateHideRipple;
+- (void)animatePressedShadow;
+- (void)animateRestoreShadow;
+
 // color
 @property UIColor *rippleLayerColor;
 @property UIColor *backgroundLayerColor;

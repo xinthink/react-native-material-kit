@@ -38,7 +38,7 @@
     self.adjustsImageWhenHighlighted = false;
 
     // default properties
-    self.ripplePercent = 0.9;
+    self.ripplePercent = 2.2;
 }
 
 
@@ -130,37 +130,28 @@
     return _mkLayerSupport.backgroundLayerColor;
 }
 
-- (BOOL)beginTrackingWithTouch:(UITouch *)touch
-                     withEvent:(UIEvent *)event {
-    if (self.rippleLocation == MKRippleTapLocation) {
-        [_mkLayerSupport.mkLayer didChangeTapLocation:[touch locationInView:self]];
-    }
+#pragma mark - Touch handling
 
-    // rippleLayer animation
-    [_mkLayerSupport.mkLayer animateScaleForCircleLayer:@0.45
-                                     toScale:@1.0
-                              timingFunction:self.rippleAniTimingFunction
-                                    duration:self.rippleAniDuration];
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    [_mkLayerSupport animateShowRippleAt:[touch locationInView:self]];
+    [_mkLayerSupport animatePressedShadow];
+    [super touchesBegan:touches withEvent:event];
+}
 
-    // backgroundLayer animation
-    if (self.backgroundAniEnabled) {
-        [_mkLayerSupport.mkLayer animateAlphaForBackgroundLayer:self.backgroundAniTimingFunction
-                                            duration:self.backgroundAniDuration];
-    }
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [_mkLayerSupport animateHideRipple];
+    [_mkLayerSupport animateRestoreShadow];
+    [super touchesEnded:touches withEvent:event];
+}
 
-    // shadow animation for self
-    if (self.shadowAniEnabled) {
-        id shadowRadius = [NSNumber numberWithDouble:self.layer.shadowRadius];
-        id shadowOpacity = [NSNumber numberWithDouble:self.layer.shadowOpacity];
-        [_mkLayerSupport.mkLayer animateSuperLayerShadow:@10
-                                     toRadius:shadowRadius
-                                  fromOpacity:@0
-                                    toOpacity:shadowOpacity
-                               timingFunction:self.shadowAniTimingFunction
-                                     duration:self.shadowAniDuration];
-    }
-
-    return [super beginTrackingWithTouch:touch withEvent:event];
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [_mkLayerSupport animateHideRipple];
+    [_mkLayerSupport animateRestoreShadow];
+    [super touchesCancelled:touches withEvent:event];
 }
 
 @end

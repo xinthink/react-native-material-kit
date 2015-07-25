@@ -11,6 +11,7 @@ const theme = {
   bgDisabled: 'rgba(0,0,0,.12)',
   fontColor: 'rgb(117, 117, 117)',
   fontSize: 14,
+  rippleColor: 'rgba(255,255,255,0.125)',
 };
 
 /**
