@@ -8,32 +8,37 @@
 
 #import "MKButton.h"
 
-@implementation MKButton {
+@implementation MKButton
+{
     MKLayerSupport *_mkLayerSupport;
 }
 
-- (instancetype)init {
+- (instancetype)init
+{
     if (self = [super init]) {
         [self setupLayer];
     }
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame
+{
     if (self = [super initWithFrame:frame]) {
         [self setupLayer];
     }
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
     if (self = [super initWithCoder:aDecoder]) {
         [self setupLayer];
     }
     return self;
 }
 
-- (void)setupLayer {
+- (void)setupLayer
+{
     _mkLayerSupport = [[MKLayerSupport alloc] initWithUIView:self];
     self.adjustsImageWhenHighlighted = false;
 
@@ -42,91 +47,113 @@
 }
 
 
-- (void)setMaskEnabled:(BOOL)enabled {
+- (void)setMaskEnabled:(BOOL)enabled
+{
     _mkLayerSupport.maskEnabled = enabled;
 }
 
-- (BOOL)maskEnabled {
+- (BOOL)maskEnabled
+{
     return _mkLayerSupport.maskEnabled;
 }
 
-- (void)setShadowPathEnabled:(BOOL)enabled {
+- (void)setShadowPathEnabled:(BOOL)enabled
+{
     _mkLayerSupport.shadowPathEnabled = enabled;
 }
 
-- (BOOL)shadowPathEnabled {
+- (BOOL)shadowPathEnabled
+{
     return _mkLayerSupport.shadowPathEnabled;
 }
 
-- (void)setRippleLocation:(MKRippleLocation)location {
+- (void)setRippleLocation:(MKRippleLocation)location
+{
     _mkLayerSupport.rippleLocation = location;
 }
 
-- (MKRippleLocation)rippleLocation {
+- (MKRippleLocation)rippleLocation
+{
     return _mkLayerSupport.rippleLocation;
 }
 
-- (void)setRippleLocationByName:(NSString *)name {
+- (void)setRippleLocationByName:(NSString *)name
+{
     _mkLayerSupport.rippleLocationByName = name;
 }
 
-- (NSString*)rippleLocationByName {
+- (NSString*)rippleLocationByName
+{
     return _mkLayerSupport.rippleLocationByName;
 }
 
-- (void)setRipplePercent:(float)percent {
+- (void)setRipplePercent:(float)percent
+{
     _mkLayerSupport.ripplePercent = percent;
 }
 
-- (float)ripplePercent {
+- (float)ripplePercent
+{
     return _mkLayerSupport.ripplePercent;
 }
 
-- (void)setBackgroundLayerCornerRadius:(float)radius {
+- (void)setBackgroundLayerCornerRadius:(float)radius
+{
     _mkLayerSupport.backgroundLayerCornerRadius = radius;
 }
 
-- (float)backgroundLayerCornerRadius {
+- (float)backgroundLayerCornerRadius
+{
     return _mkLayerSupport.backgroundLayerCornerRadius;
 }
 
-- (void)setBackgroundAniEnabled:(BOOL)enabled {
+- (void)setBackgroundAniEnabled:(BOOL)enabled
+{
     _mkLayerSupport.backgroundAniEnabled = enabled;
 }
 
-- (BOOL)backgroundAniEnabled {
+- (BOOL)backgroundAniEnabled
+{
     return _mkLayerSupport.backgroundAniEnabled;
 }
 
-- (void)setRippleAniTimingFunctionByName:(NSString *)name {
+- (void)setRippleAniTimingFunctionByName:(NSString *)name
+{
     _mkLayerSupport.rippleAniTimingFunctionByName = name;
 }
 
-- (NSString*)rippleAniTimingFunctionByName {
+- (NSString*)rippleAniTimingFunctionByName
+{
     return _mkLayerSupport.rippleAniTimingFunctionByName;
 }
 
-- (void)setCornerRadius:(float)radius {
+- (void)setCornerRadius:(float)radius
+{
     _mkLayerSupport.cornerRadius = radius;
 }
 
-- (float)cornerRadius {
+- (float)cornerRadius
+{
     return _mkLayerSupport.cornerRadius;
 }
 
-- (void)setRippleLayerColor:(UIColor *)color {
+- (void)setRippleLayerColor:(UIColor *)color
+{
     _mkLayerSupport.rippleLayerColor = color;
 }
 
-- (UIColor *)rippleLayerColor {
+- (UIColor *)rippleLayerColor
+{
     return _mkLayerSupport.rippleLayerColor;
 }
 
-- (void)setBackgroundLayerColor:(UIColor *)color {
+- (void)setBackgroundLayerColor:(UIColor *)color
+{
     _mkLayerSupport.backgroundLayerColor = color;
 }
 
-- (UIColor *)backgroundLayerColor {
+- (UIColor *)backgroundLayerColor
+{
     return _mkLayerSupport.backgroundLayerColor;
 }
 

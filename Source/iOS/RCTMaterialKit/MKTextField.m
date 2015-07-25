@@ -7,8 +7,10 @@
 //
 
 #import "MKTextField.h"
+#import "MKUtils.h"
 
-@implementation MKTextField {
+@implementation MKTextField
+{
     MKLayerSupport *_mkLayerSupport;
     UILabel *_floatingLabel;
     CALayer *_bottomBorderLayer, *_bottomBorderHighlightLayer;
@@ -17,33 +19,37 @@
 @synthesize padding;
 @synthesize bottomBorderEnabled;
 
-- (instancetype)init {
+- (instancetype)init
+{
     if (self = [super init]) {
         [self setupLayer];
     }
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame
+{
     if (self = [super initWithFrame:frame]) {
         [self setupLayer];
     }
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
     if (self = [super initWithCoder:aDecoder]) {
         [self setupLayer];
     }
     return self;
 }
 
-- (void)setupLayer {
+- (void)setupLayer
+{
     _mkLayerSupport = [[MKLayerSupport alloc] initWithUIView:self];
     [_mkLayerSupport.mkLayer onResized:^(CGRect bounds) {
         [self onResized:bounds];
     }];
-    
+
     // default properties
     self.layer.borderWidth = 0;
     self.borderStyle = UITextBorderStyleNone;
@@ -60,7 +66,7 @@
     self.bottomBorderWidth = 1;
     self.highlightColor = [UIColor blueColor];
     self.bottomBorderEnabled = true;
-    
+
     // floating label
     _floatingLabel = [[UILabel alloc] init];
     self.floatingLabelFont = [UIFont boldSystemFontOfSize:10];
@@ -69,37 +75,41 @@
 //    self.placeholderFont = [UIFont boldSystemFontOfSize:12];
 }
 
-- (void)setBottomBorderEnabled:(BOOL)enabled {
+- (void)setBottomBorderEnabled:(BOOL)enabled
+{
     bottomBorderEnabled = enabled;
     [self removeBottomLayer];
-    
+
     if (enabled) {
         _bottomBorderLayer = [[CALayer alloc] init];
         [self onResized:self.bounds];
         _bottomBorderLayer.backgroundColor = self.tintColor.CGColor;
         [self.layer addSublayer:_bottomBorderLayer];
-        
+
         _bottomBorderHighlightLayer = [[CALayer alloc] init];
         [self.layer addSublayer:_bottomBorderHighlightLayer];
     }
 }
 
-- (BOOL)bottomBorderEnabled {
+- (BOOL)bottomBorderEnabled
+{
     return bottomBorderEnabled;
 }
 
-- (void)onResized:(CGRect)bounds {
+- (void)onResized:(CGRect)bounds
+{
 //    _placeholderBounds = [self placeholderRectForBounds:bounds];
     _bottomBorderLayer.frame = CGRectMake(0, CGRectGetHeight(bounds) - self.bottomBorderWidth,
                                           CGRectGetWidth(bounds), self.bottomBorderWidth);
 }
 
-- (void)animateBottomBorder {
+- (void)animateBottomBorder
+{
     BOOL isFirstRsp = [self isFirstResponder];
     CGRect bounds = _bottomBorderLayer.frame;
     CGRect destRect;
     CGPoint center = CGPointMake(CGRectGetWidth(bounds)/2, bounds.origin.y);
-    
+
     if (isFirstRsp) {
         _bottomBorderHighlightLayer.frame = CGRectMake(center.x, center.y, 0, CGRectGetHeight(bounds));
         destRect = bounds;
@@ -107,7 +117,7 @@
         _bottomBorderHighlightLayer.frame = bounds;
         destRect = CGRectMake(center.x, center.y, 0, CGRectGetHeight(bounds));
     }
-    
+
     _bottomBorderHighlightLayer.backgroundColor = self.highlightColor.CGColor;
     [UIView animateWithDuration:.3
                           delay:0
@@ -118,25 +128,29 @@
                      completion: nil];
 }
 
-- (void)removeBottomLayer {
+- (void)removeBottomLayer
+{
     if (_bottomBorderLayer) {
         [_bottomBorderHighlightLayer removeFromSuperlayer];
         _bottomBorderHighlightLayer = nil;
-        
+
         [_bottomBorderLayer removeFromSuperlayer];
         _bottomBorderLayer = nil;
     }
 }
 
-- (void)setFloatingLabelFont:(UIFont *)font {
+- (void)setFloatingLabelFont:(UIFont *)font
+{
     _floatingLabel.font = font;
 }
 
-- (UIFont*)floatingLabelFont {
+- (UIFont*)floatingLabelFont
+{
     return _floatingLabel.font;
 }
 
-- (void)setPlaceholder:(NSString *)placeholder {
+- (void)setPlaceholder:(NSString *)placeholder
+{
      super.placeholder = placeholder;
 //    self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder
 //                                                                 attributes:@{NSForegroundColorAttributeName:[UIColor lightGrayColor],
@@ -144,12 +158,14 @@
     [self updateFloatingLabelText:placeholder];
 }
 
-- (void)updateFloatingLabelText:(NSString*)text {
+- (void)updateFloatingLabelText:(NSString*)text
+{
     _floatingLabel.text = text;
     [_floatingLabel sizeToFit];
 }
 
-- (CGRect)getFloatingLabelFrame {
+- (CGRect)getFloatingLabelFrame
+{
     CGRect textRect = [self textRectForBounds:self.bounds];
     CGFloat originX = textRect.origin.x;
     CGFloat textWidth = CGRectGetWidth(textRect);
@@ -167,7 +183,8 @@
                       CGRectGetHeight(_floatingLabel.frame));
 }
 
-- (CGRect)getPlaceholderFrame {
+- (CGRect)getPlaceholderFrame
+{
     CGRect textRect = [self placeholderRectForBounds:self.bounds];
     CGFloat originX = textRect.origin.x;
     CGFloat textHeight = CGRectGetHeight(textRect);
@@ -178,15 +195,16 @@
                       CGRectGetHeight(_floatingLabel.frame));
 }
 
-- (void)showFloatingLabel {
+- (void)showFloatingLabel
+{
     if (isNotEqual(_floatingLabel.alpha, 0)) {
         return;
     }
-    
+
     _floatingLabel.frame = [self getPlaceholderFrame];
     _floatingLabel.textColor = [UIColor lightGrayColor];
     [self setPlaceholderColor:[UIColor colorWithWhite:0 alpha:0]];
-    
+
     [UIView animateWithDuration:.3
                           delay:0
                         options:UIViewAnimationOptionCurveLinear
@@ -199,11 +217,12 @@
                      completion:nil];
 }
 
-- (void)hideFloatingLabel {
+- (void)hideFloatingLabel
+{
     if (isNotEqual(_floatingLabel.alpha, 1) || isNotBlank(self.text)) {
         return;
     }
-    
+
     [UIView animateWithDuration:.3
                           delay:0
                         options:UIViewAnimationOptionCurveLinear
@@ -220,40 +239,45 @@
                      }];
 }
 
-- (void)setPlaceholderColor:(UIColor*)color {
+- (void)setPlaceholderColor:(UIColor*)color
+{
     self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.placeholder
                                                                  attributes:@{NSForegroundColorAttributeName:color}];
 }
 
-- (CGRect)textRectForBounds:(CGRect)bounds {
+- (CGRect)textRectForBounds:(CGRect)bounds
+{
     CGRect rect = [super textRectForBounds:bounds];
     CGRect newRect = CGRectMake(rect.origin.x + padding.width, rect.origin.y,
                                 rect.size.width - 2 * padding.width, rect.size.height);
-    
+
     if (!_floatingLabelEnabled) {
         return newRect;
     }
-    
+
     CGFloat dTop = _floatingLabel.font.lineHeight + _floatingLabelBottomMargin;
     newRect = UIEdgeInsetsInsetRect(newRect, UIEdgeInsetsMake(dTop, 0, 0, 0));
     return newRect;
 }
 
-- (CGRect)editingRectForBounds:(CGRect)bounds {
+- (CGRect)editingRectForBounds:(CGRect)bounds
+{
     return [self textRectForBounds:bounds];
 }
 
-- (void)layoutSubviews {
+- (void)layoutSubviews
+{
     [super layoutSubviews];
 
     [self layoutFloatingLabel];
-    
+
     if (_bottomBorderLayer) {
         [self animateBottomBorder];
     }
 }
 
-- (void)layoutFloatingLabel {
+- (void)layoutFloatingLabel
+{
     if (!self.floatingLabelEnabled) {
         return;
     }
@@ -276,91 +300,113 @@
 // ---------------------------
 // Common MKLayer properties
 
-- (void)setMaskEnabled:(BOOL)enabled {
+- (void)setMaskEnabled:(BOOL)enabled
+{
     _mkLayerSupport.maskEnabled = enabled;
 }
 
-- (BOOL)maskEnabled {
+- (BOOL)maskEnabled
+{
     return _mkLayerSupport.maskEnabled;
 }
 
-- (void)setRippleEnabled:(BOOL)enabled {
+- (void)setRippleEnabled:(BOOL)enabled
+{
     _mkLayerSupport.rippleEnabled = enabled;
 }
 
-- (BOOL)rippleEnabled {
+- (BOOL)rippleEnabled
+{
     return _mkLayerSupport.rippleEnabled;
 }
 
-- (void)setRippleLocation:(MKRippleLocation)location {
+- (void)setRippleLocation:(MKRippleLocation)location
+{
     _mkLayerSupport.rippleLocation = location;
 }
 
-- (MKRippleLocation)rippleLocation {
+- (MKRippleLocation)rippleLocation
+{
     return _mkLayerSupport.rippleLocation;
 }
 
-- (void)setRippleLocationByName:(NSString *)name {
+- (void)setRippleLocationByName:(NSString *)name
+{
     _mkLayerSupport.rippleLocationByName = name;
 }
 
-- (NSString*)rippleLocationByName {
+- (NSString*)rippleLocationByName
+{
     return _mkLayerSupport.rippleLocationByName;
 }
 
-- (void)setRipplePercent:(float)percent {
+- (void)setRipplePercent:(float)percent
+{
     _mkLayerSupport.ripplePercent = percent;
 }
 
-- (float)ripplePercent {
+- (float)ripplePercent
+{
     return _mkLayerSupport.ripplePercent;
 }
 
-- (void)setBackgroundLayerCornerRadius:(float)radius {
+- (void)setBackgroundLayerCornerRadius:(float)radius
+{
     _mkLayerSupport.backgroundLayerCornerRadius = radius;
 }
 
-- (float)backgroundLayerCornerRadius {
+- (float)backgroundLayerCornerRadius
+{
     return _mkLayerSupport.backgroundLayerCornerRadius;
 }
 
-- (void)setBackgroundAniEnabled:(BOOL)enabled {
+- (void)setBackgroundAniEnabled:(BOOL)enabled
+{
     _mkLayerSupport.backgroundAniEnabled = enabled;
 }
 
-- (BOOL)backgroundAniEnabled {
+- (BOOL)backgroundAniEnabled
+{
     return _mkLayerSupport.backgroundAniEnabled;
 }
 
-- (void)setRippleAniTimingFunctionByName:(NSString *)name {
+- (void)setRippleAniTimingFunctionByName:(NSString *)name
+{
     _mkLayerSupport.rippleAniTimingFunctionByName = name;
 }
 
-- (NSString*)rippleAniTimingFunctionByName {
+- (NSString*)rippleAniTimingFunctionByName
+{
     return _mkLayerSupport.rippleAniTimingFunctionByName;
 }
 
-- (void)setCornerRadius:(float)radius {
+- (void)setCornerRadius:(float)radius
+{
     _mkLayerSupport.cornerRadius = radius;
 }
 
-- (float)cornerRadius {
+- (float)cornerRadius
+{
     return _mkLayerSupport.cornerRadius;
 }
 
-- (void)setRippleLayerColor:(UIColor *)color {
+- (void)setRippleLayerColor:(UIColor *)color
+{
     _mkLayerSupport.rippleLayerColor = color;
 }
 
-- (UIColor *)rippleLayerColor {
+- (UIColor *)rippleLayerColor
+{
     return _mkLayerSupport.rippleLayerColor;
 }
 
-- (void)setBackgroundLayerColor:(UIColor *)color {
+- (void)setBackgroundLayerColor:(UIColor *)color
+{
     _mkLayerSupport.backgroundLayerColor = color;
 }
 
-- (UIColor *)backgroundLayerColor {
+- (UIColor *)backgroundLayerColor
+{
     return _mkLayerSupport.backgroundLayerColor;
 }
 

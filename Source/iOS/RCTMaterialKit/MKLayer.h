@@ -90,7 +90,7 @@ extern NSString *const RCTPasteboardWatcherWillExpireNotification;
 @property BOOL maskEnabled;
 @property BOOL rippleEnabled;
 @property MKRippleLocation rippleLocation;
-@property NSString *rippleLocationByName;
+@property NSString *rippleLocationByName;  // TODO use NS_ENUM & RCTConvert instead
 @property float ripplePercent;
 @property float backgroundLayerCornerRadius;
 @property float cornerRadius;
@@ -103,7 +103,7 @@ extern NSString *const RCTPasteboardWatcherWillExpireNotification;
 @property float backgroundAniDuration;
 @property float shadowAniDuration;
 @property MKTimingFunction *rippleAniTimingFunction;
-@property NSString *rippleAniTimingFunctionByName;
+@property NSString *rippleAniTimingFunctionByName;  // TODO use NS_ENUM & RCTConvert instead
 @property MKTimingFunction *backgroundAniTimingFunction;
 @property MKTimingFunction *shadowAniTimingFunction;
 

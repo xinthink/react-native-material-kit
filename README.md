@@ -141,4 +141,4 @@ the jsx equivalent:
 
 
 ---
-It's the very begining of the project, lots of work to be done, contributions are welcome! :beer:
+It's the very begining of the project, lots of work to be done, contributions are welcome! :beers:
