@@ -49,7 +49,11 @@
     self.borderStyle = UITextBorderStyleNone;
     self.tintColor = [UIColor lightGrayColor];
     self.rippleEnabled = false;
-    
+    self.rippleLayerColor = [UIColor colorWithWhite:0.45 alpha:0.2];
+    self.backgroundLayerColor = [UIColor colorWithWhite:0.75 alpha:0.2];
+    self.rippleAniDuration = 0.35;
+    self.ripplePercent = 1;
+
     self.padding = CGSizeMake(2, 2);
     self.floatingLabelBottomMargin = 2;
     self.floatingLabelEnabled = false;
@@ -263,16 +267,8 @@
 
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch
                      withEvent:(UIEvent *)event {
-    RCTMKLayer *mkLayer = _mkLayerSupport.mkLayer;
-    [mkLayer didChangeTapLocation:[touch locationInView:self]];
-    
-    [mkLayer animateScaleForCircleLayer:@0.45
-                                toScale:@1.0
-                         timingFunction:MKTimingLinear
-                               duration:self.rippleAniDuration];
-    [mkLayer animateAlphaForBackgroundLayer:MKTimingLinear
-                                   duration:self.backgroundAniDuration];
-    
+    [_mkLayerSupport animateShowRippleAt:[touch locationInView:self]];
+    [_mkLayerSupport animateHideRipple];
     return [super beginTrackingWithTouch:touch
                                withEvent:event];
 }

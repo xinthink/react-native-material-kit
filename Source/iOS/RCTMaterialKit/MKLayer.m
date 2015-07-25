@@ -497,8 +497,8 @@ static MKTimingFunction *_easeOut = nil;
 - (void)setRippleEnabled:(BOOL)enabled {
     rippleEnabled = enabled;
     [self.mkLayer enableRipple:enabled];
-    self.rippleLayerColor = _defaultRippleColor;
-    self.backgroundLayerColor = _defaultRippleColor;
+    self.rippleLayerColor = self.rippleLayerColor ? self.rippleLayerColor : _defaultRippleColor;
+    self.backgroundLayerColor = self.backgroundLayerColor ? self.backgroundLayerColor : _defaultRippleColor;
 }
 
 - (BOOL)rippleEnabled {
