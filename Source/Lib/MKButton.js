@@ -19,12 +19,14 @@ const utils = require('./utils');
  */
 class MKButton extends React.Component {
   render() {
-    var touchableProps = {};
+    const touchableProps = {};
     if (!this.props.disabled) {
-      touchableProps.onPress = this.props.onPress;
-      touchableProps.onPressIn = this.props.onPressIn;
-      touchableProps.onPressOut = this.props.onPressOut;
-      touchableProps.onLongPress = this.props.onLongPress;
+      Object.assign(touchableProps, {
+        onPress: this.props.onPress,
+        onPressIn: this.props.onPressIn,
+        onPressOut: this.props.onPressOut,
+        onLongPress: this.props.onLongPress,
+      });
     }
 
     return (
@@ -37,6 +39,7 @@ class MKButton extends React.Component {
 
 MKButton.propTypes = {
   ...MKPropTypes.mkLayerPropTypes,
+  ...TouchableWithoutFeedback.propTypes,
   disabled: React.PropTypes.bool,
 };
 
