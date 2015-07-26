@@ -5,6 +5,7 @@
 
 var React = require('react-native');
 var MK = require('react-native-material-kit');
+var appStyles = require('./styles');
 
 var {
   StyleSheet,
@@ -24,6 +25,17 @@ var {
 //   primaryColor: MKColor.Teal,
 //   accentColor: MKColor.Purple,
 // });
+
+var styles = Object.assign(appStyles, StyleSheet.create({
+  buttonText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  fab: {
+    width: 42, height: 42,
+  },
+}));
 
 var Buttons = React.createClass({
   render: function() {
@@ -116,52 +128,7 @@ var Buttons = React.createClass({
         </View>
       </ScrollView>
     );
-  }
-});
-
-var styles = StyleSheet.create({
-  scrollView: {
-    flex: 1,
   },
-  container: {
-    flex: 1,
-    alignItems: 'stretch',
-    backgroundColor: '#F5FCFF',
-    padding: 20,
-  },
-  row: {
-    flexDirection: 'row',
-  },
-  col: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    marginLeft: 7, marginRight: 7,
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginTop: 10, marginBottom: 20,
-  },
-  legendLabel: {
-    textAlign: 'center',
-    color: '#333333',
-    marginTop: 10, marginBottom: 20,
-    fontSize: 12,
-  },
-  buttonText: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  fab: {
-    width: 42, height: 42,
-  }
 });
 
 module.exports = Buttons;
