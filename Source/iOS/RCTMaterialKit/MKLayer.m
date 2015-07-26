@@ -333,7 +333,6 @@ static MKTimingFunction *_easeOut = nil;
 {
     if (_backgroundLayer) {
         _backgroundLayer.mask = enable ? _maskLayer : nil;
-        _backgroundLayer.opacity = 1;
         _backgroundLayer.masksToBounds = enable;
     }
 }
