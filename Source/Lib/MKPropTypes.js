@@ -14,6 +14,13 @@ const aniTimingFunc = PropTypes.oneOf([
   'easeOut',
 ]);
 
+const insets = PropTypes.objectOf({
+  top: PropTypes.number,
+  left: PropTypes.number,
+  bottom: PropTypes.number,
+  right: PropTypes.number,
+});
+
 const mkLayerPropTypes = {
   // FIXME naming conflicts with built-in properties, such as shadowOffset
   // lead to runtime warning: Failed propType: typeChecker is not a function Check the render method of xxx
@@ -44,4 +51,5 @@ const mkLayerPropTypes = {
 
 exports.dimen = dimen;
 exports.aniTimingFunc = aniTimingFunc;
+exports.insets = insets;
 exports.mkLayerPropTypes = mkLayerPropTypes;

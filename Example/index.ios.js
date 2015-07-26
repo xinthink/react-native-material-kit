@@ -18,6 +18,7 @@ var {
 
 var Buttons = require('./App/buttons');
 var TextFields = require('./App/textfields');
+var Toggles = require('./App/toggles');
 
 var Home = React.createClass({
   render: function () {
@@ -39,6 +40,14 @@ var Home = React.createClass({
           });
         }}>
           <Text style={styles.pushLabel}>Text Fields</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+          this.props.navigator.push({
+            title: 'Toggles',
+            component: Toggles,
+          });
+        }}>
+          <Text style={styles.pushLabel}>Toggles</Text>
         </TouchableOpacity>
       </ScrollView>
     );
