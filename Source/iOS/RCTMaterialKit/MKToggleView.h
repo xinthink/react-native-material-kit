@@ -44,7 +44,7 @@
 /*
  * Generic animated toggle control, used as subview
  */
-@interface MKToggleControl : UIControl
+@interface MKToggleControl : UIView
 
 @property UIColor *checkedColor;
 @property BOOL checkedHighlightEnabled;
