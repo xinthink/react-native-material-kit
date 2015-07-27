@@ -9,8 +9,8 @@ const {getTheme} = require('./theme');
  * Base class of MK Component builder
  */
 class Builder {
-  constructor() {
-    this.getTheme = getTheme;
+  getTheme() {
+    return getTheme();
   }
 
   withAccent(v) {

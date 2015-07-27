@@ -13,30 +13,39 @@
 #import "MKLayer.h"
 
 @class MKToggleControl;
-@protocol MKToggleViewDelegate;
+@protocol MKToggle, MKToggleDelegate;
+
+/*
+ * Protocol of toggle views
+ */
+@protocol MKToggle <NSObject>
+
+@required
+- (BOOL)checked;
+
+@end
 
 /*
  * Base class for toggle components
  */
-@interface MKToggleView : UIControl
+@interface MKToggleView : UIControl <MKToggle>
 
 @property BOOL checked;
 @property (readonly) MKToggleControl *toggleCtl;
 
-@property (nonatomic, weak) id<MKToggleViewDelegate> delegate;
+@property (nonatomic, weak) id<MKToggleDelegate> delegate;
 
 - (void)setupLayer;
 
 @end
 
-
 /*
  * Generic toggle view delegate protocol
  */
-@protocol MKToggleViewDelegate <NSObject>
+@protocol MKToggleDelegate <NSObject>
 
 @required
-- (void)toggleView:(MKToggleView*)view didToggled:(BOOL)checked;
+- (void)toggleView:(id<MKToggle>)view didToggled:(BOOL)checked;
 
 @end
 

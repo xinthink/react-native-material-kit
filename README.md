@@ -140,5 +140,56 @@ the jsx equivalent:
 :point_right: [the complete example](https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/textfields.js)
 
 
+### Toggles
+
+[Icon toggle](http://ww.getmdl.io/components/index.html#toggles-section/icon-toggle) & [Switch](http://ww.getmdl.io/components/index.html#toggles-section/switch)
+
+![toggles-mdl](https://cloud.githubusercontent.com/assets/390805/8903074/de0ed748-3487-11e5-9448-9ee304e0a6b6.gif)
+
+### Icon toggle
+
+```jsx
+<MKIconToggle
+  checked={true}
+  onCheckedChange={this._onIconChecked}
+  onPress={this._onIconClicked}
+  >
+  <Text pointerEvents="none"
+        style={styles.toggleTextOff}>Off</Text>
+  <Text state_checked={true}
+        pointerEvents="none"
+        style={[styles.toggleText, styles.toggleTextOn]}>On</Text>
+</MKIconToggle>
+```
+
+The two `Text` tags here, similar to [State List](http://developer.android.com/guide/topics/resources/drawable-resource.html#StateList) in Android development, which can give you the flexibility to decide what content and how it is shown for each state of the toggle. For example, you can use [react-native-icons](https://github.com/corymsmith/react-native-icons) here, or any content with more sophisticated styles.
+
+### Switch
+
+```jsx
+// using Builder
+const OrangeAppleSwitch = MKSwitch.mkSwitch()
+  .withStyle(styles.appleSwitch)
+  .withOnColor('rgba(255,152,0,.3)')
+  .withThumbOnColor(MKColor.Orange)
+  .withRippleLayerColor('rgba(255,152,0,.2)')
+  .withOnCheckedChange(() => console.log('orange switch clicked'))
+  .build();
+...
+<OrangeAppleSwitch/>
+
+// jsx only
+<MKSwitch
+  style={styles.appleSwitch}
+  onColor="rgba(255,152,0,.3)"
+  thumbOnColor={MKColor.Orange}
+  rippleLayerColor="rgba(255,152,0,.2)"
+  onCheckedChange={() => console.log('orange switch clicked')}
+/>
+```
+
+:point_right: [the complete example](https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/toggles.js)
+
+
 ---
 It's the very begining of the project, lots of work to be done, contributions are welcome! :beers:

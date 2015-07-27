@@ -14,7 +14,7 @@
 #import "UIView+React.h"
 #import "MKToggleView.h"
 
-@interface MKToggleViewManager : RCTViewManager <MKToggleViewDelegate>
+@interface MKToggleViewManager : RCTViewManager <MKToggleDelegate>
 @end
 
 #endif

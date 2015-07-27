@@ -10,6 +10,7 @@ const {
 } = React;
 
 const MKPropTypes = require('./MKPropTypes');
+const MKColor = require('./MKColor');
 
 
 function isViewForState(view, state) {
@@ -53,6 +54,8 @@ class MKIconToggle extends Component {
       });
     }
 
+    this.props.style = [MKIconToggle.defaultProps.style, this.props.style || {}];
+
     return (
       <TouchableWithoutFeedback {...touchableProps}>
         <NativeIconToggle {...this.props} onChange={this._onEvent.bind(this)}>
@@ -82,4 +85,52 @@ MKIconToggle.propTypes = {
 const NativeIconToggle = requireNativeComponent('MKIconToggle', MKIconToggle);
 
 
+// --------------------------
+// builders
+//
+const {
+  Builder,
+} = require('./builder');
+
+/**
+ * Toggle builder
+ */
+class MKIconToggleBuilder extends Builder {
+  withChecked(v) {
+    this.checked = v;
+    return this;
+  }
+
+  withInsets(v) {
+    this.insets = v;
+    return this;
+  }
+
+  withOnCheckedChange(v) {
+    this.onCheckedChange = v;
+    return this;
+  }
+
+  build() {
+    const props = this.toProps();
+    // console.log(props);
+
+    return React.createClass({
+      render: function () {
+        return <MKIconToggle {...props}>{this.props.children}</MKIconToggle>;
+      },
+    });
+  }
+}
+
+/**
+ * Built-in toggle builders
+ */
+function toggle() {
+  return new MKIconToggleBuilder().withBackgroundColor(MKColor.Transparent);
+}
+
+
 module.exports = MKIconToggle;
+MKIconToggle.Builder = MKIconToggleBuilder;
+MKIconToggle.toggle = toggle;

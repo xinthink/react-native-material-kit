@@ -34,4 +34,26 @@
     return color;
 }
 
++ (instancetype)indigo
+{
+    static UIColor *color = nil;
+
+    if (!color) {
+        color = [UIColor colorWithHex:MK_COLOR_INDIGO];
+    }
+
+    return color;
+}
+
++ (instancetype)silver
+{
+    static UIColor *color = nil;
+
+    if (!color) {
+        color = [UIColor colorWithHex:MK_COLOR_SILVER];
+    }
+
+    return color;
+}
+
 @end

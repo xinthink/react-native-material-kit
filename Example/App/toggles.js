@@ -16,19 +16,26 @@ const {
 
 const {
   MKIconToggle,
+  MKSwitch,
   MKColor,
 } = MK;
 
 const styles = Object.assign(appStyles, StyleSheet.create({
   toggleText: {
-    fontSize: 12,
+    fontSize: 16,
     fontStyle: 'italic',
     fontWeight: 'bold',
     color: '#616161',
   },
   toggleOnText: {
-    //fontStyle: 'normal',
     color: MKColor.Indigo,
+  },
+  switch: {
+    marginTop: 5,
+  },
+  appleSwitch: {
+    width: 40, height: 22,
+    marginBottom: 5,
   },
 }));
 
@@ -42,23 +49,58 @@ class Toggles extends Component {
   }
 
   render() {
+    const CheckedIconToggle = MKIconToggle.toggle()
+      .withChecked(true)
+      .withOnCheckedChange(this._onChecked)
+      .withOnPress(this._onToggleClicked)
+      .build();
+
+    const OrangeAppleSwitch = MKSwitch.mkSwitch()
+      .withStyle(styles.appleSwitch)
+      .withOnColor('rgba(255,152,0,.3)')
+      .withThumbOnColor(MKColor.Orange)
+      .withRippleLayerColor('rgba(255,152,0,.2)')
+      .withOnCheckedChange(() => console.log('orange switch clicked'))
+      .build();
+
     return (
       <ScrollView style={styles.scrollView}
                   contentContainerStyle={styles.container}>
         <View style={styles.row}>
           <View style={styles.col}>
-            <MKIconToggle
-              checked={true}
-              onCheckedChange={this._onChecked}
-              onPress={this._onToggleClicked}
-              >
+            <CheckedIconToggle>
               <Text state_checked={true}
                     pointerEvents="none"
                     style={[styles.toggleText, styles.toggleOnText]}>T</Text>
               <Text pointerEvents="none"
                     style={styles.toggleText}>T</Text>
+            </CheckedIconToggle>
+            <Text style={styles.legendLabel}>Icon on</Text>
+          </View>
+          <View style={styles.col}>
+            <MKIconToggle>
+              <Text state_checked={true}
+                    pointerEvents="none"
+                    style={[styles.toggleText, styles.toggleOnText]}>B</Text>
+              <Text pointerEvents="none"
+                    style={styles.toggleText}>B</Text>
             </MKIconToggle>
-            <Text style={styles.legendLabel}>Icon toggle</Text>
+            <Text style={styles.legendLabel}>Icon off</Text>
+          </View>
+        </View>
+        <View style={styles.row}>
+          <View style={styles.col}>
+            <MKSwitch
+              checked={true}
+              onCheckedChange={this._onChecked}
+              onPress={this._onToggleClicked}
+              style={styles.switch}
+            />
+            <Text style={styles.legendLabel}>Switch on</Text>
+          </View>
+          <View style={styles.col}>
+            <OrangeAppleSwitch/>
+            <Text style={styles.legendLabel}>Switch off</Text>
           </View>
         </View>
       </ScrollView>

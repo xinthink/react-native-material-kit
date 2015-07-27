@@ -5,6 +5,7 @@ exports.MKButton = require('./MKButton');
 exports.MKTextField = require('./MKTextField');
 exports.MKColor = require('./MKColor');
 exports.MKIconToggle = require('./MKIconToggle');
+exports.MKSwitch = require('./MKSwitch');
 
 exports.setTheme = require('./theme').setTheme;
 exports.getTheme = require('./theme').getTheme;
