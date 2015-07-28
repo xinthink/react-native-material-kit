@@ -45,7 +45,7 @@
 @protocol MKToggleDelegate <NSObject>
 
 @required
-- (void)toggleView:(id<MKToggle>)view didToggled:(BOOL)checked;
+- (void)toggleView:(UIView<MKToggle>*)view didToggled:(BOOL)checked;
 
 @end
 

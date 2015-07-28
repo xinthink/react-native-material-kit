@@ -14,7 +14,7 @@ RCT_EXPORT_MODULE()  // don't export 'abstract' class?
 
 #pragma mark - MKToggleViewDelegate
 
-- (void)toggleView:(MKToggleView *)view didToggled:(BOOL)checked
+- (void)toggleView:(UIView<MKToggle>*)view didToggled:(BOOL)checked
 {
     [self.bridge.eventDispatcher sendInputEventWithName:@"topChange"
                                                    body:@{@"target": view.reactTag,
