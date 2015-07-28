@@ -39,6 +39,20 @@ const styles = Object.assign(appStyles, StyleSheet.create({
   },
 }));
 
+const CheckedIconToggle = MKIconToggle.toggle()
+  .withChecked(true)
+  .withOnCheckedChange(this._onChecked)
+  .withOnPress(this._onToggleClicked)
+  .build();
+
+const OrangeAppleSwitch = MKSwitch.mkSwitch()
+  .withStyle(styles.appleSwitch)
+  .withOnColor('rgba(255,152,0,.3)')
+  .withThumbOnColor(MKColor.Orange)
+  .withRippleLayerColor('rgba(255,152,0,.2)')
+  .withOnCheckedChange(() => console.log('orange switch clicked'))
+  .build();
+
 class Toggles extends Component {
   _onChecked(event) {
     console.log(`icon toggle is checked? ${event.checked}`);
@@ -49,20 +63,6 @@ class Toggles extends Component {
   }
 
   render() {
-    const CheckedIconToggle = MKIconToggle.toggle()
-      .withChecked(true)
-      .withOnCheckedChange(this._onChecked)
-      .withOnPress(this._onToggleClicked)
-      .build();
-
-    const OrangeAppleSwitch = MKSwitch.mkSwitch()
-      .withStyle(styles.appleSwitch)
-      .withOnColor('rgba(255,152,0,.3)')
-      .withThumbOnColor(MKColor.Orange)
-      .withRippleLayerColor('rgba(255,152,0,.2)')
-      .withOnCheckedChange(() => console.log('orange switch clicked'))
-      .build();
-
     return (
       <ScrollView style={styles.scrollView}
                   contentContainerStyle={styles.container}>

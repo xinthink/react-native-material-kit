@@ -1,13 +1,12 @@
 /**
  * Created by ywu on 15/7/16.
  */
-'use strict';
 
-var React = require('react-native');
-var MK = require('react-native-material-kit');
-var appStyles = require('./styles');
+const React = require('react-native');
+const MK = require('react-native-material-kit');
+const appStyles = require('./styles');
 
-var {
+const {
   StyleSheet,
   Text,
   View,
@@ -15,7 +14,7 @@ var {
   Image,
 } = React;
 
-var {
+const {
   MKButton,
   MKColor,
 } = MK;
@@ -26,7 +25,7 @@ var {
 //   accentColor: MKColor.Purple,
 // });
 
-var styles = Object.assign(appStyles, StyleSheet.create({
+const styles = Object.assign(appStyles, StyleSheet.create({
   buttonText: {
     fontSize: 14,
     fontWeight: 'bold',
@@ -37,42 +36,42 @@ var styles = Object.assign(appStyles, StyleSheet.create({
   },
 }));
 
-var Buttons = React.createClass({
+const ColoredRaisedButton = MKButton.coloredButton()
+  .withText('BUTTON')
+  .withOnPress(() => {
+    console.log("Hi, it's a colored button!");
+  })
+  .build();
+const AccentColoredRaisedButton = MKButton.accentColoredButton()
+  .build();
+const PlainRaisedButton = MKButton.button()
+  .withText('BUTTON')
+  .build();
+const FlatButton = MKButton.flatButton()
+  .withText('BUTTON')
+  .build();
+const ColoredFlatButton = MKButton.coloredFlatButton()
+  .withText('BUTTON')
+  .build();
+const AccentColoredFlatButton = MKButton.accentColoredFlatButton()
+  .withText('BUTTON')
+  .build();
+
+const ColoredFab = MKButton.coloredFab()
+  .withStyle(styles.fab)
+  .withCornerRadius(21)  // cannot get style by id since react-native 0.7, set corner radius explicitly
+  .build();
+const AccentColoredFab = MKButton.accentColoredFab()
+  .withStyle(styles.fab)
+  .withCornerRadius(21)  // cannot get style by id since react-native 0.7, set corner radius explicitly
+  .build();
+const PlainFab = MKButton.plainFab()
+  .withStyle(styles.fab)
+  .withCornerRadius(21)  // cannot get style by id since react-native 0.7, set corner radius explicitly
+  .build();
+
+const Buttons = React.createClass({
   render: function() {
-    var ColoredRaisedButton = MKButton.coloredButton()
-      .withText('BUTTON')
-      .withOnPress(() => {
-        console.log("Hi, it's a colored button!");
-      })
-      .build();
-    var AccentColoredRaisedButton = MKButton.accentColoredButton()
-      .build();
-    var PlainRaisedButton = MKButton.button()
-      .withText('BUTTON')
-      .build();
-    var FlatButton = MKButton.flatButton()
-      .withText('BUTTON')
-      .build();
-    var ColoredFlatButton = MKButton.coloredFlatButton()
-      .withText('BUTTON')
-      .build();
-    var AccentColoredFlatButton = MKButton.accentColoredFlatButton()
-      .withText('BUTTON')
-      .build();
-
-    var ColoredFab = MKButton.coloredFab()
-      .withStyle(styles.fab)
-      .withCornerRadius(21)  // cannot get style by id since react-native 0.7, set corner radius explicitly
-      .build();
-    var AccentColoredFab = MKButton.accentColoredFab()
-      .withStyle(styles.fab)
-      .withCornerRadius(21)  // cannot get style by id since react-native 0.7, set corner radius explicitly
-      .build();
-    var PlainFab = MKButton.plainFab()
-      .withStyle(styles.fab)
-      .withCornerRadius(21)  // cannot get style by id since react-native 0.7, set corner radius explicitly
-      .build();
-
     return (
       <ScrollView style={styles.scrollView}
                   contentContainerStyle={styles.container}>

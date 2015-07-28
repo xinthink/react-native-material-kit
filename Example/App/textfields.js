@@ -1,26 +1,23 @@
 /**
  * Created by ywu on 15/7/16.
  */
-'use strict';
 
-var React = require('react-native');
-var MK = require('react-native-material-kit');
-var appStyles = require('./styles');
+const React = require('react-native');
+const MK = require('react-native-material-kit');
+const appStyles = require('./styles');
 
-var {
+const {
   StyleSheet,
   Text,
   View,
   ScrollView,
 } = React;
 
-var {
-  setTheme,
+const {
   MKTextField,
-  MKColor,
 } = MK;
 
-var styles = Object.assign(appStyles, StyleSheet.create({
+const styles = Object.assign(appStyles, StyleSheet.create({
   textfield: {
     width: 80,
     marginTop: 18,
@@ -33,34 +30,33 @@ var styles = Object.assign(appStyles, StyleSheet.create({
   },
 }));
 
-var TextFields = React.createClass({
+const Textfield = MKTextField.textfield()
+  .withPlaceholder('Text...')
+  .withStyle(styles.textfield)
+  .withOnFocus((e) => console.log('Focus', e))
+  .withOnBlur((e) => console.log('Blur', e))
+  .withOnEndEditing((e) => console.log('EndEditing', e))
+  .withOnSubmitEditing((e) => console.log('SubmitEditing', e))
+  .withOnTextChange((e) => console.log('TextChange', e))
+  .build();
+
+const TextfieldWithFloatingLabel = MKTextField.textfieldWithFloatingLabel()
+  .withPlaceholder('Text...')
+  .withStyle(styles.textfieldWithFloatingLabel)
+  .build();
+
+const TextfieldWithRipple = MKTextField.textfieldWithRipple()
+  .withPlaceholder('Text...')
+  .withStyle(styles.textfield)
+  .build();
+
+const TextfieldWithRippleAndFloatingLabel = MKTextField.textfieldWithRippleAndFloatingLabel()
+  .withPlaceholder('Text...')
+  .withStyle(styles.textfieldWithFloatingLabel)
+  .build();
+
+const TextFields = React.createClass({
   render: function() {
-
-    var Textfield = MKTextField.textfield()
-      .withPlaceholder('Text...')
-      .withStyle(styles.textfield)
-      .withOnFocus((e) => console.log('Focus', e))
-      .withOnBlur((e) => console.log('Blur', e))
-      .withOnEndEditing((e) => console.log('EndEditing', e))
-      .withOnSubmitEditing((e) => console.log('SubmitEditing', e))
-      .withOnTextChange((e) => console.log('TextChange', e))
-      .build();
-
-    var TextfieldWithFloatingLabel = MKTextField.textfieldWithFloatingLabel()
-      .withPlaceholder('Text...')
-      .withStyle(styles.textfieldWithFloatingLabel)
-      .build();
-
-    var TextfieldWithRipple = MKTextField.textfieldWithRipple()
-      .withPlaceholder('Text...')
-      .withStyle(styles.textfield)
-      .build();
-
-    var TextfieldWithRippleAndFloatingLabel = MKTextField.textfieldWithRippleAndFloatingLabel()
-      .withPlaceholder('Text...')
-      .withStyle(styles.textfieldWithFloatingLabel)
-      .build();
-
     return (
       <ScrollView style={styles.scrollView}
                   contentContainerStyle={styles.container}>
@@ -86,7 +82,7 @@ var TextFields = React.createClass({
         </View>
       </ScrollView>
     );
-  }
+  },
 });
 
 module.exports = TextFields;
