@@ -410,4 +410,15 @@
     return _mkLayerSupport.backgroundLayerColor;
 }
 
+# pragma mark - Events
+
+- (BOOL)resignFirstResponder
+{
+    BOOL result = [super resignFirstResponder];
+    if (result) {
+        [self sendActionsForControlEvents:UIControlEventTouchUpOutside];
+    }
+    return result;
+}
+
 @end

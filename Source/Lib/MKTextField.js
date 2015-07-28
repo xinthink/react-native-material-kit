@@ -13,8 +13,23 @@ const MKColor = require('./MKColor');
 
 
 class MKTextField extends React.Component {
+  _callback(callbackName, event) {
+    if (this.props[callbackName]) {
+      this.props[callbackName](event.nativeEvent);
+    }
+  }
+
   render() {
-    return <NativeTextField {...this.props} />;
+    return (
+      <NativeTextField
+        {...this.props}
+        onChange={(e) => this._callback('onTextChange', e)}
+        onFocus={(e) => this._callback('onFocus', e)}
+        onBlur={(e) => this._callback('onBlur', e)}
+        onEndEditing={(e) => this._callback('onEndEditing', e)}
+        onSubmitEditing={(e) => this._callback('onSubmitEditing', e)}
+      />
+    );
   }
 }
 
@@ -32,6 +47,13 @@ MKTextField.propTypes = {
   highlightColor: PropTypes.string,
   tintColor: PropTypes.string,
   textColor: PropTypes.string,
+  onTextChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  onEndEditing: PropTypes.func,
+  onSubmitEditing: PropTypes.func,
+  // TODO support multiline
+  // TODO configurable keyboard & return types
   // TODO configurable fonts
 };
 
@@ -106,6 +128,31 @@ class MKTextFieldBuilder extends Builder {
 
   withTextColor(v) {
     this.textColor = v;
+    return this;
+  }
+
+  withOnTextChange(cb) {
+    this.onTextChange = cb;
+    return this;
+  }
+
+  withOnFocus(cb) {
+    this.onFocus = cb;
+    return this;
+  }
+
+  withOnBlur(cb) {
+    this.onBlur = cb;
+    return this;
+  }
+
+  withOnEndEditing(cb) {
+    this.onEndEditing = cb;
+    return this;
+  }
+
+  withOnSubmitEditing(cb) {
+    this.onSubmitEditing = cb;
     return this;
   }
 

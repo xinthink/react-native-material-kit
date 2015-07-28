@@ -8,6 +8,8 @@
 
 #import "MKTextField.h"
 #import "RCTViewManager.h"
+#import "RCTEventDispatcher.h"
+#import "UIView+React.h"
 
 @interface MKTextFieldManager : RCTViewManager
 @end
@@ -18,7 +20,13 @@ RCT_EXPORT_MODULE()
 
 - (UIView*)view
 {
-    return [[MKTextField alloc] init];
+    MKTextField *txt = [[MKTextField alloc] init];
+    [txt addTarget:self action:@selector(_textfieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [txt addTarget:self action:@selector(_textfieldBeginEditing:) forControlEvents:UIControlEventEditingDidBegin];
+    [txt addTarget:self action:@selector(_textfieldEndEditing:) forControlEvents:UIControlEventEditingDidEnd];
+    [txt addTarget:self action:@selector(_textfieldSubmitEditing:) forControlEvents:UIControlEventEditingDidEndOnExit];
+    [txt addTarget:self action:@selector(_textfieldBlur:) forControlEvents:UIControlEventTouchUpOutside];
+    return txt;
 }
 
 RCT_EXPORT_VIEW_PROPERTY(text, NSString)
@@ -52,5 +60,31 @@ RCT_EXPORT_VIEW_PROPERTY(ripplePercent, float)
 RCT_EXPORT_VIEW_PROPERTY(rippleLayerColor, UIColor)
 RCT_REMAP_VIEW_PROPERTY(rippleAniTimingFunction, rippleAniTimingFunctionByName, NSString)
 RCT_REMAP_VIEW_PROPERTY(rippleLocation, rippleLocationByName, NSString)
+
+#define RCT_TEXT_EVENT_HANDLER(delegateMethod, eventName)              \
+- (void)delegateMethod:(MKTextField*)sender                            \
+{                                                                      \
+  [self.bridge.eventDispatcher sendTextEventWithType:eventName         \
+                                            reactTag:sender.reactTag   \
+                                                text:sender.text];     \
+}
+
+RCT_TEXT_EVENT_HANDLER(_textfieldDidChange, RCTTextEventTypeChange)
+RCT_TEXT_EVENT_HANDLER(_textfieldEndEditing, RCTTextEventTypeEnd)
+RCT_TEXT_EVENT_HANDLER(_textfieldSubmitEditing, RCTTextEventTypeSubmit)
+RCT_TEXT_EVENT_HANDLER(_textfieldBeginEditing, RCTTextEventTypeFocus)
+RCT_TEXT_EVENT_HANDLER(_textfieldBlur, RCTTextEventTypeBlur)
+
+// - (void)_textfieldBeginEditing:(MKTextField*)sender
+// {
+//  if (_selectTextOnFocus) {
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//      [self selectAll:nil];
+//    });
+//  }
+//  [_eventDispatcher sendTextEventWithType:RCTTextEventTypeFocus
+//                                 reactTag:self.reactTag
+//                                     text:self.text];
+// }
 
 @end

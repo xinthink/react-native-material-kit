@@ -39,6 +39,11 @@ var TextFields = React.createClass({
     var Textfield = MKTextField.textfield()
       .withPlaceholder('Text...')
       .withStyle(styles.textfield)
+      .withOnFocus((e) => console.log('Focus', e))
+      .withOnBlur((e) => console.log('Blur', e))
+      .withOnEndEditing((e) => console.log('EndEditing', e))
+      .withOnSubmitEditing((e) => console.log('SubmitEditing', e))
+      .withOnTextChange((e) => console.log('TextChange', e))
       .build();
 
     var TextfieldWithFloatingLabel = MKTextField.textfieldWithFloatingLabel()
