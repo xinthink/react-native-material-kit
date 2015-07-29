@@ -40,6 +40,14 @@ RCT_EXPORT_VIEW_PROPERTY(bottomBorderWidth, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(highlightColor, UIColor)
 RCT_EXPORT_VIEW_PROPERTY(tintColor, UIColor)
 RCT_EXPORT_VIEW_PROPERTY(textColor, UIColor)
+//RCT_EXPORT_VIEW_PROPERTY(secureTextEntry, BOOL)
+RCT_REMAP_VIEW_PROPERTY(password, secureTextEntry, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(editable, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(autoCorrect, BOOL)
+RCT_REMAP_VIEW_PROPERTY(autoCapitalize, autocapitalizationType, UITextAutocapitalizationType)
+RCT_EXPORT_VIEW_PROPERTY(keyboardType, UIKeyboardType)
+RCT_EXPORT_VIEW_PROPERTY(returnKeyType, UIReturnKeyType)
+RCT_REMAP_VIEW_PROPERTY(autoReturnKey, enableReturnKeyAutomatically, BOOL)
 
 // -----------------------------
 // common MKLayer properties

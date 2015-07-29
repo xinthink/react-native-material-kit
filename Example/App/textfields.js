@@ -41,8 +41,9 @@ const Textfield = MKTextField.textfield()
   .build();
 
 const TextfieldWithFloatingLabel = MKTextField.textfieldWithFloatingLabel()
-  .withPlaceholder('Text...')
+  .withPlaceholder('Number...')
   .withStyle(styles.textfieldWithFloatingLabel)
+  .withKeyboardType('numeric')
   .build();
 
 const TextfieldWithRipple = MKTextField.textfieldWithRipple()

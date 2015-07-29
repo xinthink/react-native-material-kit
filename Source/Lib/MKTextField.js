@@ -37,6 +37,9 @@ MKTextField.propTypes = {
   ...MKPropTypes.mkLayerPropTypes,
 
   text: PropTypes.string,
+  // secureTextEntry: PropTypes.bool,
+  password: PropTypes.bool,
+  editable: PropTypes.bool,
   placeholder: PropTypes.string,
   padding: MKPropTypes.dimen,
   floatingLabelEnabled: PropTypes.bool,
@@ -53,8 +56,52 @@ MKTextField.propTypes = {
   onEndEditing: PropTypes.func,
   onSubmitEditing: PropTypes.func,
   // TODO support multiline
-  // TODO configurable keyboard & return types
   // TODO configurable fonts
+
+  // configurable keyboard & return types
+  /**
+   * Determines which keyboard to open, e.g.`numeric`.
+   */
+  keyboardType: PropTypes.oneOf([
+    // Cross-platform
+    'default',
+    'numeric',
+    'email-address',
+    // iOS-only
+    'ascii-capable',
+    'numbers-and-punctuation',
+    'url',
+    'number-pad',
+    'phone-pad',
+    'name-phone-pad',
+    'decimal-pad',
+    'twitter',
+    'web-search',
+  ]),
+  autoCorrect: PropTypes.bool,
+  /**
+   * Determines how the return key should look.
+   */
+  returnKeyType: PropTypes.oneOf([
+    'default',
+    'go',
+    'google',
+    'join',
+    'next',
+    'route',
+    'search',
+    'send',
+    'yahoo',
+    'done',
+    'emergency-call',
+  ]),
+  autoReturnKey: PropTypes.bool,
+  autoCapitalize: PropTypes.oneOf([
+    'none',
+    'sentences',
+    'words',
+    'characters',
+  ]),
 };
 
 const NativeTextField = requireNativeComponent('MKTextField', MKTextField);
@@ -83,6 +130,11 @@ class MKTextFieldBuilder extends Builder {
 
   withPlaceholder(v) {
     this.placeholder = v;
+    return this;
+  }
+
+  withPassword(isPassword) {
+    this.password = isPassword;
     return this;
   }
 
@@ -153,6 +205,36 @@ class MKTextFieldBuilder extends Builder {
 
   withOnSubmitEditing(cb) {
     this.onSubmitEditing = cb;
+    return this;
+  }
+
+  withEditable(v) {
+    this.editable = v;
+    return this;
+  }
+
+  withAutoCorrect(v) {
+    this.autoCorrect = v;
+    return this;
+  }
+
+  withAutoCapitalize(v) {
+    this.autoCapitalize = v;
+    return this;
+  }
+
+  withKeyboardType(v) {
+    this.keyboardType = v;
+    return this;
+  }
+
+  withReturnKeyType(v) {
+    this.returnKeyType = v;
+    return this;
+  }
+
+  withAutoReturnKey(v) {
+    this.autoReturnKey = v;
     return this;
   }
 
