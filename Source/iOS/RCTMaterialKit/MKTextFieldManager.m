@@ -34,12 +34,11 @@ RCT_EXPORT_VIEW_PROPERTY(placeholder, NSString)
 RCT_EXPORT_VIEW_PROPERTY(padding, CGSize)
 RCT_EXPORT_VIEW_PROPERTY(floatingLabelEnabled, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(floatingLabelBottomMargin, CGFloat)
-RCT_EXPORT_VIEW_PROPERTY(floatingLabelTextColor, UIColor)
+RCT_EXPORT_VIEW_PROPERTY(floatingLabelFont, UIFont)
 RCT_EXPORT_VIEW_PROPERTY(bottomBorderEnabled, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(bottomBorderWidth, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(highlightColor, UIColor)
 RCT_EXPORT_VIEW_PROPERTY(tintColor, UIColor)
-RCT_EXPORT_VIEW_PROPERTY(textColor, UIColor)
 //RCT_EXPORT_VIEW_PROPERTY(secureTextEntry, BOOL)
 RCT_REMAP_VIEW_PROPERTY(password, secureTextEntry, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(editable, BOOL)
@@ -48,6 +47,25 @@ RCT_REMAP_VIEW_PROPERTY(autoCapitalize, autocapitalizationType, UITextAutocapita
 RCT_EXPORT_VIEW_PROPERTY(keyboardType, UIKeyboardType)
 RCT_EXPORT_VIEW_PROPERTY(returnKeyType, UIReturnKeyType)
 RCT_REMAP_VIEW_PROPERTY(autoReturnKey, enableReturnKeyAutomatically, BOOL)
+
+// fonts
+RCT_REMAP_VIEW_PROPERTY(color, textColor, UIColor)
+RCT_CUSTOM_VIEW_PROPERTY(fontSize, CGFloat, MKTextField)
+{
+    view.font = [RCTConvert UIFont:view.font withSize:json ?: @(defaultView.font.pointSize)];
+}
+RCT_CUSTOM_VIEW_PROPERTY(fontWeight, NSString, __unused MKTextField)
+{
+    view.font = [RCTConvert UIFont:view.font withWeight:json]; // defaults to normal
+}
+RCT_CUSTOM_VIEW_PROPERTY(fontStyle, NSString, __unused MKTextField)
+{
+    view.font = [RCTConvert UIFont:view.font withStyle:json]; // defaults to normal
+}
+RCT_CUSTOM_VIEW_PROPERTY(fontFamily, NSString, MKTextField)
+{
+    view.font = [RCTConvert UIFont:view.font withFamily:json ?: defaultView.font.familyName];
+}
 
 // -----------------------------
 // common MKLayer properties

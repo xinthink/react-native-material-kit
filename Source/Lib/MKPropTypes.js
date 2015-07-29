@@ -1,7 +1,7 @@
 /**
  * Created by ywu on 15/7/16.
  */
-const { PropTypes } = require('react-native');
+const { PropTypes, Text } = require('react-native');
 
 const dimen = PropTypes.objectOf({
   width: PropTypes.number,
@@ -19,6 +19,14 @@ const insets = PropTypes.objectOf({
   left: PropTypes.number,
   bottom: PropTypes.number,
   right: PropTypes.number,
+});
+
+const font = PropTypes.objectOf({
+  color: PropTypes.string,
+  fontSize: PropTypes.number,
+  fontWeight: Text.propTypes.style.fontWeight,
+  fontStyle: Text.propTypes.style.fontStyle,
+  fontFamily: PropTypes.string,
 });
 
 const mkLayerPropTypes = {
@@ -52,4 +60,5 @@ const mkLayerPropTypes = {
 exports.dimen = dimen;
 exports.aniTimingFunc = aniTimingFunc;
 exports.insets = insets;
+exports.font = font;
 exports.mkLayerPropTypes = mkLayerPropTypes;

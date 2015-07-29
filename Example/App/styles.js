@@ -32,8 +32,9 @@ module.exports = StyleSheet.create({
   },
   legendLabel: {
     textAlign: 'center',
-    color: '#333333',
+    color: '#666666',
     marginTop: 10, marginBottom: 20,
     fontSize: 12,
+    fontWeight: '300',
   },
 });

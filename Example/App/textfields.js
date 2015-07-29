@@ -27,6 +27,7 @@ const styles = Object.assign(appStyles, StyleSheet.create({
     width: 80,
     marginTop: 18,
     height: 38,
+    fontSize: 14,
   },
 }));
 
@@ -43,6 +44,11 @@ const Textfield = MKTextField.textfield()
 const TextfieldWithFloatingLabel = MKTextField.textfieldWithFloatingLabel()
   .withPlaceholder('Number...')
   .withStyle(styles.textfieldWithFloatingLabel)
+  .withFloatingLabelFont({
+    fontSize: 10,
+    fontStyle: 'italic',
+    fontWeight: '200',
+  })
   .withKeyboardType('numeric')
   .build();
 

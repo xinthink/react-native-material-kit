@@ -6,10 +6,12 @@ const React = require('react-native');
 const {
   requireNativeComponent,
   PropTypes,
+  Text,
 } = React;
 
 const MKPropTypes = require('./MKPropTypes');
 const MKColor = require('./MKColor');
+const {getTheme} = require('./theme');
 
 
 class MKTextField extends React.Component {
@@ -20,6 +22,11 @@ class MKTextField extends React.Component {
   }
 
   render() {
+    const defaultStyle = {
+      color: getTheme().fontColor,
+    };
+    this.props.style = [defaultStyle, this.props.style];
+
     return (
       <NativeTextField
         {...this.props}
@@ -44,12 +51,11 @@ MKTextField.propTypes = {
   padding: MKPropTypes.dimen,
   floatingLabelEnabled: PropTypes.bool,
   floatingLabelBottomMargin: PropTypes.number,
-  floatingLabelTextColor: PropTypes.string,
+  floatingLabelFont: MKPropTypes.font,
   bottomBorderEnabled: PropTypes.bool,
   bottomBorderWidth: PropTypes.number,
   highlightColor: PropTypes.string,
   tintColor: PropTypes.string,
-  textColor: PropTypes.string,
   onTextChange: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
@@ -102,6 +108,9 @@ MKTextField.propTypes = {
     'words',
     'characters',
   ]),
+
+  style: Text.propTypes.style,
+  floatingLabelFont: MKPropTypes.font,
 };
 
 const NativeTextField = requireNativeComponent('MKTextField', MKTextField);
@@ -153,8 +162,8 @@ class MKTextFieldBuilder extends Builder {
     return this;
   }
 
-  withFloatingLabelTextColor(v) {
-    this.floatingLabelTextColor = v;
+  withFloatingLabelFont(v) {
+    this.floatingLabelFont = v;
     return this;
   }
 
@@ -175,11 +184,6 @@ class MKTextFieldBuilder extends Builder {
 
   withTintColor(v) {
     this.tintColor = v;
-    return this;
-  }
-
-  withTextColor(v) {
-    this.textColor = v;
     return this;
   }
 
@@ -243,10 +247,6 @@ class MKTextFieldBuilder extends Builder {
 
     if (!this.highlightColor) {
       this.highlightColor = this.getThemeColor();
-    }
-
-    if (!this.textColor) {
-      this.textColor = this.getTheme().fontColor;
     }
   }
 
