@@ -35,11 +35,13 @@ class MKSwitch extends Component {
       });
     }
 
-    this.props.style = [MKSwitch.defaultProps.style, this.props.style || {}];
-
     return (
       <TouchableWithoutFeedback {...touchableProps}>
-        <NativeSwitch {...this.props} onChange={this._onEvent.bind(this)}/>
+        <NativeSwitch
+          {...this.props}
+          style={[MKSwitch.defaultProps.style, this.props.style]}
+          onChange={this._onEvent.bind(this)}
+        />
       </TouchableWithoutFeedback>
     );
   }
@@ -130,7 +132,7 @@ class MKSwitchBuilder extends Builder {
 
     return React.createClass({
       render: function () {
-        return <MKSwitch {...props} />;
+        return <MKSwitch {...Object.assign({}, props, this.props)} />;
       },
     });
   }

@@ -54,11 +54,12 @@ class MKIconToggle extends Component {
       });
     }
 
-    this.props.style = [MKIconToggle.defaultProps.style, this.props.style || {}];
-
     return (
       <TouchableWithoutFeedback {...touchableProps}>
-        <NativeIconToggle {...this.props} onChange={this._onEvent.bind(this)}>
+        <NativeIconToggle {...this.props}
+          style={[MKIconToggle.defaultProps.style, this.props.style]}
+          onChange={this._onEvent.bind(this)}
+          >
           {this._renderChildren()}
         </NativeIconToggle>
       </TouchableWithoutFeedback>
@@ -117,7 +118,11 @@ class MKIconToggleBuilder extends Builder {
 
     return React.createClass({
       render: function () {
-        return <MKIconToggle {...props}>{this.props.children}</MKIconToggle>;
+        return (
+          <MKIconToggle {...Object.assign({}, props, this.props)}>
+            {this.props.children}
+          </MKIconToggle>
+        );
       },
     });
   }

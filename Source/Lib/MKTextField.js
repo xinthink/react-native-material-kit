@@ -22,19 +22,15 @@ class MKTextField extends React.Component {
   }
 
   render() {
-    const defaultStyle = {
-      color: getTheme().fontColor,
-    };
-    this.props.style = [defaultStyle, this.props.style];
-
     return (
       <NativeTextField
         {...this.props}
-        onChange={(e) => this._callback('onTextChange', e)}
-        onFocus={(e) => this._callback('onFocus', e)}
-        onBlur={(e) => this._callback('onBlur', e)}
-        onEndEditing={(e) => this._callback('onEndEditing', e)}
-        onSubmitEditing={(e) => this._callback('onSubmitEditing', e)}
+        style={[MKTextField.defaultProps.style, this.props.style]}
+        onChange={this._callback.bind(this, 'onTextChange')}
+        onFocus={this._callback.bind(this, 'onFocus')}
+        onBlur={this._callback.bind(this, 'onBlur')}
+        onEndEditing={this._callback.bind(this, 'onEndEditing')}
+        onSubmitEditing={this._callback.bind(this, 'onSubmitEditing')}
       />
     );
   }
@@ -110,7 +106,12 @@ MKTextField.propTypes = {
   ]),
 
   style: Text.propTypes.style,
-  floatingLabelFont: MKPropTypes.font,
+};
+
+MKTextField.defaultProps = {
+  style: {
+    color: getTheme().fontColor,
+  },
 };
 
 const NativeTextField = requireNativeComponent('MKTextField', MKTextField);
@@ -252,12 +253,11 @@ class MKTextFieldBuilder extends Builder {
 
   build() {
     const props = this.toProps();
-    // console.log(props);
 
     return React.createClass({
       render: function () {
         return (
-          <MKTextField {...props}/>
+          <MKTextField {...Object.assign({}, props, this.props)}/>
         );
       },
     });

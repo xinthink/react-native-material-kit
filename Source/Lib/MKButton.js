@@ -98,7 +98,7 @@ class MKButtonBuilder extends TextViewBuilder {
         ) : this.props.children;
 
         return (
-          <MKButton {...props}>
+          <MKButton {...Object.assign({}, props, this.props)}>
             {ChildTag}
           </MKButton>
         );
