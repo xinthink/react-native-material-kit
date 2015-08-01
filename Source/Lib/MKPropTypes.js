@@ -1,19 +1,27 @@
-/**
- * Created by ywu on 15/7/16.
- */
+//
+// Common PropTypes definition
+//
+// Created by ywu on 15/7/16.
+//
 const { PropTypes, Text } = require('react-native');
 
+// -----------
+// ## Common data types
+
+// <secion id="dimen">Dimension</secton>
 const dimen = PropTypes.objectOf({
   width: PropTypes.number,
   height: PropTypes.number,
 });
 
+// <secion id="aniTimingFunc">Animation timing function</secton>
 const aniTimingFunc = PropTypes.oneOf([
   'linear',
   'easeIn',
   'easeOut',
 ]);
 
+// <secion id="insets">Insets</secton>
 const insets = PropTypes.objectOf({
   top: PropTypes.number,
   left: PropTypes.number,
@@ -21,6 +29,7 @@ const insets = PropTypes.objectOf({
   right: PropTypes.number,
 });
 
+// <secion id="font">Font</secton>
 const font = PropTypes.objectOf({
   color: PropTypes.string,
   fontSize: PropTypes.number,
@@ -29,6 +38,11 @@ const font = PropTypes.objectOf({
   fontFamily: PropTypes.string,
 });
 
+
+// -----------
+// ## Common PropTypes
+
+// <secion id="mkLayerPropTypes">MKLayer PropTypes</secton>
 const mkLayerPropTypes = {
   // FIXME naming conflicts with built-in properties, such as shadowOffset
   // lead to runtime warning: Failed propType: typeChecker is not a function Check the render method of xxx
@@ -57,6 +71,7 @@ const mkLayerPropTypes = {
 };
 
 
+// ## Public interface
 exports.dimen = dimen;
 exports.aniTimingFunc = aniTimingFunc;
 exports.insets = insets;

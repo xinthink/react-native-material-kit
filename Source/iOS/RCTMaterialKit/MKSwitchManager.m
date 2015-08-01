@@ -30,6 +30,7 @@ RCT_EXPORT_VIEW_PROPERTY(offColor, UIColor)
 RCT_EXPORT_VIEW_PROPERTY(thumbOnColor, UIColor)
 RCT_EXPORT_VIEW_PROPERTY(thumbOffColor, UIColor)
 RCT_EXPORT_VIEW_PROPERTY(rippleLayerColor, UIColor)
+RCT_REMAP_VIEW_PROPERTY(rippleColor, rippleLayerColor, UIColor)
 RCT_EXPORT_VIEW_PROPERTY(slidingAniDuration, CGFloat)
 
 @end

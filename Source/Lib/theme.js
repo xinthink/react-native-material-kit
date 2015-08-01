@@ -1,9 +1,12 @@
-/**
- * Created by ywu on 15/7/18.
- */
+// Theme definition
+//
+// Created by ywu on 15/7/18.
+//
 const MKColor = require('./MKColor');
-const utils = require('./utils');
 
+//
+// ## <section id='theme'>theme</section>
+//
 const theme = {
   primaryColor: MKColor.Indigo,
   accentColor: MKColor.Pink,
@@ -14,18 +17,20 @@ const theme = {
   rippleColor: 'rgba(255,255,255,0.125)',
 };
 
-/**
- * Set the default theme
- * @param {Object} theme
- * @see http://www.getmdl.io/customize
- */
+//
+// ## <section id='setTheme'>setTheme</section>
+// Set the default theme
+// - {object} `theme` new [theme](#theme)
+// - @see http://www.getmdl.io/customize
+//
 exports.setTheme = (aTheme) => {
-  utils.mergeIntoFast(theme, aTheme);
+  Object.assign(theme, aTheme);
 };
 
-/**
- * Retrieve the default theme
- */
+//
+// ## <section id='getTheme'>getTheme</section>
+// Retrieve the default theme
+//
 exports.getTheme = () => {
   return theme;
 };

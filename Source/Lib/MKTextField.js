@@ -1,6 +1,13 @@
-/**
- * Created by ywu on 15/7/16.
- */
+//
+// MDL-style Textfield component.
+//
+// - @see [MDL Textfield](http://bit.ly/1HdFPR4)
+// - [Props](#props)
+// - [Defaults](#defaults)
+// - [Built-in builders](#builders)
+//
+// Created by ywu on 15/7/16.
+//
 
 const React = require('react-native');
 const {
@@ -13,7 +20,10 @@ const MKPropTypes = require('./MKPropTypes');
 const MKColor = require('./MKColor');
 const {getTheme} = require('./theme');
 
-
+//
+// ## MKTextField
+// `MKTextField` component supports floating label and ripple effect.
+//
 class MKTextField extends React.Component {
   _callback(callbackName, event) {
     if (this.props[callbackName]) {
@@ -36,34 +46,67 @@ class MKTextField extends React.Component {
   }
 }
 
+// ## <section id='props'>Props</section>
 MKTextField.propTypes = {
+  // [Common MKLayer Props](MKPropTypes.html#mkLayerPropTypes)...
   ...MKPropTypes.mkLayerPropTypes,
 
+  // Input value
   text: PropTypes.string,
-  // secureTextEntry: PropTypes.bool,
+
+  // Secure text entry mode
   password: PropTypes.bool,
+
+  // Editable or read-only mode
   editable: PropTypes.bool,
+
+  // Placehoder (hint), also used as floating label text
   placeholder: PropTypes.string,
+
+  // The space between text and the border, [Dimen](MKPropTypes.html#dimen)
   padding: MKPropTypes.dimen,
+
+  // Enable floating label effect
   floatingLabelEnabled: PropTypes.bool,
+
+  // The gap between floating label and the input text
   floatingLabelBottomMargin: PropTypes.number,
+
+  // [Font](MKPropTypes.html#font) of the floating label
   floatingLabelFont: MKPropTypes.font,
+
+  // The highlighted bottom border effect
   bottomBorderEnabled: PropTypes.bool,
+
+  // The width of bottom border
   bottomBorderWidth: PropTypes.number,
+
+  // Color of the highlighted bottom border, and also the floating label color
   highlightColor: PropTypes.string,
+
+  // Color of the unhighlighted bottom border, cursor and the placeholder
   tintColor: PropTypes.string,
+
+  // Callback when the input text changed
   onTextChange: PropTypes.func,
+
+  // Callback that is called when the text input is focused
   onFocus: PropTypes.func,
+
+  // Callback that is called when the text input is blurred
   onBlur: PropTypes.func,
+
+  // Callback that is called when text input ends.
   onEndEditing: PropTypes.func,
+
+  // Callback that is called when the text input's submit button is pressed.
   onSubmitEditing: PropTypes.func,
+
   // TODO support multiline
   // TODO configurable fonts
 
   // configurable keyboard & return types
-  /**
-   * Determines which keyboard to open, e.g.`numeric`.
-   */
+  // Determines which keyboard to open, e.g.`numeric`.
   keyboardType: PropTypes.oneOf([
     // Cross-platform
     'default',
@@ -80,10 +123,11 @@ MKTextField.propTypes = {
     'twitter',
     'web-search',
   ]),
+
+  // If false, disables auto-correct. Default value is true.
   autoCorrect: PropTypes.bool,
-  /**
-   * Determines how the return key should look.
-   */
+
+  // Determines how the return key should look.
   returnKeyType: PropTypes.oneOf([
     'default',
     'go',
@@ -97,7 +141,16 @@ MKTextField.propTypes = {
     'done',
     'emergency-call',
   ]),
+
+  // If true, the keyboard disables the return key when there is no text and
+  // automatically enables it when there is text. Default value is false.
   autoReturnKey: PropTypes.bool,
+
+  // Can tell TextInput to automatically capitalize certain characters.
+  // - characters: all characters,
+  // - words: first letter of each word
+  // - sentences: first letter of each sentence (default)
+  // - none: don't auto capitalize anything
   autoCapitalize: PropTypes.oneOf([
     'none',
     'sentences',
@@ -108,6 +161,7 @@ MKTextField.propTypes = {
   style: Text.propTypes.style,
 };
 
+// ## <section id='defaults'>Defaults</section>
 MKTextField.defaultProps = {
   floatingLabelFont: {
     fontSize: 12,
@@ -121,129 +175,19 @@ const NativeTextField = requireNativeComponent('MKTextField', MKTextField);
 
 
 // --------------------------
-// builders
+// Builder
 //
 const {
   Builder,
 } = require('./builder');
 
-/**
- * Textfiled builder
- */
+//
+// ## Textfield builder
+//
 class MKTextFieldBuilder extends Builder {
   constructor() {
     super();
     this.withBackgroundColor(MKColor.Transparent);
-  }
-
-  withText(v) {
-    this.text = v;
-    return this;
-  }
-
-  withPlaceholder(v) {
-    this.placeholder = v;
-    return this;
-  }
-
-  withPassword(isPassword) {
-    this.password = isPassword;
-    return this;
-  }
-
-  withPadding(v) {
-    this.padding = v;
-    return this;
-  }
-
-  withFloatingLabelEnabled(v) {
-    this.floatingLabelEnabled = v;
-    return this;
-  }
-
-  withFloatingLabelBottomMargin(v) {
-    this.floatingLabelBottomMargin = v;
-    return this;
-  }
-
-  withFloatingLabelFont(font) {
-    this.floatingLabelFont = Object.assign({}, this.floatingLabelFont, font);
-    return this;
-  }
-
-  withBottomBorderEnabled(v) {
-    this.bottomBorderEnabled = v;
-    return this;
-  }
-
-  withBottomBorderWidth(v) {
-    this.bottomBorderWidth = v;
-    return this;
-  }
-
-  withHighlightColor(v) {
-    this.highlightColor = v;
-    return this;
-  }
-
-  withTintColor(v) {
-    this.tintColor = v;
-    return this;
-  }
-
-  withOnTextChange(cb) {
-    this.onTextChange = cb;
-    return this;
-  }
-
-  withOnFocus(cb) {
-    this.onFocus = cb;
-    return this;
-  }
-
-  withOnBlur(cb) {
-    this.onBlur = cb;
-    return this;
-  }
-
-  withOnEndEditing(cb) {
-    this.onEndEditing = cb;
-    return this;
-  }
-
-  withOnSubmitEditing(cb) {
-    this.onSubmitEditing = cb;
-    return this;
-  }
-
-  withEditable(v) {
-    this.editable = v;
-    return this;
-  }
-
-  withAutoCorrect(v) {
-    this.autoCorrect = v;
-    return this;
-  }
-
-  withAutoCapitalize(v) {
-    this.autoCapitalize = v;
-    return this;
-  }
-
-  withKeyboardType(v) {
-    this.keyboardType = v;
-    return this;
-  }
-
-  withReturnKeyType(v) {
-    this.returnKeyType = v;
-    return this;
-  }
-
-  withAutoReturnKey(v) {
-    this.autoReturnKey = v;
-    return this;
   }
 
   mergeStyle() {
@@ -267,9 +211,13 @@ class MKTextFieldBuilder extends Builder {
   }
 }
 
-/**
- * Built-in text field builders
- */
+// define builder method for each prop
+MKTextFieldBuilder.defineProps(MKTextField.propTypes);
+
+
+// ----------
+// ## <secion id="builders">Built-in builders</secton>
+//
 function textfield() {
   return new MKTextFieldBuilder().withCornerRadius(1);
 }
@@ -287,6 +235,7 @@ function textfieldWithRippleAndFloatingLabel() {
 }
 
 
+// ## Public interface
 module.exports = MKTextField;
 
 MKTextField.Builder = MKTextFieldBuilder;

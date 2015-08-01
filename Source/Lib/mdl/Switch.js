@@ -339,7 +339,7 @@ Switch.propTypes = {
   // Toggle status of the `Switch`
   checked: React.PropTypes.bool,
 
-  // Callback when the toggle state is changed.
+  // Callback when the toggle status is changed.
   onCheckedChange: React.PropTypes.func,
 
   // Color of the track, when switch is checked

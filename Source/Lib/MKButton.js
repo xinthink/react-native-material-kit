@@ -1,6 +1,12 @@
-/**
- * Created by ywu on 15/6/3.
- */
+//
+// Material design button
+//
+// - @see [MDL Button](http://bit.ly/1JXdkZU)
+// - [Props](#props)
+// - [Built-in builders](#builders)
+//
+// Created by ywu on 15/6/3.
+//
 
 const React = require('react-native');
 const {
@@ -14,9 +20,10 @@ const getTheme = require('./theme').getTheme;
 const utils = require('./utils');
 
 
-/**
- * Material design button
- */
+//
+// ## MKButton
+// Material design button
+//
 class MKButton extends React.Component {
   render() {
     const touchableProps = {};
@@ -37,9 +44,15 @@ class MKButton extends React.Component {
   }
 }
 
+// ## <section id='props'>Props</section>
 MKButton.propTypes = {
+  // [Common MKLayer Props](MKPropTypes.html#mkLayerPropTypes)...
   ...MKPropTypes.mkLayerPropTypes,
+
+  // Touchable...
   ...TouchableWithoutFeedback.propTypes,
+
+  // Is the button clickable?
   disabled: React.PropTypes.bool,
 };
 
@@ -47,16 +60,18 @@ const NativeButton = requireNativeComponent('MKButton', MKButton);
 
 
 // --------------------------
-// builders
+// Builder
 //
 const {
   TextViewBuilder,
 } = require('./builder');
 
-/**
- * Button builder
- */
+//
+// ## Button builder
+// - @see [TextViewBuilder](builder.html#TextViewBuilder)
+//
 class MKButtonBuilder extends TextViewBuilder {
+  // Enable FAB style
   withFab(fab) {
     this.fab = fab;
     return this;
@@ -101,9 +116,13 @@ class MKButtonBuilder extends TextViewBuilder {
   }
 }
 
-/**
- * Built-in button builders
- */
+// define builder method for each prop
+MKButtonBuilder.defineProps(MKButton.propTypes);
+
+
+// ----------
+// ## <secion id="builders">Built-in builders</secton>
+//
 function coloredRaisedButton() {
   return new MKButtonBuilder()
     .withShadowRadius(2)
@@ -183,6 +202,7 @@ function plainFab() {
 }
 
 
+// ## Public interface
 module.exports = MKButton;
 
 MKButton.Builder = MKButtonBuilder;

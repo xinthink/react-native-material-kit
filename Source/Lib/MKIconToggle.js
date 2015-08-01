@@ -1,6 +1,13 @@
-/**
- * Created by ywu on 15/7/25.
- */
+//
+// MDL-style Icon Toggle component.
+//
+// - @see [MDL Icon Toggle](http://bit.ly/1OUYzem)
+// - [Props](#props)
+// - [Defaults](#defaults)
+// - [Built-in builders](#builders)
+//
+// Created by ywu on 15/7/25.
+//
 
 const React = require('react-native');
 const {
@@ -19,9 +26,9 @@ function isViewForState(view, state) {
     !(view.props.state_checked || state);
 }
 
-/**
- * icon toggle
- */
+//
+// ## <section id='MKIconToggle'>MKIconToggle</section>
+//
 class MKIconToggle extends Component {
   constructor() {
     super();
@@ -29,7 +36,6 @@ class MKIconToggle extends Component {
   }
 
   _onEvent(event) {
-    // console.log('got event', event);
     const newState = event.nativeEvent;
     this.setState({ checked: newState.checked });
 
@@ -38,8 +44,10 @@ class MKIconToggle extends Component {
     }
   }
 
+  // Select a child element to show for the current toggle status.
+  //
+  // @see [State List](http://developer.android.com/guide/topics/resources/drawable-resource.html#StateList) in Android development
   _renderChildren() {
-    //console.log('rendering children', this.props.checked);
     return React.Children.map(this.props.children,
       (child) => isViewForState(child, this.state.checked) ? child : null);
   }
@@ -68,6 +76,7 @@ class MKIconToggle extends Component {
   }
 }
 
+// ## <section id='defaults'>Defaults</section>
 MKIconToggle.defaultProps = {
   insets: {
     top: utils.toPixels(5),
@@ -84,10 +93,18 @@ MKIconToggle.defaultProps = {
   },
 };
 
+// ## <section id='props'>Props</section>
 MKIconToggle.propTypes = {
+  // Touchable...
   ...TouchableWithoutFeedback.propTypes,
+
+  // Toggle status
   checked: React.PropTypes.bool,
+
+  // Space around the visible part, to expand the touchable area
   insets: MKPropTypes.insets,
+
+  // Callback when the toggle status is changed
   onCheckedChange: React.PropTypes.func,
 };
 
@@ -95,34 +112,18 @@ const NativeIconToggle = requireNativeComponent('MKIconToggle', MKIconToggle);
 
 
 // --------------------------
-// builders
+// Builder
 //
 const {
   Builder,
 } = require('./builder');
 
-/**
- * Toggle builder
- */
+//
+// ## Toggle builder
+//
 class MKIconToggleBuilder extends Builder {
-  withChecked(v) {
-    this.checked = v;
-    return this;
-  }
-
-  withInsets(v) {
-    this.insets = v;
-    return this;
-  }
-
-  withOnCheckedChange(v) {
-    this.onCheckedChange = v;
-    return this;
-  }
-
   build() {
     const props = this.toProps();
-    // console.log(props);
 
     return React.createClass({
       render: function () {
@@ -136,14 +137,19 @@ class MKIconToggleBuilder extends Builder {
   }
 }
 
-/**
- * Built-in toggle builders
- */
+// define builder method for each prop
+MKIconToggleBuilder.defineProps(MKIconToggle.propTypes);
+
+
+// ----------
+// ## <secion id="builders">Built-in builders</secton>
+//
 function toggle() {
   return new MKIconToggleBuilder().withBackgroundColor(MKColor.Transparent);
 }
 
 
+// ## Public interface
 module.exports = MKIconToggle;
 MKIconToggle.Builder = MKIconToggleBuilder;
 MKIconToggle.toggle = toggle;

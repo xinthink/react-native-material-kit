@@ -1,6 +1,13 @@
-/**
- * Created by ywu on 15/7/25.
- */
+//
+// MDL-style Switch component.
+//
+// - @see [MDL Switch](http://bit.ly/1IcHMPo)
+// - [Props](#props)
+// - [Defaults](#defaults)
+// - [Built-in builders](#builders)
+//
+// Created by ywu on 15/7/25.
+//
 
 const React = require('react-native');
 const {
@@ -9,20 +16,19 @@ const {
   TouchableWithoutFeedback,
 } = React;
 
+const {getTheme} = require('./theme');
 const utils = require('./utils');
 
 
-/**
- * Switch
- */
+//
+// ## <section id='MKSwitch'>MKSwitch</section>
+// The `Switch` component. Which is made up of a `Track` and a [`Thumb`](#thumb).
+//
 class MKSwitch extends Component {
 
   _onEvent(event) {
-    // console.log('got event', event);
-    const newState = event.nativeEvent;
-
     if (this.props.onCheckedChange) {
-      this.props.onCheckedChange(newState);
+      this.props.onCheckedChange(event.nativeEvent);
     }
   }
 
@@ -49,19 +55,43 @@ class MKSwitch extends Component {
   }
 }
 
+// ## <section id='props'>Props</section>
 MKSwitch.propTypes = {
+  // Touchable...
   ...TouchableWithoutFeedback.propTypes,
+
+  // Toggle status of the `Switch`
   checked: React.PropTypes.bool,
-  thumbRadius: React.PropTypes.number,
+
+  // Color of the track, when switch is checked
   onColor: React.PropTypes.string,
+
+  // Color of the track, when switch is off
   offColor: React.PropTypes.string,
+
+  // Radius of the thumb button
+  thumbRadius: React.PropTypes.number,
+
+  // Color of the thumb, when switch is checked
   thumbOnColor: React.PropTypes.string,
+
+  // Color of the thumb, when switch is off
   thumbOffColor: React.PropTypes.string,
-  rippleLayerColor: React.PropTypes.string,
+
+  // Duration of the thumb sliding animation, in milliseconds
   slidingAniDuration: React.PropTypes.number,
+
+  // Color of the ripple layer
+  rippleColor: React.PropTypes.string,
+
+  // Color of the ripple layer, alias of `rippleColor`
+  rippleLayerColor: React.PropTypes.string,
+
+  // Callback when the toggle status is changed.
   onCheckedChange: React.PropTypes.func,
 };
 
+// ## <section id='defaults'>Defaults</section>
 MKSwitch.defaultProps = {
   thumbRadius: utils.toPixels(7),
   style: {
@@ -73,64 +103,19 @@ const NativeSwitch = requireNativeComponent('MKSwitch', MKSwitch);
 
 
 // --------------------------
-// builders
+// Builder
 //
 const {
   Builder,
 } = require('./builder');
 
-/**
- * Switch builder
- */
+//
+// ## Switch builder
+//
 class MKSwitchBuilder extends Builder {
-  withChecked(v) {
-    this.checked = v;
-    return this;
-  }
-
-  withThumbRadius(v) {
-    this.thumbRadius = v;
-    return this;
-  }
-
-  withOnColor(v) {
-    this.onColor = v;
-    return this;
-  }
-
-  withOffColor(v) {
-    this.offColor = v;
-    return this;
-  }
-
-  withThumbOnColor(v) {
-    this.thumbOnColor = v;
-    return this;
-  }
-
-  withThumbOffColor(v) {
-    this.thumbOffColor = v;
-    return this;
-  }
-
-  withRippleLayerColor(v) {
-    this.rippleLayerColor = v;
-    return this;
-  }
-
-  withSlidingAniDuration(v) {
-    this.slidingAniDuration = v;
-    return this;
-  }
-
-  withOnCheckedChange(v) {
-    this.onCheckedChange = v;
-    return this;
-  }
 
   build() {
     const props = this.toProps();
-    //console.log(props);
 
     return React.createClass({
       render: function () {
@@ -140,13 +125,18 @@ class MKSwitchBuilder extends Builder {
   }
 }
 
-/**
- * Built-in switch builders
- */
+// define builder method for each prop
+MKSwitchBuilder.defineProps(MKSwitch.propTypes);
+
+
+// ----------
+// ## <secion id="builders">Built-in builders</secton>
+//
 function mkSwitch() {
   return new MKSwitchBuilder();
 }
 
+// ## Public interface
 module.exports = MKSwitch;
 MKSwitch.Builder = MKSwitchBuilder;
 MKSwitch.mkSwitch = mkSwitch;

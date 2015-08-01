@@ -20,7 +20,21 @@ const {
   MKSwitch,
   MKColor,
   mdl,
+  getTheme,
+  setTheme,
 } = MK;
+
+// customize the material design theme
+// setTheme({
+//   primaryColor: MKColor.Teal,
+//   accentColor: MKColor.Purple,
+// });
+
+// Object.assign(getTheme().toggleTheme, {
+//   onColor: 'rgba(76,175,80,.4)',
+//   thumbOnColor: 'rgb(76,175,80)',
+//   rippleColor: 'rgba(139,195,74,.2)',
+// });
 
 const toPx = PixelRatio.getPixelSizeForLayoutSize.bind(PixelRatio);
 
@@ -32,7 +46,7 @@ const styles = Object.assign(appStyles, StyleSheet.create({
     color: '#616161',
   },
   toggleOnText: {
-    color: MKColor.Indigo,
+    color: getTheme().primaryColor,
   },
   switch: {
     marginTop: toPx(5),
@@ -52,13 +66,10 @@ const CheckedIconToggle = MKIconToggle.toggle()
   .withOnPress(this._onToggleClicked)
   .build();
 
-const OrangeAppleSwitch = MKSwitch.mkSwitch()
+const FatSwitch = MKSwitch.mkSwitch()
   .withThumbRadius(toPx(7))
   .withStyle(styles.appleSwitch)
-  .withOnColor('rgba(255,152,0,.3)')
-  .withThumbOnColor(MKColor.Orange)
-  .withRippleLayerColor('rgba(255,152,0,.2)')
-  .withOnCheckedChange(() => console.log('orange switch clicked'))
+  .withOnCheckedChange(() => console.log('fat switch clicked'))
   .build();
 
 class Toggles extends Component {
@@ -107,7 +118,7 @@ class Toggles extends Component {
             <Text style={styles.legendLabel}>Switch on</Text>
           </View>
           <View style={styles.col}>
-            <OrangeAppleSwitch/>
+            <FatSwitch/>
             <Text style={styles.legendLabel}>Switch off</Text>
           </View>
         </View>
