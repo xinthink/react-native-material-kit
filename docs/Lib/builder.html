@@ -37,7 +37,8 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> {getTheme} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./theme'</span>);
-
+<span class="hljs-keyword">const</span> {mkLayerPropTypes} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./MKPropTypes'</span>);
+<span class="hljs-keyword">const</span> {TouchableWithoutFeedback} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">capitalize</span>(<span class="hljs-params">str</span>) </span>{
   <span class="hljs-keyword">return</span> str.substring(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>).toUpperCase() + str.substring(<span class="hljs-number">1</span>);
@@ -127,106 +128,6 @@
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
   }
 
-  withShadowColor(v) {
-    <span class="hljs-keyword">this</span>.shadowColor = v;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
-  }
-
-  withShadowOffset(v) {
-    <span class="hljs-keyword">this</span>.shadowOffset = v;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
-  }
-
-  withShadowOpacity(v) {
-    <span class="hljs-keyword">this</span>.shadowOpacity = v;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
-  }
-
-  withShadowRadius(v) {
-    <span class="hljs-keyword">this</span>.shadowRadius = v;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
-  }
-
-  withShadowPathEnabled(enabled) {
-    <span class="hljs-keyword">this</span>.shadowPathEnabled = enabled;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
-  }
-
-  withCornerRadius(v) {
-    <span class="hljs-keyword">this</span>.cornerRadius = v;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
-  }
-
-  withMaskEnabled(v) {
-    <span class="hljs-keyword">this</span>.maskEnabled = v;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
-  }
-
-  withRippleEnabled(v) {
-    <span class="hljs-keyword">this</span>.rippleEnabled = v;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
-  }
-
-  withBackgroundColor(v) {
-    <span class="hljs-keyword">this</span>.backgroundColor = v;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
-  }
-
-  withBackgroundLayerColor(v) {
-    <span class="hljs-keyword">this</span>.backgroundLayerColor = v;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
-  }
-
-  withBackgroundLayerCornerRadius(v) {
-    <span class="hljs-keyword">this</span>.backgroundLayerCornerRadius = v;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
-  }
-
-  withBackgroundAniEnabled(v) {
-    <span class="hljs-keyword">this</span>.backgroundAniEnabled = v;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
-  }
-
-  withRipplePercent(v) {
-    <span class="hljs-keyword">this</span>.ripplePercent = v;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
-  }
-
-  withRippleLayerColor(v) {
-    <span class="hljs-keyword">this</span>.rippleLayerColor = v;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
-  }
-
-  withRippleAniTimingFunction(v) {
-    <span class="hljs-keyword">this</span>.rippleAniTimingFunction = v;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
-  }
-
-  withRippleLocation(v) {
-    <span class="hljs-keyword">this</span>.rippleLocation = v;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
-  }
-
-  withOnPress(v) {
-    <span class="hljs-keyword">this</span>.onPress = v;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
-  }
-
-  withOnPressIn(v) {
-    <span class="hljs-keyword">this</span>.onPressIn = v;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
-  }
-
-  withOnPressOut(v) {
-    <span class="hljs-keyword">this</span>.onPressOut = v;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
-  }
-
-  withOnLongPress(v) {
-    <span class="hljs-keyword">this</span>.onLongPress = v;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
-  }
-
   build() {
   }
 
@@ -260,6 +161,36 @@
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>define builder method for common <a href="MKPropTypes.html#mkLayerPropTypes">MKLayer props</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Builder.defineProps(mkLayerPropTypes);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>define builder method for common Touchable props</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Builder.defineProps(TouchableWithoutFeedback.propTypes);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <h2 id="-section-id-textviewbuilder-textviewbuilder-section-"><section id='TextViewBuilder'>TextViewBuilder</section></h2>
 <p>Text-based component builder</p>
@@ -297,11 +228,11 @@
         </li>
         
         
-        <li id="section-6">
+        <li id="section-8">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-6">&#182;</a>
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <h2 id="public-interface">Public interface</h2>
 
