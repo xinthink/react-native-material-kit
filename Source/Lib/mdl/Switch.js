@@ -1,11 +1,14 @@
-/**
- * MDL style Switch component.
- *
- * <image src="http://bit.ly/1OF6Z96">
- * @see {@link http://bit.ly/1IcHMPo|MDL Switch}
- *
- * Created by ywu on 15/7/28.
- */
+//
+// MDL style switch component.
+//
+// <image src="http://bit.ly/1OF6Z96" width="400"/>
+//
+// - @see [MDL Switch](http://bit.ly/1IcHMPo)
+// - [Props](#props)
+// - [Defaults](#props)
+//
+// Created by ywu on 15/7/28.
+//
 
 const React = require('react-native');
 const MKColor = require('../MKColor');
@@ -17,11 +20,11 @@ const {
   TouchableWithoutFeedback,
 } = React;
 
-/**
- * Thumb component of the Switch.
- * Which is displayed as a circle with shadow and ripple effect.
- * @class
- */
+//
+// ## <section id='thumb'>Thumb</section>
+// `Thumb` component of the `Switch`.
+// Which is displayed as a circle with shadow and ripple effect.
+//
 class Thumb extends Component {
   constructor(props) {
     super(props);
@@ -41,32 +44,28 @@ class Thumb extends Component {
     }
   }
 
-  /**
-   * When a toggle action started.
-   */
+  // When a toggle action started.
   startToggle() {
     this.showRipple();
   }
 
-  /**
-   * When a toggle action is confirmed.
-   * @param {boolean} fromState a toggle from the given state has been confirmed
-   */
+  // When a toggle action (from the given state) is confirmed.
+  // - {`boolean`} `fromState` the previous state
   confirmToggle(fromState) {
     this.state.checked = !fromState;
   }
 
-  /**
-   * When a toggle action is finished (confirmed or canceled).
-   */
+  // When a toggle action is finished (confirmed or canceled).
   endToggle() {
     this.hideRipple();
   }
 
+  // Start the ripple effect
   showRipple() {
     this.state.rippleAlpha.setValue(1);
     this.state.rippleScale.setValue(0);
 
+    // scaling up the ripple layer
     this._rippleAni = Animated.timing(this.state.rippleScale, {
       toValue: 1,
       duration: this.props.rippleAniDuration || 150,
@@ -82,6 +81,7 @@ class Thumb extends Component {
     });
   }
 
+  // Stop the ripple effect
   hideRipple() {
     this._pendingRippleAni = () => {
       Animated.timing(this.state.rippleAlpha, {
@@ -102,6 +102,7 @@ class Thumb extends Component {
     return this.state.checked ? this.props.onColor : this.props.offColor;
   }
 
+  // Rendering the `Thumb`
   render() {
     return (
       <View  // the circle
@@ -130,6 +131,7 @@ class Thumb extends Component {
   }
 }
 
+// Default props of `Thumb`
 Thumb.defaultProps = {
   pointerEvents: 'none',
   onColor: MKColor.Indigo,
@@ -143,13 +145,13 @@ Thumb.defaultProps = {
   },
 };
 
+// Enable animations on `Thumb`
 const AnimatedThumb = Animated.createAnimatedComponent(Thumb);
 
 
-/**
- * The Switch component. Which is made up of a Track & a {@link Thumb}.
- * @class
- */
+// ## <section id='switch'>Switch</section>
+// The `Switch` component. Which is made up of a `Track` and a [`Thumb`](#thumb).
+//
 class Switch extends Component {
   constructor(props) {
     super(props);
@@ -180,7 +182,7 @@ class Switch extends Component {
     this.refs.track.measure(this._layoutThumb.bind(this));
   }
 
-  // layout the thumb according to the size of the track
+  // Layout the thumb according to the size of the track
   _layoutThumb(x, y, trackWidth, trackHeight) {
     const trackRadii = trackHeight / 2;
     const thumbRadii = this.props.thumbRadius;
@@ -199,7 +201,7 @@ class Switch extends Component {
     });
   }
 
-  // move the thumb left or right according to the current state
+  // Move the thumb left or right according to the current state
   _translateThumb() {
     this.state.thumbLeft.setValue(this.state.thumbFrame.x);
     const newX = this._computeThumbX(this.state.checked);
@@ -211,7 +213,7 @@ class Switch extends Component {
     });
   }
 
-  // calc the next position (x-axis) of the thumb
+  // Calc the next position (x-axis) of the thumb
   _computeThumbX(toChecked) {
     if (!this.state.thumbFrame.r) {
       return 0;
@@ -222,16 +224,12 @@ class Switch extends Component {
     return this.state.thumbFrame.x + dx;
   }
 
-  /**
-   * When a toggle action started.
-   */
+  // When a toggle action started.
   startToggle() {
     this.getThumb().startToggle();
   }
 
-  /**
-   * When a toggle action is confirmed.
-   */
+  // When a toggle action is confirmed.
   confirmToggle() {
     const prevState = this.state.checked;
     this.setState({checked: !prevState}, () => {
@@ -244,18 +242,13 @@ class Switch extends Component {
     });
   }
 
-  /**
-   * When a toggle action is finished (confirmed or canceled).
-   */
+  // When a toggle action is finished (confirmed or canceled).
   endToggle() {
     this.getThumb().endToggle();
   }
 
-  /**
-   * Unwrap the Thumb node from AnimatedComponent,
-   * in order to access the component function defined in {@link Thumb}
-   * @returns {Thumb}
-   */
+  // Un-boxing the `Thumb` node from `AnimatedComponent`,
+  // in order to access the component functions defined in `Thumb`
   getThumb() {
     return this.refs.thumb.refs.node;
   }
@@ -285,6 +278,7 @@ class Switch extends Component {
     }
   }
 
+  // Rendering the `Switch`
   render() {
     const touchProps = {
       delayPressIn: this.props.delayPressIn,
@@ -317,7 +311,7 @@ class Switch extends Component {
         onPressIn={this._onPressIn.bind(this)}
         onPressOut={this._onPressOut.bind(this)}
         >
-        <View ref="track"  // the 'track' part of the Switch
+        <View ref="track"  // the 'track' part
               style={[Switch.defaultProps.style,
                       this.props.style,
                       {
@@ -326,7 +320,7 @@ class Switch extends Component {
                       },
                     ]}
           >
-          <AnimatedThumb ref="thumb"  // the 'thumb' part of the Switch
+          <AnimatedThumb ref="thumb"  // the 'thumb' part
             {...thumbProps}
           />
         </View>
@@ -335,53 +329,47 @@ class Switch extends Component {
   }
 }
 
-/**
- * Props of Switch
- */
+//
+// ## <section id='props'>Props</section>
+//
 Switch.propTypes = {
+  // Touchable...
   ...TouchableWithoutFeedback.propTypes,
+
+  // Toggle status of the `Switch`
   checked: React.PropTypes.bool,
-  /**
-   * Callback when the toggle state is changed.
-   */
+
+  // Callback when the toggle state is changed.
   onCheckedChange: React.PropTypes.func,
-  /**
-   * Color of the track, when switch is checked
-   */
+
+  // Color of the track, when switch is checked
   onColor: React.PropTypes.string,
-  /**
-   * Color of the track, when switch is off
-   */
+
+  // Color of the track, when switch is off
   offColor: React.PropTypes.string,
-  /**
-   * Radius of the thumb button
-   */
+
+  // Radius of the thumb button
   thumbRadius: React.PropTypes.number,
-  /**
-   * Color of the thumb, when switch is checked
-   */
+
+  // Color of the thumb, when switch is checked
   thumbOnColor: React.PropTypes.string,
-  /**
-   * Color of the thumb, when switch is off
-   */
+
+  // Color of the thumb, when switch is off
   thumbOffColor: React.PropTypes.string,
-  /**
-   * Duration of the thumb sliding animation, in milliseconds
-   */
+
+  // Duration of the thumb sliding animation, in milliseconds
   thumbAniDuration: React.PropTypes.number,
-  /**
-   * Color of the ripple layer
-   */
+
+  // Color of the ripple layer
   rippleColor: React.PropTypes.string,
-  /**
-   * Duration of the ripple effect, in milliseconds
-   */
+
+  // Duration of the ripple effect, in milliseconds
   rippleAniDuration: React.PropTypes.number,
 };
 
-/**
- * Defaults
- */
+//
+// ## <section id='defaults'>Defaults</section>
+//
 Switch.defaultProps = {
   checked: false,
   onColor: 'rgba(63,81,181,0.4)',  // Indigo + alpha
@@ -398,5 +386,5 @@ Switch.defaultProps = {
 };
 
 
-// Public interface
+// ## Public interface
 module.exports = Switch;
