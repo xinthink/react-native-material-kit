@@ -42,6 +42,7 @@
             <div class="content"><div class='highlight'><pre>
 <span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
 <span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../MKColor'</span>);
+<span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../utils'</span>);
 
 <span class="hljs-keyword">const</span> {
   Component,
@@ -60,7 +61,7 @@
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
               <h2 id="-section-id-thumb-thumb-section-"><section id='thumb'>Thumb</section></h2>
-<p><code>Thumb</code> component of the <code>Switch</code>.
+<p><code>Thumb</code> component of the <code>[Switch](#switch)</code>.
 Which is displayed as a circle with shadow and ripple effect.</p>
 
             </div>
@@ -255,6 +256,9 @@ Which is displayed as a circle with shadow and ripple effect.</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>  render() {
+    <span class="hljs-keyword">const</span> rippleSize = <span class="hljs-keyword">this</span>.props.rippleRadius * <span class="hljs-number">2</span>;
+    <span class="hljs-keyword">const</span> rippleOffset = <span class="hljs-keyword">this</span>.props.radius - <span class="hljs-keyword">this</span>.props.rippleRadius;
+
     <span class="hljs-keyword">return</span> (
       <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">View</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">circle</span>
         <span class="hljs-attribute">style</span>=<span class="hljs-value">{[</span>
@@ -267,11 +271,11 @@ Which is displayed as a circle with shadow and ripple effect.</p>
           <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
             <span class="hljs-attribute">opacity:</span> <span class="hljs-attribute">this.state.rippleAlpha</span>,
             <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this.props.rippleColor</span>,
-            <span class="hljs-attribute">width:</span> <span class="hljs-attribute">this.props.rippleRadius</span> * <span class="hljs-attribute">2</span>,
-            <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this.props.rippleRadius</span> * <span class="hljs-attribute">2</span>,
+            <span class="hljs-attribute">width:</span> <span class="hljs-attribute">rippleSize</span>,
+            <span class="hljs-attribute">height:</span> <span class="hljs-attribute">rippleSize</span>,
             <span class="hljs-attribute">borderRadius:</span> <span class="hljs-attribute">this.props.rippleRadius</span>,
-            <span class="hljs-attribute">top:</span> <span class="hljs-attribute">-this.props.rippleRadius</span> / <span class="hljs-attribute">2</span>,
-            <span class="hljs-attribute">left:</span> <span class="hljs-attribute">-this.props.rippleRadius</span> / <span class="hljs-attribute">2</span>,
+            <span class="hljs-attribute">top:</span> <span class="hljs-attribute">rippleOffset</span>,
+            <span class="hljs-attribute">left:</span> <span class="hljs-attribute">rippleOffset</span>,
             <span class="hljs-attribute">transform:</span> [
               {<span class="hljs-attribute">scale:</span> <span class="hljs-attribute">this.state.rippleScale</span>},
             ],
@@ -576,6 +580,7 @@ in order to access the component functions defined in <code>Thumb</code></p>
       rippleColor: <span class="hljs-keyword">this</span>.props.rippleColor,
       rippleRadius: thumbFrame.rippleRadii,
       rippleAniDuration: <span class="hljs-keyword">this</span>.props.rippleAniDuration,
+      radius: <span class="hljs-keyword">this</span>.props.thumbRadius,
       style: {
         left: <span class="hljs-keyword">this</span>.state.thumbLeft,
         top: thumbFrame.y,
@@ -664,7 +669,7 @@ in order to access the component functions defined in <code>Thumb</code></p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
-              <p>Callback when the toggle state is changed.</p>
+              <p>Callback when the toggle status is changed.</p>
 
             </div>
             
@@ -808,14 +813,14 @@ in order to access the component functions defined in <code>Thumb</code></p>
   checked: <span class="hljs-literal">false</span>,
   onColor: <span class="hljs-string">'rgba(63,81,181,0.4)'</span>,  <span class="hljs-comment">// Indigo + alpha</span>
   offColor: <span class="hljs-string">'rgba(0,0,0,0.25)'</span>,
-  thumbRadius: <span class="hljs-number">10</span>,
+  thumbRadius: utils.toPixels(<span class="hljs-number">7</span>),
   thumbOnColor: MKColor.Indigo,
   thumbOffColor: MKColor.Silver,
   rippleColor: <span class="hljs-string">'rgba(63,81,181,0.2)'</span>,  <span class="hljs-comment">// Indigo + alpha</span>
   style: {
-    width: <span class="hljs-number">36</span>,
-    height: <span class="hljs-number">14</span>,
-    borderRadius: <span class="hljs-number">7</span>,
+    width: utils.toPixels(<span class="hljs-number">24</span>),
+    height: utils.toPixels(<span class="hljs-number">10</span>),
+    borderRadius: utils.toPixels(<span class="hljs-number">5</span>),
   },
 };</pre></div></div>
             

@@ -27,12 +27,13 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              
+              <p>Utilities</p>
+<p>Created by ywu on 15/7/18.</p>
+
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/**
- * Created by ywu on 15/7/18.
- */</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">const</span> {PixelRatio} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);</pre></div></div>
             
         </li>
         
@@ -43,7 +44,8 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Add some isType methods: isArguments, isFunction, isString, isNumber, isDate, isRegExp, isError.</p>
+              <p>Add some is-Type methods:
+<code>isArguments</code>, <code>isFunction</code>, <code>isString</code>, <code>isNumber</code>, <code>isDate</code>, <code>isRegExp</code>, <code>isError</code>.</p>
 
             </div>
             
@@ -51,15 +53,77 @@
   exports[<span class="hljs-string">`is<span class="hljs-subst">${name}</span>`</span>] = (obj) =&gt; {
     <span class="hljs-keyword">return</span> toString.call(obj) === <span class="hljs-string">`[object <span class="hljs-subst">${name}</span>]`</span>;
   };
-});
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Faster version of <code>mergeInto</code>
+that doesn’t check its arguments and also
+copies over prototye inherited properties.</p>
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mergeIntoFast</span>(<span class="hljs-params">a, b</span>) </span>{
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mergeIntoFast</span>(<span class="hljs-params">a, b</span>) </span>{
   <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> k <span class="hljs-keyword">in</span> b) {
     a[k] = b[k];
   }
-}
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Convert dips to pixels</p>
 
-exports.mergeIntoFast = mergeIntoFast;</pre></div></div>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> toPixels = PixelRatio.getPixelSizeForLayoutSize.bind(PixelRatio);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Get font size according to the screen density</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getFontSize</span>(<span class="hljs-params">sp</span>) </span>{
+  <span class="hljs-keyword">return</span> sp * PixelRatio.getFontScale();
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <h2 id="public-interface">Public interface</h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>exports.mergeIntoFast = mergeIntoFast;
+exports.toPixels = toPixels;
+exports.getFontSize = getFontSize;</pre></div></div>
             
         </li>
         

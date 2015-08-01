@@ -27,16 +27,27 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              
+              <p>Theme definition</p>
+<p>Created by ywu on 15/7/18.</p>
+
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/**
- * Created by ywu on 15/7/18.
- */</span>
-<span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./MKColor'</span>);
-<span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./utils'</span>);
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./MKColor'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h2 id="-section-id-theme-theme-section-"><section id='theme'>theme</section></h2>
 
-<span class="hljs-keyword">const</span> theme = {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> theme = {
   primaryColor: MKColor.Indigo,
   accentColor: MKColor.Pink,
   bgPlain: <span class="hljs-string">'rgba(158,158,158,.2)'</span>,
@@ -44,21 +55,52 @@
   fontColor: <span class="hljs-string">'rgb(117, 117, 117)'</span>,
   fontSize: <span class="hljs-number">14</span>,
   rippleColor: <span class="hljs-string">'rgba(255,255,255,0.125)'</span>,
-};
+  toggleTheme: {
+    onColor: <span class="hljs-string">'rgba(63,81,181,0.4)'</span>,  <span class="hljs-comment">// Indigo + alpha</span>
+    offColor: <span class="hljs-string">'rgba(0,0,0,0.25)'</span>,
+    thumbOnColor: MKColor.Indigo,
+    thumbOffColor: MKColor.Silver,
+    rippleColor: <span class="hljs-string">'rgba(63,81,181,0.2)'</span>,  <span class="hljs-comment">// Indigo + alpha</span>
+  },
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <h2 id="-section-id-settheme-settheme-section-"><section id='setTheme'>setTheme</section></h2>
+<p>Set the default theme</p>
+<ul>
+<li>{object} <code>theme</code> new <a href="#theme">theme</a></li>
+<li>@see <a href="http://www.getmdl.io/customize">http://www.getmdl.io/customize</a></li>
+</ul>
 
-<span class="hljs-comment">/**
- * Set the default theme
- * @param {Object} theme
- * @see http://www.getmdl.io/customize
- */</span>
-exports.setTheme = (aTheme) =&gt; {
-  utils.mergeIntoFast(theme, aTheme);
-};
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>exports.setTheme = (aTheme) =&gt; {
+  <span class="hljs-built_in">Object</span>.assign(theme, aTheme);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <h2 id="-section-id-gettheme-gettheme-section-"><section id='getTheme'>getTheme</section></h2>
+<p>Retrieve the default theme</p>
 
-<span class="hljs-comment">/**
- * Retrieve the default theme
- */</span>
-exports.getTheme = () =&gt; {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>exports.getTheme = () =&gt; {
   <span class="hljs-keyword">return</span> theme;
 };</pre></div></div>
             

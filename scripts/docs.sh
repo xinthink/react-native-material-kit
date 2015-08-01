@@ -8,3 +8,6 @@ gulp docs
 
 rm -rf $SITE_DIR/docs
 mv docs $SITE_DIR/
+
+cd $SITE_DIR
+git checkout -- docs/docco.css  # drop the auto-gen diff

@@ -27,20 +27,92 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              
+              <p>Boilerplate for styling MK Components</p>
+<ul>
+<li><a href="#Builder">Builder</a></li>
+<li><a href="#TextViewBuilder">TextViewBuilder</a></li>
+</ul>
+<p>Created by ywu on 15/7/16.</p>
+
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/**
- * Boilerplate for styling MK Components
- * Created by ywu on 15/7/16.
- */</span>
-<span class="hljs-keyword">const</span> {getTheme} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./theme'</span>);
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> {getTheme} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./theme'</span>);
 
 
-<span class="hljs-comment">/**
- * Base class of MK Component builder
- */</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Builder</span> </span>{
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">capitalize</span>(<span class="hljs-params">str</span>) </span>{
+  <span class="hljs-keyword">return</span> str.substring(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>).toUpperCase() + str.substring(<span class="hljs-number">1</span>);
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h2 id="-section-id-builder-builder-section-"><section id='Builder'>Builder</section></h2>
+<p>Base class of MK Component builder</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Builder</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Define builder method <code>withXxx</code> for prop <code>xxx</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  static defineProp(name) {
+    <span class="hljs-keyword">const</span> methodName = <span class="hljs-string">`with<span class="hljs-subst">${capitalize(name)}</span>`</span>;
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.prototype[methodName]) {
+      <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-built_in">Object</span>.defineProperty(<span class="hljs-keyword">this</span>.prototype, methodName, {
+      enumerable: <span class="hljs-literal">false</span>,
+      value: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">v</span>) </span>{
+        <span class="hljs-keyword">this</span>[name] = v;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+      },
+    });
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Convenient util to define a builder method for each prop of the component</p>
+<ul>
+<li>{<code>object</code>} <code>propTypes</code> propTypes of the given component</li>
+<li>{<code>():boolean</code>} <code>filter</code> predictor to determine which prop would has a builder method</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  static defineProps(propTypes, filter = ()=&gt;<span class="hljs-literal">true</span>) {
+    <span class="hljs-keyword">const</span> self = <span class="hljs-keyword">this</span>;
+    <span class="hljs-built_in">Object</span>.getOwnPropertyNames(propTypes).forEach((prop) =&gt; {
+      <span class="hljs-keyword">if</span> (filter(prop)) {
+        Builder.defineProp.call(self, prop);
+      }
+    });
+  }
+
   getTheme() {
     <span class="hljs-keyword">return</span> getTheme();
   }
@@ -178,12 +250,23 @@
   mergeStyleWith(base) {
     <span class="hljs-keyword">this</span>.style = [].concat(base, <span class="hljs-keyword">this</span>.style);
   }
-}
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <h2 id="-section-id-textviewbuilder-textviewbuilder-section-"><section id='TextViewBuilder'>TextViewBuilder</section></h2>
+<p>Text-based component builder</p>
 
-<span class="hljs-comment">/**
- * Text-based component builder
- */</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TextViewBuilder</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Builder</span> </span>{
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TextViewBuilder</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Builder</span> </span>{
   withText(text) {
     <span class="hljs-keyword">this</span>.text = text;
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
@@ -209,10 +292,22 @@
       fontSize: getTheme().fontSize,
     });
   }
-}
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <h2 id="public-interface">Public interface</h2>
 
-
-exports.Builder = Builder;
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>exports.Builder = Builder;
 exports.TextViewBuilder = TextViewBuilder;</pre></div></div>
             
         </li>

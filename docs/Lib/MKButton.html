@@ -27,13 +27,17 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              
+              <p>Material design button</p>
+<ul>
+<li>@see <a href="http://bit.ly/1JXdkZU">MDL Button</a></li>
+<li><a href="#props">Props</a></li>
+<li><a href="#builders">Built-in builders</a></li>
+</ul>
+<p>Created by ywu on 15/6/3.</p>
+
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/**
- * Created by ywu on 15/6/3.
- */</span>
-
+            <div class="content"><div class='highlight'><pre>
 <span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
 <span class="hljs-keyword">const</span> {
   requireNativeComponent,
@@ -43,13 +47,23 @@
 <span class="hljs-keyword">const</span> MKPropTypes = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./MKPropTypes'</span>);
 <span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./MKColor'</span>);
 <span class="hljs-keyword">const</span> getTheme = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./theme'</span>).getTheme;
-<span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./utils'</span>);
+<span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./utils'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h2 id="mkbutton">MKButton</h2>
+<p>Material design button</p>
 
-
-<span class="hljs-comment">/**
- * Material design button
- */</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MKButton</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MKButton</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
   render() {
     <span class="hljs-keyword">const</span> touchableProps = {};
     <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.props.disabled) {
@@ -67,28 +81,7 @@
       <span class="hljs-tag">&lt;/<span class="hljs-title">TouchableWithoutFeedback</span>&gt;</span>
     )</span>;
   }
-}
-
-MKButton.propTypes = {
-  ...MKPropTypes.mkLayerPropTypes,
-  ...TouchableWithoutFeedback.propTypes,
-  disabled: React.PropTypes.bool,
-};
-
-<span class="hljs-keyword">const</span> NativeButton = requireNativeComponent(<span class="hljs-string">'MKButton'</span>, MKButton);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-2">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-2">&#182;</a>
-              </div>
-              <hr>
-
-            </div>
+}</pre></div></div>
             
         </li>
         
@@ -99,33 +92,11 @@ MKButton.propTypes = {
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>builders</p>
+              <h2 id="-section-id-props-props-section-"><section id='props'>Props</section></h2>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> {
-  TextViewBuilder,
-} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./builder'</span>);
-
-<span class="hljs-comment">/**
- * Button builder
- */</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MKButtonBuilder</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">TextViewBuilder</span> </span>{
-  withFab(fab) {
-    <span class="hljs-keyword">this</span>.fab = fab;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
-  }
-
-  mergeStyle() {
-    <span class="hljs-keyword">super</span>.mergeStyle();
-    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.fab) {
-      <span class="hljs-keyword">this</span>.styleFab();
-    }
-  }
-
-  styleFab() {
-    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.style &amp;&amp; !utils.isNumber(<span class="hljs-keyword">this</span>.style)
-        &amp;&amp; (<span class="hljs-keyword">this</span>.style.width &gt; <span class="hljs-number">0</span> || <span class="hljs-keyword">this</span>.style.height &gt; <span class="hljs-number">0</span>)) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>MKButton.propTypes = {</pre></div></div>
             
         </li>
         
@@ -136,23 +107,11 @@ MKButton.propTypes = {
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>cannot get style by id since 0.7, use style object or explicit corner radius</p>
+              <p><a href="MKPropTypes.html#mkLayerPropTypes">Common MKLayer Props</a>…</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">const</span> size = <span class="hljs-built_in">Math</span>.min(<span class="hljs-keyword">this</span>.style.width || <span class="hljs-number">0</span>, <span class="hljs-keyword">this</span>.style.height || <span class="hljs-number">0</span>);
-      <span class="hljs-keyword">this</span>.style.width = <span class="hljs-keyword">this</span>.style.height = size;
-      <span class="hljs-keyword">this</span>.withCornerRadius(size / <span class="hljs-number">2</span>);
-    }
-
-    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.cornerRadius &lt;= <span class="hljs-number">0</span>) {
-      <span class="hljs-built_in">console</span>.warn(<span class="hljs-string">'to build FABs correctly, width/height is required in style or specify a cornerRadius'</span>);
-    }
-  }
-
-  build() {
-    <span class="hljs-keyword">const</span> theBuilder = <span class="hljs-keyword">this</span>;
-    <span class="hljs-keyword">const</span> props = <span class="hljs-keyword">this</span>.toProps();</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  ...MKPropTypes.mkLayerPropTypes,</pre></div></div>
             
         </li>
         
@@ -163,13 +122,11 @@ MKButton.propTypes = {
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>console.log(props);</p>
+              <p>Touchable…</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-    <span class="hljs-keyword">return</span> React.createClass({
-      render: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  ...TouchableWithoutFeedback.propTypes,</pre></div></div>
             
         </li>
         
@@ -179,6 +136,125 @@ MKButton.propTypes = {
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Is the button clickable?</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  disabled: React.PropTypes.bool,
+};
+
+<span class="hljs-keyword">const</span> NativeButton = requireNativeComponent(<span class="hljs-string">'MKButton'</span>, MKButton);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <hr>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Builder</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> {
+  TextViewBuilder,
+} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./builder'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <h2 id="button-builder">Button builder</h2>
+<ul>
+<li>@see <a href="builder.html#TextViewBuilder">TextViewBuilder</a></li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MKButtonBuilder</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">TextViewBuilder</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>Enable FAB style</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  withFab(fab) {
+    <span class="hljs-keyword">this</span>.fab = fab;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  mergeStyle() {
+    <span class="hljs-keyword">super</span>.mergeStyle();
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.fab) {
+      <span class="hljs-keyword">this</span>.styleFab();
+    }
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>merge default FAB style with custom setting</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  styleFab() {
+    <span class="hljs-keyword">this</span>.style = [{
+      width: utils.toPixels(<span class="hljs-number">24</span>),
+      height: utils.toPixels(<span class="hljs-number">24</span>),
+      borderRadius: utils.toPixels(<span class="hljs-number">12</span>),
+    }, <span class="hljs-keyword">this</span>.style];
+  }
+
+  build() {
+    <span class="hljs-keyword">const</span> theBuilder = <span class="hljs-keyword">this</span>;
+    <span class="hljs-keyword">const</span> props = <span class="hljs-keyword">this</span>.toProps();
+
+    <span class="hljs-keyword">return</span> React.createClass({
+      render: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <p>use a text or a custom content</p>
 
@@ -191,19 +267,57 @@ MKButton.propTypes = {
         )</span> : <span class="hljs-keyword">this</span>.props.children;
 
         <span class="hljs-keyword">return</span> (
-          <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">MKButton</span> {<span class="hljs-attribute">...props</span>}&gt;</span>
+          <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">MKButton</span> {<span class="hljs-attribute">...Object.assign</span>({}, <span class="hljs-attribute">props</span>, <span class="hljs-attribute">this.props</span>)}&gt;</span>
             {ChildTag}
           <span class="hljs-tag">&lt;/<span class="hljs-title">MKButton</span>&gt;</span>
         )</span>;
       },
     });
   }
-}
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>define builder method for each prop</p>
 
-<span class="hljs-comment">/**
- * Built-in button builders
- */</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">coloredRaisedButton</span>(<span class="hljs-params"></span>) </span>{
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>MKButtonBuilder.defineProps(MKButton.propTypes);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <hr>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <h2 id="-secion-id-builders-built-in-builders-secton-"><secion id="builders">Built-in builders</secton></h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">coloredRaisedButton</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> MKButtonBuilder()
     .withShadowRadius(<span class="hljs-number">2</span>)
     .withShadowOffset({width: <span class="hljs-number">0</span>, height: <span class="hljs-number">2</span>})
@@ -224,11 +338,11 @@ MKButton.propTypes = {
         </li>
         
         
-        <li id="section-7">
+        <li id="section-16">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
+                <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <p>FIXME doesn’t support translucent bg, has shadow problems</p>
 
@@ -239,11 +353,11 @@ MKButton.propTypes = {
         </li>
         
         
-        <li id="section-8">
+        <li id="section-17">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
+                <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
               <p>.withBackgroundColor(getTheme().bgPlain)
 .withShadowPathEnabled(true)
@@ -304,11 +418,11 @@ MKButton.propTypes = {
         </li>
         
         
-        <li id="section-9">
+        <li id="section-18">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
               <p>FIXME doesn’t support translucent bg, has shadow problems</p>
 
@@ -318,10 +432,22 @@ MKButton.propTypes = {
     .withBackgroundLayerColor(getTheme().bgPlain)
     .withRippleLayerColor(getTheme().bgPlain)
     .withBackgroundColor(MKColor.Silver);
-}
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <h2 id="public-interface">Public interface</h2>
 
-
-<span class="hljs-built_in">module</span>.exports = MKButton;
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = MKButton;
 
 MKButton.Builder = MKButtonBuilder;
 MKButton.button = plainRaisedButton;
