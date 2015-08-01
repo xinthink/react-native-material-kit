@@ -18,6 +18,7 @@ const {
   MKIconToggle,
   MKSwitch,
   MKColor,
+  mdl,
 } = MK;
 
 const styles = Object.assign(appStyles, StyleSheet.create({
@@ -32,10 +33,11 @@ const styles = Object.assign(appStyles, StyleSheet.create({
   },
   switch: {
     marginTop: 5,
+    marginBottom: 7,
   },
   appleSwitch: {
     width: 40, height: 22,
-    marginBottom: 5,
+    marginBottom: 7,
   },
 }));
 
@@ -100,6 +102,25 @@ class Toggles extends Component {
           </View>
           <View style={styles.col}>
             <OrangeAppleSwitch/>
+            <Text style={styles.legendLabel}>Switch off</Text>
+          </View>
+        </View>
+        <Text style={styles.legendLabel}>'Pure' JSX components</Text>
+        <View style={styles.row}>
+          <View style={styles.col}>
+            <mdl.Switch checked={true}
+                        style={styles.switch}
+            />
+            <Text style={styles.legendLabel}>Switch on</Text>
+          </View>
+          <View style={styles.col}>
+            <mdl.Switch style={styles.appleSwitch}
+                        onColor="rgba(255,152,0,.3)"
+                        thumbOnColor={MKColor.Orange}
+                        rippleColor="rgba(255,152,0,.2)"
+                        onPress={() => console.log('orange switch pressed')}
+                        onCheckedChange={(e) => console.log('orange switch checked', e)}
+              />
             <Text style={styles.legendLabel}>Switch off</Text>
           </View>
         </View>

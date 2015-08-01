@@ -63,7 +63,6 @@ MKSwitch.propTypes = {
 MKSwitch.defaultProps = {
   style: {
     width: 36, height: 14,
-    marginBottom: 10,
   },
 };
 

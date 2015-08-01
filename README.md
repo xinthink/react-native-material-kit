@@ -17,7 +17,8 @@ Thanks to the great work of [@nghialv](https://github.com/nghialv)! :thumbsup:
 2. Add `node_modules/react-native-material-kit/iOS/RCTMaterialKit.xcodeproj` to your xcode project, usually under the `Libraries` group
 3. Add `libRCTMaterialKit.a` (from `Products` under `RCTMaterialKit.xcodeproj`) to build target's `Linked Frameworks and Libraries` list
 4. `require('react-native-material-kit')` to start using the components, in js files
-5. Have fun!
+5. [Docs (Annotated Source)](http://xinthink.github.io/react-native-material-kit/docs/index.html)
+6. Have fun!
 
 
 ## Components
