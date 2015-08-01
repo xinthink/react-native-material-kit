@@ -102,6 +102,9 @@ class Thumb extends Component {
 
   // Rendering the `Thumb`
   render() {
+    const rippleSize = this.props.rippleRadius * 2;
+    const rippleOffset = this.props.radius - this.props.rippleRadius;
+
     return (
       <View  // the circle
         style={[
@@ -114,11 +117,11 @@ class Thumb extends Component {
           style={{
             opacity: this.state.rippleAlpha,
             backgroundColor: this.props.rippleColor,
-            width: this.props.rippleRadius * 2,
-            height: this.props.rippleRadius * 2,
+            width: rippleSize,
+            height: rippleSize,
             borderRadius: this.props.rippleRadius,
-            top: -this.props.rippleRadius / 2,
-            left: -this.props.rippleRadius / 2,
+            top: rippleOffset,
+            left: rippleOffset,
             transform: [
               {scale: this.state.rippleScale},
             ],
@@ -292,6 +295,7 @@ class Switch extends Component {
       rippleColor: this.props.rippleColor,
       rippleRadius: thumbFrame.rippleRadii,
       rippleAniDuration: this.props.rippleAniDuration,
+      radius: this.props.thumbRadius,
       style: {
         left: this.state.thumbLeft,
         top: thumbFrame.y,
