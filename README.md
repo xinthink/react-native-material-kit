@@ -189,6 +189,8 @@ const OrangeAppleSwitch = MKSwitch.mkSwitch()
 />
 ```
 
+Actually, there's also a **pure-jsx-implemented** `Switch` available, in which you may be interested, please refer to the [Annotated Source](http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Switch.html) for details.
+
 :point_right: [the complete example](https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/toggles.js)
 
 
