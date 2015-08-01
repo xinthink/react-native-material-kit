@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>utils.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="../docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>utils.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/**
+ * Created by ywu on 15/7/18.
+ */</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Add some isType methods: isArguments, isFunction, isString, isNumber, isDate, isRegExp, isError.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>[<span class="hljs-string">'Arguments'</span>, <span class="hljs-string">'Function'</span>, <span class="hljs-string">'String'</span>, <span class="hljs-string">'Number'</span>, <span class="hljs-string">'Date'</span>, <span class="hljs-string">'RegExp'</span>, <span class="hljs-string">'Error'</span>].forEach((name) =&gt; {
+  exports[<span class="hljs-string">`is<span class="hljs-subst">${name}</span>`</span>] = (obj) =&gt; {
+    <span class="hljs-keyword">return</span> toString.call(obj) === <span class="hljs-string">`[object <span class="hljs-subst">${name}</span>]`</span>;
+  };
+});
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mergeIntoFast</span>(<span class="hljs-params">a, b</span>) </span>{
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> k <span class="hljs-keyword">in</span> b) {
+    a[k] = b[k];
+  }
+}
+
+exports.mergeIntoFast = mergeIntoFast;</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

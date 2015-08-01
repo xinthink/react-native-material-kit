@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>MKIconToggle.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="../docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>MKIconToggle.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/**
+ * Created by ywu on 15/7/25.
+ */</span>
+
+<span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
+<span class="hljs-keyword">const</span> {
+  Component,
+  requireNativeComponent,
+  TouchableWithoutFeedback,
+} = React;
+
+<span class="hljs-keyword">const</span> MKPropTypes = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./MKPropTypes'</span>);
+<span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./MKColor'</span>);
+
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isViewForState</span>(<span class="hljs-params">view, state</span>) </span>{
+  <span class="hljs-keyword">return</span> (view.props.state_checked &amp;&amp; state) ||
+    !(view.props.state_checked || state);
+}
+
+<span class="hljs-comment">/**
+ * icon toggle
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MKIconToggle</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+  constructor() {
+    <span class="hljs-keyword">super</span>();
+    <span class="hljs-keyword">this</span>.state = {};
+  }
+
+  _onEvent(event) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>console.log(‘got event’, event);</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">const</span> newState = event.nativeEvent;
+    <span class="hljs-keyword">this</span>.setState({ checked: newState.checked });
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.onCheckedChange) {
+      <span class="hljs-keyword">this</span>.props.onCheckedChange(newState);
+    }
+  }
+
+  _renderChildren() {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>console.log(‘rendering children’, this.props.checked);</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">return</span> React.Children.map(<span class="hljs-keyword">this</span>.props.children,
+      (child) =&gt; isViewForState(child, <span class="hljs-keyword">this</span>.state.checked) ? child : <span class="hljs-literal">null</span>);
+  }
+
+  render() {
+    <span class="hljs-keyword">const</span> touchableProps = {};
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.props.disabled) {
+      <span class="hljs-built_in">Object</span>.assign(touchableProps, {
+        onPress: <span class="hljs-keyword">this</span>.props.onPress,
+        onPressIn: <span class="hljs-keyword">this</span>.props.onPressIn,
+        onPressOut: <span class="hljs-keyword">this</span>.props.onPressOut,
+        onLongPress: <span class="hljs-keyword">this</span>.props.onLongPress,
+      });
+    }
+
+    <span class="hljs-keyword">this</span>.props.style = [MKIconToggle.defaultProps.style, <span class="hljs-keyword">this</span>.props.style || {}];
+
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">TouchableWithoutFeedback</span> {<span class="hljs-attribute">...touchableProps</span>}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">NativeIconToggle</span> {<span class="hljs-attribute">...this.props</span>} <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this._onEvent.bind(this)}</span>&gt;</span>
+          {this._renderChildren()}
+        <span class="hljs-tag">&lt;/<span class="hljs-title">NativeIconToggle</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">TouchableWithoutFeedback</span>&gt;</span>
+    )</span>;
+  }
+}
+
+MKIconToggle.defaultProps = {
+  style: {
+    justifyContent: <span class="hljs-string">'center'</span>,
+    alignItems: <span class="hljs-string">'center'</span>,
+    borderColor: <span class="hljs-string">'rgba(0,0,0,.54)'</span>,
+    width: <span class="hljs-number">36</span>, height: <span class="hljs-number">36</span>,
+  },
+};
+
+MKIconToggle.propTypes = {
+  ...TouchableWithoutFeedback.propTypes,
+  checked: React.PropTypes.bool,
+  insets: MKPropTypes.insets,
+  onCheckedChange: React.PropTypes.func,
+};
+
+<span class="hljs-keyword">const</span> NativeIconToggle = requireNativeComponent(<span class="hljs-string">'MKIconToggle'</span>, MKIconToggle);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <hr>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>builders</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> {
+  Builder,
+} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./builder'</span>);
+
+<span class="hljs-comment">/**
+ * Toggle builder
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MKIconToggleBuilder</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Builder</span> </span>{
+  withChecked(v) {
+    <span class="hljs-keyword">this</span>.checked = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withInsets(v) {
+    <span class="hljs-keyword">this</span>.insets = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withOnCheckedChange(v) {
+    <span class="hljs-keyword">this</span>.onCheckedChange = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  build() {
+    <span class="hljs-keyword">const</span> props = <span class="hljs-keyword">this</span>.toProps();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>console.log(props);</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+    <span class="hljs-keyword">return</span> React.createClass({
+      render: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">MKIconToggle</span> {<span class="hljs-attribute">...props</span>}&gt;</span>{this.props.children}<span class="hljs-tag">&lt;/<span class="hljs-title">MKIconToggle</span>&gt;</span>;</span>
+      },
+    });
+  }
+}
+
+<span class="hljs-comment">/**
+ * Built-in toggle builders
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">toggle</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> MKIconToggleBuilder().withBackgroundColor(MKColor.Transparent);
+}
+
+
+<span class="hljs-built_in">module</span>.exports = MKIconToggle;
+MKIconToggle.Builder = MKIconToggleBuilder;
+MKIconToggle.toggle = toggle;</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

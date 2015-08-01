@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>MKTextField.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="../docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>MKTextField.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/**
+ * Created by ywu on 15/7/16.
+ */</span>
+
+<span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
+<span class="hljs-keyword">const</span> {
+  requireNativeComponent,
+  PropTypes,
+} = React;
+
+<span class="hljs-keyword">const</span> MKPropTypes = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./MKPropTypes'</span>);
+<span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./MKColor'</span>);
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MKTextField</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
+  render() {
+    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">NativeTextField</span> {<span class="hljs-attribute">...this.props</span>} /&gt;</span>;</span>
+  }
+}
+
+MKTextField.propTypes = {
+  ...MKPropTypes.mkLayerPropTypes,
+
+  text: PropTypes.string,
+  placeholder: PropTypes.string,
+  padding: MKPropTypes.dimen,
+  floatingLabelEnabled: PropTypes.bool,
+  floatingLabelBottomMargin: PropTypes.number,
+  floatingLabelTextColor: PropTypes.string,
+  bottomBorderEnabled: PropTypes.bool,
+  bottomBorderWidth: PropTypes.number,
+  highlightColor: PropTypes.string,
+  tintColor: PropTypes.string,
+  textColor: PropTypes.string,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>TODO configurable fonts</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>};
+
+<span class="hljs-keyword">const</span> NativeTextField = requireNativeComponent(<span class="hljs-string">'MKTextField'</span>, MKTextField);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <hr>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>builders</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> {
+  Builder,
+} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./builder'</span>);
+
+<span class="hljs-comment">/**
+ * Textfiled builder
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MKTextFieldBuilder</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Builder</span> </span>{
+  constructor() {
+    <span class="hljs-keyword">super</span>();
+    <span class="hljs-keyword">this</span>.withBackgroundColor(MKColor.Transparent);
+  }
+
+  withText(v) {
+    <span class="hljs-keyword">this</span>.text = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withPlaceholder(v) {
+    <span class="hljs-keyword">this</span>.placeholder = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withPadding(v) {
+    <span class="hljs-keyword">this</span>.padding = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withFloatingLabelEnabled(v) {
+    <span class="hljs-keyword">this</span>.floatingLabelEnabled = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withFloatingLabelBottomMargin(v) {
+    <span class="hljs-keyword">this</span>.floatingLabelBottomMargin = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withFloatingLabelTextColor(v) {
+    <span class="hljs-keyword">this</span>.floatingLabelTextColor = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withBottomBorderEnabled(v) {
+    <span class="hljs-keyword">this</span>.bottomBorderEnabled = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withBottomBorderWidth(v) {
+    <span class="hljs-keyword">this</span>.bottomBorderWidth = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withHighlightColor(v) {
+    <span class="hljs-keyword">this</span>.highlightColor = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withTintColor(v) {
+    <span class="hljs-keyword">this</span>.tintColor = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withTextColor(v) {
+    <span class="hljs-keyword">this</span>.textColor = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  mergeStyle() {
+    <span class="hljs-keyword">super</span>.mergeStyle();
+
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.highlightColor) {
+      <span class="hljs-keyword">this</span>.highlightColor = <span class="hljs-keyword">this</span>.getThemeColor();
+    }
+
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.textColor) {
+      <span class="hljs-keyword">this</span>.textColor = <span class="hljs-keyword">this</span>.getTheme().fontColor;
+    }
+  }
+
+  build() {
+    <span class="hljs-keyword">const</span> props = <span class="hljs-keyword">this</span>.toProps();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>console.log(props);</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+    <span class="hljs-keyword">return</span> React.createClass({
+      render: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> (
+          <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">MKTextField</span> {<span class="hljs-attribute">...props</span>}/&gt;</span>
+        )</span>;
+      },
+    });
+  }
+}
+
+<span class="hljs-comment">/**
+ * Built-in text field builders
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">textfield</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> MKTextFieldBuilder().withCornerRadius(<span class="hljs-number">1</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">textfieldWithFloatingLabel</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> textfield().withFloatingLabelEnabled(<span class="hljs-literal">true</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">textfieldWithRipple</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> textfield().withRippleEnabled(<span class="hljs-literal">true</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">textfieldWithRippleAndFloatingLabel</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> textfieldWithRipple().withFloatingLabelEnabled(<span class="hljs-literal">true</span>);
+}
+
+
+<span class="hljs-built_in">module</span>.exports = MKTextField;
+
+MKTextField.Builder = MKTextFieldBuilder;
+MKTextField.textfield = textfield;
+MKTextField.textfieldWithRipple = textfieldWithRipple;
+MKTextField.textfieldWithFloatingLabel = textfieldWithFloatingLabel;
+MKTextField.textfieldWithRippleAndFloatingLabel = textfieldWithRippleAndFloatingLabel;</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Switch.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="../../docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>Switch.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>MDL style switch component.</p>
+<image src="http://bit.ly/1OF6Z96" width="400"/>
+
+<ul>
+<li>@see <a href="http://bit.ly/1IcHMPo">MDL Switch</a></li>
+<li><a href="#props">Props</a></li>
+<li><a href="#props">Defaults</a></li>
+</ul>
+<p>Created by ywu on 15/7/28.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
+<span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../MKColor'</span>);
+
+<span class="hljs-keyword">const</span> {
+  Component,
+  Animated,
+  View,
+  TouchableWithoutFeedback,
+} = React;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h2 id="-section-id-thumb-thumb-section-"><section id='thumb'>Thumb</section></h2>
+<p><code>Thumb</code> component of the <code>Switch</code>.
+Which is displayed as a circle with shadow and ripple effect.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Thumb</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+  constructor(props) {
+    <span class="hljs-keyword">super</span>(props);
+    <span class="hljs-keyword">this</span>.state = {
+      rippleScale: <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">1</span>),
+      rippleAlpha: <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>),
+    };
+  }
+
+  componentWillMount() {
+    <span class="hljs-keyword">this</span>.setState({checked: <span class="hljs-keyword">this</span>.props.checked});
+  }
+
+  componentWillReceiveProps(nextProps) {
+    <span class="hljs-keyword">if</span> (nextProps.checked !== <span class="hljs-keyword">this</span>.props.checked) {
+      <span class="hljs-keyword">this</span>.setState({checked: nextProps.checked});
+    }
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>When a toggle action started.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  startToggle() {
+    <span class="hljs-keyword">this</span>.showRipple();
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>When a toggle action (from the given state) is confirmed.</p>
+<ul>
+<li>{<code>boolean</code>} <code>fromState</code> the previous state</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  confirmToggle(fromState) {
+    <span class="hljs-keyword">this</span>.state.checked = !fromState;
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>When a toggle action is finished (confirmed or canceled).</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  endToggle() {
+    <span class="hljs-keyword">this</span>.hideRipple();
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Start the ripple effect</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  showRipple() {
+    <span class="hljs-keyword">this</span>.state.rippleAlpha.setValue(<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">this</span>.state.rippleScale.setValue(<span class="hljs-number">0</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>scaling up the ripple layer</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">this</span>._rippleAni = Animated.timing(<span class="hljs-keyword">this</span>.state.rippleScale, {
+      toValue: <span class="hljs-number">1</span>,
+      duration: <span class="hljs-keyword">this</span>.props.rippleAniDuration || <span class="hljs-number">150</span>,
+    });
+
+    <span class="hljs-keyword">this</span>._rippleAni.start(() =&gt; {
+      <span class="hljs-keyword">this</span>._rippleAni = <span class="hljs-literal">undefined</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>if any pending animation, do it</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._pendingRippleAni) {
+        <span class="hljs-keyword">this</span>._pendingRippleAni();
+      }
+    });
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Stop the ripple effect</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  hideRipple() {
+    <span class="hljs-keyword">this</span>._pendingRippleAni = () =&gt; {
+      Animated.timing(<span class="hljs-keyword">this</span>.state.rippleAlpha, {
+        toValue: <span class="hljs-number">0</span>,
+        duration: <span class="hljs-number">100</span>,
+      }).start();
+
+      <span class="hljs-keyword">this</span>._pendingRippleAni = <span class="hljs-literal">undefined</span>;
+    };
+
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>._rippleAni) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>previous ripple animation is done, good to go</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">this</span>._pendingRippleAni();
+    }
+  }
+
+  _getBgColor() {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.state.checked ? <span class="hljs-keyword">this</span>.props.onColor : <span class="hljs-keyword">this</span>.props.offColor;
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>Rendering the <code>Thumb</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  render() {
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">View</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">circle</span>
+        <span class="hljs-attribute">style</span>=<span class="hljs-value">{[</span>
+          <span class="hljs-attribute">Thumb.defaultProps.style</span>,
+          <span class="hljs-attribute">this.props.style</span>,
+          {<span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this._getBgColor</span>()},
+        ]}
+        &gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">Animated.View</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">ripple</span> <span class="hljs-attribute">layer</span>
+          <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
+            <span class="hljs-attribute">opacity:</span> <span class="hljs-attribute">this.state.rippleAlpha</span>,
+            <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this.props.rippleColor</span>,
+            <span class="hljs-attribute">width:</span> <span class="hljs-attribute">this.props.rippleRadius</span> * <span class="hljs-attribute">2</span>,
+            <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this.props.rippleRadius</span> * <span class="hljs-attribute">2</span>,
+            <span class="hljs-attribute">borderRadius:</span> <span class="hljs-attribute">this.props.rippleRadius</span>,
+            <span class="hljs-attribute">top:</span> <span class="hljs-attribute">-this.props.rippleRadius</span> / <span class="hljs-attribute">2</span>,
+            <span class="hljs-attribute">left:</span> <span class="hljs-attribute">-this.props.rippleRadius</span> / <span class="hljs-attribute">2</span>,
+            <span class="hljs-attribute">transform:</span> [
+              {<span class="hljs-attribute">scale:</span> <span class="hljs-attribute">this.state.rippleScale</span>},
+            ],
+          }}
+        /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">View</span>&gt;</span>
+    )</span>;
+  }
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>Default props of <code>Thumb</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Thumb.defaultProps = {
+  pointerEvents: <span class="hljs-string">'none'</span>,
+  onColor: MKColor.Indigo,
+  offColor: MKColor.Silver,
+  rippleColor: <span class="hljs-string">'rgba(63,81,181,0.2)'</span>,  <span class="hljs-comment">// Indigo + alpha</span>
+  style: {
+    shadowColor: <span class="hljs-string">'black'</span>,
+    shadowRadius: <span class="hljs-number">1</span>,
+    shadowOpacity: <span class="hljs-number">0.7</span>,
+    shadowOffset: { width: <span class="hljs-number">0</span>, height: <span class="hljs-number">1</span> },
+  },
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>Enable animations on <code>Thumb</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> AnimatedThumb = Animated.createAnimatedComponent(Thumb);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <h2 id="-section-id-switch-switch-section-"><section id='switch'>Switch</section></h2>
+<p>The <code>Switch</code> component. Which is made up of a <code>Track</code> and a <a href="#thumb"><code>Thumb</code></a>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Switch</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+  constructor(props) {
+    <span class="hljs-keyword">super</span>(props);
+    <span class="hljs-keyword">this</span>.state = {
+      trackWidth: <span class="hljs-number">0</span>,
+      trackHeight: <span class="hljs-number">0</span>,
+      trackRadii: <span class="hljs-number">0</span>,
+      thumbLeft: <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>),
+      thumbFrame: {x: <span class="hljs-number">0</span>, y: <span class="hljs-number">0</span>, r: <span class="hljs-number">0</span>, rippleRadii: <span class="hljs-number">0</span>},
+    };
+  }
+
+  componentWillMount() {
+    <span class="hljs-keyword">this</span>.setState({checked: <span class="hljs-keyword">this</span>.props.checked});
+  }
+
+  componentWillReceiveProps(nextProps) {
+    <span class="hljs-keyword">if</span> (nextProps.checked !== <span class="hljs-keyword">this</span>.props.checked) {
+      <span class="hljs-keyword">this</span>.setState({checked: nextProps.checked});
+    }
+  }
+
+  componentDidMount() {
+    requestAnimationFrame(<span class="hljs-keyword">this</span>._doMeasurement.bind(<span class="hljs-keyword">this</span>));
+  }
+
+  _doMeasurement() {
+    <span class="hljs-keyword">this</span>.refs.track.measure(<span class="hljs-keyword">this</span>._layoutThumb.bind(<span class="hljs-keyword">this</span>));
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>Layout the thumb according to the size of the track</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  _layoutThumb(x, y, trackWidth, trackHeight) {
+    <span class="hljs-keyword">const</span> trackRadii = trackHeight / <span class="hljs-number">2</span>;
+    <span class="hljs-keyword">const</span> thumbRadii = <span class="hljs-keyword">this</span>.props.thumbRadius;
+    <span class="hljs-keyword">const</span> thumbX0 = <span class="hljs-keyword">this</span>.state.checked ? trackWidth - trackRadii : trackRadii;
+    <span class="hljs-keyword">this</span>.state.thumbLeft.setValue(thumbX0 - thumbRadii);
+    <span class="hljs-keyword">this</span>.setState({
+      trackWidth,
+      trackHeight,
+      trackRadii,
+      thumbFrame: {
+        x: thumbX0 - thumbRadii,
+        y: trackRadii - thumbRadii,
+        r: thumbRadii,
+        rippleRadii: trackWidth - trackRadii * <span class="hljs-number">2</span>,
+      },
+    });
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>Move the thumb left or right according to the current state</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  _translateThumb() {
+    <span class="hljs-keyword">this</span>.state.thumbLeft.setValue(<span class="hljs-keyword">this</span>.state.thumbFrame.x);
+    <span class="hljs-keyword">const</span> newX = <span class="hljs-keyword">this</span>._computeThumbX(<span class="hljs-keyword">this</span>.state.checked);
+    Animated.timing(<span class="hljs-keyword">this</span>.state.thumbLeft, {
+      toValue: newX,
+      duration: <span class="hljs-keyword">this</span>.props.thumbAniDuration || <span class="hljs-number">300</span>,
+    }).start(() =&gt; {
+      <span class="hljs-keyword">this</span>.state.thumbFrame.x = newX;
+    });
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>Calc the next position (x-axis) of the thumb</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  _computeThumbX(toChecked) {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.state.thumbFrame.r) {
+      <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    }
+
+    <span class="hljs-keyword">const</span> {trackWidth, trackRadii} = <span class="hljs-keyword">this</span>.state;
+    <span class="hljs-keyword">const</span> dx = (toChecked ? <span class="hljs-number">1</span> : -<span class="hljs-number">1</span>) * (trackWidth - trackRadii * <span class="hljs-number">2</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.state.thumbFrame.x + dx;
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>When a toggle action started.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  startToggle() {
+    <span class="hljs-keyword">this</span>.getThumb().startToggle();
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>When a toggle action is confirmed.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  confirmToggle() {
+    <span class="hljs-keyword">const</span> prevState = <span class="hljs-keyword">this</span>.state.checked;
+    <span class="hljs-keyword">this</span>.setState({checked: !prevState}, () =&gt; {
+      <span class="hljs-keyword">this</span>.getThumb().confirmToggle(prevState);
+      <span class="hljs-keyword">this</span>._translateThumb();
+
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.onCheckedChange) {
+        <span class="hljs-keyword">this</span>.props.onCheckedChange({checked: <span class="hljs-keyword">this</span>.state.checked});
+      }
+    });
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>When a toggle action is finished (confirmed or canceled).</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  endToggle() {
+    <span class="hljs-keyword">this</span>.getThumb().endToggle();
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>Un-boxing the <code>Thumb</code> node from <code>AnimatedComponent</code>,
+in order to access the component functions defined in <code>Thumb</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  getThumb() {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.refs.thumb.refs.node;
+  }
+
+  _getBgColor() {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.state.checked ? <span class="hljs-keyword">this</span>.props.onColor : <span class="hljs-keyword">this</span>.props.offColor;
+  }
+
+  _onPress() {
+    <span class="hljs-keyword">this</span>.confirmToggle();
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.onPress) {
+      <span class="hljs-keyword">this</span>.props.onPress();
+    }
+  }
+
+  _onPressIn() {
+    <span class="hljs-keyword">this</span>.startToggle();
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.onPressIn) {
+      <span class="hljs-keyword">this</span>.props.onPressIn();
+    }
+  }
+
+  _onPressOut() {
+    <span class="hljs-keyword">this</span>.endToggle();
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.onPressOut) {
+      <span class="hljs-keyword">this</span>.props.onPressOut();
+    }
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>Rendering the <code>Switch</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  render() {
+    <span class="hljs-keyword">const</span> touchProps = {
+      delayPressIn: <span class="hljs-keyword">this</span>.props.delayPressIn,
+      delayPressOut: <span class="hljs-keyword">this</span>.props.delayPressOut,
+      delayLongPress: <span class="hljs-keyword">this</span>.props.delayLongPress,
+      onLongPress: <span class="hljs-keyword">this</span>.props.onLongPress,
+    };
+
+    <span class="hljs-keyword">const</span> thumbFrame = <span class="hljs-keyword">this</span>.state.thumbFrame;
+    <span class="hljs-keyword">const</span> thumbProps = {
+      checked: <span class="hljs-keyword">this</span>.state.checked,
+      onColor: <span class="hljs-keyword">this</span>.props.thumbOnColor,
+      offColor: <span class="hljs-keyword">this</span>.props.thumbOffColor,
+      rippleColor: <span class="hljs-keyword">this</span>.props.rippleColor,
+      rippleRadius: thumbFrame.rippleRadii,
+      rippleAniDuration: <span class="hljs-keyword">this</span>.props.rippleAniDuration,
+      style: {
+        left: <span class="hljs-keyword">this</span>.state.thumbLeft,
+        top: thumbFrame.y,
+        width: <span class="hljs-keyword">this</span>.props.thumbRadius * <span class="hljs-number">2</span>,
+        height: <span class="hljs-keyword">this</span>.props.thumbRadius * <span class="hljs-number">2</span>,
+        borderRadius: <span class="hljs-keyword">this</span>.props.thumbRadius,
+      },
+    };
+
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">TouchableWithoutFeedback</span>
+        {<span class="hljs-attribute">...touchProps</span>}
+        <span class="hljs-attribute">onPress</span>=<span class="hljs-value">{this._onPress.bind(this)}</span>
+        <span class="hljs-attribute">onPressIn</span>=<span class="hljs-value">{this._onPressIn.bind(this)}</span>
+        <span class="hljs-attribute">onPressOut</span>=<span class="hljs-value">{this._onPressOut.bind(this)}</span>
+        &gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">View</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"track"</span>  // <span class="hljs-attribute">the</span> '<span class="hljs-attribute">track</span>' <span class="hljs-attribute">part</span>
+              <span class="hljs-attribute">style</span>=<span class="hljs-value">{[Switch.defaultProps.style,</span>
+                      <span class="hljs-attribute">this.props.style</span>,
+                      {
+                        <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this._getBgColor</span>(),
+                        <span class="hljs-attribute">borderRadius:</span> <span class="hljs-attribute">this.state.trackRadii</span>,
+                      },
+                    ]}
+          &gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">AnimatedThumb</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"thumb"</span>  // <span class="hljs-attribute">the</span> '<span class="hljs-attribute">thumb</span>' <span class="hljs-attribute">part</span>
+            {<span class="hljs-attribute">...thumbProps</span>}
+          /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">View</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">TouchableWithoutFeedback</span>&gt;</span>
+    )</span>;
+  }
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <h2 id="-section-id-props-props-section-"><section id='props'>Props</section></h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Switch.propTypes = {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>Touchable…</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  ...TouchableWithoutFeedback.propTypes,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p>Toggle status of the <code>Switch</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  checked: React.PropTypes.bool,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <p>Callback when the toggle state is changed.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  onCheckedChange: React.PropTypes.func,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <p>Color of the track, when switch is checked</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  onColor: React.PropTypes.string,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <p>Color of the track, when switch is off</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  offColor: React.PropTypes.string,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-29">&#182;</a>
+              </div>
+              <p>Radius of the thumb button</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  thumbRadius: React.PropTypes.number,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-30">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-30">&#182;</a>
+              </div>
+              <p>Color of the thumb, when switch is checked</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  thumbOnColor: React.PropTypes.string,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-31">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-31">&#182;</a>
+              </div>
+              <p>Color of the thumb, when switch is off</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  thumbOffColor: React.PropTypes.string,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-32">&#182;</a>
+              </div>
+              <p>Duration of the thumb sliding animation, in milliseconds</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  thumbAniDuration: React.PropTypes.number,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-33">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-33">&#182;</a>
+              </div>
+              <p>Color of the ripple layer</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  rippleColor: React.PropTypes.string,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-34">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-34">&#182;</a>
+              </div>
+              <p>Duration of the ripple effect, in milliseconds</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  rippleAniDuration: React.PropTypes.number,
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-35">&#182;</a>
+              </div>
+              <h2 id="-section-id-defaults-defaults-section-"><section id='defaults'>Defaults</section></h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Switch.defaultProps = {
+  checked: <span class="hljs-literal">false</span>,
+  onColor: <span class="hljs-string">'rgba(63,81,181,0.4)'</span>,  <span class="hljs-comment">// Indigo + alpha</span>
+  offColor: <span class="hljs-string">'rgba(0,0,0,0.25)'</span>,
+  thumbRadius: <span class="hljs-number">10</span>,
+  thumbOnColor: MKColor.Indigo,
+  thumbOffColor: MKColor.Silver,
+  rippleColor: <span class="hljs-string">'rgba(63,81,181,0.2)'</span>,  <span class="hljs-comment">// Indigo + alpha</span>
+  style: {
+    width: <span class="hljs-number">36</span>,
+    height: <span class="hljs-number">14</span>,
+    borderRadius: <span class="hljs-number">7</span>,
+  },
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-36">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-36">&#182;</a>
+              </div>
+              <h2 id="public-interface">Public interface</h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = Switch;</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

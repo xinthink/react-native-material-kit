@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>builder.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="../docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>builder.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/**
+ * Boilerplate for styling MK Components
+ * Created by ywu on 15/7/16.
+ */</span>
+<span class="hljs-keyword">const</span> {getTheme} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./theme'</span>);
+
+
+<span class="hljs-comment">/**
+ * Base class of MK Component builder
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Builder</span> </span>{
+  getTheme() {
+    <span class="hljs-keyword">return</span> getTheme();
+  }
+
+  withAccent(v) {
+    <span class="hljs-keyword">this</span>.accent = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withStyle(v) {
+    <span class="hljs-keyword">this</span>.style = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withShadowColor(v) {
+    <span class="hljs-keyword">this</span>.shadowColor = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withShadowOffset(v) {
+    <span class="hljs-keyword">this</span>.shadowOffset = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withShadowOpacity(v) {
+    <span class="hljs-keyword">this</span>.shadowOpacity = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withShadowRadius(v) {
+    <span class="hljs-keyword">this</span>.shadowRadius = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withShadowPathEnabled(enabled) {
+    <span class="hljs-keyword">this</span>.shadowPathEnabled = enabled;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withCornerRadius(v) {
+    <span class="hljs-keyword">this</span>.cornerRadius = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withMaskEnabled(v) {
+    <span class="hljs-keyword">this</span>.maskEnabled = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withRippleEnabled(v) {
+    <span class="hljs-keyword">this</span>.rippleEnabled = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withBackgroundColor(v) {
+    <span class="hljs-keyword">this</span>.backgroundColor = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withBackgroundLayerColor(v) {
+    <span class="hljs-keyword">this</span>.backgroundLayerColor = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withBackgroundLayerCornerRadius(v) {
+    <span class="hljs-keyword">this</span>.backgroundLayerCornerRadius = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withBackgroundAniEnabled(v) {
+    <span class="hljs-keyword">this</span>.backgroundAniEnabled = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withRipplePercent(v) {
+    <span class="hljs-keyword">this</span>.ripplePercent = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withRippleLayerColor(v) {
+    <span class="hljs-keyword">this</span>.rippleLayerColor = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withRippleAniTimingFunction(v) {
+    <span class="hljs-keyword">this</span>.rippleAniTimingFunction = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withRippleLocation(v) {
+    <span class="hljs-keyword">this</span>.rippleLocation = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withOnPress(v) {
+    <span class="hljs-keyword">this</span>.onPress = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withOnPressIn(v) {
+    <span class="hljs-keyword">this</span>.onPressIn = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withOnPressOut(v) {
+    <span class="hljs-keyword">this</span>.onPressOut = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withOnLongPress(v) {
+    <span class="hljs-keyword">this</span>.onLongPress = v;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  build() {
+  }
+
+  toProps() {
+    <span class="hljs-keyword">this</span>.mergeStyle();
+    <span class="hljs-keyword">this</span>.choseBackgroundColor();
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.assign({}, <span class="hljs-keyword">this</span>);
+  }
+
+  getThemeColor() {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.accent ? getTheme().accentColor : getTheme().primaryColor;
+  }
+
+  mergeStyle() {
+  }
+
+  choseBackgroundColor() {
+    <span class="hljs-keyword">this</span>.backgroundColor = <span class="hljs-keyword">this</span>.backgroundColor || <span class="hljs-keyword">this</span>.getThemeColor();
+  }
+
+  mergeStyleWith(base) {
+    <span class="hljs-keyword">this</span>.style = [].concat(base, <span class="hljs-keyword">this</span>.style);
+  }
+}
+
+<span class="hljs-comment">/**
+ * Text-based component builder
+ */</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TextViewBuilder</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Builder</span> </span>{
+  withText(text) {
+    <span class="hljs-keyword">this</span>.text = text;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  withTextStyle(style) {
+    <span class="hljs-keyword">this</span>.textStyle = style;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+
+  mergeTextStyleWith(base) {
+    <span class="hljs-keyword">this</span>.textStyle = [].concat(base, <span class="hljs-keyword">this</span>.textStyle);
+  }
+
+  mergeStyle() {
+    <span class="hljs-keyword">super</span>.mergeStyle();
+    <span class="hljs-keyword">this</span>.mergeStyleWith({
+      padding: <span class="hljs-number">8</span>,
+      justifyContent: <span class="hljs-string">'center'</span>,
+      alignItems: <span class="hljs-string">'center'</span>,
+    });
+    <span class="hljs-keyword">this</span>.mergeTextStyleWith({
+      fontSize: getTheme().fontSize,
+    });
+  }
+}
+
+
+exports.Builder = Builder;
+exports.TextViewBuilder = TextViewBuilder;</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
