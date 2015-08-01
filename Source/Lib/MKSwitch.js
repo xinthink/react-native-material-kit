@@ -133,7 +133,13 @@ MKSwitchBuilder.defineProps(MKSwitch.propTypes);
 // ## <secion id="builders">Built-in builders</secton>
 //
 function mkSwitch() {
-  return new MKSwitchBuilder();
+  const theme = getTheme().toggleTheme;
+  return new MKSwitchBuilder()
+    .withOnColor(theme.onColor)
+    .withOffColor(theme.offColor)
+    .withThumbOnColor(theme.thumbOnColor)
+    .withThumbOffColor(theme.thumbOffColor)
+    .withRippleColor(theme.rippleColor);
 }
 
 // ## Public interface

@@ -15,6 +15,13 @@ const theme = {
   fontColor: 'rgb(117, 117, 117)',
   fontSize: 14,
   rippleColor: 'rgba(255,255,255,0.125)',
+  toggleTheme: {
+    onColor: 'rgba(63,81,181,0.4)',  // Indigo + alpha
+    offColor: 'rgba(0,0,0,0.25)',
+    thumbOnColor: MKColor.Indigo,
+    thumbOffColor: MKColor.Silver,
+    rippleColor: 'rgba(63,81,181,0.2)',  // Indigo + alpha
+  },
 };
 
 //
