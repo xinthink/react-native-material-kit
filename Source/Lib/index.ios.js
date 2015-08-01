@@ -9,3 +9,5 @@ exports.MKSwitch = require('./MKSwitch');
 
 exports.setTheme = require('./theme').setTheme;
 exports.getTheme = require('./theme').getTheme;
+
+exports.mdl = require('./mdl');
