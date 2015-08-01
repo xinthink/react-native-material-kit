@@ -76,6 +76,10 @@ h1 {
   margin-top: 40px;
 }
 
+.annotation h1, h2, h3, h4, h5, h6 {
+  margin-top: 20px;
+}
+
 hr {
   border: 0;
   background: 1px #ddd;
@@ -343,6 +347,11 @@ ul.sections > li > div {
   ul.sections > li > div.annotation:hover .pilcrow {
     opacity: 1;
   }
+
+  .annotation h1, h2, h3, h4, h5, h6 {
+    margin-top: 5px;
+  }
+
 }
 
 /*---------------------- (> 1025px) ---------------------*/
