@@ -5,7 +5,7 @@
 //
 // - @see [MDL Switch](http://bit.ly/1IcHMPo)
 // - [Props](#props)
-// - [Defaults](#props)
+// - [Defaults](#defaults)
 //
 // Created by ywu on 15/7/28.
 //
@@ -20,11 +20,9 @@ const {
   TouchableWithoutFeedback,
 } = React;
 
-//
 // ## <section id='thumb'>Thumb</section>
 // `Thumb` component of the `Switch`.
 // Which is displayed as a circle with shadow and ripple effect.
-//
 class Thumb extends Component {
   constructor(props) {
     super(props);
@@ -151,7 +149,6 @@ const AnimatedThumb = Animated.createAnimatedComponent(Thumb);
 
 // ## <section id='switch'>Switch</section>
 // The `Switch` component. Which is made up of a `Track` and a [`Thumb`](#thumb).
-//
 class Switch extends Component {
   constructor(props) {
     super(props);
@@ -329,9 +326,7 @@ class Switch extends Component {
   }
 }
 
-//
 // ## <section id='props'>Props</section>
-//
 Switch.propTypes = {
   // Touchable...
   ...TouchableWithoutFeedback.propTypes,
@@ -367,9 +362,7 @@ Switch.propTypes = {
   rippleAniDuration: React.PropTypes.number,
 };
 
-//
 // ## <section id='defaults'>Defaults</section>
-//
 Switch.defaultProps = {
   checked: false,
   onColor: 'rgba(63,81,181,0.4)',  // Indigo + alpha
