@@ -6,7 +6,8 @@
 // Created by ywu on 15/7/16.
 //
 const {getTheme} = require('./theme');
-
+const {mkLayerPropTypes} = require('./MKPropTypes');
+const {TouchableWithoutFeedback} = require('react-native');
 
 function capitalize(str) {
   return str.substring(0, 1).toUpperCase() + str.substring(1);
@@ -61,106 +62,6 @@ class Builder {
     return this;
   }
 
-  withShadowColor(v) {
-    this.shadowColor = v;
-    return this;
-  }
-
-  withShadowOffset(v) {
-    this.shadowOffset = v;
-    return this;
-  }
-
-  withShadowOpacity(v) {
-    this.shadowOpacity = v;
-    return this;
-  }
-
-  withShadowRadius(v) {
-    this.shadowRadius = v;
-    return this;
-  }
-
-  withShadowPathEnabled(enabled) {
-    this.shadowPathEnabled = enabled;
-    return this;
-  }
-
-  withCornerRadius(v) {
-    this.cornerRadius = v;
-    return this;
-  }
-
-  withMaskEnabled(v) {
-    this.maskEnabled = v;
-    return this;
-  }
-
-  withRippleEnabled(v) {
-    this.rippleEnabled = v;
-    return this;
-  }
-
-  withBackgroundColor(v) {
-    this.backgroundColor = v;
-    return this;
-  }
-
-  withBackgroundLayerColor(v) {
-    this.backgroundLayerColor = v;
-    return this;
-  }
-
-  withBackgroundLayerCornerRadius(v) {
-    this.backgroundLayerCornerRadius = v;
-    return this;
-  }
-
-  withBackgroundAniEnabled(v) {
-    this.backgroundAniEnabled = v;
-    return this;
-  }
-
-  withRipplePercent(v) {
-    this.ripplePercent = v;
-    return this;
-  }
-
-  withRippleLayerColor(v) {
-    this.rippleLayerColor = v;
-    return this;
-  }
-
-  withRippleAniTimingFunction(v) {
-    this.rippleAniTimingFunction = v;
-    return this;
-  }
-
-  withRippleLocation(v) {
-    this.rippleLocation = v;
-    return this;
-  }
-
-  withOnPress(v) {
-    this.onPress = v;
-    return this;
-  }
-
-  withOnPressIn(v) {
-    this.onPressIn = v;
-    return this;
-  }
-
-  withOnPressOut(v) {
-    this.onPressOut = v;
-    return this;
-  }
-
-  withOnLongPress(v) {
-    this.onLongPress = v;
-    return this;
-  }
-
   build() {
   }
 
@@ -185,6 +86,13 @@ class Builder {
     this.style = [].concat(base, this.style);
   }
 }
+
+
+// define builder method for common [MKLayer props](MKPropTypes.html#mkLayerPropTypes)
+Builder.defineProps(mkLayerPropTypes);
+
+// define builder method for common Touchable props
+Builder.defineProps(TouchableWithoutFeedback.propTypes);
 
 
 //
