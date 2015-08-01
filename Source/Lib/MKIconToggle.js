@@ -11,6 +11,7 @@ const {
 
 const MKPropTypes = require('./MKPropTypes');
 const MKColor = require('./MKColor');
+const utils = require('./utils');
 
 
 function isViewForState(view, state) {
@@ -68,11 +69,18 @@ class MKIconToggle extends Component {
 }
 
 MKIconToggle.defaultProps = {
+  insets: {
+    top: utils.toPixels(5),
+    left: utils.toPixels(5),
+    right: utils.toPixels(5),
+    bottom: utils.toPixels(5),
+  },
   style: {
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: 'rgba(0,0,0,.54)',
-    width: 36, height: 36,
+    width: utils.toPixels(24),
+    height: utils.toPixels(24),
   },
 };
 

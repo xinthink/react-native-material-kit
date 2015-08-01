@@ -142,6 +142,7 @@
 - (void)setFloatingLabelFont:(UIFont *)font
 {
     _floatingLabel.font = font;
+    [_floatingLabel sizeToFit];
 }
 
 - (UIFont*)floatingLabelFont

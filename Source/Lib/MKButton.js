@@ -69,24 +69,18 @@ class MKButtonBuilder extends TextViewBuilder {
     }
   }
 
+  // merge default FAB style with custom setting
   styleFab() {
-    if (this.style && !utils.isNumber(this.style)
-        && (this.style.width > 0 || this.style.height > 0)) {
-      // cannot get style by id since 0.7, use style object or explicit corner radius
-      const size = Math.min(this.style.width || 0, this.style.height || 0);
-      this.style.width = this.style.height = size;
-      this.withCornerRadius(size / 2);
-    }
-
-    if (this.cornerRadius <= 0) {
-      console.warn('to build FABs correctly, width/height is required in style or specify a cornerRadius');
-    }
+    this.style = [{
+      width: utils.toPixels(24),
+      height: utils.toPixels(24),
+      borderRadius: utils.toPixels(12),
+    }, this.style];
   }
 
   build() {
     const theBuilder = this;
     const props = this.toProps();
-    //console.log(props);
 
     return React.createClass({
       render: function () {

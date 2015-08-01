@@ -12,6 +12,7 @@ const {
   Text,
   View,
   ScrollView,
+  PixelRatio,
 } = React;
 
 const {
@@ -20,6 +21,8 @@ const {
   MKColor,
   mdl,
 } = MK;
+
+const toPx = PixelRatio.getPixelSizeForLayoutSize.bind(PixelRatio);
 
 const styles = Object.assign(appStyles, StyleSheet.create({
   toggleText: {
@@ -32,12 +35,14 @@ const styles = Object.assign(appStyles, StyleSheet.create({
     color: MKColor.Indigo,
   },
   switch: {
-    marginTop: 5,
-    marginBottom: 7,
+    marginTop: toPx(5),
+    marginBottom: toPx(5),
   },
   appleSwitch: {
-    width: 40, height: 22,
-    marginBottom: 7,
+    width: toPx(26),
+    height: toPx(15),
+    marginTop: toPx(2),
+    marginBottom: toPx(5),
   },
 }));
 
@@ -48,6 +53,7 @@ const CheckedIconToggle = MKIconToggle.toggle()
   .build();
 
 const OrangeAppleSwitch = MKSwitch.mkSwitch()
+  .withThumbRadius(toPx(7))
   .withStyle(styles.appleSwitch)
   .withOnColor('rgba(255,152,0,.3)')
   .withThumbOnColor(MKColor.Orange)

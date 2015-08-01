@@ -12,6 +12,7 @@
 
 const React = require('react-native');
 const MKColor = require('../MKColor');
+const utils = require('../utils');
 
 const {
   Component,
@@ -21,7 +22,7 @@ const {
 } = React;
 
 // ## <section id='thumb'>Thumb</section>
-// `Thumb` component of the `Switch`.
+// `Thumb` component of the `[Switch](#switch)`.
 // Which is displayed as a circle with shadow and ripple effect.
 class Thumb extends Component {
   constructor(props) {
@@ -371,14 +372,14 @@ Switch.defaultProps = {
   checked: false,
   onColor: 'rgba(63,81,181,0.4)',  // Indigo + alpha
   offColor: 'rgba(0,0,0,0.25)',
-  thumbRadius: 10,
+  thumbRadius: utils.toPixels(7),
   thumbOnColor: MKColor.Indigo,
   thumbOffColor: MKColor.Silver,
   rippleColor: 'rgba(63,81,181,0.2)',  // Indigo + alpha
   style: {
-    width: 36,
-    height: 14,
-    borderRadius: 7,
+    width: utils.toPixels(24),
+    height: utils.toPixels(10),
+    borderRadius: utils.toPixels(5),
   },
 };
 

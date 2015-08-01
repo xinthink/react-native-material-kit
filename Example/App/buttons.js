@@ -32,7 +32,8 @@ const styles = Object.assign(appStyles, StyleSheet.create({
     color: 'white',
   },
   fab: {
-    width: 42, height: 42,
+    // width: 42, height: 42,
+    // borderRadius: 21,  // cannot get style by id since react-native 0.7, set corner radius explicitly
   },
 }));
 
@@ -59,15 +60,12 @@ const AccentColoredFlatButton = MKButton.accentColoredFlatButton()
 
 const ColoredFab = MKButton.coloredFab()
   .withStyle(styles.fab)
-  .withCornerRadius(21)  // cannot get style by id since react-native 0.7, set corner radius explicitly
   .build();
 const AccentColoredFab = MKButton.accentColoredFab()
   .withStyle(styles.fab)
-  .withCornerRadius(21)  // cannot get style by id since react-native 0.7, set corner radius explicitly
   .build();
 const PlainFab = MKButton.plainFab()
   .withStyle(styles.fab)
-  .withCornerRadius(21)  // cannot get style by id since react-native 0.7, set corner radius explicitly
   .build();
 
 const Buttons = React.createClass({

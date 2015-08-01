@@ -109,6 +109,9 @@ MKTextField.propTypes = {
 };
 
 MKTextField.defaultProps = {
+  floatingLabelFont: {
+    fontSize: 12,
+  },
   style: {
     color: getTheme().fontColor,
   },
@@ -163,8 +166,8 @@ class MKTextFieldBuilder extends Builder {
     return this;
   }
 
-  withFloatingLabelFont(v) {
-    this.floatingLabelFont = v;
+  withFloatingLabelFont(font) {
+    this.floatingLabelFont = Object.assign({}, this.floatingLabelFont, font);
     return this;
   }
 

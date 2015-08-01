@@ -9,9 +9,11 @@ const {
   TouchableWithoutFeedback,
 } = React;
 
+const utils = require('./utils');
+
 
 /**
- * icon toggle
+ * Switch
  */
 class MKSwitch extends Component {
 
@@ -61,8 +63,9 @@ MKSwitch.propTypes = {
 };
 
 MKSwitch.defaultProps = {
+  thumbRadius: utils.toPixels(7),
   style: {
-    width: 36, height: 14,
+    width: utils.toPixels(24), height: utils.toPixels(10),
   },
 };
 
