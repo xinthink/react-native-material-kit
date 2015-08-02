@@ -22,7 +22,7 @@ const {
 } = React;
 
 // ## <section id='thumb'>Thumb</section>
-// `Thumb` component of the `[Switch](#switch)`.
+// `Thumb` component of the [`Switch`](#switch).
 // Which is displayed as a circle with shadow and ripple effect.
 class Thumb extends Component {
   constructor(props) {

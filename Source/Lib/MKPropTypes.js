@@ -6,7 +6,7 @@
 const { PropTypes, Text } = require('react-native');
 
 // -----------
-// ## Common data types
+// ## Data types
 
 // <secion id="dimen">Dimension</secton>
 const dimen = PropTypes.objectOf({
@@ -44,24 +44,42 @@ const font = PropTypes.objectOf({
 
 // <secion id="mkLayerPropTypes">MKLayer PropTypes</secton>
 const mkLayerPropTypes = {
-  // FIXME naming conflicts with built-in properties, such as shadowOffset
-  // lead to runtime warning: Failed propType: typeChecker is not a function Check the render method of xxx
+  // FIXME naming conflicts with built-in properties, such as shadowOffset, which lead to a warning:
+  //
+  //     Failed propType: typeChecker is not a function. Check the render method of ...
+
+  // Shadow style, ok to specify in [RN.View#style](https://facebook.github.io/react-native/docs/view.html#style)
   shadowColor: PropTypes.string,
   shadowOffset: dimen,
   shadowOpacity: PropTypes.number,
   shadowRadius: PropTypes.number,
+
+  // (*Experimental*) Draw shadow under bottom border, avoid shadow under text when there's a translucent background
   shadowPathEnabled: PropTypes.bool,
 
+  // Corner radius, ok to specify as [RN.View#style.borderRadius](https://facebook.github.io/react-native/docs/view.html#style)
   cornerRadius: PropTypes.number,
+
+  // If true, restrict ripple stay inside the bounds, like css `overflow: 'hidden'`
   maskEnabled: PropTypes.bool,
-  rippleEnabled: PropTypes.bool,
+
+  // Background color, ok to specify in [RN.View#style](https://facebook.github.io/react-native/docs/view.html#style)
   backgroundColor: PropTypes.string,
+
+  // The opacity effect of background, disable it will also disable `maskEnabled`
+  backgroundAniEnabled: PropTypes.bool,
+
+  // The translucent mask over ripple layer
   backgroundLayerColor: PropTypes.string,
   backgroundLayerCornerRadius: PropTypes.number,
-  backgroundAniEnabled: PropTypes.bool,
+
+  // Ripple effect
+  rippleEnabled: PropTypes.bool,
   ripplePercent: PropTypes.number,
   rippleLayerColor: PropTypes.string,
   rippleAniTimingFunction: aniTimingFunc,
+
+  // Starting point of the ripple effect
   rippleLocation: PropTypes.oneOf([
     'tapLocation',
     'center',
