@@ -37,3 +37,4 @@ read -d '' GA_SCRIPT <<"EOF"
 EOF
 # echo $GA_SCRIPT
 find docs -type f -name "*.html" -exec $SED_CMD "s|</body>|${GA_SCRIPT}</body>|g" '{}' \;
+find docs -type f -name "*.html" -exec $SED_CMD -E "s/(FIXME|TODO)/<strong><i>\1<\/i><\/strong>/g" '{}' \;
