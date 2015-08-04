@@ -33,7 +33,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">const</span> {PixelRatio} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);</pre></div></div>
+<span class="hljs-keyword">const</span> {PixelRatio, TouchableWithoutFeedback} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);</pre></div></div>
             
         </li>
         
@@ -117,13 +117,66 @@ copies over prototye inherited properties.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
+              <p>Extract the specified props from the given component instance.</p>
+<ul>
+<li>{<code>object</code>} <code>view</code> the component instance</li>
+<li>{<code>array</code>|<code>object</code>} <code>propTypes</code> props definitions</li>
+<li>{<code>():boolean</code>} <code>filter</code> predictor to determine which prop should be extracted</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">extractProps</span>(<span class="hljs-params">view, propTypes, filter</span>) </span>{
+  <span class="hljs-keyword">const</span> props = {};
+  <span class="hljs-keyword">const</span> propNames = <span class="hljs-built_in">Array</span>.isArray(propTypes) ? propTypes : <span class="hljs-built_in">Object</span>.getOwnPropertyNames(propTypes);
+
+  propNames.forEach((name) =&gt; {
+    <span class="hljs-keyword">if</span> (!filter || filter(name)) {
+      props[name] = view.props[name];
+    }
+  });
+
+  <span class="hljs-keyword">return</span> props;
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Extract Touchable props from the given component instance.</p>
+<ul>
+<li>{<code>object</code>} <code>view</code> the component instance</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">extractTouchableProps</span>(<span class="hljs-params">view</span>) </span>{
+  <span class="hljs-keyword">return</span> extractProps(view, TouchableWithoutFeedback.propTypes);
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
               <h2 id="public-interface">Public interface</h2>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>exports.mergeIntoFast = mergeIntoFast;
 exports.toPixels = toPixels;
-exports.getFontSize = getFontSize;</pre></div></div>
+exports.getFontSize = getFontSize;
+exports.extractProps = extractProps;
+exports.extractTouchableProps = extractTouchableProps;</pre></div></div>
             
         </li>
         
