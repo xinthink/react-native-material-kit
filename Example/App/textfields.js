@@ -11,11 +11,16 @@ const {
   Text,
   View,
   ScrollView,
+  PixelRatio,
 } = React;
 
 const {
   MKTextField,
+  MKColor,
+  mdl,
 } = MK;
+
+const toPx = PixelRatio.getPixelSizeForLayoutSize.bind(PixelRatio);
 
 const styles = Object.assign(appStyles, StyleSheet.create({
   textfield: {
@@ -29,10 +34,18 @@ const styles = Object.assign(appStyles, StyleSheet.create({
     height: 38,
     fontSize: 14,
   },
+  mdlTextfieldWithFloatingLabel: {
+    width: 80,
+    height: toPx(20),
+    marginTop: 18,
+    // fontSize: 14,
+    // padding: 2,
+  },
 }));
 
 const Textfield = MKTextField.textfield()
   .withPlaceholder('Text...')
+  .withTintColor(MKColor.Lime)
   .withStyle(styles.textfield)
   .withOnFocus((e) => console.log('Focus', e))
   .withOnBlur((e) => console.log('Blur', e))
@@ -85,6 +98,35 @@ const TextFields = React.createClass({
           <View style={styles.col}>
             <TextfieldWithRippleAndFloatingLabel/>
             <Text style={styles.legendLabel}>Ripple + floating label</Text>
+          </View>
+        </View>
+        <View style={styles.row}>
+          <View style={styles.col}>
+            <mdl.Textfield
+              placeholder="Text..."
+              value="Hello"
+              style={[styles.textfield, {marginTop: 30}]}
+              textInputStyle={{
+                // color: '#666666',
+              }}
+            />
+            <Text style={styles.legendLabel}>Standard textfield</Text>
+          </View>
+          <View style={styles.col}>
+            <mdl.Textfield
+              floatingLabelEnabled={true}
+              placeholder="Text..."
+              value="Hello"
+              style={styles.mdlTextfieldWithFloatingLabel}
+              editable={true}
+              onFocus={() => console.log('Focus')}
+              onBlur={() => console.log('Blur')}
+              onEndEditing={(e) => console.log('EndEditing', e.nativeEvent.text)}
+              onSubmitEditing={(e) => console.log('SubmitEditing', e.nativeEvent.text)}
+              onTextChange={(e) => console.log('TextChange', e)}
+              onChangeText={(e) => console.log('ChangeText', e)}
+            />
+            <Text style={styles.legendLabel}>With floating label</Text>
           </View>
         </View>
       </ScrollView>
