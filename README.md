@@ -94,7 +94,7 @@ the jsx equivalent:
 
 👉 [the complete example][buttons-sample]
 
-> Why builders? See the '[Builder vs. configuration object][issue-3]’ discussion.
+> Why builders? See the ‘[Builder vs. configuration object][issue-3]’ discussion.
 
 [img-buttons]: https://cloud.githubusercontent.com/assets/390805/8888853/69f8d9f8-32f2-11e5-9823-c235ab8c0dd2.gif
 [mdl-buttons]: http://www.getmdl.io/components/index.html#buttons-section
@@ -210,13 +210,12 @@ Actually, there's also a **pure-jsx-implemented** `Switch` available, in which y
 [toggles-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/toggles.js
 [docs-switch]: http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Switch.html
 
----
-It's the very beginning of the project, lots of work to be done, contributions are welcome!🍻
-
 ## About
-This project began with porting [MaterialKit][mdk], thanks [@nghialv][at-ng] for the great work!👍
+This project began with porting [MaterialKit][mdk], thanks [@nghialv][at-ng] for the great work!👍🖖
 But before long, I decided to rewrite in JSX (in progress), with no or limited help of native code.
-'cause it would be easier for me, if I don’t have to do the porting again😵 for the forthcoming *RN Android*, although I’m not sure how to provide it on *Android* for now, which is [MD][md]’s home field😅.
+Life would be easier for me, if I don’t have to do the porting again😵 for the forthcoming *RN Android*, although I have no idea how to provide it on *Android* for now, which is [MD][md]’s home field😅.
+
+And lastly, it’s the very beginning of the project, lots of work to be done, ***contributions*** are welcome!🍻
 
 [at-ng]: https://github.com/nghialv
 [mdk]: https://github.com/nghialv/MaterialKit
