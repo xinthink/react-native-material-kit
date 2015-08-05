@@ -9,12 +9,10 @@
 /* Begin PBXBuildFile section */
 		8A0233A51B2303DC0030EFCF /* MKLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0233A41B2303DC0030EFCF /* MKLayer.m */; };
 		8A0233A91B245BA50030EFCF /* MKButtonManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0233A81B245BA50030EFCF /* MKButtonManager.m */; };
-		8A19B7241B57357C00919606 /* MKTextFieldManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A19B7231B57357C00919606 /* MKTextFieldManager.m */; };
 		8A1B8E7B1B22E4E300DB45C2 /* RCTMaterialKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A1B8E7A1B22E4E300DB45C2 /* RCTMaterialKit.h */; };
 		8A1B8E7D1B22E4E300DB45C2 /* RCTMaterialKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B8E7C1B22E4E300DB45C2 /* RCTMaterialKit.m */; };
 		8A1B8EB01B22E7F400DB45C2 /* MKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B8EAF1B22E7F400DB45C2 /* MKButton.m */; };
 		8A6A1F8C1B65B14900C47AB7 /* MKSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6A1F8B1B65B14900C47AB7 /* MKSwitch.m */; };
-		8A9355581B5010E300491A4E /* MKTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9355571B5010E300491A4E /* MKTextField.m */; };
 		8AD23F3C1B62180200384806 /* UIColor+MKColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD23F3B1B62180200384806 /* UIColor+MKColor.m */; };
 		8AD23F401B632EB900384806 /* MKIconToggle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD23F3F1B632EB900384806 /* MKIconToggle.m */; };
 		8AD23F421B63B23700384806 /* MKIconToggleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD23F411B63B23700384806 /* MKIconToggleManager.m */; };
@@ -42,15 +40,12 @@
 		8A0233A71B23127F0030EFCF /* MKUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MKUtils.h; path = RCTMaterialKit/MKUtils.h; sourceTree = "<group>"; };
 		8A0233A81B245BA50030EFCF /* MKButtonManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKButtonManager.m; sourceTree = "<group>"; };
 		8A0233AB1B245C5B0030EFCF /* MKButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MKButton.h; path = RCTMaterialKit/MKButton.h; sourceTree = "<group>"; };
-		8A19B7231B57357C00919606 /* MKTextFieldManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKTextFieldManager.m; sourceTree = "<group>"; };
 		8A1B8E771B22E4E300DB45C2 /* libRCTMaterialKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTMaterialKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A1B8E7A1B22E4E300DB45C2 /* RCTMaterialKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTMaterialKit.h; sourceTree = "<group>"; };
 		8A1B8E7C1B22E4E300DB45C2 /* RCTMaterialKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTMaterialKit.m; sourceTree = "<group>"; };
 		8A1B8EAF1B22E7F400DB45C2 /* MKButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKButton.m; path = RCTMaterialKit/MKButton.m; sourceTree = "<group>"; };
 		8A6A1F8A1B65B14900C47AB7 /* MKSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKSwitch.h; path = RCTMaterialKit/MKSwitch.h; sourceTree = "<group>"; };
 		8A6A1F8B1B65B14900C47AB7 /* MKSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKSwitch.m; path = RCTMaterialKit/MKSwitch.m; sourceTree = "<group>"; };
-		8A9355561B5010CA00491A4E /* MKTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MKTextField.h; path = RCTMaterialKit/MKTextField.h; sourceTree = "<group>"; };
-		8A9355571B5010E300491A4E /* MKTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKTextField.m; path = RCTMaterialKit/MKTextField.m; sourceTree = "<group>"; };
 		8AD23F3A1B62180200384806 /* UIColor+MKColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+MKColor.h"; path = "RCTMaterialKit/UIColor+MKColor.h"; sourceTree = "<group>"; };
 		8AD23F3B1B62180200384806 /* UIColor+MKColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+MKColor.m"; path = "RCTMaterialKit/UIColor+MKColor.m"; sourceTree = "<group>"; };
 		8AD23F3E1B632EA300384806 /* MKIconToggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MKIconToggle.h; path = RCTMaterialKit/MKIconToggle.h; sourceTree = "<group>"; };
@@ -97,7 +92,6 @@
 				8A0233A81B245BA50030EFCF /* MKButtonManager.m */,
 				8AD23F411B63B23700384806 /* MKIconToggleManager.m */,
 				8AF5F0171B65F32B000F8452 /* MKSwitchManager.m */,
-				8A19B7231B57357C00919606 /* MKTextFieldManager.m */,
 				8AD23F511B63EDC000384806 /* MKToggleViewManager.h */,
 				8AD23F521B63EF4D00384806 /* MKToggleViewManager.m */,
 				8A1B8E7A1B22E4E300DB45C2 /* RCTMaterialKit.h */,
@@ -117,8 +111,6 @@
 				8A0233A41B2303DC0030EFCF /* MKLayer.m */,
 				8A6A1F8A1B65B14900C47AB7 /* MKSwitch.h */,
 				8A6A1F8B1B65B14900C47AB7 /* MKSwitch.m */,
-				8A9355561B5010CA00491A4E /* MKTextField.h */,
-				8A9355571B5010E300491A4E /* MKTextField.m */,
 				8AD23F4E1B63E59000384806 /* MKToggleView.h */,
 				8AD23F4F1B63E78600384806 /* MKToggleView.m */,
 				8A0233A71B23127F0030EFCF /* MKUtils.h */,
@@ -193,10 +185,8 @@
 				8AD23F531B63EF4D00384806 /* MKToggleViewManager.m in Sources */,
 				8AD23F501B63E78600384806 /* MKToggleView.m in Sources */,
 				8A1B8EB01B22E7F400DB45C2 /* MKButton.m in Sources */,
-				8A9355581B5010E300491A4E /* MKTextField.m in Sources */,
 				8A0233A91B245BA50030EFCF /* MKButtonManager.m in Sources */,
 				8AD23F421B63B23700384806 /* MKIconToggleManager.m in Sources */,
-				8A19B7241B57357C00919606 /* MKTextFieldManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

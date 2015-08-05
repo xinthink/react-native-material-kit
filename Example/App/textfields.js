@@ -24,34 +24,20 @@ const toPx = PixelRatio.getPixelSizeForLayoutSize.bind(PixelRatio);
 
 const styles = Object.assign(appStyles, StyleSheet.create({
   textfield: {
-    width: 80,
-    marginTop: 18,
+    width: 100,
     height: 28,
+    marginTop: 22,
   },
   textfieldWithFloatingLabel: {
-    width: 80,
-    marginTop: 18,
-    height: 38,
-    fontSize: 14,
-  },
-  mdlTextfieldWithFloatingLabel: {
-    width: 80,
+    width: 100,
     height: toPx(20),
-    marginTop: 18,
-    // fontSize: 14,
-    // padding: 2,
+    marginTop: 10,
   },
 }));
 
 const Textfield = MKTextField.textfield()
   .withPlaceholder('Text...')
-  .withTintColor(MKColor.Lime)
   .withStyle(styles.textfield)
-  .withOnFocus((e) => console.log('Focus', e))
-  .withOnBlur((e) => console.log('Blur', e))
-  .withOnEndEditing((e) => console.log('EndEditing', e))
-  .withOnSubmitEditing((e) => console.log('SubmitEditing', e))
-  .withOnTextChange((e) => console.log('TextChange', e))
   .build();
 
 const TextfieldWithFloatingLabel = MKTextField.textfieldWithFloatingLabel()
@@ -65,27 +51,18 @@ const TextfieldWithFloatingLabel = MKTextField.textfieldWithFloatingLabel()
   .withKeyboardType('numeric')
   .build();
 
-const TextfieldWithRipple = MKTextField.textfieldWithRipple()
+const ColoredTextfield = mdl.Textfield.textfield()
   .withPlaceholder('Text...')
   .withStyle(styles.textfield)
-  .build();
-
-const TextfieldWithRippleAndFloatingLabel = MKTextField.textfieldWithRippleAndFloatingLabel()
-  .withPlaceholder('Text...')
-  .withStyle(styles.textfieldWithFloatingLabel)
-  .build();
-
-const JxTextfield = mdl.Textfield.textfield()
-  .withPlaceholder('Text...')
-  .withStyle([styles.textfield, {marginTop: 30}])
+  .withTintColor(MKColor.Lime)
   .withTextInputStyle({color: MKColor.Orange})
   .build();
 
-const JxTextfieldWithFloatingLabel = mdl.Textfield.textfieldWithFloatingLabel()
-  .withPlaceholder('Password')
-  .withValue('Hello')
+const PasswordInput = mdl.Textfield.textfieldWithFloatingLabel()
   .withPassword(true)
-  .withStyle(styles.mdlTextfieldWithFloatingLabel)
+  .withPlaceholder('Password')
+  .withValue('passcode')
+  .withStyle(styles.textfieldWithFloatingLabel)
   .withOnFocus(() => console.log('Focus'))
   .withOnBlur(() => console.log('Blur'))
   .withOnEndEditing((e) => console.log('EndEditing', e.nativeEvent.text))
@@ -105,27 +82,17 @@ const TextFields = React.createClass({
             <Text style={styles.legendLabel}>Textfield</Text>
           </View>
           <View style={styles.col}>
-            <TextfieldWithRipple/>
-            <Text style={styles.legendLabel}>With ripple</Text>
-          </View>
-        </View>
-        <View style={styles.row}>
-          <View style={styles.col}>
             <TextfieldWithFloatingLabel/>
             <Text style={styles.legendLabel}>With floating label</Text>
           </View>
-          <View style={styles.col}>
-            <TextfieldWithRippleAndFloatingLabel/>
-            <Text style={styles.legendLabel}>Ripple + floating label</Text>
-          </View>
         </View>
         <View style={styles.row}>
           <View style={styles.col}>
-            <JxTextfield/>
-            <Text style={styles.legendLabel}>JSX textfield</Text>
+            <ColoredTextfield/>
+            <Text style={styles.legendLabel}>Textfield</Text>
           </View>
           <View style={styles.col}>
-            <JxTextfieldWithFloatingLabel/>
+            <PasswordInput/>
             <Text style={styles.legendLabel}>With floating label</Text>
           </View>
         </View>
