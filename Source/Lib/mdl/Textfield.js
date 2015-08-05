@@ -171,6 +171,7 @@ class Underline extends Component {
       return [];
     }
 
+    this.animatedLeft.setValue(this.state.lineLength / 2);
     return [
       Animated.timing(this.animatedLeft, {
         toValue: 0,
@@ -277,12 +278,14 @@ class Textfield extends Component {
   }
 
   componentWillMount() {
-    this.bufferedValue = this.props.value || this.props.text;
+    this.bufferedValue = this.props.value || this.props.text ||
+      this.props.defaultValue;
     this._originPlaceholder = this.props.placeholder;
   }
 
   componentWillReceiveProps(nextProps) {
-    this.bufferedValue = nextProps.value || nextProps.text;
+    this.bufferedValue = nextProps.value || nextProps.text ||
+      this.props.defaultValue;
     this._originPlaceholder = nextProps.placeholder;
   }
 
@@ -386,7 +389,10 @@ class Textfield extends Component {
     }
     const underlineProps = utils.extractProps(this, ['tintColor',
       'highlightColor', 'underlineWidth', 'underlineEnabled']);
-    const inputProps = utils.extractProps(this, TextInput.propTypes);
+    const inputProps = utils.extractProps(this, {
+      ...TextInput.propTypes,
+      password: 1,
+    });
 
     return (
       <View style={this.props.style}>
