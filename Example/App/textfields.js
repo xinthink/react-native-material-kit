@@ -75,6 +75,25 @@ const TextfieldWithRippleAndFloatingLabel = MKTextField.textfieldWithRippleAndFl
   .withStyle(styles.textfieldWithFloatingLabel)
   .build();
 
+const JxTextfield = mdl.Textfield.textfield()
+  .withPlaceholder('Text...')
+  .withStyle([styles.textfield, {marginTop: 30}])
+  .withTextInputStyle({color: MKColor.Orange})
+  .build();
+
+const JxTextfieldWithFloatingLabel = mdl.Textfield.textfieldWithFloatingLabel()
+  .withPlaceholder('Password')
+  .withValue('Hello')
+  .withPassword(true)
+  .withStyle(styles.mdlTextfieldWithFloatingLabel)
+  .withOnFocus(() => console.log('Focus'))
+  .withOnBlur(() => console.log('Blur'))
+  .withOnEndEditing((e) => console.log('EndEditing', e.nativeEvent.text))
+  .withOnSubmitEditing((e) => console.log('SubmitEditing', e.nativeEvent.text))
+  .withOnTextChange((e) => console.log('TextChange', e))
+  .withOnChangeText((e) => console.log('ChangeText', e))
+  .build();
+
 const TextFields = React.createClass({
   render: function() {
     return (
@@ -102,30 +121,11 @@ const TextFields = React.createClass({
         </View>
         <View style={styles.row}>
           <View style={styles.col}>
-            <mdl.Textfield
-              placeholder="Text..."
-              value="Hello"
-              style={[styles.textfield, {marginTop: 30}]}
-              textInputStyle={{
-                // color: '#666666',
-              }}
-            />
-            <Text style={styles.legendLabel}>Standard textfield</Text>
+            <JxTextfield/>
+            <Text style={styles.legendLabel}>JSX textfield</Text>
           </View>
           <View style={styles.col}>
-            <mdl.Textfield
-              floatingLabelEnabled={true}
-              placeholder="Text..."
-              value="Hello"
-              style={styles.mdlTextfieldWithFloatingLabel}
-              editable={true}
-              onFocus={() => console.log('Focus')}
-              onBlur={() => console.log('Blur')}
-              onEndEditing={(e) => console.log('EndEditing', e.nativeEvent.text)}
-              onSubmitEditing={(e) => console.log('SubmitEditing', e.nativeEvent.text)}
-              onTextChange={(e) => console.log('TextChange', e)}
-              onChangeText={(e) => console.log('ChangeText', e)}
-            />
+            <JxTextfieldWithFloatingLabel/>
             <Text style={styles.legendLabel}>With floating label</Text>
           </View>
         </View>

@@ -4,6 +4,7 @@
 // - @see [MDL Textfield](http://www.getmdl.io/components/index.html#textfields-section)
 // - [Props](#props)
 // - [Defaults](#defaults)
+// - [Built-in builders](#builders)
 //
 // Created by ywu on 15/8/3.
 //
@@ -467,5 +468,62 @@ Textfield.defaultProps = {
 };
 
 
+// --------------------------
+// Builder
+//
+const {
+  Builder,
+} = require('../builder');
+
+//
+// ## Textfield builder
+//
+class TextfieldBuilder extends Builder {
+  constructor() {
+    super();
+    this.withBackgroundColor(MKColor.Transparent);
+  }
+
+  mergeStyle() {
+    super.mergeStyle();
+
+    if (!this.highlightColor) {
+      this.highlightColor = this.getThemeColor();
+    }
+  }
+
+  build() {
+    const props = this.toProps();
+
+    return React.createClass({
+      render: function () {
+        return (
+          <Textfield {...Object.assign(props, this.props)}/>
+        );
+      },
+    });
+  }
+}
+
+// define builder method for each prop
+TextfieldBuilder.defineProps(Textfield.propTypes);
+
+
+// ----------
+// ## <secion id="builders">Built-in builders</secton>
+//
+function textfield() {
+  return new TextfieldBuilder();
+}
+
+function textfieldWithFloatingLabel() {
+  return textfield().withFloatingLabelEnabled(true);
+}
+
+
 // ## Public interface
 module.exports = Textfield;
+
+Textfield.Builder = TextfieldBuilder;
+Textfield.textfield = textfield;
+Textfield.textfieldWithFloatingLabel = textfieldWithFloatingLabel;
