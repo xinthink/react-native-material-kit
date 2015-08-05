@@ -3,7 +3,6 @@ http://www.xinthink.com/react-native-material-kit/docs/Lib/MKColor.html
 http://www.xinthink.com/react-native-material-kit/docs/Lib/MKIconToggle.html
 http://www.xinthink.com/react-native-material-kit/docs/Lib/MKPropTypes.html
 http://www.xinthink.com/react-native-material-kit/docs/Lib/MKSwitch.html
-http://www.xinthink.com/react-native-material-kit/docs/Lib/MKTextField.html
 http://www.xinthink.com/react-native-material-kit/docs/Lib/builder.html
 http://www.xinthink.com/react-native-material-kit/docs/Lib/index.ios.html
 http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Switch.html
