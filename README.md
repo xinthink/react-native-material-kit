@@ -1,7 +1,7 @@
 # [Material Design](http://www.google.com/design/spec/material-design/introduction.html) components for [React Native](https://facebook.github.io/react-native)
 
 [![npm](https://img.shields.io/npm/v/react-native-material-kit.svg)](https://www.npmjs.com/package/react-native-material-kit)
-[![react-native](https://img.shields.io/badge/react--native-v0.8.0-05A5D1.svg)](https://facebook.github.io/react-native "tested react-native version")
+[![react-native](https://img.shields.io/badge/react--native-v0.9.0-05A5D1.svg)](https://facebook.github.io/react-native "tested react-native version")
 [![DUB](https://img.shields.io/dub/l/vibe-d.svg)](https://raw.githubusercontent.com/xinthink/react-native-material-kit/master/LICENSE.md "MIT")
 
 This is a port of [MaterialKit](https://github.com/nghialv/MaterialKit) (written in Swift) to Objective-C, so that it can be used in [React Native](https://facebook.github.io/react-native) projects, as a static library.
