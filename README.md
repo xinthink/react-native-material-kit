@@ -1,37 +1,42 @@
-# [Material Design](http://www.google.com/design/spec/material-design/introduction.html) components for [React Native](https://facebook.github.io/react-native)
+[![npm][npm-badge]][npm]
+[![react-native][rn-badge]][rn]
+[![MIT][license-badge]][license]
 
-[![npm](https://img.shields.io/npm/v/react-native-material-kit.svg)](https://www.npmjs.com/package/react-native-material-kit)
-[![react-native](https://img.shields.io/badge/react--native-v0.9.0-05A5D1.svg)](https://facebook.github.io/react-native "tested react-native version")
-[![DUB](https://img.shields.io/dub/l/vibe-d.svg)](https://raw.githubusercontent.com/xinthink/react-native-material-kit/master/LICENSE.md "MIT")
+A set of UI components, in the purpose of introducing [Material Design][md] to apps built with [React Native][rn], quickly and painlessly.
 
-This is a port of [MaterialKit](https://github.com/nghialv/MaterialKit) (written in Swift) to Objective-C, so that it can be used in [React Native](https://facebook.github.io/react-native) projects, as a static library.
-
-Thanks to the great work of [@nghialv](https://github.com/nghialv)! :thumbsup:
-
+[npm-badge]: https://img.shields.io/npm/v/react-native-material-kit.svg
+[npm]: https://www.npmjs.com/package/react-native-material-kit
+[rn-badge]: https://img.shields.io/badge/react--native-v0.9.0-05A5D1.svg
+[rn]: https://facebook.github.io/react-native
+[md]: http://www.google.com/design/spec/material-design/introduction.html
+[license-badge]: https://img.shields.io/dub/l/vibe-d.svg
+[license]: https://raw.githubusercontent.com/xinthink/react-native-material-kit/master/LICENSE.md
 
 ## Getting Started
 
-`cd` to your React Native project,
+`cd` to your RN project directory,
 
 1. `npm i -S react-native-material-kit`
 2. Add `node_modules/react-native-material-kit/iOS/RCTMaterialKit.xcodeproj` to your xcode project, usually under the `Libraries` group
 3. Add `libRCTMaterialKit.a` (from `Products` under `RCTMaterialKit.xcodeproj`) to build target's `Linked Frameworks and Libraries` list
 4. `require('react-native-material-kit')` to start using the components, in js files
-5. [Docs (Annotated Source)](http://xinthink.github.io/react-native-material-kit/docs/index.html)
-6. Have fun!
+5. Have fun!
 
+> Looking for api docs? Please refer to the [Annotated Source][docs].
+
+[docs]: http://xinthink.github.io/react-native-material-kit/docs/index.html
 
 ## Components
 
 ### Buttons
 
-![buttons-mdl](https://cloud.githubusercontent.com/assets/390805/8888853/69f8d9f8-32f2-11e5-9823-c235ab8c0dd2.gif)
+![buttons-mdl][img-buttons]
 
-Apply [Material Design Buttons](http://www.getmdl.io/components/index.html#buttons-section) with minimum codes using pre-defined builders, which comply with the [Material Design Lite default theme](http://www.getmdl.io/customize/index.html).
+Apply [Material Design Buttons][mdl-buttons] with a few lines of code using predefined builders, which comply with the [Material Design Lite default theme][mdl-theme].
 
 ```jsx
 // colored button with default theme (configurable)
-var ColoredRaisedButton = MKButton.coloredButton()
+const ColoredRaisedButton = MKButton.coloredButton()
   .withText('BUTTON')
   .withOnPress(() => {
     console.log("Hi, it's a colored button!");
@@ -47,7 +52,7 @@ And you can definitely build customized buttons from scratch.
 with builder:
 
 ```jsx
-var CustomButton = new MKButton.Builder()
+const CustomButton = new MKButton.Builder()
   .withBackgroundColor(MKColor.Teal)
   .withShadowRadius(2)
   .withShadowOffset({width:0, height:2})
@@ -87,21 +92,25 @@ the jsx equivalent:
 </MKButton>
 ```
 
-:point_right: [the complete example](https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/buttons.js)
+👉 [the complete example][buttons-sample]
 
-> Why builders? See the '[Builder vs. configuration object](https://github.com/xinthink/react-native-material-kit/issues/3)' discussion
+> Why builders? See the '[Builder vs. configuration object][issue-3]’ discussion.
 
+[img-buttons]: https://cloud.githubusercontent.com/assets/390805/8888853/69f8d9f8-32f2-11e5-9823-c235ab8c0dd2.gif
+[mdl-buttons]: http://www.getmdl.io/components/index.html#buttons-section
+[mdl-theme]: http://www.getmdl.io/customize/index.html
+[buttons-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/buttons.js
+[issue-3]: https://github.com/xinthink/react-native-material-kit/issues/3
 
 ### Text Fields
 
-Built-in textfields, which comply with [Material Design Lite](http://www.getmdl.io/components/#textfields-section).
+Built-in textfields, which comply with [Material Design Lite][mdl-tf].
 
-![textfields-mdl](https://cloud.githubusercontent.com/assets/390805/8794770/26b24724-2fb9-11e5-9af4-abead1cd456b.gif)
-
+![textfields-mdl][img-tf]
 
 ```jsx
 // textfield with default theme (configurable)
-var Textfield = MKTextField.textfield()
+const Textfield = MKTextField.textfield()
   .withPlaceholder('Text...')
   .withStyle(styles.textfield)
   .build();
@@ -113,15 +122,12 @@ var Textfield = MKTextField.textfield()
 Customizing textfields through builder:
 
 ```jsx
-var CustomTexfield = new MKTextField.Builder()
-  .withBackgroundColor('rgba(158,158,158,.2)')
-  .withTintColor(MKColor.Teal)
-  .withTextColor(MKColor.Orange)
-  .withPlaceholder('Hint')
-  .withRippleEnabled(true)
+const ColoredTextfield = mdl.Textfield.textfield()
+  .withPlaceholder(‘Text…’)
   .withStyle(styles.textfield)
+  .withTintColor(MKColor.Lime)
+  .withTextInputStyle({color: MKColor.Orange})
   .build();
-
 ...
 <CustomTexfield/>
 ```
@@ -130,22 +136,27 @@ the jsx equivalent:
 
 ```jsx
 <MKTextField
-  backgroundColor="rgba(158,158,158,.2)"
-  tintColor={MKColor.Teal}
-  textColor={MKColor.Orange}
-  placeholder="Hint"
-  rippleEnabled={true}
+  tintColor={MKColor.Lime}
+  textInputStyle={{color: MKColor.Orange}}
+  placeholder=“Text…”
   style={styles.textfield}/>
 ```
 
-:point_right: [the complete example](https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/textfields.js)
+👉 [the complete example][tf-sample]
 
+
+[mdl-tf]: http://www.getmdl.io/components/#textfields-section
+[img-tf]: https://cloud.githubusercontent.com/assets/390805/9085678/8280484a-3bb1-11e5-9354-a244b0520736.gif
+[tf-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/textfields.js
 
 ### Toggles
 
-[Icon toggle](http://ww.getmdl.io/components/index.html#toggles-section/icon-toggle) & [Switch](http://ww.getmdl.io/components/index.html#toggles-section/switch)
+[Icon toggle][mdl-icon-toggle] & [Switch][mdl-switch]
+![toggles-mdl][img-toggles]
 
-![toggles-mdl](https://cloud.githubusercontent.com/assets/390805/8903074/de0ed748-3487-11e5-9448-9ee304e0a6b6.gif)
+[mdl-icon-toggle]: http://www.getmdl.io/components/index.html#toggles-section/icon-toggle
+[mdl-switch]: http://www.getmdl.io/components/index.html#toggles-section/switch
+[img-toggles]: https://cloud.githubusercontent.com/assets/390805/8903074/de0ed748-3487-11e5-9448-9ee304e0a6b6.gif
 
 ### Icon toggle
 
@@ -163,7 +174,10 @@ the jsx equivalent:
 </MKIconToggle>
 ```
 
-The two `Text` tags here, similar to [State List](http://developer.android.com/guide/topics/resources/drawable-resource.html#StateList) in Android development, which can give you the flexibility to decide what content and how it is shown for each state of the toggle. For example, you can use [react-native-icons](https://github.com/corymsmith/react-native-icons) here, or any content with more sophisticated styles.
+The two `Text` tags here, similar to [State List][android-state-list] in *Android* development, which can give you the flexibility to decide what content and how it is shown for each state of the toggle. For example, you can use [react-native-icons][rn-icons] here, or any other sophisticated contents.
+
+[android-state-list]: http://developer.android.com/guide/topics/resources/drawable-resource.html#StateList
+[rn-icons]: http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Switch.html
 
 ### Switch
 
@@ -189,10 +203,20 @@ const OrangeAppleSwitch = MKSwitch.mkSwitch()
 />
 ```
 
-Actually, there's also a **pure-jsx-implemented** `Switch` available, in which you may be interested, please refer to the [Annotated Source](http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Switch.html) for details.
+Actually, there's also a **pure-jsx-implemented** `Switch` available, in which you may be interested, please refer to the [Annotated Source][docs-switch] for details.
 
-:point_right: [the complete example](https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/toggles.js)
+👉 [the complete example][toggles-sample]
 
+[toggles-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/toggles.js
+[docs-switch]: http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Switch.html
 
 ---
-It's the very begining of the project, lots of work to be done, contributions are welcome! :beers:
+It's the very beginning of the project, lots of work to be done, contributions are welcome!🍻
+
+## About
+This project began with porting [MaterialKit][mdk], thanks [@nghialv][at-ng] for the great work!👍
+But before long, I decided to rewrite in JSX (in progress), with no or limited help of native code.
+'cause it would be easier for me, if I don’t have to do the porting again😵 for the forthcoming *RN Android*, although I’m not sure how to provide it on *Android* for now, which is [MD][md]’s home field😅.
+
+[at-ng]: https://github.com/nghialv
+[mdk]: https://github.com/nghialv/MaterialKit
