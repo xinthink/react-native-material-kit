@@ -57,6 +57,12 @@ class Builder {
     return this;
   }
 
+  // FIXME few components has this prop, move it to subclass
+  withBackgroundColor(color) {
+    this.backgroundColor = color;
+    return this;
+  }
+
   withStyle(v) {
     this.style = v;
     return this;
@@ -86,13 +92,6 @@ class Builder {
     this.style = [].concat(base, this.style);
   }
 }
-
-
-// define builder method for common [MKLayer props](MKPropTypes.html#mkLayerPropTypes)
-Builder.defineProps(mkLayerPropTypes);
-
-// define builder method for common Touchable props
-Builder.defineProps(TouchableWithoutFeedback.propTypes);
 
 
 //
