@@ -34,6 +34,25 @@ a {
   background-color: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.3); }
 
+.presentation-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.presentation-section {
+  display: inline-block;
+  /*width: 400px;*/
+  min-width: 300px;
+  margin:10px 5px;
+  border-radius: 4px;
+  background-color: rgba(0,0,0,0);
+}
+
+.presentation-section:hover {
+  background-color: rgba(240,240,240,0.3);
+}
+
 @media screen and (min-width: 64em) {
   .btn {
     padding: 0.75rem 1rem; } }
@@ -212,7 +231,7 @@ a {
 
 @media screen and (min-width: 42em) and (max-width: 64em) {
   .main-content {
-    padding: 2rem 4rem;
+    padding: 2rem 10rem;
     font-size: 1.1rem; } }
 
 @media screen and (max-width: 42em) {
