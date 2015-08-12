@@ -72,6 +72,10 @@ const PasswordInput = mdl.Textfield.textfieldWithFloatingLabel()
   .build();
 
 const TextFields = React.createClass({
+  componentDidMount: function() {
+    this.refs.defaultInput.focus();
+  },
+
   render: function() {
     return (
       <ScrollView style={styles.scrollView}
@@ -82,7 +86,7 @@ const TextFields = React.createClass({
             <Text style={styles.legendLabel}>Textfield</Text>
           </View>
           <View style={styles.col}>
-            <TextfieldWithFloatingLabel/>
+            <TextfieldWithFloatingLabel ref="defaultInput"/>
             <Text style={styles.legendLabel}>With floating label</Text>
           </View>
         </View>

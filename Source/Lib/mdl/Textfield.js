@@ -161,8 +161,9 @@ class Underline extends Component {
     };
   }
 
-  set lineLength(lineLength) {
-    this.setState({lineLength});
+  // update the length of stretched underline
+  updateLineLength(lineLength, cb) {
+    this.setState({lineLength}, cb);
   }
 
   // stretch the line, from center
@@ -277,6 +278,14 @@ class Textfield extends Component {
     return (this._bufferedValue || '').trim();
   }
 
+  focus() {
+    this.refs.input.focus();
+  }
+
+  isFocused() {
+    return this.refs.input.isFocused();
+  }
+
   componentWillMount() {
     this.bufferedValue = this.props.value || this.props.text ||
       this.props.defaultValue;
@@ -306,10 +315,11 @@ class Textfield extends Component {
 
   _onInputMeasured(left, top, width, height) {
     Object.assign(this.inputFrame, {left, top, width, height});
-    this.refs.underline.lineLength = width;
-    if (this.bufferedValue) {
-      this._aniStartHighlight();  // if input not empty, lift the label
-    }
+    this.refs.underline.updateLineLength(width, () => {
+      if (this.bufferedValue || this.isFocused()) {
+        this._aniStartHighlight();  // if input not empty, lift the label
+      }
+    });
   }
 
   // animation when textfield focused
@@ -499,15 +509,9 @@ class TextfieldBuilder extends Builder {
   }
 
   build() {
-    const props = this.toProps();
-
-    return React.createClass({
-      render: function () {
-        return (
-          <Textfield {...Object.assign(props, this.props)}/>
-        );
-      },
-    });
+    const BuiltTextfield = class extends Textfield {};
+    BuiltTextfield.defaultProps = Object.assign({}, Textfield.defaultProps, this.toProps());
+    return BuiltTextfield;
   }
 }
 
