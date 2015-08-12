@@ -324,8 +324,10 @@ class Textfield extends Component {
 
   // animation when textfield focused
   _aniStartHighlight() {
-    // hide fixed placeholder
-    this.setPlaceholder('');
+    // hide fixed placeholder, if floating
+    if (this.props.floatingLabelEnabled) {
+      this.setPlaceholder('');
+    }
 
     // stretch the underline if enabled
     const animations = this.refs.underline.aniStretchUnderline();
@@ -354,7 +356,9 @@ class Textfield extends Component {
     if (animations.length) {
       Animated.parallel(animations).start(() => {
         // then show fixed placeholder
-        this.setPlaceholder(this._originPlaceholder);
+        if (this.props.floatingLabelEnabled) {
+          this.setPlaceholder(this._originPlaceholder);
+        }
       });
     }
   }
