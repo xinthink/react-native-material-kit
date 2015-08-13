@@ -19,6 +19,7 @@ var {
 var Buttons = require('./App/buttons');
 var TextFields = require('./App/textfields');
 var Toggles = require('./App/toggles');
+var Progress = require('./App/progress');
 
 var Home = React.createClass({
   render: function () {
@@ -49,9 +50,17 @@ var Home = React.createClass({
         }}>
           <Text style={styles.pushLabel}>Toggles</Text>
         </TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+          this.props.navigator.push({
+            title: 'Progress',
+            component: Progress,
+          });
+        }}>
+          <Text style={styles.pushLabel}>Progress</Text>
+        </TouchableOpacity>
       </ScrollView>
     );
-  }
+  },
 });
 
 var Example = React.createClass({

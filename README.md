@@ -22,7 +22,7 @@ A set of UI components, in the purpose of introducing [Material Design][md] to a
 4. `require('react-native-material-kit')` to start using the components, in js files
 5. Have fun!
 
-> Looking for api docs? Please refer to the [Annotated Source][docs].
+> Looking for api docs? Try the [Annotated Source][docs].
 
 [docs]: http://xinthink.github.io/react-native-material-kit/docs/index.html
 
@@ -212,10 +212,12 @@ Actually, there's also a **pure-jsx-implemented** `Switch` available, in which y
 
 ## About
 This project began with porting [MaterialKit][mdk], thanks [@nghialv][at-ng] for the great work!👍🖖
-But before long, I decided to rewrite in JSX (in progress), with no or limited help of native code.
-Life would be easier for me, if I don’t have to do the porting again😵 for the forthcoming *RN Android*, although I have no idea how to provide it on *Android* for now, which is [MD][md]’s home field😅.
 
-And lastly, it’s the very beginning of the project, lots of work to be done, ***contributions*** are welcome!🍻
+But before long, I decided to rewrite all the components in JSX, with no or limited help of native code (the rewriting is in progress now).
+
+I figure that my life would be easier if I don’t have to do the porting again 😵, for the forthcoming *RN Android*. Although I have no idea how to provide it on *Android* for now, which is [MD][md]’s home field 😅.
+
+And lastly, it’s the very beginning of the project, lots of work to be done, ***contributions*** are welcome!🎉🍻
 
 [at-ng]: https://github.com/nghialv
 [mdk]: https://github.com/nghialv/MaterialKit

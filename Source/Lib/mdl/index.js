@@ -3,3 +3,4 @@
  */
 exports.Switch = require('./Switch');
 exports.Textfield = require('./Textfield');
+exports.Progress = require('./Progress');
