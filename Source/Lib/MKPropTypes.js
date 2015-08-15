@@ -8,20 +8,20 @@ const { PropTypes, Text } = require('react-native');
 // -----------
 // ## Data types
 
-// <secion id="dimen">Dimension</secton>
+// <section id="dimen">Dimension</section>
 const dimen = PropTypes.objectOf({
   width: PropTypes.number,
   height: PropTypes.number,
 });
 
-// <secion id="aniTimingFunc">Animation timing function</secton>
+// <section id="aniTimingFunc">Animation timing function</section>
 const aniTimingFunc = PropTypes.oneOf([
   'linear',
   'easeIn',
   'easeOut',
 ]);
 
-// <secion id="insets">Insets</secton>
+// <section id="insets">Insets</section>
 const insets = PropTypes.objectOf({
   top: PropTypes.number,
   left: PropTypes.number,
@@ -29,7 +29,7 @@ const insets = PropTypes.objectOf({
   right: PropTypes.number,
 });
 
-// <secion id="font">Font</secton>
+// <section id="font">Font</section>
 const font = PropTypes.objectOf({
   color: PropTypes.string,
   fontSize: PropTypes.number,
@@ -42,7 +42,7 @@ const font = PropTypes.objectOf({
 // -----------
 // ## Common PropTypes
 
-// <secion id="mkLayerPropTypes">MKLayer PropTypes</secton>
+// <section id="mkLayerPropTypes">MKLayer PropTypes</section>
 const mkLayerPropTypes = {
   // FIXME naming conflicts with built-in properties, such as `shadowOffset`, which lead to a warning:
   //

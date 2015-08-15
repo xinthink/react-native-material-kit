@@ -130,7 +130,7 @@ MKSwitchBuilder.defineProps(MKSwitch.propTypes);
 
 
 // ----------
-// ## <secion id="builders">Built-in builders</secton>
+// ## <section id="builders">Built-in builders</section>
 //
 function mkSwitch() {
   const theme = getTheme().toggleTheme;

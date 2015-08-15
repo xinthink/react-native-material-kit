@@ -524,7 +524,7 @@ TextfieldBuilder.defineProps(Textfield.propTypes);
 
 
 // ----------
-// ## <secion id="builders">Built-in builders</secton>
+// ## <section id="builders">Built-in builders</section>
 //
 function textfield() {
   return new TextfieldBuilder();

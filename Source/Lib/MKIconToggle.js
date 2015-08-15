@@ -142,7 +142,7 @@ MKIconToggleBuilder.defineProps(MKIconToggle.propTypes);
 
 
 // ----------
-// ## <secion id="builders">Built-in builders</secton>
+// ## <section id="builders">Built-in builders</section>
 //
 function toggle() {
   return new MKIconToggleBuilder().withBackgroundColor(MKColor.Transparent);

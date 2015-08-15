@@ -121,7 +121,7 @@ MKButtonBuilder.defineProps(MKButton.propTypes);
 
 
 // ----------
-// ## <secion id="builders">Built-in builders</secton>
+// ## <section id="builders">Built-in builders</section>
 //
 function coloredRaisedButton() {
   return new MKButtonBuilder()
