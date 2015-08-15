@@ -2,8 +2,14 @@
 // MDL style progress bar component.
 //
 // - @see [MDL Progress Bar](http://www.getmdl.io/components/index.html#loading-section/progress)
-// - [Props](#props)
-// - [Defaults](#defaults)
+//
+// - [Default progress](#Progress)
+//   - [Props](#props)
+//   - [Defaults](#defaults)
+//
+// - [Indeterminate progress](#IndeterminateProgress)
+//   - [Props](#IndeterminateProgressProps)
+//   - [Defaults](#IndeterminateProgressDefaults)
 //
 // Created by ywu on 15/8/7.
 //
@@ -297,6 +303,50 @@ IndeterminateProgress.defaultProps = {
 };
 
 
+// --------------------------
+// Builder
+//
+const {
+  Builder,
+} = require('../builder');
+
+//
+// ## Progress builder
+//
+class ProgressBuilder extends Builder {
+  withIndeterminate(isIndeterminate) {
+    this.indeterminate = isIndeterminate;
+    return this;
+  }
+
+  build() {
+    const BuiltProgress = this.indeterminate ?
+      class extends IndeterminateProgress {} : class extends Progress {};
+    const defaults = (this.indeterminate ? IndeterminateProgress : Progress).defaultProps;
+    BuiltProgress.defaultProps = Object.assign({}, defaults, this.toProps());
+    return BuiltProgress;
+  }
+}
+
+// define builder method for each prop
+ProgressBuilder.defineProps(Progress.propTypes);
+ProgressBuilder.defineProps(IndeterminateProgress.propTypes);
+
+// ----------
+// ## <section id="builders">Built-in builders</section>
+//
+function progress() {
+  return new ProgressBuilder();
+}
+
+function indeterminateProgress() {
+  return progress().withIndeterminate(true);
+}
+
+
 // ## Public interface
 module.exports = Progress;
 Progress.Indeterminate = IndeterminateProgress;
+Progress.Builder = ProgressBuilder;
+Progress.progress = progress;
+Progress.indeterminateProgress = indeterminateProgress;

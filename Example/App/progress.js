@@ -22,8 +22,19 @@ const styles = Object.assign(appStyles, StyleSheet.create({
     width: 125,
     height: 2,
   },
+  spinner: {
+    width: 28,
+    height: 28,
+  },
 }));
 
+const Indeterminate = mdl.Progress.indeterminateProgress()
+  .withStyle(styles.progress)
+  .build();
+
+const SingleColorSpinner = mdl.Spinner.singleColorSpinner()
+  .withStyle(styles.spinner)
+  .build();
 
 const Progress = React.createClass({
   componentDidMount: function () {
@@ -47,14 +58,12 @@ const Progress = React.createClass({
               style={styles.progress}
               progress={0.2}
               />
-            <Text style={styles.legendLabel}>Default Progress Bar</Text>
+            <Text style={styles.legendLabel}>Default progress bar</Text>
           </View>
         </View>
         <View style={styles.row}>
           <View style={styles.col}>
-            <mdl.Progress.Indeterminate
-              style={styles.progress}
-              />
+            <Indeterminate/>
             <Text style={styles.legendLabel}>Indeterminate</Text>
           </View>
         </View>
@@ -67,6 +76,16 @@ const Progress = React.createClass({
               buffer={0.3}
               />
             <Text style={styles.legendLabel}>Buffering</Text>
+          </View>
+        </View>
+        <View style={styles.row}>
+          <View style={styles.col}>
+            <mdl.Spinner style={styles.spinner}/>
+            <Text style={styles.legendLabel}>Default spinner</Text>
+          </View>
+          <View style={styles.col}>
+            <SingleColorSpinner/>
+            <Text style={styles.legendLabel}>Single color</Text>
           </View>
         </View>
       </ScrollView>
