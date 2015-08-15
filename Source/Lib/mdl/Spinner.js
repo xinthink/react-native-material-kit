@@ -59,7 +59,8 @@ class Spinner extends Component {
 
   componentDidMount() {
     requestAnimationFrame(() => {
-      this.refs.container.refs.node.measure((left, top, width, height) => {
+      const container = this.refs.container.refs.node;  // un-box animated view
+      container.measure((left, top, width, height) => {
         this.setState({dimen: {width, height}}, () => this._aniUpdateSpinner());
       });
     });

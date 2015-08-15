@@ -27,6 +27,14 @@ A set of UI components, in the purpose of introducing [Material Design][md] to a
 [docs]: http://xinthink.github.io/react-native-material-kit/docs/index.html
 
 ## Components
+- [Buttons](#buttons)
+- [Textfields](#text-fields)
+- [Toggles](#toggles)
+  - [Icon toggle](#icon-toggle)
+  - [Switch](#switch)
+- [Loading](#loading)
+  - [Progress bar](#progress-bar)
+  - [Spinner](#spinner)
 
 ### Buttons
 
@@ -158,7 +166,7 @@ the jsx equivalent:
 [mdl-switch]: http://www.getmdl.io/components/index.html#toggles-section/switch
 [img-toggles]: https://cloud.githubusercontent.com/assets/390805/8903074/de0ed748-3487-11e5-9448-9ee304e0a6b6.gif
 
-### Icon toggle
+#### Icon toggle
 
 ```jsx
 <MKIconToggle
@@ -179,7 +187,7 @@ The two `Text` tags here, similar to [State List][android-state-list] in *Androi
 [android-state-list]: http://developer.android.com/guide/topics/resources/drawable-resource.html#StateList
 [rn-icons]: http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Switch.html
 
-### Switch
+#### Switch
 
 ```jsx
 // using Builder
@@ -209,6 +217,36 @@ Actually, there's also a **pure-jsx-implemented** `Switch` available, in which y
 
 [toggles-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/toggles.js
 [docs-switch]: http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Switch.html
+
+### Loading
+[MDL Loading][mdl-loading] components.
+
+#### Progress bar
+![progress-demo][img-progress]
+
+```jsx
+<mdl.Progress
+  style={styles.progress}
+  progress={0.2}
+  />
+```
+
+👉 [the complete example][progress-sample]
+
+
+#### Spinner
+![spinner-demo][img-spinner]
+
+```jsx
+<mdl.Spinner/>
+```
+
+👉 [the complete example][progress-sample]
+
+[mdl-loading]: http://www.getmdl.io/components/index.html#loading-section
+[img-progress]: https://cloud.githubusercontent.com/assets/390805/9288698/01e31432-4387-11e5-98e5-85b18471baeb.gif
+[img-spinner]: https://cloud.githubusercontent.com/assets/390805/9288699/01e3573a-4387-11e5-8f7b-6c34066846fe.gif
+[progress-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/progress.js
 
 ## About
 This project began with porting [MaterialKit][mdk], thanks [@nghialv][at-ng] for the great work!👍🖖
