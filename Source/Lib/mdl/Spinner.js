@@ -188,7 +188,7 @@ Spinner.propTypes = {
 Spinner.defaultProps = {
   strokeWidth: utils.toPixels(1.5),
   strokeColor: defaultStrokeColors,
-  spinnerAniDuration: 1500,
+  spinnerAniDuration: 1333,
   style: {
     width: utils.toPixels(14),
     height: utils.toPixels(14),
