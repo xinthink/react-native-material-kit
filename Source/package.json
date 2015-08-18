@@ -25,6 +25,9 @@
     "react-native": ">=0.6.0 <1.0.0"
   },
   "devDependencies": {
+    "babel-eslint": "^4.0.10",
+    "eslint": "^1.1.0",
+    "eslint-plugin-react": "^3.2.3",
     "gulp": "^3.9.0",
     "gulp-docco": "0.0.4"
   }
