@@ -222,7 +222,7 @@ Actually, there's also a **pure-jsx-implemented** `Switch` available, in which y
 [MDL Loading][mdl-loading] components.
 
 #### Progress bar
-![progress-demo][img-progress]
+![progress-demo][]
 
 ```jsx
 <mdl.Progress
@@ -235,7 +235,7 @@ Actually, there's also a **pure-jsx-implemented** `Switch` available, in which y
 
 
 #### Spinner
-![spinner-demo][img-spinner]
+![spinner-demo][]
 
 ```jsx
 <mdl.Spinner/>
@@ -244,18 +244,18 @@ Actually, there's also a **pure-jsx-implemented** `Switch` available, in which y
 👉 [the complete example][progress-sample]
 
 [mdl-loading]: http://www.getmdl.io/components/index.html#loading-section
-[img-progress]: https://cloud.githubusercontent.com/assets/390805/9288698/01e31432-4387-11e5-98e5-85b18471baeb.gif
-[img-spinner]: https://cloud.githubusercontent.com/assets/390805/9291361/6e7a75bc-43ec-11e5-95be-2b33eb7f8734.gif
+[progress-demo]: https://cloud.githubusercontent.com/assets/390805/9288698/01e31432-4387-11e5-98e5-85b18471baeb.gif
+[spinner-demo]: https://cloud.githubusercontent.com/assets/390805/9291361/6e7a75bc-43ec-11e5-95be-2b33eb7f8734.gif
 [progress-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/progress.js
 
 ## About
-This project began with porting [MaterialKit][mdk], thanks [@nghialv][at-ng] for the great work!👍🖖
+This project began with porting [MaterialKit][], thanks [@nghialv][] for the great work!👍🖖
 
 But before long, I decided to rewrite all the components in JSX, with no or limited help of native code (the rewriting is in progress now).
 
-I figure that my life would be easier if I don’t have to do the porting again 😵, for the forthcoming *RN Android*. Although I have no idea how to provide it on *Android* for now, which is [MD][md]’s home field 😅.
+I figure that my life would be easier if I don’t have to do the porting again 😵, for the forthcoming *RN Android*. Although I have no idea how to provide it on *Android* for now, which is [MD][]’s home field 😅.
 
 And lastly, it’s the very beginning of the project, lots of work to be done, ***contributions*** are welcome!🎉🍻
 
-[at-ng]: https://github.com/nghialv
-[mdk]: https://github.com/nghialv/MaterialKit
+[@nghialv]: https://github.com/nghialv
+[MaterialKit]: https://github.com/nghialv/MaterialKit
