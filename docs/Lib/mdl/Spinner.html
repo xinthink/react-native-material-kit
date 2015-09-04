@@ -122,6 +122,9 @@
 
   componentDidMount() {
     requestAnimationFrame(() =&gt; {
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.refs.container == <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">return</span>;
+      }
       <span class="hljs-keyword">const</span> container = <span class="hljs-keyword">this</span>.refs.container.refs.node;  <span class="hljs-comment">// un-box animated view</span>
       container.measure((left, top, width, height) =&gt; {
         <span class="hljs-keyword">this</span>.setState({dimen: {width, height}}, () =&gt; <span class="hljs-keyword">this</span>._aniUpdateSpinner());
