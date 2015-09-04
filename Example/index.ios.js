@@ -14,12 +14,13 @@ var {
   ScrollView,
   NavigatorIOS,
   TouchableOpacity,
-  } = React;
+} = React;
 
 var Buttons = require('./App/buttons');
 var TextFields = require('./App/textfields');
 var Toggles = require('./App/toggles');
 var Progress = require('./App/progress');
+var Sliders = require('./App/sliders');
 
 var Home = React.createClass({
   render: function () {
@@ -57,6 +58,14 @@ var Home = React.createClass({
           });
         }}>
           <Text style={styles.pushLabel}>Progress</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+          this.props.navigator.push({
+            title: 'Sliders',
+            component: Sliders,
+          });
+        }}>
+          <Text style={styles.pushLabel}>Sliders</Text>
         </TouchableOpacity>
       </ScrollView>
     );

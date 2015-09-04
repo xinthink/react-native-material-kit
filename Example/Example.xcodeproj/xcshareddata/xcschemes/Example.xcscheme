@@ -107,6 +107,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "rnmk-demo"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
