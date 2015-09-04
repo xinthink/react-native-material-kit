@@ -35,6 +35,7 @@ A set of UI components, in the purpose of introducing [Material Design][md] to a
 - [Loading](#loading)
   - [Progress bar](#progress-bar)
   - [Spinner](#spinner)
+- [Sliders](#sliders)
 
 ### Buttons
 
@@ -247,6 +248,31 @@ Actually, there's also a **pure-jsx-implemented** `Switch` available, in which y
 [progress-demo]: https://cloud.githubusercontent.com/assets/390805/9288698/01e31432-4387-11e5-98e5-85b18471baeb.gif
 [spinner-demo]: https://cloud.githubusercontent.com/assets/390805/9291361/6e7a75bc-43ec-11e5-95be-2b33eb7f8734.gif
 [progress-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/progress.js
+
+### Sliders
+[MDL Slider][mdl-slider] components.
+![slider-demo][]
+
+```jsx
+<mdl.Slider style={styles.slider}/>
+…
+const SliderWithValue = mdl.Slider.slider()
+  .withStyle(styles.slider)
+  .withMin(10)
+  .withMax(100)
+  .build();
+…
+<SliderWithValue
+	ref=“sliderWithValue”
+  onChange={(curValue) => this.setState({curValue})}
+  />
+```
+
+👉 [the complete example][slider-sample]
+
+[mdl-slider]: http://www.getmdl.io/components/index.html#sliders-section
+[slider-demo]: https://cloud.githubusercontent.com/assets/390805/9685661/44260e64-5352-11e5-9fea-0a8aecc07de2.gif
+[slider-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/sliders.js
 
 ## About
 This project began with porting [MaterialKit][], thanks [@nghialv][] for the great work!👍🖖
