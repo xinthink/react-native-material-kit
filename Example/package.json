@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node_modules/react-native/packager/packager.sh"
+    "start": "node_modules/react-native/packager/packager.sh --root=../Source"
   },
   "dependencies": {
-    "react-native": ">=0.6.0 <1.0.0"
+    "react-native": ">=0.8.0 <1.0.0",
+    "react-native-material-kit": "0.x"
   }
 }
