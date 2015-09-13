@@ -152,7 +152,7 @@ the jsx equivalent:
   style={styles.textfield}/>
 ```
 
-👉 [props reference][tf-props-doc]and [example code][tf-sample]
+👉 [props reference][tf-props-doc] and [example code][tf-sample]
 
 [mdl-tf]: http://www.getmdl.io/components/#textfields-section
 [img-tf]: https://cloud.githubusercontent.com/assets/390805/9085678/8280484a-3bb1-11e5-9354-a244b0520736.gif
@@ -231,7 +231,7 @@ The two `Text` tags here, similar to [State List][android-state-list] in *Androi
 <mdl.Spinner/>
 ```
 
-👉 [props reference][spinner-props-doc] [example code][progress-sample]
+👉 [props reference][spinner-props-doc] and [example code][progress-sample]
 
 [mdl-loading]: http://www.getmdl.io/components/index.html#loading-section
 [progress-demo]: https://cloud.githubusercontent.com/assets/390805/9288698/01e31432-4387-11e5-98e5-85b18471baeb.gif
