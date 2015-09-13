@@ -44,25 +44,25 @@ class Progress extends Component {
 
   // Update the current progress.
   // {`Number`} `progress` the current progress, 0 ~ 1
-  set progress(progress) {
+  setProgress(progress) {
     this._progress = progress;
     this._aniUpdateProgress(progress);
   }
 
   // Retrieve the current progress.
-  get progress() {
+  getProgress() {
     return this._progress;
   }
 
   // Update the current percent of buffering.
   // {`Number`} `buffer` current percent of buffering, 0 ~ 1
-  set buffer(buffer) {
+  setBuffer(buffer) {
     this._buffer = buffer;
     this._aniUpdateBuffer(buffer);
   }
 
   // Retrieve the current progress.
-  get buffer() {
+  getBuffer() {
     return this._buffer;
   }
 
