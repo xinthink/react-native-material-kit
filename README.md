@@ -101,7 +101,7 @@ the jsx equivalent:
 </MKButton>
 ```
 
-👉 [the complete example][buttons-sample]
+👉 [props reference][button-props-doc] and [example code][buttons-sample]
 
 > Why builders? See the ‘[Builder vs. configuration object][issue-3]’ discussion.
 
@@ -110,6 +110,7 @@ the jsx equivalent:
 [mdl-theme]: http://www.getmdl.io/customize/index.html
 [buttons-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/buttons.js
 [issue-3]: https://github.com/xinthink/react-native-material-kit/issues/3
+[button-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/Lib/MKButton.html#props
 
 ### Text Fields
 
@@ -151,12 +152,12 @@ the jsx equivalent:
   style={styles.textfield}/>
 ```
 
-👉 [the complete example][tf-sample]
-
+👉 [props reference][tf-props-doc]and [example code][tf-sample]
 
 [mdl-tf]: http://www.getmdl.io/components/#textfields-section
 [img-tf]: https://cloud.githubusercontent.com/assets/390805/9085678/8280484a-3bb1-11e5-9354-a244b0520736.gif
 [tf-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/textfields.js
+[tf-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Textfield.html#props
 
 ### Toggles
 
@@ -185,39 +186,28 @@ the jsx equivalent:
 
 The two `Text` tags here, similar to [State List][android-state-list] in *Android* development, which can give you the flexibility to decide what content and how it is shown for each state of the toggle. For example, you can use [react-native-icons][rn-icons] here, or any other sophisticated contents.
 
+👉 [props reference][icon-toggle-props-doc] and [example code][toggles-sample]
+
 [android-state-list]: http://developer.android.com/guide/topics/resources/drawable-resource.html#StateList
 [rn-icons]: http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Switch.html
+[icon-toggle-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/Lib/MKIconToggle.html#props
 
 #### Switch
 
 ```jsx
-// using Builder
-const OrangeAppleSwitch = MKSwitch.mkSwitch()
-  .withStyle(styles.appleSwitch)
-  .withOnColor('rgba(255,152,0,.3)')
-  .withThumbOnColor(MKColor.Orange)
-  .withRippleLayerColor('rgba(255,152,0,.2)')
-  .withOnCheckedChange(() => console.log('orange switch clicked'))
-  .build();
-...
-<OrangeAppleSwitch/>
-
-// jsx only
-<MKSwitch
-  style={styles.appleSwitch}
-  onColor="rgba(255,152,0,.3)"
-  thumbOnColor={MKColor.Orange}
-  rippleLayerColor="rgba(255,152,0,.2)"
-  onCheckedChange={() => console.log('orange switch clicked')}
+<mdl.Switch style={styles.appleSwitch}
+          onColor="rgba(255,152,0,.3)"
+          thumbOnColor={MKColor.Orange}
+          rippleColor="rgba(255,152,0,.2)"
+          onPress={() => console.log('orange switch pressed')}
+          onCheckedChange={(e) => console.log('orange switch checked', e)}
 />
 ```
 
-Actually, there's also a **pure-jsx-implemented** `Switch` available, in which you may be interested, please refer to the [Annotated Source][docs-switch] for details.
-
-👉 [the complete example][toggles-sample]
+👉 [props reference][switch-js-props-doc] and [example code][toggles-sample]
 
 [toggles-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/toggles.js
-[docs-switch]: http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Switch.html
+[switch-js-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Switch.html#props
 
 ### Loading
 [MDL Loading][mdl-loading] components.
@@ -232,8 +222,7 @@ Actually, there's also a **pure-jsx-implemented** `Switch` available, in which y
   />
 ```
 
-👉 [the complete example][progress-sample]
-
+👉 [props reference][prog-props-doc] and [example code][progress-sample]
 
 #### Spinner
 ![spinner-demo][]
@@ -242,12 +231,14 @@ Actually, there's also a **pure-jsx-implemented** `Switch` available, in which y
 <mdl.Spinner/>
 ```
 
-👉 [the complete example][progress-sample]
+👉 [props reference][spinner-props-doc] [example code][progress-sample]
 
 [mdl-loading]: http://www.getmdl.io/components/index.html#loading-section
 [progress-demo]: https://cloud.githubusercontent.com/assets/390805/9288698/01e31432-4387-11e5-98e5-85b18471baeb.gif
 [spinner-demo]: https://cloud.githubusercontent.com/assets/390805/9291361/6e7a75bc-43ec-11e5-95be-2b33eb7f8734.gif
 [progress-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/progress.js
+[prog-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Progress.html#props
+[spinner-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Spinner.html#props
 
 ### Sliders
 [MDL Slider][mdl-slider] components.
@@ -268,16 +259,17 @@ const SliderWithValue = mdl.Slider.slider()
   />
 ```
 
-👉 [the complete example][slider-sample]
+👉 [props reference][slider-props-doc] and [example code][slider-sample]
 
 [mdl-slider]: http://www.getmdl.io/components/index.html#sliders-section
 [slider-demo]: https://cloud.githubusercontent.com/assets/390805/9685661/44260e64-5352-11e5-9fea-0a8aecc07de2.gif
 [slider-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/sliders.js
+[slider-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Slider.html#props
 
 ## About
 This project began with porting [MaterialKit][], thanks [@nghialv][] for the great work!👍🖖
 
-But before long, I decided to rewrite all the components in JSX, with no or limited help of native code (the rewriting is in progress now).
+But before long, I decided to rewrite all the components in JSX, with no or limited help of native code (the rewriting is in progress).
 
 I figure that my life would be easier if I don’t have to do the porting again 😵, for the forthcoming *RN Android*. Although I have no idea how to provide it on *Android* for now, which is [MD][]’s home field 😅.
 
