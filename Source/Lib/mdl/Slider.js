@@ -191,12 +191,12 @@ class Slider extends Component {
   }
 
   // Public api to update the current value
-  set value(value) {
+  setValue(value) {
     this._internalSetValue(value);
     this._aniUpdateValue(value);
   }
 
-  get value() {
+  getValue() {
     return this._value;
   }
 
