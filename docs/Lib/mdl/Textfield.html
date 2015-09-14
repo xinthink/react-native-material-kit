@@ -1001,6 +1001,28 @@ which has floating label and underline effect.</p>
   constructor() {
     <span class="hljs-keyword">super</span>();
     <span class="hljs-keyword">this</span>.withBackgroundColor(MKColor.Transparent);
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-41">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-41">&#182;</a>
+              </div>
+              <p>For compatibility with RN version older than 0.9.0.</p>
+<blockquote>
+<p>Since <a href="https://github.com/facebook/react-native/releases/tag/v0.9.0-rc">RN v0.9.0</a>, <code>TextInput</code> became a <a href="https://facebook.github.io/react/docs/forms.html#controlled-components">controlled component</a></p>
+</blockquote>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  withDefaultValue(defaultValue) {
+    <span class="hljs-keyword">const</span> propName = Textfield.propTypes.defaultValue ? <span class="hljs-string">'defaultValue'</span> : <span class="hljs-string">'value'</span>;
+    <span class="hljs-keyword">this</span>[propName] = defaultValue;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
   }
 
   mergeStyle() {
@@ -1021,11 +1043,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-41">
+        <li id="section-42">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-41">&#182;</a>
+                <a class="pilcrow" href="#section-42">&#182;</a>
               </div>
               <p>define builder method for each prop</p>
 
@@ -1036,11 +1058,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-42">
+        <li id="section-43">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-42">&#182;</a>
+                <a class="pilcrow" href="#section-43">&#182;</a>
               </div>
               <hr>
 
@@ -1049,11 +1071,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-43">
+        <li id="section-44">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-43">&#182;</a>
+                <a class="pilcrow" href="#section-44">&#182;</a>
               </div>
               <h2 id="-section-id-builders-built-in-builders-section-"><section id="builders">Built-in builders</section></h2>
 
@@ -1070,11 +1092,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-44">
+        <li id="section-45">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-44">&#182;</a>
+                <a class="pilcrow" href="#section-45">&#182;</a>
               </div>
               <h2 id="public-interface">Public interface</h2>
 
