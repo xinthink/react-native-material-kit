@@ -504,6 +504,16 @@ class TextfieldBuilder extends Builder {
     this.withBackgroundColor(MKColor.Transparent);
   }
 
+  // For compatibility with RN version older than 0.9.0.
+  // > Since [RN v0.9.0][], `TextInput` became a [controlled component][]
+  // [RN v0.9.0]: https://github.com/facebook/react-native/releases/tag/v0.9.0-rc
+  // [controlled component]: https://facebook.github.io/react/docs/forms.html#controlled-components
+  withDefaultValue(defaultValue) {
+    const propName = Textfield.propTypes.defaultValue ? 'defaultValue' : 'value';
+    this[propName] = defaultValue;
+    return this;
+  }
+
   mergeStyle() {
     super.mergeStyle();
 
