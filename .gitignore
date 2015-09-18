@@ -24,7 +24,7 @@ project.xcworkspace
 
 # node.js
 #
-/Source/node_modules/
+node_modules/
 npm-debug.log
 lib-cov
 *.seed
@@ -38,5 +38,3 @@ lib-cov
 # WebStorm
 #
 .idea
-
-docs/

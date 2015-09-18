@@ -23,8 +23,10 @@ A set of UI components, in the purpose of introducing [Material Design][md] to a
 5. Have fun!
 
 > Looking for api docs? Try the [Annotated Source][docs].
+> Debugging local module? Refer to [Debuggin local RNMK module][debug-with-demo]
 
 [docs]: http://xinthink.github.io/react-native-material-kit/docs/index.html
+[debug-with-demo]: https://github.com/xinthink/rnmk-demo#debuggin-local-rnmk-module
 
 ## Components
 - [Buttons](#buttons)
@@ -108,7 +110,7 @@ the jsx equivalent:
 [img-buttons]: https://cloud.githubusercontent.com/assets/390805/8888853/69f8d9f8-32f2-11e5-9823-c235ab8c0dd2.gif
 [mdl-buttons]: http://www.getmdl.io/components/index.html#buttons-section
 [mdl-theme]: http://www.getmdl.io/customize/index.html
-[buttons-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/buttons.js
+[buttons-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/buttons.js
 [issue-3]: https://github.com/xinthink/react-native-material-kit/issues/3
 [button-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/Lib/MKButton.html#props
 
@@ -156,7 +158,7 @@ the jsx equivalent:
 
 [mdl-tf]: http://www.getmdl.io/components/#textfields-section
 [img-tf]: https://cloud.githubusercontent.com/assets/390805/9085678/8280484a-3bb1-11e5-9354-a244b0520736.gif
-[tf-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/textfields.js
+[tf-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/textfields.js
 [tf-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Textfield.html#props
 
 ### Toggles
@@ -206,7 +208,7 @@ The two `Text` tags here, similar to [State List][android-state-list] in *Androi
 
 👉 [props reference][switch-js-props-doc] and [example code][toggles-sample]
 
-[toggles-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/toggles.js
+[toggles-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/toggles.js
 [switch-js-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Switch.html#props
 
 ### Loading
@@ -236,7 +238,7 @@ The two `Text` tags here, similar to [State List][android-state-list] in *Androi
 [mdl-loading]: http://www.getmdl.io/components/index.html#loading-section
 [progress-demo]: https://cloud.githubusercontent.com/assets/390805/9288698/01e31432-4387-11e5-98e5-85b18471baeb.gif
 [spinner-demo]: https://cloud.githubusercontent.com/assets/390805/9291361/6e7a75bc-43ec-11e5-95be-2b33eb7f8734.gif
-[progress-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/progress.js
+[progress-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/progress.js
 [prog-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Progress.html#props
 [spinner-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Spinner.html#props
 
@@ -263,15 +265,13 @@ const SliderWithValue = mdl.Slider.slider()
 
 [mdl-slider]: http://www.getmdl.io/components/index.html#sliders-section
 [slider-demo]: https://cloud.githubusercontent.com/assets/390805/9685661/44260e64-5352-11e5-9fea-0a8aecc07de2.gif
-[slider-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/Example/App/sliders.js
+[slider-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/sliders.js
 [slider-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Slider.html#props
 
 ## About
 This project began with porting [MaterialKit][], thanks [@nghialv][] for the great work!👍🖖
 
-But before long, I decided to rewrite all the components in JSX, with no or limited help of native code (the rewriting is in progress).
-
-I figure that my life would be easier if I don’t have to do the porting again 😵, for the forthcoming *RN Android*. Although I have no idea how to provide it on *Android* for now, which is [MD][]’s home field 😅.
+But before long, I decided to rewrite all the components in JSX, with no or limited help of native code, and the rewriting is in progress.
 
 And lastly, it’s the very beginning of the project, lots of work to be done, ***contributions*** are welcome!🎉🍻
 

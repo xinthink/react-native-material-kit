@@ -1,8 +1,8 @@
 {
   "name": "react-native-material-kit",
-  "version": "0.1.9",
+  "version": "0.2.0-SNAPSHOT",
   "description": "Bringing Material Design to React Native",
-  "main": "Lib/index.ios.js",
+  "main": "lib/index.ios.js",
   "author": "Yingxin Wu <yingxinwu.g@gmail.com>",
   "license": "MIT",
   "keywords": [

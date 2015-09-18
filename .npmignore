@@ -26,4 +26,6 @@ DerivedData
 node_modules/
 npm-debug.log
 
-docs/
+# WebStorm
+#
+.idea
