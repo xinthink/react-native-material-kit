@@ -1,11 +1,11 @@
 #!/bin/zsh
 SITE_DIR=$(cd `dirname $0`/.. && pwd)
-LIB_DIR=$(cd `dirname $0`/../../rct-material-kit/Source && pwd)
+LIB_DIR=$(cd `dirname $0`/../../rct-material-kit && pwd)
 
 cd $LIB_DIR
 docco-central --title 'Index' \
   --windowTitle 'Annotated Source - RN Material Kit' \
-  'Lib/**/*.js'
+  'lib/**/*.js'
 gulp docs
 
 rm -rf $SITE_DIR/docs
