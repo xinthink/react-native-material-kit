@@ -6,7 +6,7 @@ gulp.task('default', function() {
 });
 
 gulp.task('docs', function() {
-  gulp.src('./Lib/**/*.js', {base: '.'})
+  gulp.src('./lib/**/*.js', {base: '.'})
   .pipe(docco())
   .pipe(gulp.dest('./docs'));
 });

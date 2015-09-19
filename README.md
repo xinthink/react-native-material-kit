@@ -1,6 +1,7 @@
 [![npm][npm-badge]][npm]
 [![react-native][rn-badge]][rn]
 [![MIT][license-badge]][license]
+[![bitHound Score][bithound-badge]][bithound]
 
 A set of UI components, in the purpose of introducing [Material Design][md] to apps built with [React Native][rn], quickly and painlessly.
 
@@ -11,6 +12,8 @@ A set of UI components, in the purpose of introducing [Material Design][md] to a
 [md]: http://www.google.com/design/spec/material-design/introduction.html
 [license-badge]: https://img.shields.io/dub/l/vibe-d.svg
 [license]: https://raw.githubusercontent.com/xinthink/react-native-material-kit/master/LICENSE.md
+[bithound-badge]: https://www.bithound.io/github/xinthink/react-native-material-kit/badges/score.svg
+[bithound]: https://www.bithound.io/github/xinthink/react-native-material-kit
 
 ## Getting Started
 
