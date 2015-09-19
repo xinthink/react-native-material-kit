@@ -115,7 +115,7 @@ the jsx equivalent:
 [mdl-theme]: http://www.getmdl.io/customize/index.html
 [buttons-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/buttons.js
 [issue-3]: https://github.com/xinthink/react-native-material-kit/issues/3
-[button-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/Lib/MKButton.html#props
+[button-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/MKButton.html#props
 
 ### Text Fields
 
@@ -162,7 +162,7 @@ the jsx equivalent:
 [mdl-tf]: http://www.getmdl.io/components/#textfields-section
 [img-tf]: https://cloud.githubusercontent.com/assets/390805/9085678/8280484a-3bb1-11e5-9354-a244b0520736.gif
 [tf-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/textfields.js
-[tf-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Textfield.html#props
+[tf-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Textfield.html#props
 
 ### Toggles
 
@@ -194,8 +194,8 @@ The two `Text` tags here, similar to [State List][android-state-list] in *Androi
 👉 [props reference][icon-toggle-props-doc] and [example code][toggles-sample]
 
 [android-state-list]: http://developer.android.com/guide/topics/resources/drawable-resource.html#StateList
-[rn-icons]: http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Switch.html
-[icon-toggle-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/Lib/MKIconToggle.html#props
+[rn-icons]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Switch.html
+[icon-toggle-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/MKIconToggle.html#props
 
 #### Switch
 
@@ -212,7 +212,7 @@ The two `Text` tags here, similar to [State List][android-state-list] in *Androi
 👉 [props reference][switch-js-props-doc] and [example code][toggles-sample]
 
 [toggles-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/toggles.js
-[switch-js-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Switch.html#props
+[switch-js-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Switch.html#props
 
 ### Loading
 [MDL Loading][mdl-loading] components.
@@ -242,8 +242,8 @@ The two `Text` tags here, similar to [State List][android-state-list] in *Androi
 [progress-demo]: https://cloud.githubusercontent.com/assets/390805/9288698/01e31432-4387-11e5-98e5-85b18471baeb.gif
 [spinner-demo]: https://cloud.githubusercontent.com/assets/390805/9291361/6e7a75bc-43ec-11e5-95be-2b33eb7f8734.gif
 [progress-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/progress.js
-[prog-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Progress.html#props
-[spinner-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Spinner.html#props
+[prog-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Progress.html#props
+[spinner-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Spinner.html#props
 
 ### Sliders
 [MDL Slider][mdl-slider] components.
@@ -269,7 +269,7 @@ const SliderWithValue = mdl.Slider.slider()
 [mdl-slider]: http://www.getmdl.io/components/index.html#sliders-section
 [slider-demo]: https://cloud.githubusercontent.com/assets/390805/9685661/44260e64-5352-11e5-9fea-0a8aecc07de2.gif
 [slider-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/sliders.js
-[slider-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Slider.html#props
+[slider-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Slider.html#props
 
 ## About
 This project began with porting [MaterialKit][], thanks [@nghialv][] for the great work!👍🖖
