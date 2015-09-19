@@ -25,11 +25,11 @@ A set of UI components, in the purpose of introducing [Material Design][md] to a
 4. `require('react-native-material-kit')` to start using the components, in js files
 5. Have fun!
 
-> Looking for api docs? Try the [Annotated Source][docs].
-> Debugging local module? Refer to [Debuggin local RNMK module][debug-with-demo]
+> - Looking for api docs? Try the [Annotated Source][docs].
+> - Debugging local module? Please refer to [Debugging local RNMK module][debug-with-demo]
 
 [docs]: http://xinthink.github.io/react-native-material-kit/docs/index.html
-[debug-with-demo]: https://github.com/xinthink/rnmk-demo#debuggin-local-rnmk-module
+[debug-with-demo]: https://github.com/xinthink/rnmk-demo#debugging-local-rnmk-module
 
 ## Components
 - [Buttons](#buttons)
