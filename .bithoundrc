@@ -1,5 +1,6 @@
 {
   "ignore": [
-    "/iOS"
+    "/iOS",
+    "/android"
   ]
 }

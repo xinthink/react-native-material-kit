@@ -259,7 +259,7 @@ const SliderWithValue = mdl.Slider.slider()
   .build();
 …
 <SliderWithValue
-	ref=“sliderWithValue”
+  ref=“sliderWithValue”
   onChange={(curValue) => this.setState({curValue})}
   />
 ```
