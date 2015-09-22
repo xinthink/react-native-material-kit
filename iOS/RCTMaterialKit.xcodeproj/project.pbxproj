@@ -10,6 +10,8 @@
 		8A0233A51B2303DC0030EFCF /* MKLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0233A41B2303DC0030EFCF /* MKLayer.m */; };
 		8A1B8E7B1B22E4E300DB45C2 /* RCTMaterialKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A1B8E7A1B22E4E300DB45C2 /* RCTMaterialKit.h */; };
 		8A1B8E7D1B22E4E300DB45C2 /* RCTMaterialKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1B8E7C1B22E4E300DB45C2 /* RCTMaterialKit.m */; };
+		8A6D44471BB189F500D6A5EB /* MKTouchable.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6D44461BB189F500D6A5EB /* MKTouchable.m */; settings = {ASSET_TAGS = (); }; };
+		8ABF4CC51BB191C500158736 /* MKTouchableManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ABF4CC41BB191C500158736 /* MKTouchableManager.m */; settings = {ASSET_TAGS = (); }; };
 		8AD23F3C1B62180200384806 /* UIColor+MKColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD23F3B1B62180200384806 /* UIColor+MKColor.m */; };
 		8AD23F401B632EB900384806 /* MKIconToggle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD23F3F1B632EB900384806 /* MKIconToggle.m */; };
 		8AD23F421B63B23700384806 /* MKIconToggleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD23F411B63B23700384806 /* MKIconToggleManager.m */; };
@@ -37,6 +39,9 @@
 		8A1B8E771B22E4E300DB45C2 /* libRCTMaterialKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTMaterialKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A1B8E7A1B22E4E300DB45C2 /* RCTMaterialKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTMaterialKit.h; sourceTree = "<group>"; };
 		8A1B8E7C1B22E4E300DB45C2 /* RCTMaterialKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTMaterialKit.m; sourceTree = "<group>"; };
+		8A6D44451BB189D100D6A5EB /* MKTouchable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MKTouchable.h; path = RCTMaterialKit/MKTouchable.h; sourceTree = "<group>"; };
+		8A6D44461BB189F500D6A5EB /* MKTouchable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKTouchable.m; path = RCTMaterialKit/MKTouchable.m; sourceTree = "<group>"; };
+		8ABF4CC41BB191C500158736 /* MKTouchableManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKTouchableManager.m; sourceTree = "<group>"; };
 		8AD23F3A1B62180200384806 /* UIColor+MKColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+MKColor.h"; path = "RCTMaterialKit/UIColor+MKColor.h"; sourceTree = "<group>"; };
 		8AD23F3B1B62180200384806 /* UIColor+MKColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+MKColor.m"; path = "RCTMaterialKit/UIColor+MKColor.m"; sourceTree = "<group>"; };
 		8AD23F3E1B632EA300384806 /* MKIconToggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MKIconToggle.h; path = RCTMaterialKit/MKIconToggle.h; sourceTree = "<group>"; };
@@ -84,6 +89,7 @@
 				8AD23F521B63EF4D00384806 /* MKToggleViewManager.m */,
 				8A1B8E7A1B22E4E300DB45C2 /* RCTMaterialKit.h */,
 				8A1B8E7C1B22E4E300DB45C2 /* RCTMaterialKit.m */,
+				8ABF4CC41BB191C500158736 /* MKTouchableManager.m */,
 			);
 			path = RCTMaterialKit;
 			sourceTree = "<group>";
@@ -100,6 +106,8 @@
 				8A0233A71B23127F0030EFCF /* MKUtils.h */,
 				8AD23F3A1B62180200384806 /* UIColor+MKColor.h */,
 				8AD23F3B1B62180200384806 /* UIColor+MKColor.m */,
+				8A6D44451BB189D100D6A5EB /* MKTouchable.h */,
+				8A6D44461BB189F500D6A5EB /* MKTouchable.m */,
 			);
 			name = MaterialKit;
 			sourceTree = "<group>";
@@ -166,7 +174,9 @@
 				8A0233A51B2303DC0030EFCF /* MKLayer.m in Sources */,
 				8AD23F531B63EF4D00384806 /* MKToggleViewManager.m in Sources */,
 				8AD23F501B63E78600384806 /* MKToggleView.m in Sources */,
+				8ABF4CC51BB191C500158736 /* MKTouchableManager.m in Sources */,
 				8AD23F421B63B23700384806 /* MKIconToggleManager.m in Sources */,
+				8A6D44471BB189F500D6A5EB /* MKTouchable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
