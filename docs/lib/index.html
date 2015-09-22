@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>index.ios.js</title>
+  <title>index.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="../docco.css" />
@@ -15,7 +15,7 @@
         
           <li id="title">
               <div class="annotation">
-                  <h1>index.ios.js</h1>
+                  <h1>index.js</h1>
               </div>
           </li>
         
@@ -33,16 +33,36 @@
             <div class="content"><div class='highlight'><pre><span class="hljs-comment">/**
  * Created by ywu on 15/6/1.
  */</span>
-exports.MKButton = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./MKButton'</span>);
-exports.MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./MKColor'</span>);
-exports.MKIconToggle = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./MKIconToggle'</span>);
-exports.MKSwitch = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./MKSwitch'</span>);
-
 exports.setTheme = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./theme'</span>).setTheme;
 exports.getTheme = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./theme'</span>).getTheme;
 
 exports.mdl = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./mdl'</span>);
-exports.MKTextField = exports.mdl.Textfield;</pre></div></div>
+
+exports.MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./MKColor'</span>);
+exports.MKIconToggle = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./MKIconToggle'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Shortcuts, and also compatibility for legacy native components like MKButton
+exports.MKButton = require(‘./MKButton’);</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>exports.MKButton = exports.mdl.Button;
+exports.MKTextField = exports.mdl.Textfield;
+exports.MKSwitch = exports.mdl.Switch;
+
+exports.MKRipple = exports.mdl.Ripple;
+exports.MKProgress = exports.mdl.Progress;
+exports.MKSlider = exports.mdl.Slider;
+exports.MKSpinner = exports.mdl.Spinner;</pre></div></div>
             
         </li>
         

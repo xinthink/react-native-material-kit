@@ -37,8 +37,6 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> {getTheme} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./theme'</span>);
-<span class="hljs-keyword">const</span> {mkLayerPropTypes} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./MKPropTypes'</span>);
-<span class="hljs-keyword">const</span> {TouchableWithoutFeedback} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">capitalize</span>(<span class="hljs-params">str</span>) </span>{
   <span class="hljs-keyword">return</span> str.substring(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>).toUpperCase() + str.substring(<span class="hljs-number">1</span>);
@@ -108,7 +106,7 @@
             <div class="content"><div class='highlight'><pre>  static defineProps(propTypes, filter = ()=&gt;<span class="hljs-literal">true</span>) {
     <span class="hljs-keyword">const</span> self = <span class="hljs-keyword">this</span>;
     <span class="hljs-built_in">Object</span>.getOwnPropertyNames(propTypes).forEach((prop) =&gt; {
-      <span class="hljs-keyword">if</span> (filter(prop)) {
+      <span class="hljs-keyword">if</span> (!self.hasOwnProperty(prop) &amp;&amp; filter(prop)) {
         Builder.defineProp.call(self, prop);
       }
     });
@@ -142,7 +140,7 @@
   }
 
   withStyle(v) {
-    <span class="hljs-keyword">this</span>.style = v;
+    <span class="hljs-keyword">this</span>.style = <span class="hljs-keyword">this</span>.style ? [<span class="hljs-keyword">this</span>.style, v] : v;
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
   }
 
@@ -150,8 +148,8 @@
   }
 
   toProps() {
-    <span class="hljs-keyword">this</span>.mergeStyle();
     <span class="hljs-keyword">this</span>.choseBackgroundColor();
+    <span class="hljs-keyword">this</span>.mergeStyle();
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.assign({}, <span class="hljs-keyword">this</span>);
   }
 
@@ -160,6 +158,9 @@
   }
 
   mergeStyle() {
+    <span class="hljs-keyword">this</span>.mergeStyleWith({
+      backgroundColor: <span class="hljs-keyword">this</span>.backgroundColor,
+    });
   }
 
   choseBackgroundColor() {

@@ -99,7 +99,7 @@
   constructor(props) {
     <span class="hljs-keyword">super</span>(props);
     <span class="hljs-keyword">this</span>.x = <span class="hljs-number">0</span>;  <span class="hljs-comment">// current x-axis position</span>
-    <span class="hljs-keyword">this</span>.trackWidth = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">this</span>.trackLenght = <span class="hljs-number">0</span>;
     <span class="hljs-keyword">this</span>._animatedLeft = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>);
     <span class="hljs-keyword">this</span>._animatedScale = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">1</span>);
     <span class="hljs-keyword">this</span>._animatedBorder = <span class="hljs-keyword">new</span> Animated.Value(utils.toPixels(<span class="hljs-number">1</span>));  <span class="hljs-comment">// 1 dp</span>
@@ -113,7 +113,7 @@
   componentWillMount() {
     <span class="hljs-keyword">this</span>.setState({
       borderColor: <span class="hljs-keyword">this</span>.props.upperTrackColor,
-      borderWidth: <span class="hljs-keyword">this</span>.props.trackHeight,
+      borderWidth: <span class="hljs-keyword">this</span>.props.trackSize,
     });
   }
 
@@ -184,7 +184,7 @@
             
             <div class="content"><div class='highlight'><pre>  moveTo(x) {
     <span class="hljs-keyword">this</span>.x = <span class="hljs-built_in">Math</span>.max(x, <span class="hljs-number">0</span>);
-    <span class="hljs-keyword">this</span>.x = <span class="hljs-built_in">Math</span>.min(<span class="hljs-keyword">this</span>.x, <span class="hljs-keyword">this</span>.trackWidth);
+    <span class="hljs-keyword">this</span>.x = <span class="hljs-built_in">Math</span>.min(<span class="hljs-keyword">this</span>.x, <span class="hljs-keyword">this</span>.trackLenght);
 
     Animated.parallel([
       Animated.timing(<span class="hljs-keyword">this</span>._animatedScale, {
@@ -416,7 +416,7 @@
       <span class="hljs-keyword">return</span>;
     }
 
-    <span class="hljs-keyword">this</span>.refs.thumb.trackWidth = <span class="hljs-keyword">this</span>._trackTotalWidth;
+    <span class="hljs-keyword">this</span>.refs.thumb.trackLenght = <span class="hljs-keyword">this</span>._trackTotalWidth;
 
     <span class="hljs-keyword">const</span> ratio = (value - <span class="hljs-keyword">this</span>.props.min) / (<span class="hljs-keyword">this</span>.props.max - <span class="hljs-keyword">this</span>.props.min);
     <span class="hljs-keyword">const</span> x = ratio * <span class="hljs-keyword">this</span>._trackTotalWidth;
@@ -560,8 +560,8 @@
     <span class="hljs-keyword">return</span> (
       <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">View</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"container"</span>  // <span class="hljs-attribute">extends</span> <span class="hljs-attribute">the</span> <span class="hljs-attribute">touchable</span> <span class="hljs-attribute">area</span>
             <span class="hljs-attribute">style</span>=<span class="hljs-value">{[{</span>
-                <span class="hljs-attribute">paddingTop:</span> <span class="hljs-attribute">this.props.thumbRadius</span> <span class="hljs-attribute">-</span> <span class="hljs-attribute">this.props.trackHeight</span> / <span class="hljs-attribute">2</span>,
-                <span class="hljs-attribute">paddingBottom:</span> <span class="hljs-attribute">this.props.thumbRadius</span> <span class="hljs-attribute">-</span> <span class="hljs-attribute">this.props.trackHeight</span> / <span class="hljs-attribute">2</span>,
+                <span class="hljs-attribute">paddingTop:</span> <span class="hljs-attribute">this.props.thumbRadius</span> <span class="hljs-attribute">-</span> <span class="hljs-attribute">this.props.trackSize</span> / <span class="hljs-attribute">2</span>,
+                <span class="hljs-attribute">paddingBottom:</span> <span class="hljs-attribute">this.props.thumbRadius</span> <span class="hljs-attribute">-</span> <span class="hljs-attribute">this.props.trackSize</span> / <span class="hljs-attribute">2</span>,
                 <span class="hljs-attribute">paddingLeft:</span> <span class="hljs-attribute">this.props.thumbRadius</span>,
                 <span class="hljs-attribute">paddingRight:</span> <span class="hljs-attribute">this.props.thumbRadius</span>,
               },
@@ -580,7 +580,7 @@
               <span class="hljs-attribute">pointerEvents</span>=<span class="hljs-value">"none"</span>
               <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
                 <span class="hljs-attribute">flex:</span> <span class="hljs-attribute">1</span>,
-                <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this.props.trackHeight</span>,
+                <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this.props.trackSize</span>,
                 <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this.props.upperTrackColor</span>,
               }}
           &gt;</span>
@@ -588,7 +588,7 @@
             <span class="hljs-attribute">ref</span>=<span class="hljs-value">"lowerTrack"</span>
             <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
               <span class="hljs-attribute">width:</span> <span class="hljs-attribute">this._animatedTrackWidth</span>,
-              <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this.props.trackHeight</span>,
+              <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this.props.trackSize</span>,
               <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this.props.lowerTrackColor</span> || <span class="hljs-attribute">getTheme</span>()<span class="hljs-attribute">.primaryColor</span>,
             }}
             /&gt;</span>
@@ -596,11 +596,11 @@
             <span class="hljs-attribute">ref</span>=<span class="hljs-value">"thumb"</span>
             <span class="hljs-attribute">radius</span>=<span class="hljs-value">{this.props.thumbRadius}</span>
             <span class="hljs-attribute">trackWidth</span>=<span class="hljs-value">{this._trackTotalWidth}</span>
-            <span class="hljs-attribute">trackHeight</span>=<span class="hljs-value">{this.props.trackHeight}</span>
+            <span class="hljs-attribute">trackSize</span>=<span class="hljs-value">{this.props.trackSize}</span>
             <span class="hljs-attribute">lowerTrackColor</span>=<span class="hljs-value">{this.props.lowerTrackColor</span> || <span class="hljs-attribute">getTheme</span>()<span class="hljs-attribute">.primaryColor</span>}
             <span class="hljs-attribute">upperTrackColor</span>=<span class="hljs-value">{this.props.upperTrackColor}</span>
             <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
-              <span class="hljs-attribute">top:</span> <span class="hljs-attribute">this.props.trackHeight</span> / <span class="hljs-attribute">2</span> <span class="hljs-attribute">-</span> <span class="hljs-attribute">this.props.thumbRadius</span>,
+              <span class="hljs-attribute">top:</span> <span class="hljs-attribute">this.props.trackSize</span> / <span class="hljs-attribute">2</span> <span class="hljs-attribute">-</span> <span class="hljs-attribute">this.props.thumbRadius</span>,
             }}
             /&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-title">View</span>&gt;</span>
@@ -678,11 +678,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
-              <p>Height of the track of the Slider</p>
+              <p>The thickness of the Slider track</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  trackHeight: PropTypes.number,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  trackSize: PropTypes.number,</pre></div></div>
             
         </li>
         
@@ -760,7 +760,7 @@
             
             <div class="content"><div class='highlight'><pre>Slider.defaultProps = {
   thumbRadius: utils.toPixels(<span class="hljs-number">4</span>),  <span class="hljs-comment">// 4 dp</span>
-  trackHeight: utils.toPixels(<span class="hljs-number">1</span>),  <span class="hljs-comment">// 1 dp</span>
+  trackSize: utils.toPixels(<span class="hljs-number">1</span>),  <span class="hljs-comment">// 1 dp</span>
   min: <span class="hljs-number">0</span>,
   max: <span class="hljs-number">100</span>,
   upperTrackColor: DEFAULT_UPPER_TRACK_COLOR,

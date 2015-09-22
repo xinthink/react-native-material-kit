@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>MKTouchable.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="../../docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>MKTouchable.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>Touchable view, for listening to touch events, but not intercept them.</p>
+<p>Created by ywu on 15/9/22.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
+<span class="hljs-keyword">const</span> {
+  Component,
+  requireNativeComponent,
+} = React;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h2 id="-section-id-mktouchable-mktouchable-section-"><section id='MKTouchable'>MKTouchable</section></h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MKTouchable</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+
+  _onTouchEvent(event) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.onTouchEvent) {
+      <span class="hljs-keyword">this</span>.props.onTouchEvent(event.nativeEvent);
+    }
+  }
+
+  measure(cb) {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.refs.node.measure(cb);
+  }
+
+  render() {
+    <span class="hljs-keyword">const</span> touchableProps = {};
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.props.disabled) {
+      <span class="hljs-built_in">Object</span>.assign(touchableProps, {
+        onPress: <span class="hljs-keyword">this</span>.props.onPress,
+        onPressIn: <span class="hljs-keyword">this</span>.props.onPressIn,
+        onPressOut: <span class="hljs-keyword">this</span>.props.onPressOut,
+        onLongPress: <span class="hljs-keyword">this</span>.props.onLongPress,
+      });
+    }
+
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">NativeTouchable</span>
+        <span class="hljs-attribute">ref</span>=<span class="hljs-value">"node"</span>
+        {<span class="hljs-attribute">...this.props</span>}
+        <span class="hljs-attribute">style</span>=<span class="hljs-value">{this.props.style}</span>
+        <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this._onTouchEvent.bind(this)}</span>
+        &gt;</span>
+        {this.props.children}
+      <span class="hljs-tag">&lt;/<span class="hljs-title">NativeTouchable</span>&gt;</span>
+    )</span>;
+  }
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <h2 id="-section-id-props-props-section-"><section id='props'>Props</section></h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>MKTouchable.propTypes = {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Touch events callback</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  onTouchEvent: React.PropTypes.func,
+};
+
+<span class="hljs-keyword">const</span> NativeTouchable = requireNativeComponent(<span class="hljs-string">'MKTouchable'</span>, MKTouchable);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <h2 id="public-interface">Public interface</h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = MKTouchable;</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+<script> (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-33049696-2', 'auto'); ga('send', 'pageview'); </script></body>
+</html>

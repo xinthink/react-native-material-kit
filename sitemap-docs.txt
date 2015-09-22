@@ -1,12 +1,13 @@
 http://www.xinthink.com/react-native-material-kit/docs/index.html
-http://www.xinthink.com/react-native-material-kit/docs/lib/MKButton.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/MKColor.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/MKIconToggle.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/MKPropTypes.html
-http://www.xinthink.com/react-native-material-kit/docs/lib/MKSwitch.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/builder.html
-http://www.xinthink.com/react-native-material-kit/docs/lib/index.ios.html
+http://www.xinthink.com/react-native-material-kit/docs/lib/index.html
+http://www.xinthink.com/react-native-material-kit/docs/lib/internal/MKTouchable.html
+http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Button.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Progress.html
+http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Ripple.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Slider.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Spinner.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Switch.html

@@ -22,21 +22,23 @@
                 <input type="text" class="search" placeholder="Search..." />
                 <ul>
                 
-                  <li><a href="lib&#x2F;MKButton.html">lib&#x2F;MKButton.js</a></li>
-                
                   <li><a href="lib&#x2F;MKColor.html">lib&#x2F;MKColor.js</a></li>
                 
                   <li><a href="lib&#x2F;MKIconToggle.html">lib&#x2F;MKIconToggle.js</a></li>
                 
                   <li><a href="lib&#x2F;MKPropTypes.html">lib&#x2F;MKPropTypes.js</a></li>
                 
-                  <li><a href="lib&#x2F;MKSwitch.html">lib&#x2F;MKSwitch.js</a></li>
-                
                   <li><a href="lib&#x2F;builder.html">lib&#x2F;builder.js</a></li>
                 
-                  <li><a href="lib&#x2F;index.ios.html">lib&#x2F;index.ios.js</a></li>
+                  <li><a href="lib&#x2F;index.html">lib&#x2F;index.js</a></li>
+                
+                  <li><a href="lib&#x2F;internal&#x2F;MKTouchable.html">lib&#x2F;internal&#x2F;MKTouchable.js</a></li>
+                
+                  <li><a href="lib&#x2F;mdl&#x2F;Button.html">lib&#x2F;mdl&#x2F;Button.js</a></li>
                 
                   <li><a href="lib&#x2F;mdl&#x2F;Progress.html">lib&#x2F;mdl&#x2F;Progress.js</a></li>
+                
+                  <li><a href="lib&#x2F;mdl&#x2F;Ripple.html">lib&#x2F;mdl&#x2F;Ripple.js</a></li>
                 
                   <li><a href="lib&#x2F;mdl&#x2F;Slider.html">lib&#x2F;mdl&#x2F;Slider.js</a></li>
                 
@@ -77,8 +79,10 @@
 </ol>
 
 <blockquote>
-  <p>Looking for api docs? Try the <a href="http://xinthink.github.io/react-native-material-kit/docs/index.html">Annotated Source</a>.
-  Debugging local module? Refer to <a href="https://github.com/xinthink/rnmk-demo#debuggin-local-rnmk-module">Debuggin local RNMK module</a></p>
+  <ul>
+  <li>Looking for api docs? Try the <a href="http://xinthink.github.io/react-native-material-kit/docs/index.html">Annotated Source</a>.</li>
+  <li>Debugging local module? Please refer to <a href="https://github.com/xinthink/rnmk-demo#debugging-local-rnmk-module">Debugging local RNMK module</a></li>
+  </ul>
 </blockquote>
 
 <h2 id="components">Components</h2>
@@ -156,7 +160,7 @@ const ColoredRaisedButton = MKButton.coloredButton()
 &lt;/MKButton&gt;
 </code></pre>
 
-<p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/Lib/MKButton.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/buttons.js">example code</a></p>
+<p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/lib/MKButton.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/buttons.js">example code</a></p>
 
 <blockquote>
   <p>Why builders? See the ‘<a href="https://github.com/xinthink/react-native-material-kit/issues/3">Builder vs. configuration object</a>’ discussion.</p>
@@ -199,7 +203,7 @@ const Textfield = MKTextField.textfield()
   style={styles.textfield}/&gt;
 </code></pre>
 
-<p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Textfield.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/textfields.js">example code</a></p>
+<p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Textfield.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/textfields.js">example code</a></p>
 
 <h3 id="toggles">Toggles</h3>
 
@@ -221,9 +225,9 @@ const Textfield = MKTextField.textfield()
 &lt;/MKIconToggle&gt;
 </code></pre>
 
-<p>The two <code>Text</code> tags here, similar to <a href="http://developer.android.com/guide/topics/resources/drawable-resource.html#StateList">State List</a> in <em>Android</em> development, which can give you the flexibility to decide what content and how it is shown for each state of the toggle. For example, you can use <a href="http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Switch.html">react-native-icons</a> here, or any other sophisticated contents.</p>
+<p>The two <code>Text</code> tags here, similar to <a href="http://developer.android.com/guide/topics/resources/drawable-resource.html#StateList">State List</a> in <em>Android</em> development, which can give you the flexibility to decide what content and how it is shown for each state of the toggle. For example, you can use <a href="http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Switch.html">react-native-icons</a> here, or any other sophisticated contents.</p>
 
-<p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/Lib/MKIconToggle.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/toggles.js">example code</a></p>
+<p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/lib/MKIconToggle.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/toggles.js">example code</a></p>
 
 <h4 id="switch">Switch</h4>
 
@@ -236,7 +240,7 @@ const Textfield = MKTextField.textfield()
 /&gt;
 </code></pre>
 
-<p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Switch.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/toggles.js">example code</a></p>
+<p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Switch.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/toggles.js">example code</a></p>
 
 <h3 id="loading">Loading</h3>
 
@@ -252,7 +256,7 @@ const Textfield = MKTextField.textfield()
   /&gt;
 </code></pre>
 
-<p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Progress.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/progress.js">example code</a></p>
+<p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Progress.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/progress.js">example code</a></p>
 
 <h4 id="spinner">Spinner</h4>
 
@@ -261,7 +265,7 @@ const Textfield = MKTextField.textfield()
 <pre><code class="jsx">&lt;mdl.Spinner/&gt;
 </code></pre>
 
-<p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Spinner.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/progress.js">example code</a></p>
+<p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Spinner.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/progress.js">example code</a></p>
 
 <h3 id="sliders">Sliders</h3>
 
@@ -277,12 +281,12 @@ const SliderWithValue = mdl.Slider.slider()
   .build();
 …
 &lt;SliderWithValue
-    ref=“sliderWithValue”
+  ref=“sliderWithValue”
   onChange={(curValue) =&gt; this.setState({curValue})}
   /&gt;
 </code></pre>
 
-<p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/Lib/mdl/Slider.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/sliders.js">example code</a></p>
+<p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Slider.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/sliders.js">example code</a></p>
 
 <h2 id="about">About</h2>
 
