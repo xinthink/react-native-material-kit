@@ -162,6 +162,7 @@ static MKTimingFunction *_easeOut = nil;
 - (void)dealloc
 {
     [_superLayer removeObserver:self forKeyPath:@"bounds"];
+    _superLayer.shadowPath = nil; // Help prevent memory leak
     _resizedCallback = Nil;
 }
 
