@@ -267,7 +267,7 @@ const SliderWithValue = mdl.Slider.slider()
 👉 [props reference][slider-props-doc] and [example code][slider-sample]
 
 [mdl-slider]: http://www.getmdl.io/components/index.html#sliders-section
-[slider-demo]: https://cloud.githubusercontent.com/assets/390805/9685661/44260e64-5352-11e5-9fea-0a8aecc07de2.gif
+[slider-demo]: https://cloud.githubusercontent.com/assets/390805/10123318/6c502e6e-6569-11e5-924a-62c8b850511c.gif
 [slider-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/sliders.js
 [slider-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Slider.html#props
 
