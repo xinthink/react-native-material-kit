@@ -25,12 +25,13 @@ android {
 repositories {
     mavenLocal()
     jcenter()
+    mavenCentral()
 }
 
 dependencies {
-    provided ('com.facebook.react:react-native:0.11.+') {
+    provided ('com.facebook.react:react-native:0.12.+') {
         exclude module: 'support-v4'
         exclude module: 'appcompat-v7'
     }
-    compile 'com.android.support:design:23.0.1'
+    //compile 'com.android.support:design:23.0.1'
 }

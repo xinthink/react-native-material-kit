@@ -139,7 +139,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0630;
-				ORGANIZATIONNAME = xinthink;
+				ORGANIZATIONNAME = "https://github.com/xinthink";
 				TargetAttributes = {
 					8A1B8E761B22E4E300DB45C2 = {
 						CreatedOnToolsVersion = 6.3.2;
