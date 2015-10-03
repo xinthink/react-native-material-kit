@@ -32,6 +32,7 @@ A set of UI components, in the purpose of introducing [Material Design][md] to a
 [debug-with-demo]: https://github.com/xinthink/rnmk-demo#debugging-local-rnmk-module
 
 ## Components
+- [Cards](#cards)
 - [Buttons](#buttons)
 - [Textfields](#text-fields)
 - [Toggles](#toggles)
@@ -42,6 +43,28 @@ A set of UI components, in the purpose of introducing [Material Design][md] to a
   - [Spinner](#spinner)
 - [Sliders](#sliders)
 
+### Cards
+![img-cards]
+
+Apply `Card Style` with only few styles !.  
+```jsx
+require('react-native-material-kit');
+const {
+  MKCardStyles
+} = MK;
+
+<View style={MKCardStyles.card}>
+  <Image source={{uri : base64Icon}} style={MKCardStyles.image}/>
+  <Text style={MKCardStyles.title}>Welcome</Text>
+  <Text style={MKCardStyles.content}>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Mauris sagittis pellentesque lacus eleifend lacinia...
+  </Text>
+  <View style={MKCardStyles.menu}>{menu}</View>
+  <Text style={MKCardStyles.action}>My Action</Text>
+</View>
+
+```
 ### Buttons
 
 ![buttons-mdl][img-buttons]
@@ -113,6 +136,7 @@ the jsx equivalent:
 > Why builders? See the ‘[Builder vs. configuration object][issue-3]’ discussion.
 
 [img-buttons]: https://cloud.githubusercontent.com/assets/390805/8888853/69f8d9f8-32f2-11e5-9823-c235ab8c0dd2.gif
+[img-cards]: https://cloud.githubusercontent.com/assets/1107936/10191049/2cb85614-6771-11e5-8dc2-17e5847a7abf.png
 [mdl-buttons]: http://www.getmdl.io/components/index.html#buttons-section
 [mdl-theme]: http://www.getmdl.io/customize/index.html
 [buttons-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/buttons.js
