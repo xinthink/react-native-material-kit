@@ -29,9 +29,6 @@ repositories {
 }
 
 dependencies {
-    provided ('com.facebook.react:react-native:0.12.+') {
-        exclude module: 'support-v4'
-        exclude module: 'appcompat-v7'
-    }
+    provided 'com.facebook.react:react-native:0.11.+'
     //compile 'com.android.support:design:23.0.1'
 }

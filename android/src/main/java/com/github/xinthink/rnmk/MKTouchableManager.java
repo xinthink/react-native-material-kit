@@ -19,11 +19,10 @@ import com.github.xinthink.rnmk.widget.MKTouchable;
 public class MKTouchableManager extends ReactViewManager {
 
     /**
-     * FIXME A dummy prop having RN register this component
-     * https://github.com/facebook/react-native/issues/2856#issuecomment-141997152
+     * A workaround having onLayout events available on custom native component
      */
-    @UIProp(UIProp.Type.STRING)
-    public static final String PROP_DUMMY = "dummy";
+    @UIProp(UIProp.Type.BOOLEAN)
+    public static final String PROP_ON_LAYOUT = "onLayout";
 
     @Override
     public String getName() {
