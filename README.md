@@ -35,7 +35,7 @@ First, `cd` to your RN project directory, and install RNMK through the command `
   project(':RNMaterialKit').projectDir = resolve file('../node_modules/react-native-material-kit/android')
   ```
 1. Add `compile project(':RNMaterialKit')` to your `android/app/build.gradle`
-1. Add `ReactMaterialKitPackage` to your `ReactInstanceManager` instance, in your `MainActivity`, for example:
+1. Add `ReactMaterialKitPackage` to your `ReactInstanceManager` instance, in your `MainActivity`:
   ```java
   mReactInstanceManager = ReactInstanceManager.builder()
       .setApplication(getApplication())
@@ -44,9 +44,11 @@ First, `cd` to your RN project directory, and install RNMK through the command `
       .addPackage(new ReactMaterialKitPackage())
       ...
       .build();
+  
   ```
 
 Finally, you're good to go, feel free to require `react-native-material-kit` in your JS files.
+
 Have fun! :metal:
 
 ## Resources
@@ -171,8 +173,12 @@ const {
 
 ```
 
+👉 [props reference][card-props-doc] and [example code][card-sample]
+
 [cards-mdl]: http://www.getmdl.io/components/index.html#cards-section
 [img-cards]: https://cloud.githubusercontent.com/assets/390805/10262736/4411994a-6a07-11e5-8a72-b7a46ba5e4a9.png
+[card-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Card.html#props
+[card-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/cards.js
 
 ### Loading
 [MDL Loading][mdl-loading] components.
