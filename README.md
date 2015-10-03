@@ -17,54 +17,59 @@ A set of UI components, in the purpose of introducing [Material Design][md] to a
 
 ## Getting Started
 
-`cd` to your RN project directory,
+First, `cd` to your RN project directory, and install RNMK through the command `npm i -S react-native-material-kit`.
 
-1. `npm i -S react-native-material-kit`
-2. Add `node_modules/react-native-material-kit/iOS/RCTMaterialKit.xcodeproj` to your xcode project, usually under the `Libraries` group
-3. Add `libRCTMaterialKit.a` (from `Products` under `RCTMaterialKit.xcodeproj`) to build target's `Linked Frameworks and Libraries` list
-4. `require('react-native-material-kit')` to start using the components, in js files
-5. Have fun!
+### iOS
+1. Add `node_modules/react-native-material-kit/iOS/RCTMaterialKit.xcodeproj` to your xcode project, usually under the `Libraries` group
+1. Add `libRCTMaterialKit.a` (from `Products` under `RCTMaterialKit.xcodeproj`) to build target's `Linked Frameworks and Libraries` list
 
-> - Looking for api docs? Try the [Annotated Source][docs].
-> - Debugging local module? Please refer to [Debugging local RNMK module][debug-with-demo]
+### Android
+1. Add the following snippet to your `android/settings.gradle`:
+  ```gradle
+  // resolve the symbolic link if any
+  def resolve(File dir) {
+    dir.toPath().toAbsolutePath().toFile();
+  }
+
+  include ':RNMaterialKit'
+  project(':RNMaterialKit').projectDir = resolve file('../node_modules/react-native-material-kit/android')
+  ```
+1. Add `compile project(':RNMaterialKit')` to your `android/app/build.gradle`
+1. Add `ReactMaterialKitPackage` to your `ReactInstanceManager` instance, in your `MainActivity`, for example:
+  ```java
+  mReactInstanceManager = ReactInstanceManager.builder()
+      .setApplication(getApplication())
+      ...
+      .addPackage(new MainReactPackage())
+      .addPackage(new ReactMaterialKitPackage())
+      ...
+      .build();
+  ```
+
+Finally, you're good to go, feel free to require `react-native-material-kit` in your JS files.
+Have fun! :metal:
+
+## Resources
+- Source code of [Demo app][]
+- Refer to the [Annotated Source][docs] as API docs
+- For contributors, please refer to [How to debug local RNMK module][debug-with-demo]
 
 [docs]: http://xinthink.github.io/react-native-material-kit/docs/index.html
+[Demo app]: https://github.com/xinthink/rnmk-demo
 [debug-with-demo]: https://github.com/xinthink/rnmk-demo#debugging-local-rnmk-module
 
 ## Components
-- [Cards](#cards)
 - [Buttons](#buttons)
-- [Textfields](#text-fields)
-- [Toggles](#toggles)
-  - [Icon toggle](#icon-toggle)
-  - [Switch](#switch)
+- [Cards](#cards)
 - [Loading](#loading)
   - [Progress bar](#progress-bar)
   - [Spinner](#spinner)
 - [Sliders](#sliders)
+- [Textfields](#text-fields)
+- [Toggles](#toggles)
+  - [Icon toggle](#icon-toggle)
+  - [Switch](#switch)
 
-### Cards
-![img-cards]
-
-Apply `Card Style` with only few styles !.  
-```jsx
-require('react-native-material-kit');
-const {
-  MKCardStyles
-} = MK;
-
-<View style={MKCardStyles.card}>
-  <Image source={{uri : base64Icon}} style={MKCardStyles.image}/>
-  <Text style={MKCardStyles.title}>Welcome</Text>
-  <Text style={MKCardStyles.content}>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Mauris sagittis pellentesque lacus eleifend lacinia...
-  </Text>
-  <View style={MKCardStyles.menu}>{menu}</View>
-  <Text style={MKCardStyles.action}>My Action</Text>
-</View>
-
-```
 ### Buttons
 
 ![buttons-mdl][img-buttons]
@@ -136,13 +141,95 @@ the jsx equivalent:
 > Why builders? See the ‘[Builder vs. configuration object][issue-3]’ discussion.
 
 [img-buttons]: https://cloud.githubusercontent.com/assets/390805/8888853/69f8d9f8-32f2-11e5-9823-c235ab8c0dd2.gif
-[img-cards]: https://cloud.githubusercontent.com/assets/1107936/10191049/2cb85614-6771-11e5-8dc2-17e5847a7abf.png
 [mdl-buttons]: http://www.getmdl.io/components/index.html#buttons-section
 [mdl-theme]: http://www.getmdl.io/customize/index.html
 [buttons-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/buttons.js
 [issue-3]: https://github.com/xinthink/react-native-material-kit/issues/3
 [button-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/MKButton.html#props
 [android-issue-shadow]: https://facebook.github.io/react-native/docs/known-issues.html#no-support-for-shadows-on-android
+
+### Cards
+![cards-mdl][img-cards]
+
+Apply [`Card Style`][cards-mdl] with only few styles !.
+```jsx
+require('react-native-material-kit');
+const {
+  MKCardStyles
+} = MK;
+
+<View style={MKCardStyles.card}>
+  <Image source={{uri : base64Icon}} style={MKCardStyles.image}/>
+  <Text style={MKCardStyles.title}>Welcome</Text>
+  <Text style={MKCardStyles.content}>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Mauris sagittis pellentesque lacus eleifend lacinia...
+  </Text>
+  <View style={MKCardStyles.menu}>{menu}</View>
+  <Text style={MKCardStyles.action}>My Action</Text>
+</View>
+
+```
+
+[cards-mdl]: http://www.getmdl.io/components/index.html#cards-section
+[img-cards]: https://cloud.githubusercontent.com/assets/390805/10262736/4411994a-6a07-11e5-8a72-b7a46ba5e4a9.png
+
+### Loading
+[MDL Loading][mdl-loading] components.
+
+#### Progress bar
+![progress-demo][]
+
+```jsx
+<mdl.Progress
+  style={styles.progress}
+  progress={0.2}
+  />
+```
+
+👉 [props reference][prog-props-doc] and [example code][progress-sample]
+
+#### Spinner
+![spinner-demo][]
+
+```jsx
+<mdl.Spinner/>
+```
+
+👉 [props reference][spinner-props-doc] and [example code][progress-sample]
+
+[mdl-loading]: http://www.getmdl.io/components/index.html#loading-section
+[progress-demo]: https://cloud.githubusercontent.com/assets/390805/9288698/01e31432-4387-11e5-98e5-85b18471baeb.gif
+[spinner-demo]: https://cloud.githubusercontent.com/assets/390805/9291361/6e7a75bc-43ec-11e5-95be-2b33eb7f8734.gif
+[progress-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/progress.js
+[prog-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Progress.html#props
+[spinner-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Spinner.html#props
+
+### Sliders
+[MDL Slider][mdl-slider] components.
+![slider-demo][]
+
+```jsx
+<mdl.Slider style={styles.slider}/>
+…
+const SliderWithValue = mdl.Slider.slider()
+  .withStyle(styles.slider)
+  .withMin(10)
+  .withMax(100)
+  .build();
+…
+<SliderWithValue
+  ref=“sliderWithValue”
+  onChange={(curValue) => this.setState({curValue})}
+  />
+```
+
+👉 [props reference][slider-props-doc] and [example code][slider-sample]
+
+[mdl-slider]: http://www.getmdl.io/components/index.html#sliders-section
+[slider-demo]: https://cloud.githubusercontent.com/assets/390805/10123318/6c502e6e-6569-11e5-924a-62c8b850511c.gif
+[slider-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/sliders.js
+[slider-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Slider.html#props
 
 ### Text Fields
 
@@ -240,63 +327,6 @@ The two `Text` tags here, similar to [State List][android-state-list] in *Androi
 
 [toggles-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/toggles.js
 [switch-js-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Switch.html#props
-
-### Loading
-[MDL Loading][mdl-loading] components.
-
-#### Progress bar
-![progress-demo][]
-
-```jsx
-<mdl.Progress
-  style={styles.progress}
-  progress={0.2}
-  />
-```
-
-👉 [props reference][prog-props-doc] and [example code][progress-sample]
-
-#### Spinner
-![spinner-demo][]
-
-```jsx
-<mdl.Spinner/>
-```
-
-👉 [props reference][spinner-props-doc] and [example code][progress-sample]
-
-[mdl-loading]: http://www.getmdl.io/components/index.html#loading-section
-[progress-demo]: https://cloud.githubusercontent.com/assets/390805/9288698/01e31432-4387-11e5-98e5-85b18471baeb.gif
-[spinner-demo]: https://cloud.githubusercontent.com/assets/390805/9291361/6e7a75bc-43ec-11e5-95be-2b33eb7f8734.gif
-[progress-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/progress.js
-[prog-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Progress.html#props
-[spinner-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Spinner.html#props
-
-### Sliders
-[MDL Slider][mdl-slider] components.
-![slider-demo][]
-
-```jsx
-<mdl.Slider style={styles.slider}/>
-…
-const SliderWithValue = mdl.Slider.slider()
-  .withStyle(styles.slider)
-  .withMin(10)
-  .withMax(100)
-  .build();
-…
-<SliderWithValue
-  ref=“sliderWithValue”
-  onChange={(curValue) => this.setState({curValue})}
-  />
-```
-
-👉 [props reference][slider-props-doc] and [example code][slider-sample]
-
-[mdl-slider]: http://www.getmdl.io/components/index.html#sliders-section
-[slider-demo]: https://cloud.githubusercontent.com/assets/390805/10123318/6c502e6e-6569-11e5-924a-62c8b850511c.gif
-[slider-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/sliders.js
-[slider-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Slider.html#props
 
 ## About
 This project began with porting [MaterialKit][], thanks [@nghialv][] for the great work!👍🖖
