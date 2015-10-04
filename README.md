@@ -74,7 +74,7 @@ Have fun! :metal:
 
 ### Buttons
 
-![buttons-mdl][img-buttons]
+[![img-buttons]][mdl-buttons]
 
 Apply [Material Design Buttons][mdl-buttons] with a few lines of code using predefined builders, which comply with the [Material Design Lite default theme][mdl-theme].
 
@@ -151,7 +151,7 @@ the jsx equivalent:
 [android-issue-shadow]: https://facebook.github.io/react-native/docs/known-issues.html#no-support-for-shadows-on-android
 
 ### Cards
-![cards-mdl][img-cards]
+[![img-cards]][cards-mdl]
 
 Apply [`Card Style`][cards-mdl] with only few styles !.
 ```jsx
@@ -183,7 +183,7 @@ const {
 [MDL Loading][mdl-loading] components.
 
 #### Progress bar
-![progress-demo][]
+[![progress-demo]][mdl-loading]
 
 ```jsx
 <mdl.Progress
@@ -195,7 +195,7 @@ const {
 👉 [props reference][prog-props-doc] and [example code][progress-sample]
 
 #### Spinner
-![spinner-demo][]
+[![spinner-demo]][mdl-loading]
 
 ```jsx
 <mdl.Spinner/>
@@ -212,7 +212,7 @@ const {
 
 ### Sliders
 [MDL Slider][mdl-slider] components.
-![slider-demo][]
+[![slider-demo]][mdl-slider]
 
 ```jsx
 <mdl.Slider style={styles.slider}/>
@@ -240,7 +240,7 @@ const SliderWithValue = mdl.Slider.slider()
 
 Built-in textfields, which comply with [Material Design Lite][mdl-tf].
 
-![textfields-mdl][img-tf]
+[![img-tf]][mdl-tf]
 
 ```jsx
 // textfield with default theme (configurable)
@@ -286,8 +286,9 @@ the jsx equivalent:
 ### Toggles
 
 [Icon toggle][mdl-icon-toggle] & [Switch][mdl-switch]
-![toggles-mdl][img-toggles]
+[![img-toggles]][mdl-toggles]
 
+[mdl-toggles]: http://www.getmdl.io/components/index.html#toggles-section
 [mdl-icon-toggle]: http://www.getmdl.io/components/index.html#toggles-section/icon-toggle
 [mdl-switch]: http://www.getmdl.io/components/index.html#toggles-section/switch
 [img-toggles]: https://cloud.githubusercontent.com/assets/390805/8903074/de0ed748-3487-11e5-9448-9ee304e0a6b6.gif
