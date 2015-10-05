@@ -4,6 +4,9 @@
   "description": "Bringing Material Design to React Native",
   "main": "lib/index.js",
   "author": "Yingxin Wu <yingxinwu.g@gmail.com>",
+  "contributors": [
+    "All Contributors (https://github.com/xinthink/react-native-material-kit/graphs/contributors)"
+  ],
   "license": "MIT",
   "keywords": [
     "react",
@@ -12,6 +15,7 @@
     "react-native",
     "react-native-component",
     "ios",
+    "android",
     "material design",
     "MaterialKit"
   ],
