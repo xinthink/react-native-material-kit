@@ -6,6 +6,7 @@ import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,6 +29,9 @@ public class ReactMaterialKitPackage implements ReactPackage {
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactApplicationContext) {
-        return Collections.<ViewManager>singletonList(new MKTouchableManager());
+        return Arrays.<ViewManager>asList(
+                new MKTouchableManager(),
+                new MKSpinnerManager()
+        );
     }
 }

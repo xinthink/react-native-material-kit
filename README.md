@@ -28,7 +28,7 @@ First, `cd` to your RN project directory, and install RNMK through the command `
   ```gradle
   // resolve the symbolic link if any
   def resolve(File dir) {
-    dir.toPath().toAbsolutePath().toFile();
+    dir.toPath().toAbsolutePath().toFile()
   }
 
   include ':RNMaterialKit'

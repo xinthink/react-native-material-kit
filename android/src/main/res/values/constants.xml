@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Material theme colors -->
+    <color name="mdl_indigo">#3F51B5</color>
+
+    <color name="mdl_palette_blue_400">#42a5f5</color>
+    <color name="mdl_palette_red_500">#f44336</color>
+    <color name="mdl_palette_yellow_600">#fdd835</color>
+    <color name="mdl_palette_green_500">#4caf50</color>
+
+    <!-- Spinner -->
+    <dimen name="mk_spinner_width">28dp</dimen>
+    <dimen name="mk_spinner_height">28dp</dimen>
+    <integer name="mk_spinner_ani_duration">1333</integer>
+    <dimen name="mk_spinner_stroke_width">3dp</dimen>
+    <integer-array name="mk_spinner_stroke_colors">
+        <item>@color/mdl_palette_blue_400</item>
+        <item>@color/mdl_palette_red_500</item>
+        <item>@color/mdl_palette_yellow_600</item>
+        <item>@color/mdl_palette_green_500</item>
+    </integer-array>
+</resources>
