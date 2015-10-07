@@ -256,6 +256,12 @@ public class MKSpinner extends View implements ReactCompoundView {
         start();
     }
 
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        stop();
+    }
+
     private void start() {
         if (spinnerAni != null && spinnerAni.isStarted()) {
             return;
