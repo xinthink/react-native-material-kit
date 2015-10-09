@@ -41,8 +41,8 @@
             <div class="content"><div class='highlight'><pre>
 <span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
 <span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../MKColor'</span>);
+<span class="hljs-keyword">const</span> MKTouchable = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../internal/MKTouchable'</span>);
 <span class="hljs-keyword">const</span> {getTheme} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../theme'</span>);
-<span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../utils'</span>);
 
 <span class="hljs-keyword">const</span> {
   Component,
@@ -64,7 +64,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> DEFAULT_UPPER_TRACK_COLOR = <span class="hljs-string">'rgba(0,0,0,0.25)'</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> DEFAULT_UPPER_TRACK_COLOR = <span class="hljs-string">'#cccccc'</span>;</pre></div></div>
             
         </li>
         
@@ -90,48 +90,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <h2 id="-section-id-thumb-thumb-section-"><section id='Thumb'>Thumb</section></h2>
-<p><code>Thumb</code> component of the <a href="#Slider"><code>Slider</code></a>.</p>
+              <p>The max scale of the thumb</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Thumb</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
-  constructor(props) {
-    <span class="hljs-keyword">super</span>(props);
-    <span class="hljs-keyword">this</span>.x = <span class="hljs-number">0</span>;  <span class="hljs-comment">// current x-axis position</span>
-    <span class="hljs-keyword">this</span>.trackLenght = <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">this</span>._animatedLeft = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>);
-    <span class="hljs-keyword">this</span>._animatedScale = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">1</span>);
-    <span class="hljs-keyword">this</span>._animatedBorder = <span class="hljs-keyword">new</span> Animated.Value(utils.toPixels(<span class="hljs-number">1</span>));  <span class="hljs-comment">// 1 dp</span>
-    <span class="hljs-keyword">this</span>.state = {
-      color: LOWEST_VALUE_THUMB_COLOR,
-      borderColor: DEFAULT_UPPER_TRACK_COLOR,
-      padding: utils.toPixels(<span class="hljs-number">1</span>),  <span class="hljs-comment">// 1 dp</span>
-    };
-  }
-
-  componentWillMount() {
-    <span class="hljs-keyword">this</span>.setState({
-      borderColor: <span class="hljs-keyword">this</span>.props.upperTrackColor,
-      borderWidth: <span class="hljs-keyword">this</span>.props.trackSize,
-    });
-  }
-
-  componentDidMount() {
-    <span class="hljs-keyword">this</span>._animatedLeft.addListener(<span class="hljs-keyword">this</span>._getOnSliding());
-  }
-
-  componentWillUnmount() {
-    <span class="hljs-keyword">this</span>._animatedLeft.removeAllListeners();
-  }
-
-  _getOnSliding() {
-    <span class="hljs-keyword">let</span> prevX = <span class="hljs-keyword">this</span>.x;  <span class="hljs-comment">// memorize the previous x</span>
-
-    <span class="hljs-keyword">return</span> ({value}) =&gt; {
-      <span class="hljs-keyword">const</span> x = value + <span class="hljs-keyword">this</span>.props.radius;
-
-      <span class="hljs-keyword">if</span> (prevX &lt;= <span class="hljs-number">0</span> &amp;&amp; x &gt; <span class="hljs-number">0</span>) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> THUMB_SCALE_RATIO = <span class="hljs-number">1.3</span>;</pre></div></div>
             
         </li>
         
@@ -142,12 +105,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>leaving the lowest position, scale up the thumb</p>
+              <p>Width of the thumb border</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">this</span>._onExplode();
-      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (prevX &gt; <span class="hljs-number">0</span> &amp;&amp; x &lt;= <span class="hljs-number">0</span>) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> THUMB_BORDER_WIDTH = <span class="hljs-number">2</span></pre></div></div>
             
         </li>
         
@@ -158,7 +120,154 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>lowest position, scale down the thumb</p>
+              <p>extra spacing enlarging the touchable area</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> TRACK_EXTRA_MARGIN_V = <span class="hljs-number">5</span>;
+<span class="hljs-keyword">const</span> TRACK_EXTRA_MARGIN_H = <span class="hljs-number">5</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <h2 id="-section-id-thumb-thumb-section-"><section id='Thumb'>Thumb</section></h2>
+<p><code>Thumb</code> component of the <a href="#Slider"><code>Slider</code></a>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Thumb</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+  constructor(props) {
+    <span class="hljs-keyword">super</span>(props);
+    <span class="hljs-keyword">this</span>.x = <span class="hljs-number">0</span>;  <span class="hljs-comment">// current x-axis position</span>
+    <span class="hljs-keyword">this</span>._animatedLeft = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>);
+    <span class="hljs-keyword">this</span>._animatedScale = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">this</span>.state = {
+      color: LOWEST_VALUE_THUMB_COLOR,
+      borderColor: DEFAULT_UPPER_TRACK_COLOR,
+    };
+  }
+
+  componentWillMount() {
+    <span class="hljs-keyword">this</span>._onRadiiUpdate(<span class="hljs-keyword">this</span>.props);
+    <span class="hljs-keyword">this</span>.setState({
+      borderColor: <span class="hljs-keyword">this</span>.props.upperTrackColor,
+      borderWidth: <span class="hljs-keyword">this</span>.props.trackSize,
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    <span class="hljs-keyword">this</span>._onRadiiUpdate(nextProps);
+  }
+
+  componentDidMount() {
+    <span class="hljs-keyword">this</span>._animatedLeft.addListener(<span class="hljs-keyword">this</span>._getOnSliding());
+  }
+
+  componentWillUnmount() {
+    <span class="hljs-keyword">this</span>._animatedLeft.removeAllListeners();
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>when thumb radii updated, re-calc the dimens</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  _onRadiiUpdate(props) {
+    <span class="hljs-keyword">this</span>._radii = props.radius;
+    <span class="hljs-keyword">this</span>._dia = <span class="hljs-keyword">this</span>._radii * <span class="hljs-number">2</span>;
+    <span class="hljs-keyword">this</span>._containerRadii = <span class="hljs-keyword">this</span>._radii + THUMB_BORDER_WIDTH;
+    <span class="hljs-keyword">this</span>._containerDia = <span class="hljs-keyword">this</span>._containerRadii * <span class="hljs-number">2</span>;
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>return a memoized function to handle sliding animation events</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  _getOnSliding() {
+    <span class="hljs-keyword">let</span> prevX = <span class="hljs-keyword">this</span>.x;  <span class="hljs-comment">// memorize the previous x</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>on sliding of the thumb
+<code>value</code> - the <code>left</code> of the thumb, relative to the container</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">return</span> ({value}) =&gt; {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>convert to value relative to the track</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">const</span> x = value + <span class="hljs-keyword">this</span>._containerRadii - <span class="hljs-keyword">this</span>.props.trackMarginH;
+
+      <span class="hljs-keyword">if</span> (prevX &lt;= <span class="hljs-number">0</span> &amp;&amp; x &gt; <span class="hljs-number">0</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>leaving the lowest value, scale up the thumb</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">this</span>._onExplode();
+      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (prevX &gt; <span class="hljs-number">0</span> &amp;&amp; x &lt;= <span class="hljs-number">0</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>at lowest value, scale down the thumb</p>
 
             </div>
             
@@ -172,208 +281,31 @@
         </li>
         
         
-        <li id="section-7">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
-              </div>
-              <p>animate the sliding</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  moveTo(x) {
-    <span class="hljs-keyword">this</span>.x = <span class="hljs-built_in">Math</span>.max(x, <span class="hljs-number">0</span>);
-    <span class="hljs-keyword">this</span>.x = <span class="hljs-built_in">Math</span>.min(<span class="hljs-keyword">this</span>.x, <span class="hljs-keyword">this</span>.trackLenght);
-
-    Animated.parallel([
-      Animated.timing(<span class="hljs-keyword">this</span>._animatedScale, {
-        toValue: <span class="hljs-number">1.5</span>,
-        duration: <span class="hljs-number">100</span>,
-      }),
-      Animated.timing(<span class="hljs-keyword">this</span>._animatedBorder, {
-        toValue: utils.toPixels(<span class="hljs-number">0.5</span>),
-        duration: <span class="hljs-number">100</span>,
-      }),
-      Animated.timing(<span class="hljs-keyword">this</span>._animatedLeft, {
-        toValue: <span class="hljs-keyword">this</span>.x - <span class="hljs-keyword">this</span>.props.radius,
-        duration: <span class="hljs-number">0</span>,
-      }),
-    ]).start();
-  }</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-8">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
-              </div>
-              <p>release the sliding</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  confirmMoveTo() {
-    Animated.parallel([
-      Animated.timing(<span class="hljs-keyword">this</span>._animatedScale, {
-        toValue: <span class="hljs-number">1</span>,
-        duration: <span class="hljs-number">100</span>,
-      }),
-      Animated.timing(<span class="hljs-keyword">this</span>._animatedBorder, {
-        toValue: utils.toPixels(<span class="hljs-number">1</span>),
-        duration: <span class="hljs-number">100</span>,
-      }),
-    ]).start();
-  }</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-9">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
-              </div>
-              <p>from ‘lowest’ to ‘non-lowest’</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  _onExplode() {
-    <span class="hljs-keyword">this</span>.setState({
-      borderColor: MKColor.Transparent,
-      color: <span class="hljs-keyword">this</span>.props.lowerTrackColor,
-    });
-  }</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-10">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
-              </div>
-              <p>from ‘non-lowest’ to ‘lowest’</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  _onCollapse() {
-    <span class="hljs-keyword">this</span>.setState({
-      borderColor: <span class="hljs-keyword">this</span>.props.upperTrackColor,</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-11">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
-              </div>
-              <p><strong><i>FIXME</i></strong> make it transparent</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>      color: LOWEST_VALUE_THUMB_COLOR,
-    });
-  }</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-12">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-12">&#182;</a>
-              </div>
-              <p>Rendering the <code>Thumb</code></p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  render() {
-    <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Animated.View</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{[</span>
-          <span class="hljs-attribute">this.props.style</span>,
-          {
-            <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">MKColor.Transparent</span>,
-            <span class="hljs-attribute">padding:</span> <span class="hljs-attribute">this.state.padding</span>,  // <span class="hljs-attribute">extends</span> <span class="hljs-attribute">the</span> <span class="hljs-attribute">touchable</span> <span class="hljs-attribute">area</span>
-            <span class="hljs-attribute">position:</span> '<span class="hljs-attribute">absolute</span>',
-            <span class="hljs-attribute">left:</span> <span class="hljs-attribute">this._animatedLeft</span>,
-            <span class="hljs-attribute">transform:</span> [
-              {<span class="hljs-attribute">scale:</span> <span class="hljs-attribute">this._animatedScale</span>},
-            ],
-          },
-        ]}
-        &gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">Animated.View</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
-            <span class="hljs-attribute">flex:</span> <span class="hljs-attribute">1</span>,
-            <span class="hljs-attribute">borderRadius:</span> <span class="hljs-attribute">this.props.radius</span> <span class="hljs-attribute">-</span> <span class="hljs-attribute">this.state.padding</span>,
-            <span class="hljs-attribute">width:</span> (<span class="hljs-attribute">this.props.radius</span> <span class="hljs-attribute">-</span> <span class="hljs-attribute">this.state.padding</span>) * <span class="hljs-attribute">2</span>,
-            <span class="hljs-attribute">height:</span> (<span class="hljs-attribute">this.props.radius</span> <span class="hljs-attribute">-</span> <span class="hljs-attribute">this.state.padding</span>) * <span class="hljs-attribute">2</span>,
-            <span class="hljs-attribute">borderWidth:</span> <span class="hljs-attribute">this._animatedBorder</span>,
-            <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this.state.color</span>,
-            <span class="hljs-attribute">borderColor:</span> <span class="hljs-attribute">this.state.borderColor</span>,
-          }}
-          /&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-title">Animated.View</span>&gt;</span>
-    )</span>;
-  }
-}</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-13">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
-              </div>
-              <p>Default props of <code>Thumb</code></p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>Thumb.defaultProps = {
-  pointerEvents: <span class="hljs-string">'none'</span>,
-};</pre></div></div>
-            
-        </li>
-        
-        
         <li id="section-14">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
-              <h2 id="-section-id-slider-slider-section-"><section id='Slider'>Slider</section></h2>
+              <p>animate the sliding
+<code>x</code> - target position, relative to the track</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Slider</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
-  constructor(props) {
-    <span class="hljs-keyword">super</span>(props);
-    <span class="hljs-keyword">this</span>._value = <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">this</span>._trackTotalWidth = <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">this</span>._animatedTrackWidth = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>);
-  }
+            <div class="content"><div class='highlight'><pre>  moveTo(x) {
+    <span class="hljs-keyword">this</span>.x = x;
+    <span class="hljs-keyword">const</span> x0 = <span class="hljs-keyword">this</span>.x + <span class="hljs-keyword">this</span>.props.trackMarginH;
 
-  componentDidMount() {
-    requestAnimationFrame(() =&gt; {
-      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.refs.track) {
-        <span class="hljs-keyword">return</span>;
-      }
-
-      <span class="hljs-keyword">this</span>.refs.track.measure((left, top, width) =&gt; {
-        <span class="hljs-keyword">this</span>._trackTotalWidth = width;
-        <span class="hljs-keyword">this</span>._aniUpdateValue(<span class="hljs-keyword">this</span>.value);
-      });
-    });
+    Animated.parallel([
+      Animated.timing(<span class="hljs-keyword">this</span>._animatedScale, {
+        toValue: THUMB_SCALE_RATIO,
+        duration: <span class="hljs-number">100</span>,
+      }),
+      Animated.timing(<span class="hljs-keyword">this</span>._animatedLeft, {
+        toValue: x0 - <span class="hljs-keyword">this</span>._containerRadii,
+        duration: <span class="hljs-number">0</span>,
+      }),
+    ]).start();
   }</pre></div></div>
             
         </li>
@@ -385,43 +317,15 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
-              <p>Public api to update the current value</p>
+              <p>stop sliding</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  set value(value) {
-    <span class="hljs-keyword">this</span>._internalSetValue(value);
-    <span class="hljs-keyword">this</span>._aniUpdateValue(value);
-  }
-
-  get value() {
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._value;
-  }
-
-  _internalSetValue(value, fireChange=<span class="hljs-literal">true</span>) {
-    <span class="hljs-keyword">this</span>._value = value;
-    <span class="hljs-keyword">if</span> (fireChange) {
-      <span class="hljs-keyword">this</span>._fireChange(value);
-    }
-  }
-
-  _fireChange(newValue) {
-    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.onChange) {
-      <span class="hljs-keyword">this</span>.props.onChange(newValue);
-    }
-  }
-
-  _aniUpdateValue(value) {
-    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>._trackTotalWidth) {
-      <span class="hljs-keyword">return</span>;
-    }
-
-    <span class="hljs-keyword">this</span>.refs.thumb.trackLenght = <span class="hljs-keyword">this</span>._trackTotalWidth;
-
-    <span class="hljs-keyword">const</span> ratio = (value - <span class="hljs-keyword">this</span>.props.min) / (<span class="hljs-keyword">this</span>.props.max - <span class="hljs-keyword">this</span>.props.min);
-    <span class="hljs-keyword">const</span> x = ratio * <span class="hljs-keyword">this</span>._trackTotalWidth;
-    <span class="hljs-keyword">this</span>._moveThumb(x);
-    <span class="hljs-keyword">this</span>._confirmMoveThumb(x);
+            <div class="content"><div class='highlight'><pre>  confirmMoveTo() {
+    Animated.timing(<span class="hljs-keyword">this</span>._animatedScale, {
+      toValue: <span class="hljs-number">1</span>,
+      duration: <span class="hljs-number">100</span>,
+    }).start();
   }</pre></div></div>
             
         </li>
@@ -433,12 +337,15 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
-              <p>The View is now responding for touch events.</p>
+              <p>from ‘lowest’ to ‘non-lowest’</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  _onResponderGrant(evt) {
-    <span class="hljs-keyword">this</span>._updateValueByTouch(evt);
+            <div class="content"><div class='highlight'><pre>  _onExplode() {
+    <span class="hljs-keyword">this</span>.setState({
+      borderColor: <span class="hljs-keyword">this</span>.props.lowerTrackColor,
+      color: <span class="hljs-keyword">this</span>.props.lowerTrackColor,
+    });
   }</pre></div></div>
             
         </li>
@@ -450,12 +357,15 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
-              <p>Something else is the responder right now and will not release it</p>
+              <p>from ‘non-lowest’ to ‘lowest’</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  _onResponderReject(evt) {
-    <span class="hljs-keyword">this</span>._confirmUpdateValueByTouch(evt);
+            <div class="content"><div class='highlight'><pre>  _onCollapse() {
+    <span class="hljs-keyword">this</span>.setState({
+      borderColor: <span class="hljs-keyword">this</span>.props.upperTrackColor,
+      color: LOWEST_VALUE_THUMB_COLOR,
+    });
   }</pre></div></div>
             
         </li>
@@ -467,13 +377,40 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
-              <p>The user is moving their finger</p>
+              <p>Rendering the <code>Thumb</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  _onResponderMove(evt) {
-    <span class="hljs-keyword">this</span>._updateValueByTouch(evt);
-  }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  render() {
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Animated.View</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{[</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">outer</span> <span class="hljs-attribute">circle</span> <span class="hljs-attribute">to</span> <span class="hljs-attribute">draw</span> <span class="hljs-attribute">the</span> <span class="hljs-attribute">border</span>
+          <span class="hljs-attribute">this.props.style</span>,
+          {
+            <span class="hljs-attribute">width:</span> <span class="hljs-attribute">this._containerDia</span>,
+            <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this._containerDia</span>,
+            <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this.state.borderColor</span>,
+            <span class="hljs-attribute">borderRadius:</span> <span class="hljs-attribute">this._containerRadii</span>,
+            <span class="hljs-attribute">position:</span> '<span class="hljs-attribute">absolute</span>',
+            <span class="hljs-attribute">left:</span> <span class="hljs-attribute">this._animatedLeft</span>,
+            <span class="hljs-attribute">transform:</span> [
+              {<span class="hljs-attribute">scale:</span> <span class="hljs-attribute">this._animatedScale</span>},
+            ],
+          },
+        ]}
+        &gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">View</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">inner</span> <span class="hljs-attribute">circle</span>
+            <span class="hljs-attribute">width:</span> <span class="hljs-attribute">this._dia</span>,
+            <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this._dia</span>,
+            <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this.state.color</span>,
+            <span class="hljs-attribute">borderRadius:</span> <span class="hljs-attribute">this._radii</span>,
+            <span class="hljs-attribute">top:</span> <span class="hljs-attribute">THUMB_BORDER_WIDTH</span>,
+            <span class="hljs-attribute">left:</span> <span class="hljs-attribute">THUMB_BORDER_WIDTH</span>,
+          }}
+          /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">Animated.View</span>&gt;</span>
+    )</span>;
+  }
+}</pre></div></div>
             
         </li>
         
@@ -484,12 +421,61 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
-              <p>Fired at the end of the touch, ie “touchUp”</p>
+              <h2 id="-section-id-slider-slider-section-"><section id='Slider'>Slider</section></h2>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  _onResponderRelease(evt) {
-    <span class="hljs-keyword">this</span>._confirmUpdateValueByTouch(evt);
+            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Slider</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+  constructor(props) {
+    <span class="hljs-keyword">super</span>(props);
+    <span class="hljs-keyword">this</span>._value = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">this</span>._trackTotalLength = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">this</span>._animatedTrackLength = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>);
+  }
+
+  componentWillMount() {
+    <span class="hljs-keyword">this</span>._onThumbRadiiUpdate(<span class="hljs-keyword">this</span>.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    <span class="hljs-keyword">this</span>._onThumbRadiiUpdate(nextProps);
+  }
+
+  componentDidMount() {
+    requestAnimationFrame(() =&gt; {
+      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.refs.track) {
+        <span class="hljs-keyword">return</span>;
+      }
+
+      <span class="hljs-keyword">this</span>.refs.track.measure((left, top, width) =&gt; {
+        <span class="hljs-keyword">this</span>._trackTotalLength = width;
+        <span class="hljs-keyword">this</span>._aniUpdateValue(<span class="hljs-keyword">this</span>.value);
+      });
+    });
+  }
+
+  _internalSetValue(value, fireChange=<span class="hljs-literal">true</span>) {
+    <span class="hljs-keyword">this</span>._value = value;
+    <span class="hljs-keyword">if</span> (fireChange) {
+      <span class="hljs-keyword">this</span>._emitChange(value);
+    }
+  }
+
+  _emitChange(newValue) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.onChange) {
+      <span class="hljs-keyword">this</span>.props.onChange(newValue);
+    }
+  }
+
+  _aniUpdateValue(value) {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>._trackTotalLength) {
+      <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-keyword">const</span> ratio = (value - <span class="hljs-keyword">this</span>.props.min) / (<span class="hljs-keyword">this</span>.props.max - <span class="hljs-keyword">this</span>.props.min);
+    <span class="hljs-keyword">const</span> x = ratio * <span class="hljs-keyword">this</span>._trackTotalLength;
+    <span class="hljs-keyword">this</span>._moveThumb(x);
+    <span class="hljs-keyword">this</span>._confirmMoveThumb(x);
   }</pre></div></div>
             
         </li>
@@ -501,13 +487,20 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
-              <p>The responder has been taken from the View.</p>
+              <p>Touch events handling</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  _onResponderTerminate(evt) {
-    <span class="hljs-keyword">this</span>._confirmUpdateValueByTouch(evt);
-  }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  _onTouchEvent(evt) {
+    <span class="hljs-keyword">switch</span> (evt.type) {
+      <span class="hljs-keyword">case</span> <span class="hljs-string">'TOUCH_DOWN'</span>:
+      <span class="hljs-keyword">case</span> <span class="hljs-string">'TOUCH_MOVE'</span>:
+        <span class="hljs-keyword">this</span>._updateValueByTouch(evt);
+        <span class="hljs-keyword">break</span>;
+      <span class="hljs-keyword">case</span> <span class="hljs-string">'TOUCH_UP'</span>:
+        <span class="hljs-keyword">this</span>._confirmUpdateValueByTouch(evt);
+        <span class="hljs-keyword">break</span>;
+      <span class="hljs-keyword">case</span> <span class="hljs-string">'TOUCH_CANCEL'</span>:</pre></div></div>
             
         </li>
         
@@ -518,96 +511,14 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
-              <p>get touch position relative to the track</p>
+              <p>should not use the coordination inside a cancelled event</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  _getTouchOnTrack(evt) {
-    <span class="hljs-keyword">const</span> padding = <span class="hljs-keyword">this</span>.props.thumbRadius;
-    <span class="hljs-keyword">let</span> x = <span class="hljs-built_in">Math</span>.max(evt.locationX - padding, <span class="hljs-number">0</span>);
-    x = <span class="hljs-built_in">Math</span>.min(x, <span class="hljs-keyword">this</span>._trackTotalWidth);
-
-    <span class="hljs-keyword">const</span> ratio = x / <span class="hljs-keyword">this</span>._trackTotalWidth;
-
-    <span class="hljs-keyword">return</span> {x, ratio};
-  }
-
-  _updateValueByTouch(evt) {
-    <span class="hljs-keyword">const</span> {x, ratio} = <span class="hljs-keyword">this</span>._getTouchOnTrack(evt.nativeEvent);
-    <span class="hljs-keyword">this</span>._internalSetValue(ratio * (<span class="hljs-keyword">this</span>.props.max - <span class="hljs-keyword">this</span>.props.min) + <span class="hljs-keyword">this</span>.props.min);
-    <span class="hljs-keyword">this</span>._moveThumb(x);
-  }
-
-  _confirmUpdateValueByTouch(evt) {
-    <span class="hljs-keyword">const</span> {x} = <span class="hljs-keyword">this</span>._getTouchOnTrack(evt.nativeEvent);
-    <span class="hljs-keyword">this</span>._confirmMoveThumb(x);
-  }
-
-  _moveThumb(x) {
-    <span class="hljs-keyword">this</span>.refs.thumb.moveTo(x);
-
-    Animated.timing(<span class="hljs-keyword">this</span>._animatedTrackWidth, {
-      toValue: x,
-      duration: <span class="hljs-number">0</span>,
-    }).start();
-  }
-
-  _confirmMoveThumb(x) {
-    <span class="hljs-keyword">this</span>.refs.thumb.confirmMoveTo(x);
-  }
-
-  render() {
-    <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">View</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"container"</span>  // <span class="hljs-attribute">extends</span> <span class="hljs-attribute">the</span> <span class="hljs-attribute">touchable</span> <span class="hljs-attribute">area</span>
-            <span class="hljs-attribute">style</span>=<span class="hljs-value">{[{</span>
-                <span class="hljs-attribute">paddingTop:</span> <span class="hljs-attribute">this.props.thumbRadius</span> <span class="hljs-attribute">-</span> <span class="hljs-attribute">this.props.trackSize</span> / <span class="hljs-attribute">2</span>,
-                <span class="hljs-attribute">paddingBottom:</span> <span class="hljs-attribute">this.props.thumbRadius</span> <span class="hljs-attribute">-</span> <span class="hljs-attribute">this.props.trackSize</span> / <span class="hljs-attribute">2</span>,
-                <span class="hljs-attribute">paddingLeft:</span> <span class="hljs-attribute">this.props.thumbRadius</span>,
-                <span class="hljs-attribute">paddingRight:</span> <span class="hljs-attribute">this.props.thumbRadius</span>,
-              },
-              <span class="hljs-attribute">this.props.style</span>,
-            ]}
-            <span class="hljs-attribute">onStartShouldSetResponder</span>=<span class="hljs-value">{()</span> =&gt;</span> true}
-            onMoveShouldSetResponder={() =&gt; false}
-            onResponderGrant={this._onResponderGrant.bind(this)}
-            onResponderReject={this._onResponderReject.bind(this)}
-            onResponderMove={this._onResponderMove.bind(this)}
-            onResponderRelease={this._onResponderRelease.bind(this)}
-            onResponderTerminationRequest={() =&gt; true}
-            onResponderTerminate={this._onResponderTerminate.bind(this)}
-        &gt;
-        <span class="hljs-tag">&lt;<span class="hljs-title">View</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"track"</span>
-              <span class="hljs-attribute">pointerEvents</span>=<span class="hljs-value">"none"</span>
-              <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
-                <span class="hljs-attribute">flex:</span> <span class="hljs-attribute">1</span>,
-                <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this.props.trackSize</span>,
-                <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this.props.upperTrackColor</span>,
-              }}
-          &gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-title">Animated.View</span>
-            <span class="hljs-attribute">ref</span>=<span class="hljs-value">"lowerTrack"</span>
-            <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
-              <span class="hljs-attribute">width:</span> <span class="hljs-attribute">this._animatedTrackWidth</span>,
-              <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this.props.trackSize</span>,
-              <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this.props.lowerTrackColor</span> || <span class="hljs-attribute">getTheme</span>()<span class="hljs-attribute">.primaryColor</span>,
-            }}
-            /&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-title">Thumb</span>
-            <span class="hljs-attribute">ref</span>=<span class="hljs-value">"thumb"</span>
-            <span class="hljs-attribute">radius</span>=<span class="hljs-value">{this.props.thumbRadius}</span>
-            <span class="hljs-attribute">trackWidth</span>=<span class="hljs-value">{this._trackTotalWidth}</span>
-            <span class="hljs-attribute">trackSize</span>=<span class="hljs-value">{this.props.trackSize}</span>
-            <span class="hljs-attribute">lowerTrackColor</span>=<span class="hljs-value">{this.props.lowerTrackColor</span> || <span class="hljs-attribute">getTheme</span>()<span class="hljs-attribute">.primaryColor</span>}
-            <span class="hljs-attribute">upperTrackColor</span>=<span class="hljs-value">{this.props.upperTrackColor}</span>
-            <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
-              <span class="hljs-attribute">top:</span> <span class="hljs-attribute">this.props.trackSize</span> / <span class="hljs-attribute">2</span> <span class="hljs-attribute">-</span> <span class="hljs-attribute">this.props.thumbRadius</span>,
-            }}
-            /&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">View</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-title">View</span>&gt;</span>
-    )</span>;
-  }
-}</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">this</span>._confirmUpdateValueByTouch();
+        <span class="hljs-keyword">break</span>;
+    }
+  }</pre></div></div>
             
         </li>
         
@@ -618,11 +529,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
-              <h2 id="-section-id-props-props-section-"><section id='props'>Props</section></h2>
+              <p>get touch position relative to the track</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Slider.propTypes = {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  _getTouchOnTrack(evt) {</pre></div></div>
             
         </li>
         
@@ -633,11 +544,46 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
-              <p><a href="https://facebook.github.io/react-native/docs/view.html#props">RN.View Props</a>…</p>
+              <p>touch location relative to the track</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  ...View.propTypes,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">let</span> x = <span class="hljs-built_in">Math</span>.max(evt.x - <span class="hljs-keyword">this</span>._trackMarginH, <span class="hljs-number">0</span>);
+    x = <span class="hljs-built_in">Math</span>.min(x, <span class="hljs-keyword">this</span>._trackTotalLength);
+
+    <span class="hljs-keyword">const</span> ratio = x / <span class="hljs-keyword">this</span>._trackTotalLength;
+
+    <span class="hljs-keyword">return</span> {x, ratio};
+  }
+
+  _updateValueByTouch(evt) {
+    <span class="hljs-keyword">const</span> {x, ratio} = <span class="hljs-keyword">this</span>._getTouchOnTrack(evt);
+    <span class="hljs-keyword">const</span> _value = ratio * (<span class="hljs-keyword">this</span>.props.max - <span class="hljs-keyword">this</span>.props.min) + <span class="hljs-keyword">this</span>.props.min;
+    <span class="hljs-keyword">this</span>._internalSetValue(_value);  <span class="hljs-comment">// report changes in 'real-time'</span>
+    <span class="hljs-keyword">this</span>._moveThumb(x);
+  }
+
+  _confirmUpdateValueByTouch(evt) {
+    <span class="hljs-keyword">if</span> (evt) {
+      <span class="hljs-keyword">const</span> {x} = <span class="hljs-keyword">this</span>._getTouchOnTrack(evt);
+      <span class="hljs-keyword">this</span>._confirmMoveThumb(x);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">this</span>._confirmMoveThumb();
+    }
+  }
+
+  _moveThumb(x) {
+    <span class="hljs-keyword">this</span>.refs.thumb.moveTo(x);
+
+    Animated.timing(<span class="hljs-keyword">this</span>._animatedTrackLength, {
+      toValue: x,
+      duration: <span class="hljs-number">0</span>,
+    }).start();
+  }
+
+  _confirmMoveThumb(x) {
+    <span class="hljs-keyword">this</span>.refs.thumb.confirmMoveTo(x);
+  }</pre></div></div>
             
         </li>
         
@@ -648,11 +594,20 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
-              <p>Minimum value of the range, default is <code>0</code></p>
+              <p>when thumb radii updated, re-calc the dimens</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  min: PropTypes.number,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  _onThumbRadiiUpdate(props) {
+    <span class="hljs-keyword">this</span>._thumbRadii = props.thumbRadius;
+    <span class="hljs-keyword">this</span>._thumbRadiiWithBorder = <span class="hljs-keyword">this</span>._thumbRadii + THUMB_BORDER_WIDTH;
+    <span class="hljs-keyword">this</span>._trackMarginV = <span class="hljs-keyword">this</span>._thumbRadiiWithBorder * THUMB_SCALE_RATIO +
+      TRACK_EXTRA_MARGIN_V - <span class="hljs-keyword">this</span>.props.trackSize / <span class="hljs-number">2</span>;
+    <span class="hljs-keyword">this</span>._trackMarginH = <span class="hljs-keyword">this</span>._thumbRadiiWithBorder * THUMB_SCALE_RATIO +
+      TRACK_EXTRA_MARGIN_H;
+  }
+
+  render() {</pre></div></div>
             
         </li>
         
@@ -663,11 +618,65 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
-              <p>Maximum value of the range, default is <code>100</code></p>
+              <p>making room for the Thumb, cause’s Android doesn’t support <code>overflow: visible</code></p>
+<ul>
+<li>@see <a href="http://bit.ly/1Fzr5SE">http://bit.ly/1Fzr5SE</a></li>
+</ul>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  max: PropTypes.number,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">const</span> trackMargin = {
+      marginLeft: <span class="hljs-keyword">this</span>._trackMarginH,
+      marginRight: <span class="hljs-keyword">this</span>._trackMarginH,
+      marginTop: <span class="hljs-keyword">this</span>._trackMarginV,
+      marginBottom: <span class="hljs-keyword">this</span>._trackMarginV,
+    };
+
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">MKTouchable</span>
+        <span class="hljs-attribute">ref</span>=<span class="hljs-value">"container"</span>
+        <span class="hljs-attribute">style</span>=<span class="hljs-value">{[this.props.style,</span> {
+          <span class="hljs-attribute">padding:</span> <span class="hljs-attribute">0</span>,
+          <span class="hljs-attribute">paddingTop:</span> <span class="hljs-attribute">0</span>,
+          <span class="hljs-attribute">paddingBottom:</span> <span class="hljs-attribute">0</span>,
+          <span class="hljs-attribute">paddingLeft:</span> <span class="hljs-attribute">0</span>,
+          <span class="hljs-attribute">paddingRight:</span> <span class="hljs-attribute">0</span>,
+        }]}
+        <span class="hljs-attribute">pointerEvents</span>=<span class="hljs-value">"box-only"</span>
+        <span class="hljs-attribute">onTouch</span>=<span class="hljs-value">{this._onTouchEvent.bind(this)}</span>
+        &gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">View</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"track"</span>
+              <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
+                <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this.props.trackSize</span>,
+                <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this.props.upperTrackColor</span>,
+                <span class="hljs-attribute">...trackMargin</span>,
+              }}
+          &gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">Animated.View</span>
+            <span class="hljs-attribute">ref</span>=<span class="hljs-value">"lowerTrack"</span>
+            <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
+              <span class="hljs-attribute">position:</span> '<span class="hljs-attribute">absolute</span>',
+              <span class="hljs-attribute">width:</span> <span class="hljs-attribute">this._animatedTrackLength</span>,
+              <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this.props.trackSize</span>,
+              <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this.props.lowerTrackColor</span> || <span class="hljs-attribute">getTheme</span>()<span class="hljs-attribute">.primaryColor</span>,
+            }}
+            /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">View</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">Thumb</span>
+          <span class="hljs-attribute">ref</span>=<span class="hljs-value">"thumb"</span>
+          <span class="hljs-attribute">radius</span>=<span class="hljs-value">{this.props.thumbRadius}</span>
+          <span class="hljs-attribute">trackSize</span>=<span class="hljs-value">{this.props.trackSize}</span>
+          <span class="hljs-attribute">trackMarginH</span>=<span class="hljs-value">{this._trackMarginH}</span>
+          <span class="hljs-attribute">lowerTrackColor</span>=<span class="hljs-value">{this.props.lowerTrackColor</span> || <span class="hljs-attribute">getTheme</span>()<span class="hljs-attribute">.primaryColor</span>}
+          <span class="hljs-attribute">upperTrackColor</span>=<span class="hljs-value">{this.props.upperTrackColor}</span>
+          <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
+            <span class="hljs-attribute">top:</span> <span class="hljs-attribute">this._thumbRadiiWithBorder</span> * (<span class="hljs-attribute">THUMB_SCALE_RATIO</span> <span class="hljs-attribute">-</span> <span class="hljs-attribute">1</span>) + <span class="hljs-attribute">TRACK_EXTRA_MARGIN_V</span>,
+          }}
+          /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">MKTouchable</span>&gt;</span>
+    )</span>;
+  }
+}</pre></div></div>
             
         </li>
         
@@ -678,11 +687,20 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
-              <p>The thickness of the Slider track</p>
+              <p>Public api to update the current value</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  trackSize: PropTypes.number,</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">Object</span>.defineProperty(Slider.prototype, <span class="hljs-string">'value'</span>, {
+  set: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">value</span>) </span>{
+    <span class="hljs-keyword">this</span>._internalSetValue(value);
+    <span class="hljs-keyword">this</span>._aniUpdateValue(value);
+  },
+  get: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._value;
+  },
+  enumerable: <span class="hljs-literal">true</span>,
+});</pre></div></div>
             
         </li>
         
@@ -693,11 +711,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
-              <p>Radius of the thumb of the Slider</p>
+              <h2 id="-section-id-props-props-section-"><section id='props'>Props</section></h2>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  thumbRadius: PropTypes.number,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Slider.propTypes = {</pre></div></div>
             
         </li>
         
@@ -708,11 +726,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
-              <p>Color of the lower part of the track, it’s also the color of the thumb</p>
+              <p><a href="https://facebook.github.io/react-native/docs/view.html#props">RN.View Props</a>…</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  lowerTrackColor: PropTypes.string,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  ...View.propTypes,</pre></div></div>
             
         </li>
         
@@ -723,11 +741,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
-              <p>Color of the upper part of the track</p>
+              <p>Minimum value of the range, default is <code>0</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  upperTrackColor: PropTypes.string,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  min: PropTypes.number,</pre></div></div>
             
         </li>
         
@@ -737,6 +755,81 @@
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-30">&#182;</a>
+              </div>
+              <p>Maximum value of the range, default is <code>100</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  max: PropTypes.number,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-31">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-31">&#182;</a>
+              </div>
+              <p>The thickness of the Slider track</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  trackSize: PropTypes.number,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-32">&#182;</a>
+              </div>
+              <p>Radius of the thumb of the Slider</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  thumbRadius: PropTypes.number,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-33">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-33">&#182;</a>
+              </div>
+              <p>Color of the lower part of the track, it’s also the color of the thumb</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  lowerTrackColor: PropTypes.string,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-34">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-34">&#182;</a>
+              </div>
+              <p>Color of the upper part of the track</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  upperTrackColor: PropTypes.string,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-35">&#182;</a>
               </div>
               <p>Callback when value changed</p>
 
@@ -748,19 +841,19 @@
         </li>
         
         
-        <li id="section-31">
+        <li id="section-36">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-31">&#182;</a>
+                <a class="pilcrow" href="#section-36">&#182;</a>
               </div>
               <h2 id="-section-id-defaults-defaults-section-"><section id='defaults'>Defaults</section></h2>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>Slider.defaultProps = {
-  thumbRadius: utils.toPixels(<span class="hljs-number">4</span>),  <span class="hljs-comment">// 4 dp</span>
-  trackSize: utils.toPixels(<span class="hljs-number">1</span>),  <span class="hljs-comment">// 1 dp</span>
+  thumbRadius: <span class="hljs-number">6</span>,
+  trackSize: <span class="hljs-number">2</span>,
   min: <span class="hljs-number">0</span>,
   max: <span class="hljs-number">100</span>,
   upperTrackColor: DEFAULT_UPPER_TRACK_COLOR,
@@ -769,11 +862,11 @@
         </li>
         
         
-        <li id="section-32">
+        <li id="section-37">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-32">&#182;</a>
+                <a class="pilcrow" href="#section-37">&#182;</a>
               </div>
               <hr>
 
@@ -782,11 +875,11 @@
         </li>
         
         
-        <li id="section-33">
+        <li id="section-38">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-33">&#182;</a>
+                <a class="pilcrow" href="#section-38">&#182;</a>
               </div>
               <p>Builder</p>
 
@@ -799,11 +892,11 @@
         </li>
         
         
-        <li id="section-34">
+        <li id="section-39">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-34">&#182;</a>
+                <a class="pilcrow" href="#section-39">&#182;</a>
               </div>
               <h2 id="slider-builder">Slider builder</h2>
 
@@ -820,11 +913,11 @@
         </li>
         
         
-        <li id="section-35">
+        <li id="section-40">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-35">&#182;</a>
+                <a class="pilcrow" href="#section-40">&#182;</a>
               </div>
               <p>define builder method for each prop</p>
 
@@ -835,11 +928,11 @@
         </li>
         
         
-        <li id="section-36">
+        <li id="section-41">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-36">&#182;</a>
+                <a class="pilcrow" href="#section-41">&#182;</a>
               </div>
               <hr>
 
@@ -848,28 +941,28 @@
         </li>
         
         
-        <li id="section-37">
+        <li id="section-42">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-37">&#182;</a>
+                <a class="pilcrow" href="#section-42">&#182;</a>
               </div>
               <h2 id="-section-id-builders-built-in-builders-section-"><section id="builders">Built-in builders</section></h2>
 
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">slider</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> SliderBuilder();
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> SliderBuilder().withBackgroundColor(MKColor.Transparent);
 }</pre></div></div>
             
         </li>
         
         
-        <li id="section-38">
+        <li id="section-43">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-38">&#182;</a>
+                <a class="pilcrow" href="#section-43">&#182;</a>
               </div>
               <h2 id="public-interface">Public interface</h2>
 

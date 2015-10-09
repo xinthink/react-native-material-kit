@@ -34,9 +34,13 @@
             
             <div class="content"><div class='highlight'><pre>
 <span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
+<span class="hljs-keyword">const</span> {convertCoordinate} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../utils'</span>);
+
 <span class="hljs-keyword">const</span> {
   Component,
   requireNativeComponent,
+  View,
+  PropTypes,
 } = React;</pre></div></div>
             
         </li>
@@ -55,8 +59,11 @@
             <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MKTouchable</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
 
   _onTouchEvent(event) {
-    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.onTouchEvent) {
-      <span class="hljs-keyword">this</span>.props.onTouchEvent(event.nativeEvent);
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.onTouch) {
+      <span class="hljs-keyword">const</span> evt = event.nativeEvent;
+      evt.x = convertCoordinate(evt.x);
+      evt.y = convertCoordinate(evt.y);
+      <span class="hljs-keyword">this</span>.props.onTouch(evt);
     }
   }
 
@@ -65,23 +72,14 @@
   }
 
   render() {
-    <span class="hljs-keyword">const</span> touchableProps = {};
-    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.props.disabled) {
-      <span class="hljs-built_in">Object</span>.assign(touchableProps, {
-        onPress: <span class="hljs-keyword">this</span>.props.onPress,
-        onPressIn: <span class="hljs-keyword">this</span>.props.onPressIn,
-        onPressOut: <span class="hljs-keyword">this</span>.props.onPressOut,
-        onLongPress: <span class="hljs-keyword">this</span>.props.onLongPress,
-      });
-    }
-
     <span class="hljs-keyword">return</span> (
       <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">NativeTouchable</span>
         <span class="hljs-attribute">ref</span>=<span class="hljs-value">"node"</span>
         {<span class="hljs-attribute">...this.props</span>}
         <span class="hljs-attribute">style</span>=<span class="hljs-value">{this.props.style}</span>
         <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this._onTouchEvent.bind(this)}</span>
-        &gt;</span>
+        <span class="hljs-attribute">onLayout</span>=<span class="hljs-value">{(evt)</span> =&gt;</span> this.props.onLayout &amp;&amp; this.props.onLayout(evt)}
+        &gt;
         {this.props.children}
       <span class="hljs-tag">&lt;/<span class="hljs-title">NativeTouchable</span>&gt;</span>
     )</span>;
@@ -112,14 +110,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>Touch events callback</p>
+              <p><a href="https://facebook.github.io/react-native/docs/view.html#props">RN.View Props</a>…</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  onTouchEvent: React.PropTypes.func,
-};
-
-<span class="hljs-keyword">const</span> NativeTouchable = requireNativeComponent(<span class="hljs-string">'MKTouchable'</span>, MKTouchable);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  ...View.propTypes,</pre></div></div>
             
         </li>
         
@@ -129,6 +124,48 @@
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Touch events callback</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  onTouch: React.PropTypes.func,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p><strong><i>FIXME</i></strong> no propType for native prop error on Android</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  nativeBackgroundAndroid: PropTypes.object,
+  needsOffscreenAlphaCompositing: PropTypes.bool,
+  scaleX: PropTypes.number,
+  scaleY: PropTypes.number,
+  translateX: PropTypes.number,
+  translateY: PropTypes.number,
+  rotation: PropTypes.number,
+};
+
+<span class="hljs-keyword">const</span> NativeTouchable = requireNativeComponent(<span class="hljs-string">'MKTouchable'</span>, {
+  name: <span class="hljs-string">'MKTouchable'</span>,
+  propTypes: MKTouchable.propTypes,
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <h2 id="public-interface">Public interface</h2>
 

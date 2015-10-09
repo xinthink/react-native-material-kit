@@ -24,8 +24,6 @@
                 
                   <li><a href="lib&#x2F;MKColor.html">lib&#x2F;MKColor.js</a></li>
                 
-                  <li><a href="lib&#x2F;MKIconToggle.html">lib&#x2F;MKIconToggle.js</a></li>
-                
                   <li><a href="lib&#x2F;MKPropTypes.html">lib&#x2F;MKPropTypes.js</a></li>
                 
                   <li><a href="lib&#x2F;builder.html">lib&#x2F;builder.js</a></li>
@@ -36,17 +34,35 @@
                 
                   <li><a href="lib&#x2F;mdl&#x2F;Button.html">lib&#x2F;mdl&#x2F;Button.js</a></li>
                 
+                  <li><a href="lib&#x2F;mdl&#x2F;IconToggle.html">lib&#x2F;mdl&#x2F;IconToggle.js</a></li>
+                
                   <li><a href="lib&#x2F;mdl&#x2F;Progress.html">lib&#x2F;mdl&#x2F;Progress.js</a></li>
                 
                   <li><a href="lib&#x2F;mdl&#x2F;Ripple.html">lib&#x2F;mdl&#x2F;Ripple.js</a></li>
                 
                   <li><a href="lib&#x2F;mdl&#x2F;Slider.html">lib&#x2F;mdl&#x2F;Slider.js</a></li>
                 
-                  <li><a href="lib&#x2F;mdl&#x2F;Spinner.html">lib&#x2F;mdl&#x2F;Spinner.js</a></li>
+                  <li><a href="lib&#x2F;mdl&#x2F;Spinner.android.html">lib&#x2F;mdl&#x2F;Spinner.android.js</a></li>
+                
+                  <li><a href="lib&#x2F;mdl&#x2F;Spinner.ios.html">lib&#x2F;mdl&#x2F;Spinner.ios.js</a></li>
                 
                   <li><a href="lib&#x2F;mdl&#x2F;Switch.html">lib&#x2F;mdl&#x2F;Switch.js</a></li>
                 
                   <li><a href="lib&#x2F;mdl&#x2F;Textfield.html">lib&#x2F;mdl&#x2F;Textfield.js</a></li>
+                
+                  <li><a href="lib&#x2F;mdl&#x2F;cards&#x2F;action.html">lib&#x2F;mdl&#x2F;cards&#x2F;action.js</a></li>
+                
+                  <li><a href="lib&#x2F;mdl&#x2F;cards&#x2F;container.html">lib&#x2F;mdl&#x2F;cards&#x2F;container.js</a></li>
+                
+                  <li><a href="lib&#x2F;mdl&#x2F;cards&#x2F;content.html">lib&#x2F;mdl&#x2F;cards&#x2F;content.js</a></li>
+                
+                  <li><a href="lib&#x2F;mdl&#x2F;cards&#x2F;image.html">lib&#x2F;mdl&#x2F;cards&#x2F;image.js</a></li>
+                
+                  <li><a href="lib&#x2F;mdl&#x2F;cards&#x2F;menu.html">lib&#x2F;mdl&#x2F;cards&#x2F;menu.js</a></li>
+                
+                  <li><a href="lib&#x2F;mdl&#x2F;cards&#x2F;styles.html">lib&#x2F;mdl&#x2F;cards&#x2F;styles.js</a></li>
+                
+                  <li><a href="lib&#x2F;mdl&#x2F;cards&#x2F;title.html">lib&#x2F;mdl&#x2F;cards&#x2F;title.js</a></li>
                 
                   <li><a href="lib&#x2F;mdl&#x2F;index.html">lib&#x2F;mdl&#x2F;index.js</a></li>
                 
@@ -68,40 +84,90 @@
 
 <h2 id="gettingstarted">Getting Started</h2>
 
-<p><code>cd</code> to your RN project directory,</p>
+<p>First, <code>cd</code> to your RN project directory, and install RNMK through the command <code>npm i -S react-native-material-kit</code>.</p>
+
+<h3 id="ios">iOS</h3>
 
 <ol>
-<li><code>npm i -S react-native-material-kit</code></li>
 <li>Add <code>node_modules/react-native-material-kit/iOS/RCTMaterialKit.xcodeproj</code> to your xcode project, usually under the <code>Libraries</code> group</li>
 <li>Add <code>libRCTMaterialKit.a</code> (from <code>Products</code> under <code>RCTMaterialKit.xcodeproj</code>) to build target's <code>Linked Frameworks and Libraries</code> list</li>
-<li><code>require('react-native-material-kit')</code> to start using the components, in js files</li>
-<li>Have fun!</li>
 </ol>
 
-<blockquote>
-  <ul>
-  <li>Looking for api docs? Try the <a href="http://xinthink.github.io/react-native-material-kit/docs/index.html">Annotated Source</a>.</li>
-  <li>Debugging local module? Please refer to <a href="https://github.com/xinthink/rnmk-demo#debugging-local-rnmk-module">Debugging local RNMK module</a></li>
-  </ul>
-</blockquote>
+<h4 id="optionusingcocoapodshttpscocoapodsorg">Option: Using <a href="https://cocoapods.org">CocoaPods</a></h4>
+
+<p>Assuming you have <a href="https://cocoapods.org">CocoaPods</a> installed, create a <code>PodFile</code> like this in your app's project directory. You can leave out the modules you don't need.</p>
+
+<pre><code class="ruby">xcodeproj 'path/to/YourProject.xcodeproj/'
+
+pod 'React', :subspecs =&gt; ['Core', 'RCTText', 'RCTWebSocket'], :path =&gt; 'node_modules/react-native'
+pod 'react-native-material-kit', :path =&gt; 'node_modules/react-native-material-kit'
+
+post_install do |installer|
+  target = installer.pods_project.targets.select{|t| 'React' == t.name}.first
+  phase = target.new_shell_script_build_phase('Run Script')
+  phase.shell_script = "if nc -w 5 -z localhost 8081 ; then\n  if ! curl -s \"http://localhost:8081/status\" | grep -q \"packager-status:running\" ; then\n    echo \"Port 8081 already in use, packager is either not running or not running correctly\"\n    exit 2\n  fi\nelse\n  open $SRCROOT/../node_modules/react-native/packager/launchPackager.command || echo \"Can't start packager automatically\"\nfi"
+end
+</code></pre>
+
+<p>Now run <code>pod install</code>. This will create an Xcode workspace containing all necessary native files, including react-native-material-kit. From now on open <code>YourProject.xcworkspace</code> instead of <code>YourProject.xcodeproject</code> in Xcode. Because React Native's iOS code is now pulled in via CocoaPods, you also need to remove the <code>React</code>, <code>RCTImage</code>, etc. subprojects from your app's Xcode project, in case they were added previously.</p>
+
+<h3 id="android">Android</h3>
+
+<ol>
+<li><p>Add the following snippet to your <code>android/settings.gradle</code>:
+```gradle
+// resolve the symbolic link if any
+def resolve(File dir) {
+dir.toPath().toAbsolutePath().toFile()
+}</p>
+
+<p>include ':RNMaterialKit'
+project(':RNMaterialKit').projectDir = resolve file('../node_modules/react-native-material-kit/android')
+```</p></li>
+<li>Add <code>compile project(':RNMaterialKit')</code> to your <code>android/app/build.gradle</code></li>
+<li><p>Add <code>ReactMaterialKitPackage</code> to your <code>ReactInstanceManager</code> instance, in your <code>MainActivity</code>:
+```java
+mReactInstanceManager = ReactInstanceManager.builder()
+  .setApplication(getApplication())
+  ...
+  .addPackage(new MainReactPackage())
+  .addPackage(new ReactMaterialKitPackage())
+  ...
+  .build();</p>
+
+<p>```</p></li>
+</ol>
+
+<p>Finally, you're good to go, feel free to require <code>react-native-material-kit</code> in your JS files.</p>
+
+<p>Have fun! :metal:</p>
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+<li>Source code of <a href="https://github.com/xinthink/rnmk-demo">Demo app</a></li>
+<li>Refer to the <a href="http://xinthink.github.io/react-native-material-kit/docs/index.html">Annotated Source</a> as API docs</li>
+<li>For contributors, please refer to <a href="https://github.com/xinthink/rnmk-demo#debugging-local-rnmk-module">How to debug local RNMK module</a></li>
+</ul>
 
 <h2 id="components">Components</h2>
 
 <ul>
 <li><a href="#buttons">Buttons</a></li>
-<li><a href="#text-fields">Textfields</a></li>
-<li><a href="#toggles">Toggles</a>
-<ul><li><a href="#icon-toggle">Icon toggle</a></li>
-<li><a href="#switch">Switch</a></li></ul></li>
+<li><a href="#cards">Cards</a></li>
 <li><a href="#loading">Loading</a>
 <ul><li><a href="#progress-bar">Progress bar</a></li>
 <li><a href="#spinner">Spinner</a></li></ul></li>
 <li><a href="#sliders">Sliders</a></li>
+<li><a href="#text-fields">Textfields</a></li>
+<li><a href="#toggles">Toggles</a>
+<ul><li><a href="#icon-toggle">Icon toggle</a></li>
+<li><a href="#switch">Switch</a></li></ul></li>
 </ul>
 
 <h3 id="buttons">Buttons</h3>
 
-<p><img src="https://cloud.githubusercontent.com/assets/390805/8888853/69f8d9f8-32f2-11e5-9823-c235ab8c0dd2.gif" alt="buttons-mdl" title="" /></p>
+<p>[<img src="http://www.getmdl.io/components/index.html#buttons-section" alt="img-buttons]" title="" /></p>
 
 <p>Apply <a href="http://www.getmdl.io/components/index.html#buttons-section">Material Design Buttons</a> with a few lines of code using predefined builders, which comply with the <a href="http://www.getmdl.io/customize/index.html">Material Design Lite default theme</a>.</p>
 
@@ -160,17 +226,92 @@ const ColoredRaisedButton = MKButton.coloredButton()
 &lt;/MKButton&gt;
 </code></pre>
 
+<blockquote>
+  <p>For this time, <a href="https://facebook.github.io/react-native/docs/known-issues.html#no-support-for-shadows-on-android">Shadows are unavailable on Android</a></p>
+</blockquote>
+
 <p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/lib/MKButton.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/buttons.js">example code</a></p>
 
 <blockquote>
   <p>Why builders? See the ‘<a href="https://github.com/xinthink/react-native-material-kit/issues/3">Builder vs. configuration object</a>’ discussion.</p>
 </blockquote>
 
+<h3 id="cards">Cards</h3>
+
+<p>[<img src="http://www.getmdl.io/components/index.html#cards-section" alt="img-cards]" title="" /></p>
+
+<p>Apply <a href="http://www.getmdl.io/components/index.html#cards-section"><code>Card Style</code></a> with only few styles !.</p>
+
+<pre><code class="jsx">require('react-native-material-kit');
+const {
+  MKCardStyles
+} = MK;
+
+&lt;View style={MKCardStyles.card}&gt;
+  &lt;Image source={{uri : base64Icon}} style={MKCardStyles.image}/&gt;
+  &lt;Text style={MKCardStyles.title}&gt;Welcome&lt;/Text&gt;
+  &lt;Text style={MKCardStyles.content}&gt;
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Mauris sagittis pellentesque lacus eleifend lacinia...
+  &lt;/Text&gt;
+  &lt;View style={MKCardStyles.menu}&gt;{menu}&lt;/View&gt;
+  &lt;Text style={MKCardStyles.action}&gt;My Action&lt;/Text&gt;
+&lt;/View&gt;
+</code></pre>
+
+<p>👉 <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/cards.js">example code</a></p>
+
+<h3 id="loading">Loading</h3>
+
+<p><a href="http://www.getmdl.io/components/index.html#loading-section">MDL Loading</a> components.</p>
+
+<h4 id="progressbar">Progress bar</h4>
+
+<p>[<img src="http://www.getmdl.io/components/index.html#loading-section" alt="progress-demo]" title="" /></p>
+
+<pre><code class="jsx">&lt;mdl.Progress
+  style={styles.progress}
+  progress={0.2}
+  /&gt;
+</code></pre>
+
+<p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Progress.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/progress.js">example code</a></p>
+
+<h4 id="spinner">Spinner</h4>
+
+<p>[<img src="http://www.getmdl.io/components/index.html#loading-section" alt="spinner-demo]" title="" /></p>
+
+<pre><code class="jsx">&lt;mdl.Spinner/&gt;
+</code></pre>
+
+<p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Spinner.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/progress.js">example code</a></p>
+
+<h3 id="sliders">Sliders</h3>
+
+<p><a href="http://www.getmdl.io/components/index.html#sliders-section">MDL Slider</a> components.
+[<img src="http://www.getmdl.io/components/index.html#sliders-section" alt="slider-demo]" title="" /></p>
+
+<pre><code class="jsx">&lt;mdl.Slider style={styles.slider}/&gt;
+…
+const SliderWithValue = mdl.Slider.slider()
+  .withStyle(styles.slider)
+  .withMin(10)
+  .withMax(100)
+  .build();
+…
+&lt;SliderWithValue
+  ref=“sliderWithValue”
+  onChange={(curValue) =&gt; this.setState({curValue})}
+  /&gt;
+</code></pre>
+
+<p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Slider.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/sliders.js">example code</a></p>
+
 <h3 id="textfields">Text Fields</h3>
 
 <p>Built-in textfields, which comply with <a href="http://www.getmdl.io/components/#textfields-section">Material Design Lite</a>.</p>
 
-<p><img src="https://cloud.githubusercontent.com/assets/390805/9085678/8280484a-3bb1-11e5-9354-a244b0520736.gif" alt="textfields-mdl" title="" /></p>
+<p>[<img src="http://www.getmdl.io/components/#textfields-section" alt="img-tf]" title="" /></p>
 
 <pre><code class="jsx">// textfield with default theme (configurable)
 const Textfield = MKTextField.textfield()
@@ -208,7 +349,7 @@ const Textfield = MKTextField.textfield()
 <h3 id="toggles">Toggles</h3>
 
 <p><a href="http://www.getmdl.io/components/index.html#toggles-section/icon-toggle">Icon toggle</a> &amp; <a href="http://www.getmdl.io/components/index.html#toggles-section/switch">Switch</a>
-<img src="https://cloud.githubusercontent.com/assets/390805/8903074/de0ed748-3487-11e5-9448-9ee304e0a6b6.gif" alt="toggles-mdl" title="" /></p>
+[<img src="http://www.getmdl.io/components/index.html#toggles-section" alt="img-toggles]" title="" /></p>
 
 <h4 id="icontoggle">Icon toggle</h4>
 
@@ -241,52 +382,6 @@ const Textfield = MKTextField.textfield()
 </code></pre>
 
 <p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Switch.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/toggles.js">example code</a></p>
-
-<h3 id="loading">Loading</h3>
-
-<p><a href="http://www.getmdl.io/components/index.html#loading-section">MDL Loading</a> components.</p>
-
-<h4 id="progressbar">Progress bar</h4>
-
-<p><img src="https://cloud.githubusercontent.com/assets/390805/9288698/01e31432-4387-11e5-98e5-85b18471baeb.gif" alt="progress-demo" title="" /></p>
-
-<pre><code class="jsx">&lt;mdl.Progress
-  style={styles.progress}
-  progress={0.2}
-  /&gt;
-</code></pre>
-
-<p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Progress.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/progress.js">example code</a></p>
-
-<h4 id="spinner">Spinner</h4>
-
-<p><img src="https://cloud.githubusercontent.com/assets/390805/9291361/6e7a75bc-43ec-11e5-95be-2b33eb7f8734.gif" alt="spinner-demo" title="" /></p>
-
-<pre><code class="jsx">&lt;mdl.Spinner/&gt;
-</code></pre>
-
-<p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Spinner.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/progress.js">example code</a></p>
-
-<h3 id="sliders">Sliders</h3>
-
-<p><a href="http://www.getmdl.io/components/index.html#sliders-section">MDL Slider</a> components.
-<img src="https://cloud.githubusercontent.com/assets/390805/9685661/44260e64-5352-11e5-9fea-0a8aecc07de2.gif" alt="slider-demo" title="" /></p>
-
-<pre><code class="jsx">&lt;mdl.Slider style={styles.slider}/&gt;
-…
-const SliderWithValue = mdl.Slider.slider()
-  .withStyle(styles.slider)
-  .withMin(10)
-  .withMax(100)
-  .build();
-…
-&lt;SliderWithValue
-  ref=“sliderWithValue”
-  onChange={(curValue) =&gt; this.setState({curValue})}
-  /&gt;
-</code></pre>
-
-<p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Slider.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/sliders.js">example code</a></p>
 
 <h2 id="about">About</h2>
 

@@ -33,7 +33,11 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">const</span> {PixelRatio, TouchableWithoutFeedback} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);</pre></div></div>
+<span class="hljs-keyword">const</span> {
+  PixelRatio,
+  TouchableWithoutFeedback,
+  Platform,
+} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);</pre></div></div>
             
         </li>
         
@@ -100,6 +104,40 @@ copies over prototye inherited properties.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
+              <p>Convert pixels back to dips</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">toDips</span>(<span class="hljs-params">px</span>) </span>{
+  <span class="hljs-keyword">return</span> px / PixelRatio.get();
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Convert native coorindate value into unit used in JSX</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">convertCoordinate</span>(<span class="hljs-params">value</span>) </span>{
+  <span class="hljs-keyword">return</span> Platform.OS === <span class="hljs-string">'android'</span> ? toDips(value) : value;
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
               <p>Get font size according to the screen density</p>
 
             </div>
@@ -111,11 +149,11 @@ copies over prototye inherited properties.</p>
         </li>
         
         
-        <li id="section-6">
+        <li id="section-8">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-6">&#182;</a>
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <p>Extract the specified props from the given component instance.</p>
 <ul>
@@ -142,11 +180,11 @@ copies over prototye inherited properties.</p>
         </li>
         
         
-        <li id="section-7">
+        <li id="section-9">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
+                <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <p>Extract Touchable props from the given component instance.</p>
 <ul>
@@ -162,11 +200,11 @@ copies over prototye inherited properties.</p>
         </li>
         
         
-        <li id="section-8">
+        <li id="section-10">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
+                <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <h2 id="public-interface">Public interface</h2>
 
@@ -174,6 +212,8 @@ copies over prototye inherited properties.</p>
             
             <div class="content"><div class='highlight'><pre>exports.mergeIntoFast = mergeIntoFast;
 exports.toPixels = toPixels;
+exports.toDips = toDips;
+exports.convertCoordinate = convertCoordinate;
 exports.getFontSize = getFontSize;
 exports.extractProps = extractProps;
 exports.extractTouchableProps = extractTouchableProps;</pre></div></div>

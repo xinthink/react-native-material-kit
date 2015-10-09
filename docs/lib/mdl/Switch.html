@@ -42,7 +42,6 @@
             <div class="content"><div class='highlight'><pre>
 <span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
 <span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../MKColor'</span>);
-<span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../utils'</span>);
 
 <span class="hljs-keyword">const</span> {
   Component,
@@ -69,9 +68,10 @@ Which is displayed as a circle with shadow and ripple effect.</p>
             <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Thumb</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
   constructor(props) {
     <span class="hljs-keyword">super</span>(props);
+    <span class="hljs-keyword">this</span>._animatedRippleScale = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>);
+    <span class="hljs-keyword">this</span>._animatedRippleAlpha = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>);
     <span class="hljs-keyword">this</span>.state = {
-      rippleScale: <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">1</span>),
-      rippleAlpha: <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>),
+      checked: <span class="hljs-literal">false</span>,
     };
   }
 
@@ -152,9 +152,7 @@ Which is displayed as a circle with shadow and ripple effect.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  showRipple() {
-    <span class="hljs-keyword">this</span>.state.rippleAlpha.setValue(<span class="hljs-number">1</span>);
-    <span class="hljs-keyword">this</span>.state.rippleScale.setValue(<span class="hljs-number">0</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  showRipple() {</pre></div></div>
             
         </li>
         
@@ -169,10 +167,16 @@ Which is displayed as a circle with shadow and ripple effect.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">this</span>._rippleAni = Animated.timing(<span class="hljs-keyword">this</span>.state.rippleScale, {
-      toValue: <span class="hljs-number">1</span>,
-      duration: <span class="hljs-keyword">this</span>.props.rippleAniDuration || <span class="hljs-number">150</span>,
-    });
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">this</span>._rippleAni = Animated.parallel([
+      Animated.timing(<span class="hljs-keyword">this</span>._animatedRippleAlpha, {
+        toValue: <span class="hljs-number">1</span>,
+        duration: <span class="hljs-keyword">this</span>.props.rippleAniDuration || <span class="hljs-number">250</span>,
+      }),
+      Animated.timing(<span class="hljs-keyword">this</span>._animatedRippleScale, {
+        toValue: <span class="hljs-number">1</span>,
+        duration: <span class="hljs-keyword">this</span>.props.rippleAniDuration || <span class="hljs-number">250</span>,
+      }),
+    ]);
 
     <span class="hljs-keyword">this</span>._rippleAni.start(() =&gt; {
       <span class="hljs-keyword">this</span>._rippleAni = <span class="hljs-literal">undefined</span>;</pre></div></div>
@@ -211,10 +215,16 @@ Which is displayed as a circle with shadow and ripple effect.</p>
             
             <div class="content"><div class='highlight'><pre>  hideRipple() {
     <span class="hljs-keyword">this</span>._pendingRippleAni = () =&gt; {
-      Animated.timing(<span class="hljs-keyword">this</span>.state.rippleAlpha, {
-        toValue: <span class="hljs-number">0</span>,
-        duration: <span class="hljs-number">100</span>,
-      }).start();
+      Animated.parallel([
+        Animated.timing(<span class="hljs-keyword">this</span>._animatedRippleScale, {
+          toValue: <span class="hljs-number">0</span>,
+          duration: <span class="hljs-keyword">this</span>.props.rippleAniDuration || <span class="hljs-number">250</span>,
+        }),
+        Animated.timing(<span class="hljs-keyword">this</span>._animatedRippleAlpha, {
+          toValue: <span class="hljs-number">0</span>,
+          duration: <span class="hljs-keyword">this</span>.props.rippleAniDuration || <span class="hljs-number">250</span>,
+        }),
+      ]).start();
 
       <span class="hljs-keyword">this</span>._pendingRippleAni = <span class="hljs-literal">undefined</span>;
     };
@@ -257,27 +267,35 @@ Which is displayed as a circle with shadow and ripple effect.</p>
             
             <div class="content"><div class='highlight'><pre>  render() {
     <span class="hljs-keyword">const</span> rippleSize = <span class="hljs-keyword">this</span>.props.rippleRadius * <span class="hljs-number">2</span>;
-    <span class="hljs-keyword">const</span> rippleOffset = <span class="hljs-keyword">this</span>.props.radius - <span class="hljs-keyword">this</span>.props.rippleRadius;
 
     <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">View</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">circle</span>
-        <span class="hljs-attribute">style</span>=<span class="hljs-value">{[</span>
-          <span class="hljs-attribute">Thumb.defaultProps.style</span>,
-          <span class="hljs-attribute">this.props.style</span>,
-          {<span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this._getBgColor</span>()},
-        ]}
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">View</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"container"</span>
+            <span class="hljs-attribute">style</span>=<span class="hljs-value">{[this.props.style,</span> {
+              <span class="hljs-attribute">position:</span> '<span class="hljs-attribute">absolute</span>',
+              <span class="hljs-attribute">width:</span> <span class="hljs-attribute">rippleSize</span>,
+              <span class="hljs-attribute">height:</span> <span class="hljs-attribute">rippleSize</span>,
+              <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">MKColor.Transparent</span>,
+            }]}
         &gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">View</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">circle</span>
+          <span class="hljs-attribute">style</span>=<span class="hljs-value">{[</span>
+            <span class="hljs-attribute">Thumb.defaultProps.style</span>,
+            <span class="hljs-attribute">this.props.thumbStyle</span>, {
+              <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this._getBgColor</span>(),
+          }]}
+        /&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">Animated.View</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">ripple</span> <span class="hljs-attribute">layer</span>
           <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
-            <span class="hljs-attribute">opacity:</span> <span class="hljs-attribute">this.state.rippleAlpha</span>,
+            <span class="hljs-attribute">position:</span> '<span class="hljs-attribute">absolute</span>',
+            <span class="hljs-attribute">opacity:</span> <span class="hljs-attribute">this._animatedRippleAlpha</span>,
             <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this.props.rippleColor</span>,
             <span class="hljs-attribute">width:</span> <span class="hljs-attribute">rippleSize</span>,
             <span class="hljs-attribute">height:</span> <span class="hljs-attribute">rippleSize</span>,
             <span class="hljs-attribute">borderRadius:</span> <span class="hljs-attribute">this.props.rippleRadius</span>,
-            <span class="hljs-attribute">top:</span> <span class="hljs-attribute">rippleOffset</span>,
-            <span class="hljs-attribute">left:</span> <span class="hljs-attribute">rippleOffset</span>,
+            <span class="hljs-attribute">top:</span> <span class="hljs-attribute">0</span>,
+            <span class="hljs-attribute">left:</span> <span class="hljs-attribute">0</span>,
             <span class="hljs-attribute">transform:</span> [
-              {<span class="hljs-attribute">scale:</span> <span class="hljs-attribute">this.state.rippleScale</span>},
+              {<span class="hljs-attribute">scale:</span> <span class="hljs-attribute">this._animatedRippleScale</span>},
             ],
           }}
         /&gt;</span>
@@ -344,31 +362,26 @@ Which is displayed as a circle with shadow and ripple effect.</p>
             <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Switch</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
   constructor(props) {
     <span class="hljs-keyword">super</span>(props);
+    <span class="hljs-keyword">this</span>._animatedThumbLeft = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>);
     <span class="hljs-keyword">this</span>.state = {
-      trackWidth: <span class="hljs-number">0</span>,
-      trackHeight: <span class="hljs-number">0</span>,
+      trackSize: <span class="hljs-number">0</span>,
+      trackLength: <span class="hljs-number">0</span>,
       trackRadii: <span class="hljs-number">0</span>,
-      thumbLeft: <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>),
-      thumbFrame: {x: <span class="hljs-number">0</span>, y: <span class="hljs-number">0</span>, r: <span class="hljs-number">0</span>, rippleRadii: <span class="hljs-number">0</span>},
+      trackMargin: <span class="hljs-number">0</span>,
+      thumbFrame: {x: <span class="hljs-number">0</span>, padding: <span class="hljs-number">0</span>, r: <span class="hljs-number">0</span>, rippleRadii: <span class="hljs-number">0</span>},
     };
   }
 
   componentWillMount() {
     <span class="hljs-keyword">this</span>.setState({checked: <span class="hljs-keyword">this</span>.props.checked});
+    <span class="hljs-keyword">this</span>._layoutThumb(<span class="hljs-keyword">this</span>.props);
   }
 
   componentWillReceiveProps(nextProps) {
     <span class="hljs-keyword">if</span> (nextProps.checked !== <span class="hljs-keyword">this</span>.props.checked) {
       <span class="hljs-keyword">this</span>.setState({checked: nextProps.checked});
     }
-  }
-
-  componentDidMount() {
-    requestAnimationFrame(<span class="hljs-keyword">this</span>._doMeasurement.bind(<span class="hljs-keyword">this</span>));
-  }
-
-  _doMeasurement() {
-    <span class="hljs-keyword">this</span>.refs.track.measure(<span class="hljs-keyword">this</span>._layoutThumb.bind(<span class="hljs-keyword">this</span>));
+    <span class="hljs-keyword">this</span>._layoutThumb(nextProps);
   }</pre></div></div>
             
         </li>
@@ -384,20 +397,23 @@ Which is displayed as a circle with shadow and ripple effect.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  _layoutThumb(x, y, trackWidth, trackHeight) {
-    <span class="hljs-keyword">const</span> trackRadii = trackHeight / <span class="hljs-number">2</span>;
+            <div class="content"><div class='highlight'><pre>  _layoutThumb({checked, trackLength, trackSize}) {
+    <span class="hljs-keyword">const</span> trackRadii = trackSize / <span class="hljs-number">2</span>;
     <span class="hljs-keyword">const</span> thumbRadii = <span class="hljs-keyword">this</span>.props.thumbRadius;
-    <span class="hljs-keyword">const</span> thumbX0 = <span class="hljs-keyword">this</span>.state.checked ? trackWidth - trackRadii : trackRadii;
-    <span class="hljs-keyword">this</span>.state.thumbLeft.setValue(thumbX0 - thumbRadii);
+    <span class="hljs-keyword">const</span> rippleRadii = trackLength - trackSize;
+    <span class="hljs-keyword">const</span> trackMargin = rippleRadii - trackRadii;  <span class="hljs-comment">// make room for ripple</span>
+    <span class="hljs-keyword">const</span> thumbLeft = checked ? trackMargin + trackRadii : <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">this</span>._animatedThumbLeft.setValue(thumbLeft);
     <span class="hljs-keyword">this</span>.setState({
-      trackWidth,
-      trackHeight,
+      trackSize,
+      trackLength,
       trackRadii,
+      trackMargin,
       thumbFrame: {
-        x: thumbX0 - thumbRadii,
-        y: trackRadii - thumbRadii,
+        rippleRadii,
+        x: thumbLeft,
         r: thumbRadii,
-        rippleRadii: trackWidth - trackRadii * <span class="hljs-number">2</span>,
+        padding: rippleRadii - thumbRadii,
       },
     });
   }</pre></div></div>
@@ -416,9 +432,9 @@ Which is displayed as a circle with shadow and ripple effect.</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>  _translateThumb() {
-    <span class="hljs-keyword">this</span>.state.thumbLeft.setValue(<span class="hljs-keyword">this</span>.state.thumbFrame.x);
+    <span class="hljs-keyword">this</span>._animatedThumbLeft.setValue(<span class="hljs-keyword">this</span>.state.thumbFrame.x);
     <span class="hljs-keyword">const</span> newX = <span class="hljs-keyword">this</span>._computeThumbX(<span class="hljs-keyword">this</span>.state.checked);
-    Animated.timing(<span class="hljs-keyword">this</span>.state.thumbLeft, {
+    Animated.timing(<span class="hljs-keyword">this</span>._animatedThumbLeft, {
       toValue: newX,
       duration: <span class="hljs-keyword">this</span>.props.thumbAniDuration || <span class="hljs-number">300</span>,
     }).start(() =&gt; {
@@ -444,8 +460,8 @@ Which is displayed as a circle with shadow and ripple effect.</p>
       <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
     }
 
-    <span class="hljs-keyword">const</span> {trackWidth, trackRadii} = <span class="hljs-keyword">this</span>.state;
-    <span class="hljs-keyword">const</span> dx = (toChecked ? <span class="hljs-number">1</span> : -<span class="hljs-number">1</span>) * (trackWidth - trackRadii * <span class="hljs-number">2</span>);
+    <span class="hljs-keyword">const</span> {trackLength, trackSize} = <span class="hljs-keyword">this</span>.state;
+    <span class="hljs-keyword">const</span> dx = (toChecked ? <span class="hljs-number">1</span> : -<span class="hljs-number">1</span>) * (trackLength - trackSize);
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.state.thumbFrame.x + dx;
   }</pre></div></div>
             
@@ -582,11 +598,15 @@ in order to access the component functions defined in <code>Thumb</code></p>
       rippleAniDuration: <span class="hljs-keyword">this</span>.props.rippleAniDuration,
       radius: <span class="hljs-keyword">this</span>.props.thumbRadius,
       style: {
-        left: <span class="hljs-keyword">this</span>.state.thumbLeft,
-        top: thumbFrame.y,
+        left: <span class="hljs-keyword">this</span>._animatedThumbLeft,
+        top: <span class="hljs-number">0</span>,
+      },
+      thumbStyle: {
         width: <span class="hljs-keyword">this</span>.props.thumbRadius * <span class="hljs-number">2</span>,
         height: <span class="hljs-keyword">this</span>.props.thumbRadius * <span class="hljs-number">2</span>,
         borderRadius: <span class="hljs-keyword">this</span>.props.thumbRadius,
+        top: thumbFrame.padding,
+        left: thumbFrame.padding,
       },
     };
 
@@ -597,15 +617,19 @@ in order to access the component functions defined in <code>Thumb</code></p>
         <span class="hljs-attribute">onPressIn</span>=<span class="hljs-value">{this._onPressIn.bind(this)}</span>
         <span class="hljs-attribute">onPressOut</span>=<span class="hljs-value">{this._onPressOut.bind(this)}</span>
         &gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">View</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"track"</span>  // <span class="hljs-attribute">the</span> '<span class="hljs-attribute">track</span>' <span class="hljs-attribute">part</span>
-              <span class="hljs-attribute">style</span>=<span class="hljs-value">{[Switch.defaultProps.style,</span>
-                      <span class="hljs-attribute">this.props.style</span>,
-                      {
+        <span class="hljs-tag">&lt;<span class="hljs-title">View</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"container"</span>
+              <span class="hljs-attribute">pointerEvents</span>=<span class="hljs-value">"box-only"</span>
+              <span class="hljs-attribute">style</span>=<span class="hljs-value">{this.props.style}</span>
+          &gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">View</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"track"</span>  // <span class="hljs-attribute">the</span> '<span class="hljs-attribute">track</span>' <span class="hljs-attribute">part</span>
+                <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
+                        <span class="hljs-attribute">width:</span> <span class="hljs-attribute">this.props.trackLength</span>,
+                        <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this.props.trackSize</span>,
                         <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this._getBgColor</span>(),
                         <span class="hljs-attribute">borderRadius:</span> <span class="hljs-attribute">this.state.trackRadii</span>,
-                      },
-                    ]}
-          &gt;</span>
+                        <span class="hljs-attribute">margin:</span> <span class="hljs-attribute">this.state.trackMargin</span>,
+                      }}
+          /&gt;</span>
           <span class="hljs-tag">&lt;<span class="hljs-title">AnimatedThumb</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"thumb"</span>  // <span class="hljs-attribute">the</span> '<span class="hljs-attribute">thumb</span>' <span class="hljs-attribute">part</span>
             {<span class="hljs-attribute">...thumbProps</span>}
           /&gt;</span>
@@ -714,11 +738,11 @@ in order to access the component functions defined in <code>Thumb</code></p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
-              <p>Radius of the thumb button</p>
+              <p>The thickness of the Switch track</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  thumbRadius: React.PropTypes.number,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  trackSize: React.PropTypes.number,</pre></div></div>
             
         </li>
         
@@ -729,11 +753,11 @@ in order to access the component functions defined in <code>Thumb</code></p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
-              <p>Color of the thumb, when switch is checked</p>
+              <p>The length of the Switch track</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  thumbOnColor: React.PropTypes.string,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  trackLength: React.PropTypes.number,</pre></div></div>
             
         </li>
         
@@ -744,11 +768,11 @@ in order to access the component functions defined in <code>Thumb</code></p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-31">&#182;</a>
               </div>
-              <p>Color of the thumb, when switch is off</p>
+              <p>Radius of the thumb button</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  thumbOffColor: React.PropTypes.string,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  thumbRadius: React.PropTypes.number,</pre></div></div>
             
         </li>
         
@@ -759,11 +783,11 @@ in order to access the component functions defined in <code>Thumb</code></p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-32">&#182;</a>
               </div>
-              <p>Duration of the thumb sliding animation, in milliseconds</p>
+              <p>Color of the thumb, when switch is checked</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  thumbAniDuration: React.PropTypes.number,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  thumbOnColor: React.PropTypes.string,</pre></div></div>
             
         </li>
         
@@ -774,11 +798,11 @@ in order to access the component functions defined in <code>Thumb</code></p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-33">&#182;</a>
               </div>
-              <p>Color of the ripple layer</p>
+              <p>Color of the thumb, when switch is off</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  rippleColor: React.PropTypes.string,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  thumbOffColor: React.PropTypes.string,</pre></div></div>
             
         </li>
         
@@ -788,6 +812,36 @@ in order to access the component functions defined in <code>Thumb</code></p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-34">&#182;</a>
+              </div>
+              <p>Duration of the thumb sliding animation, in milliseconds</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  thumbAniDuration: React.PropTypes.number,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-35">&#182;</a>
+              </div>
+              <p>Color of the ripple layer</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  rippleColor: React.PropTypes.string,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-36">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-36">&#182;</a>
               </div>
               <p>Duration of the ripple effect, in milliseconds</p>
 
@@ -799,11 +853,11 @@ in order to access the component functions defined in <code>Thumb</code></p>
         </li>
         
         
-        <li id="section-35">
+        <li id="section-37">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-35">&#182;</a>
+                <a class="pilcrow" href="#section-37">&#182;</a>
               </div>
               <h2 id="-section-id-defaults-defaults-section-"><section id='defaults'>Defaults</section></h2>
 
@@ -813,25 +867,22 @@ in order to access the component functions defined in <code>Thumb</code></p>
   checked: <span class="hljs-literal">false</span>,
   onColor: <span class="hljs-string">'rgba(63,81,181,0.4)'</span>,  <span class="hljs-comment">// Indigo + alpha</span>
   offColor: <span class="hljs-string">'rgba(0,0,0,0.25)'</span>,
-  thumbRadius: utils.toPixels(<span class="hljs-number">7</span>),
+  trackLength: <span class="hljs-number">48</span>,
+  trackSize: <span class="hljs-number">20</span>,
+  thumbRadius: <span class="hljs-number">14</span>,
   thumbOnColor: MKColor.Indigo,
   thumbOffColor: MKColor.Silver,
   rippleColor: <span class="hljs-string">'rgba(63,81,181,0.2)'</span>,  <span class="hljs-comment">// Indigo + alpha</span>
-  style: {
-    width: utils.toPixels(<span class="hljs-number">24</span>),
-    height: utils.toPixels(<span class="hljs-number">10</span>),
-    borderRadius: utils.toPixels(<span class="hljs-number">5</span>),
-  },
 };</pre></div></div>
             
         </li>
         
         
-        <li id="section-36">
+        <li id="section-38">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-36">&#182;</a>
+                <a class="pilcrow" href="#section-38">&#182;</a>
               </div>
               <h2 id="public-interface">Public interface</h2>
 
