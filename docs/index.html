@@ -114,16 +114,11 @@ end
 <h3 id="android">Android</h3>
 
 <ol>
-<li><p>Add the following snippet to your <code>android/settings.gradle</code>:
-```gradle
-// resolve the symbolic link if any
-def resolve(File dir) {
-dir.toPath().toAbsolutePath().toFile()
-}</p>
-
-<p>include ':RNMaterialKit'
-project(':RNMaterialKit').projectDir = resolve file('../node_modules/react-native-material-kit/android')
-```</p></li>
+<li>Add the following snippet to your <code>android/settings.gradle</code>:
+<code>gradle
+include ':RNMaterialKit'
+project(':RNMaterialKit').projectDir = file('../node_modules/react-native-material-kit/android')
+</code></li>
 <li>Add <code>compile project(':RNMaterialKit')</code> to your <code>android/app/build.gradle</code></li>
 <li><p>Add <code>ReactMaterialKitPackage</code> to your <code>ReactInstanceManager</code> instance, in your <code>MainActivity</code>:
 ```java
