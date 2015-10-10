@@ -45,13 +45,8 @@ Now run `pod install`. This will create an Xcode workspace containing all necess
 ### Android
 1. Add the following snippet to your `android/settings.gradle`:
   ```gradle
-  // resolve the symbolic link if any
-  def resolve(File dir) {
-    dir.toPath().toAbsolutePath().toFile()
-  }
-
   include ':RNMaterialKit'
-  project(':RNMaterialKit').projectDir = resolve file('../node_modules/react-native-material-kit/android')
+  project(':RNMaterialKit').projectDir = file('../node_modules/react-native-material-kit/android')
   ```
 1. Add `compile project(':RNMaterialKit')` to your `android/app/build.gradle`
 1. Add `ReactMaterialKitPackage` to your `ReactInstanceManager` instance, in your `MainActivity`:

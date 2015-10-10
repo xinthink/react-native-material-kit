@@ -26,7 +26,7 @@
     "url": "git://github.com/xinthink/react-native-material-kit.git"
   },
   "peerDependencies": {
-    "react-native": ">=0.8.0 <1.0.0"
+    "react-native": ">=0.12.0 <1.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^4.0.10",
@@ -34,5 +34,8 @@
     "eslint-plugin-react": "^3.2.3",
     "gulp": "^3.9.0",
     "gulp-docco": "0.0.4"
+  },
+  "dependencies": {
+    "tinycolor2": "^1.1.2"
   }
 }

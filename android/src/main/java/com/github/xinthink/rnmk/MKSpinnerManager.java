@@ -1,7 +1,6 @@
 package com.github.xinthink.rnmk;
 
 import com.facebook.react.bridge.ReadableArray;
-import com.facebook.react.uimanager.CSSColorUtil;
 import com.facebook.react.uimanager.CatalystStylesDiffMap;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -56,7 +55,7 @@ public class MKSpinnerManager extends SimpleViewManager<MKSpinner> {
 
                 for (int i = 0; i < colors.size(); i++) {
                     if (!colors.isNull(i)) {
-                        colorScheme[i] = CSSColorUtil.getColor(colors.getString(i));
+                        colorScheme[i] = colors.getInt(i);
                     }
                 }
 
