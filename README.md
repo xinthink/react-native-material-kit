@@ -48,6 +48,7 @@ Now run `pod install`. This will create an Xcode workspace containing all necess
   ```gradle
   include ':RNMaterialKit'
   project(':RNMaterialKit').projectDir = file('../node_modules/react-native-material-kit/android')
+  
   ```
 1. Add `compile project(':RNMaterialKit')` to your `android/app/build.gradle`
 1. Add `ReactMaterialKitPackage` to your `ReactInstanceManager` instance, in your `MainActivity`:
@@ -59,6 +60,7 @@ Now run `pod install`. This will create an Xcode workspace containing all necess
       .addPackage(new ReactMaterialKitPackage())
       ...
       .build();
+      
   ```
 
 Finally, you're good to go, feel free to require `react-native-material-kit` in your JS files.
