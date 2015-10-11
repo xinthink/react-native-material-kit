@@ -43,6 +43,7 @@ end
 Now run `pod install`. This will create an Xcode workspace containing all necessary native files, including react-native-material-kit. From now on open `YourProject.xcworkspace` instead of `YourProject.xcodeproject` in Xcode. Because React Native's iOS code is now pulled in via CocoaPods, you also need to remove the `React`, `RCTImage`, etc. subprojects from your app's Xcode project, in case they were added previously.
 
 ### Android
+1. JDK 7+ is required
 1. Add the following snippet to your `android/settings.gradle`:
   ```gradle
   include ':RNMaterialKit'
@@ -58,7 +59,6 @@ Now run `pod install`. This will create an Xcode workspace containing all necess
       .addPackage(new ReactMaterialKitPackage())
       ...
       .build();
-
   ```
 
 Finally, you're good to go, feel free to require `react-native-material-kit` in your JS files.
