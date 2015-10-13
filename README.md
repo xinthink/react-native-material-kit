@@ -48,7 +48,7 @@ Now run `pod install`. This will create an Xcode workspace containing all necess
   ```gradle
   include ':RNMaterialKit'
   project(':RNMaterialKit').projectDir = file('../node_modules/react-native-material-kit/android')
-  
+
   ```
 1. Add `compile project(':RNMaterialKit')` to your `android/app/build.gradle`
 1. Add `ReactMaterialKitPackage` to your `ReactInstanceManager` instance, in your `MainActivity`:
@@ -60,7 +60,7 @@ Now run `pod install`. This will create an Xcode workspace containing all necess
       .addPackage(new ReactMaterialKitPackage())
       ...
       .build();
-      
+
   ```
 
 Finally, you're good to go, feel free to require `react-native-material-kit` in your JS files.
@@ -86,6 +86,7 @@ Have fun! :metal:
 - [Textfields](#text-fields)
 - [Toggles](#toggles)
   - [Icon toggle](#icon-toggle)
+  - [Radio button](#radio-button)
   - [Switch](#switch)
 
 ### Buttons
@@ -349,6 +350,29 @@ The two `Text` tags here, similar to [State List][android-state-list] in *Androi
 
 [toggles-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/toggles.js
 [switch-js-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Switch.html#props
+
+#### Radio button
+
+[![img-radio]][mdl-radio]
+
+```jsx
+  constructor() {
+    super();
+    this.radioGroup = new MKRadioButton.Group();
+  }
+  ...
+  <MKRadioButton
+    checked={true}
+    group={this.radioGroup}
+  />
+```
+
+👉 [props reference][radio-props-doc] and [example code][toggles-sample]
+
+[mdl-radio]: http://www.getmdl.io/components/index.html#toggles-section/radio
+[img-radio]: https://cloud.githubusercontent.com/assets/390805/10442805/bdb08bc0-7188-11e5-8565-4ee0049ad590.gif)
+[radio-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/RadioButton.html#props
+
 
 ## About
 This project began with porting [MaterialKit][], thanks [@nghialv][] for the great work!👍🖖
