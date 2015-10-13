@@ -37,9 +37,8 @@
   PixelRatio,
   TouchableWithoutFeedback,
   Platform,
-} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
-
-<span class="hljs-keyword">const</span> tinycolor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'tinycolor2'</span>);</pre></div></div>
+  processColor,
+} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);</pre></div></div>
             
         </li>
         
@@ -212,15 +211,7 @@ copies over prototye inherited properties.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">parseColor</span>(<span class="hljs-params">color</span>) </span>{
-  <span class="hljs-keyword">if</span> (!color || <span class="hljs-keyword">typeof</span> color === <span class="hljs-string">'number'</span>) {
-    <span class="hljs-keyword">return</span> color;
-  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (color <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Array</span>) {
-    <span class="hljs-keyword">return</span> color.map(parseColor);
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-keyword">var</span> hexString = tinycolor(color).toHex8();
-    <span class="hljs-keyword">var</span> colorInt = <span class="hljs-built_in">parseInt</span>(hexString, <span class="hljs-number">16</span>);
-    <span class="hljs-keyword">if</span> (Platform.OS === <span class="hljs-string">'android'</span>) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> parseColor = processColor;</pre></div></div>
             
         </li>
         
@@ -230,28 +221,6 @@ copies over prototye inherited properties.</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-11">&#182;</a>
-              </div>
-              <p>Android use 32 bit <em>signed</em> integer to represent the color
-We utilize the fact that bitwise operations in JS also operates on
-signed 32 bit integers, so that we can use those to convert from
-<em>unsiged</em> to <em>signed</em> 32bit int that way.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>      colorInt = colorInt | <span class="hljs-number">0x0</span>;
-    }
-    <span class="hljs-keyword">return</span> colorInt;
-  }
-}</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-12">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <h2 id="public-interface">Public interface</h2>
 

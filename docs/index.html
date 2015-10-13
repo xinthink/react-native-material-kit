@@ -38,6 +38,8 @@
                 
                   <li><a href="lib&#x2F;mdl&#x2F;Progress.html">lib&#x2F;mdl&#x2F;Progress.js</a></li>
                 
+                  <li><a href="lib&#x2F;mdl&#x2F;RadioButton.html">lib&#x2F;mdl&#x2F;RadioButton.js</a></li>
+                
                   <li><a href="lib&#x2F;mdl&#x2F;Ripple.html">lib&#x2F;mdl&#x2F;Ripple.js</a></li>
                 
                   <li><a href="lib&#x2F;mdl&#x2F;Slider.html">lib&#x2F;mdl&#x2F;Slider.js</a></li>
@@ -76,7 +78,7 @@
             </td>
             <td class="readme">
 <p><a href="https://www.npmjs.com/package/react-native-material-kit"><img src="https://img.shields.io/npm/v/react-native-material-kit.svg" alt="npm" title="" /></a>
-<a href="https://facebook.github.io/react-native"><img src="https://img.shields.io/badge/react--native-v0.11.x-05A5D1.svg" alt="react-native" title="" /></a>
+<a href="https://facebook.github.io/react-native"><img src="https://img.shields.io/badge/react--native-v0.12.x-05A5D1.svg" alt="react-native" title="" /></a>
 <a href="https://raw.githubusercontent.com/xinthink/react-native-material-kit/master/LICENSE.md"><img src="https://img.shields.io/dub/l/vibe-d.svg" alt="MIT" title="" /></a>
 <a href="https://www.bithound.io/github/xinthink/react-native-material-kit"><img src="https://www.bithound.io/github/xinthink/react-native-material-kit/badges/score.svg" alt="bitHound Score" title="" /></a></p>
 
@@ -114,11 +116,13 @@ end
 <h3 id="android">Android</h3>
 
 <ol>
-<li>Add the following snippet to your <code>android/settings.gradle</code>:
-<code>gradle
+<li>JDK 7+ is required</li>
+<li><p>Add the following snippet to your <code>android/settings.gradle</code>:
+```gradle
 include ':RNMaterialKit'
-project(':RNMaterialKit').projectDir = file('../node_modules/react-native-material-kit/android')
-</code></li>
+project(':RNMaterialKit').projectDir = file('../node_modules/react-native-material-kit/android')</p>
+
+<p>```</p></li>
 <li>Add <code>compile project(':RNMaterialKit')</code> to your <code>android/app/build.gradle</code></li>
 <li><p>Add <code>ReactMaterialKitPackage</code> to your <code>ReactInstanceManager</code> instance, in your <code>MainActivity</code>:
 ```java
@@ -157,6 +161,7 @@ mReactInstanceManager = ReactInstanceManager.builder()
 <li><a href="#text-fields">Textfields</a></li>
 <li><a href="#toggles">Toggles</a>
 <ul><li><a href="#icon-toggle">Icon toggle</a></li>
+<li><a href="#radio-button">Radio button</a></li>
 <li><a href="#switch">Switch</a></li></ul></li>
 </ul>
 
@@ -377,6 +382,23 @@ const Textfield = MKTextField.textfield()
 </code></pre>
 
 <p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Switch.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/toggles.js">example code</a></p>
+
+<h4 id="radiobutton">Radio button</h4>
+
+<p>[<img src="http://www.getmdl.io/components/index.html#toggles-section/radio" alt="img-radio]" title="" /></p>
+
+<pre><code class="jsx">  constructor() {
+    super();
+    this.radioGroup = new MKRadioButton.Group();
+  }
+  ...
+  &lt;MKRadioButton
+    checked={true}
+    group={this.radioGroup}
+  /&gt;
+</code></pre>
+
+<p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/RadioButton.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/toggles.js">example code</a></p>
 
 <h2 id="about">About</h2>
 

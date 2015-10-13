@@ -7,6 +7,7 @@ http://www.xinthink.com/react-native-material-kit/docs/lib/internal/MKTouchable.
 http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Button.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/IconToggle.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Progress.html
+http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/RadioButton.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Ripple.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Slider.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Spinner.android.html
