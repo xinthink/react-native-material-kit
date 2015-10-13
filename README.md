@@ -370,7 +370,7 @@ The two `Text` tags here, similar to [State List][android-state-list] in *Androi
 👉 [props reference][radio-props-doc] and [example code][toggles-sample]
 
 [mdl-radio]: http://www.getmdl.io/components/index.html#toggles-section/radio
-[img-radio]: https://cloud.githubusercontent.com/assets/390805/10442805/bdb08bc0-7188-11e5-8565-4ee0049ad590.gif)
+[img-radio]: https://cloud.githubusercontent.com/assets/390805/10442805/bdb08bc0-7188-11e5-8565-4ee0049ad590.gif
 [radio-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/RadioButton.html#props
 
 
