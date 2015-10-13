@@ -29,3 +29,8 @@ npm-debug.log
 # WebStorm
 #
 .idea
+*.iml
+
+# Android
+local.properties
+.gradle/
