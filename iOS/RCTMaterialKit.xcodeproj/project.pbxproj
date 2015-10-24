@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8A6D44471BB189F500D6A5EB /* MKTouchable.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6D44461BB189F500D6A5EB /* MKTouchable.m */; settings = {ASSET_TAGS = (); }; };
-		8ABF4CC51BB191C500158736 /* MKTouchableManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ABF4CC41BB191C500158736 /* MKTouchableManager.m */; settings = {ASSET_TAGS = (); }; };
+		8A6D44471BB189F500D6A5EB /* MKTouchable.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6D44461BB189F500D6A5EB /* MKTouchable.m */; };
+		8ABF4CC51BB191C500158736 /* MKTouchableManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ABF4CC41BB191C500158736 /* MKTouchableManager.m */; };
 		8AD23F3C1B62180200384806 /* UIColor+MKColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD23F3B1B62180200384806 /* UIColor+MKColor.m */; };
 /* End PBXBuildFile section */
 
@@ -188,7 +188,7 @@
 					"$(SRCROOT)/../../react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -230,7 +230,7 @@
 					"$(SRCROOT)/../../react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
