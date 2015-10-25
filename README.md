@@ -69,13 +69,15 @@ Finally, you're good to go, feel free to require `react-native-material-kit` in 
 Have fun! :metal:
 
 ## Resources
-- Source code of [Demo app][]
+- [Release Notes]
 - Refer to the [Annotated Source][docs] as API docs
+- Source code of [Demo app][]
 - For contributors, please refer to [How to debug local RNMK module][debug-with-demo]
 
 [docs]: http://xinthink.github.io/react-native-material-kit/docs/index.html
 [Demo app]: https://github.com/xinthink/rnmk-demo
 [debug-with-demo]: https://github.com/xinthink/rnmk-demo#debugging-local-rnmk-module
+[Release Notes]: https://github.com/xinthink/react-native-material-kit/releases
 
 ## Components
 - [Buttons](#buttons)
