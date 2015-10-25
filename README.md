@@ -7,7 +7,7 @@ A set of UI components, in the purpose of introducing [Material Design][md] to a
 
 [npm-badge]: https://img.shields.io/npm/v/react-native-material-kit.svg
 [npm]: https://www.npmjs.com/package/react-native-material-kit
-[rn-badge]: https://img.shields.io/badge/react--native-v0.12.x-05A5D1.svg
+[rn-badge]: https://img.shields.io/badge/react--native-v0.13.x-05A5D1.svg
 [rn]: https://facebook.github.io/react-native
 [md]: http://www.google.com/design/spec/material-design/introduction.html
 [license-badge]: https://img.shields.io/dub/l/vibe-d.svg
@@ -51,8 +51,7 @@ Now run `pod install`. This will create an Xcode workspace containing all necess
 
   ```
 1. Add `compile project(':RNMaterialKit')` to your `android/app/build.gradle`
-1. Add `import com.github.xinthink.rnmk.ReactMaterialKitPackage; ` in `MainActivity.java` imports 
-1. Add `ReactMaterialKitPackage` to your `ReactInstanceManager` instance, in your `MainActivity`:
+1. Import `com.github.xinthink.rnmk.ReactMaterialKitPackage` and register it to the `ReactInstanceManager`, in your `MainActivity` (or equivalent):
   ```java
   mReactInstanceManager = ReactInstanceManager.builder()
       .setApplication(getApplication())

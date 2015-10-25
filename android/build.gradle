@@ -30,6 +30,6 @@ repositories {
 }
 
 dependencies {
-    provided 'com.facebook.react:react-native:0.12.+'
+    provided 'com.facebook.react:react-native:0.13.+'
     //compile 'com.android.support:design:23.0.1'
 }
