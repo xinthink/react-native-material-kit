@@ -51,6 +51,7 @@ Now run `pod install`. This will create an Xcode workspace containing all necess
 
   ```
 1. Add `compile project(':RNMaterialKit')` to your `android/app/build.gradle`
+1. Add `import com.github.xinthink.rnmk.ReactMaterialKitPackage; ` in `MainActivity.java` imports 
 1. Add `ReactMaterialKitPackage` to your `ReactInstanceManager` instance, in your `MainActivity`:
   ```java
   mReactInstanceManager = ReactInstanceManager.builder()
