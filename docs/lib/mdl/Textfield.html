@@ -116,11 +116,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p><strong><i>FIXME</i></strong> color has to be an int since RN v0.12, <a href="https://github.com/facebook/react-native/issues/3300">https://github.com/facebook/react-native/issues/3300</a></p>
+              <p><strong><i>FIXME</i></strong> color has to be wrapped into the style object since RN 0.13</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">this</span>.refs.label.setNativeProps({color: utils.parseColor(color)});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">this</span>.refs.label.setNativeProps({style:{color: utils.parseColor(color)}});</pre></div></div>
             
         </li>
         
@@ -131,7 +131,9 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>use this with RN before 0.12
+              <p>color has to be an int since RN v0.12, <a href="https://github.com/facebook/react-native/issues/3300">https://github.com/facebook/react-native/issues/3300</a>, use this with RN 0.12
+this.refs.label.setNativeProps({color: utils.parseColor(color)});
+use this with RN before 0.12
 this.refs.label.setNativeProps({color});</p>
 
             </div>
@@ -524,6 +526,9 @@ which has floating label and underline effect.</p>
 
   set bufferedValue(v) {
     <span class="hljs-keyword">this</span>._bufferedValue = v;
+    <span class="hljs-keyword">if</span> (v) {
+      <span class="hljs-keyword">this</span>._aniFloatLabel();
+    }
   }
 
   get bufferedValue() {
@@ -546,7 +551,7 @@ which has floating label and underline effect.</p>
 
   componentWillReceiveProps(nextProps) {
     <span class="hljs-keyword">this</span>.bufferedValue = nextProps.value || nextProps.text ||
-      <span class="hljs-keyword">this</span>.props.defaultValue;
+      nextProps.defaultValue;
     <span class="hljs-keyword">this</span>._originPlaceholder = nextProps.placeholder;
   }
 
@@ -569,9 +574,22 @@ which has floating label and underline effect.</p>
     <span class="hljs-built_in">Object</span>.assign(<span class="hljs-keyword">this</span>.inputFrame, {left, top, width, height});
     <span class="hljs-keyword">this</span>.refs.underline.updateLineLength(width, () =&gt; {
       <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.bufferedValue || <span class="hljs-keyword">this</span>.isFocused()) {
-        <span class="hljs-keyword">this</span>._aniStartHighlight();  <span class="hljs-comment">// if input not empty, lift the label</span>
+        <span class="hljs-keyword">this</span>._aniStartHighlight(<span class="hljs-keyword">this</span>.isFocused());  <span class="hljs-comment">// if input not empty, lift the label</span>
       }
     });
+  }
+
+  _aniFloatLabel() {
+    <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span>.bufferedValue &amp;&amp; <span class="hljs-keyword">this</span>.props.floatingLabelEnabled)) {
+      <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.refs.floatingLabel) {
+      <span class="hljs-keyword">const</span> animations = <span class="hljs-keyword">this</span>.refs.floatingLabel.aniFloatLabel();
+      <span class="hljs-keyword">if</span> (animations.length) {
+        Animated.parallel(animations).start();
+      }
+    }
   }</pre></div></div>
             
         </li>
@@ -587,7 +605,7 @@ which has floating label and underline effect.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  _aniStartHighlight() {
+            <div class="content"><div class='highlight'><pre>  _aniStartHighlight(focused) {
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.floatingLabelEnabled) {</pre></div></div>
             
         </li>
@@ -635,7 +653,7 @@ which has floating label and underline effect.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">const</span> animations = <span class="hljs-keyword">this</span>.refs.underline.aniStretchUnderline(<span class="hljs-keyword">this</span>.isFocused());</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">const</span> animations = <span class="hljs-keyword">this</span>.refs.underline.aniStretchUnderline(focused);</pre></div></div>
             
         </li>
         
@@ -772,7 +790,7 @@ which has floating label and underline effect.</p>
   }
 
   _onFocus() {
-    <span class="hljs-keyword">this</span>._aniStartHighlight();
+    <span class="hljs-keyword">this</span>._aniStartHighlight(<span class="hljs-literal">true</span>);
     <span class="hljs-keyword">this</span>._callback(<span class="hljs-string">'onFocus'</span>);
   }
 
@@ -810,16 +828,6 @@ which has floating label and underline effect.</p>
           <span class="hljs-attribute">text</span>=<span class="hljs-value">{this.props.placeholder}</span>
         /&gt;</span>
       )</span>;
-
-      defaultDim = {
-        width: <span class="hljs-number">100</span>,
-        height: <span class="hljs-number">38</span>,
-      };
-    } <span class="hljs-keyword">else</span> {
-      defaultDim = {
-        width: <span class="hljs-number">100</span>,
-        height: <span class="hljs-number">28</span>,
-      };
     }
 
     <span class="hljs-keyword">const</span> underlineProps = utils.extractProps(<span class="hljs-keyword">this</span>, [<span class="hljs-string">'tintColor'</span>,
@@ -830,7 +838,7 @@ which has floating label and underline effect.</p>
     });
 
     <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">View</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{[defaultDim,</span> <span class="hljs-attribute">this.props.style</span>]} &gt;</span>
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">View</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{this.props.style}</span> &gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">TextInput</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">input</span>
           <span class="hljs-attribute">ref</span>=<span class="hljs-value">"input"</span>
           {<span class="hljs-attribute">...inputProps</span>}

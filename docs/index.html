@@ -78,7 +78,7 @@
             </td>
             <td class="readme">
 <p><a href="https://www.npmjs.com/package/react-native-material-kit"><img src="https://img.shields.io/npm/v/react-native-material-kit.svg" alt="npm" title="" /></a>
-<a href="https://facebook.github.io/react-native"><img src="https://img.shields.io/badge/react--native-v0.12.x-05A5D1.svg" alt="react-native" title="" /></a>
+<a href="https://facebook.github.io/react-native"><img src="https://img.shields.io/badge/react--native-v0.13.x-05A5D1.svg" alt="react-native" title="" /></a>
 <a href="https://raw.githubusercontent.com/xinthink/react-native-material-kit/master/LICENSE.md"><img src="https://img.shields.io/dub/l/vibe-d.svg" alt="MIT" title="" /></a>
 <a href="https://www.bithound.io/github/xinthink/react-native-material-kit"><img src="https://www.bithound.io/github/xinthink/react-native-material-kit/badges/score.svg" alt="bitHound Score" title="" /></a></p>
 
@@ -124,7 +124,7 @@ project(':RNMaterialKit').projectDir = file('../node_modules/react-native-materi
 
 <p>```</p></li>
 <li>Add <code>compile project(':RNMaterialKit')</code> to your <code>android/app/build.gradle</code></li>
-<li><p>Add <code>ReactMaterialKitPackage</code> to your <code>ReactInstanceManager</code> instance, in your <code>MainActivity</code>:
+<li><p>Import <code>com.github.xinthink.rnmk.ReactMaterialKitPackage</code> and register it to the <code>ReactInstanceManager</code>, in your <code>MainActivity</code> (or equivalent):
 ```java
 mReactInstanceManager = ReactInstanceManager.builder()
   .setApplication(getApplication())
@@ -144,8 +144,9 @@ mReactInstanceManager = ReactInstanceManager.builder()
 <h2 id="resources">Resources</h2>
 
 <ul>
-<li>Source code of <a href="https://github.com/xinthink/rnmk-demo">Demo app</a></li>
+<li><a href="https://github.com/xinthink/react-native-material-kit/releases">Release Notes</a></li>
 <li>Refer to the <a href="http://xinthink.github.io/react-native-material-kit/docs/index.html">Annotated Source</a> as API docs</li>
+<li>Source code of <a href="https://github.com/xinthink/rnmk-demo">Demo app</a></li>
 <li>For contributors, please refer to <a href="https://github.com/xinthink/rnmk-demo#debugging-local-rnmk-module">How to debug local RNMK module</a></li>
 </ul>
 

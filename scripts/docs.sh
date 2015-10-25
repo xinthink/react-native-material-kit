@@ -1,6 +1,6 @@
 #!/bin/zsh
 SITE_DIR=$(cd `dirname $0`/.. && pwd)
-LIB_DIR=$(cd `dirname $0`/../../rct-material-kit && pwd)
+LIB_DIR=$(cd `dirname $0`/../../react-native-material-kit && pwd)
 
 cd $LIB_DIR
 docco-central --title 'Index' \

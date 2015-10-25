@@ -73,7 +73,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> dimen = PropTypes.objectOf({
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> dimen = PropTypes.shape({
   width: PropTypes.number,
   height: PropTypes.number,
 });</pre></div></div>
@@ -91,7 +91,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> font = PropTypes.objectOf({
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> font = PropTypes.shape({
   color: PropTypes.string,
   fontSize: PropTypes.number,
   fontWeight: Text.propTypes.style.fontWeight,

@@ -51,7 +51,9 @@
 <span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../MKColor'</span>);
 <span class="hljs-keyword">const</span> Ripple = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./Ripple'</span>);
 <span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../utils'</span>);
-<span class="hljs-keyword">const</span> {getTheme} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../theme'</span>);</pre></div></div>
+<span class="hljs-keyword">const</span> {getTheme} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../theme'</span>);
+
+<span class="hljs-keyword">const</span> DEFAULT_EXTRA_RIPPLE_RADII = <span class="hljs-number">16</span>;</pre></div></div>
             
         </li>
         
@@ -75,6 +77,8 @@
     <span class="hljs-keyword">this</span>._group = <span class="hljs-literal">null</span>;
     <span class="hljs-keyword">this</span>.state = {
       checked: <span class="hljs-literal">false</span>,
+      width: <span class="hljs-number">0</span>,
+      height: <span class="hljs-number">0</span>,
     };
   }
 
@@ -93,6 +97,18 @@
   _initView(checked) {
     <span class="hljs-keyword">this</span>.setState({checked});
     <span class="hljs-keyword">this</span>._aniChecked(checked)
+  }
+
+  _onLayout({nativeEvent: {layout: {width, height}}}) {
+    <span class="hljs-keyword">if</span> (width === <span class="hljs-keyword">this</span>.state.width &amp;&amp; height === <span class="hljs-keyword">this</span>.state.height) {
+      <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-keyword">const</span> padding = <span class="hljs-keyword">this</span>.props.extraRippleRadius || DEFAULT_EXTRA_RIPPLE_RADII;
+    <span class="hljs-keyword">this</span>.setState({
+      width: width + padding,
+      height: height + padding,
+    });
   }</pre></div></div>
             
         </li>
@@ -191,7 +207,7 @@
     <span class="hljs-keyword">const</span> rippleColor = <span class="hljs-keyword">this</span>.props.rippleColor || <span class="hljs-string">`rgba(<span class="hljs-subst">${getTheme().RGBPrimaryColor}</span>,.2)`</span>;
 
     <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">TouchableWithoutFeedback</span> {<span class="hljs-attribute">...utils.extractTouchableProps</span>(<span class="hljs-attribute">this</span>)}&gt;</span>
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">TouchableWithoutFeedback</span> {<span class="hljs-attribute">...utils.extractTouchableProps</span>(<span class="hljs-attribute">this</span>)} &gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">Ripple</span>
           {<span class="hljs-attribute">...this.props</span>}
           <span class="hljs-attribute">maskBorderRadiusInPercent</span>=<span class="hljs-value">{50}</span>
@@ -199,7 +215,10 @@
           <span class="hljs-attribute">rippleColor</span>=<span class="hljs-value">{rippleColor}</span>
           <span class="hljs-attribute">onTouch</span>=<span class="hljs-value">{this._onTouch.bind(this)}</span>
           <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
-            <span class="hljs-attribute">padding:</span> <span class="hljs-attribute">16</span>,
+            <span class="hljs-attribute">justifyContent:</span> '<span class="hljs-attribute">center</span>',
+            <span class="hljs-attribute">alignItems:</span> '<span class="hljs-attribute">center</span>',
+            <span class="hljs-attribute">width:</span> <span class="hljs-attribute">this.state.width</span>,
+            <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this.state.height</span>,
           }}
           &gt;</span>
           <span class="hljs-tag">&lt;<span class="hljs-title">View</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"outerCircle"</span>
@@ -209,6 +228,7 @@
                   },
                   <span class="hljs-attribute">this.props.style</span>,
                 ]}
+                <span class="hljs-attribute">onLayout</span>=<span class="hljs-value">{this._onLayout.bind(this)}</span>
             &gt;</span>
             <span class="hljs-tag">&lt;<span class="hljs-title">Animated.View</span>
               <span class="hljs-attribute">ref</span>=<span class="hljs-value">"innerCircle"</span>
@@ -355,8 +375,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  onCheckedChange: PropTypes.func,
-};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  onCheckedChange: PropTypes.func,</pre></div></div>
             
         </li>
         
@@ -366,6 +385,23 @@
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>How far the ripple can extend outside the RadioButton’s border,
+default is 16</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  extraRippleRadius: PropTypes.number,
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <h2 id="-section-id-defaults-defaults-section-"><section id='defaults'>Defaults</section></h2>
 
@@ -378,22 +414,8 @@
     justifyContent: <span class="hljs-string">'center'</span>,
     alignItems: <span class="hljs-string">'center'</span>,
     width: <span class="hljs-number">20</span>,
-    height: <span class="hljs-number">20</span>,</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-16">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
-              </div>
-              <p>margin: 22,</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>    borderWidth: <span class="hljs-number">2</span>,
+    height: <span class="hljs-number">20</span>,
+    borderWidth: <span class="hljs-number">2</span>,
     borderRadius: <span class="hljs-number">10</span>,
   },
 };</pre></div></div>
