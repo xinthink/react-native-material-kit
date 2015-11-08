@@ -166,7 +166,7 @@ the jsx equivalent:
 [mdl-theme]: http://www.getmdl.io/customize/index.html
 [buttons-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/buttons.js
 [issue-3]: https://github.com/xinthink/react-native-material-kit/issues/3
-[button-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/MKButton.html#props
+[button-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Button.html#props
 [android-issue-shadow]: https://facebook.github.io/react-native/docs/known-issues.html#no-support-for-shadows-on-android
 
 ### Cards
