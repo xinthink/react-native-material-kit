@@ -174,7 +174,7 @@ the jsx equivalent:
 
 Apply [`Card Style`][cards-mdl] with only few styles !.
 ```jsx
-require('react-native-material-kit');
+const MK = require('react-native-material-kit');
 const {
   MKCardStyles
 } = MK;
