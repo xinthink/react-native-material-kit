@@ -1,6 +1,6 @@
 {
   "name": "react-native-material-kit",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Bringing Material Design to React Native",
   "main": "lib/index.js",
   "author": "Yingxin Wu <yingxinwu.g@gmail.com>",
@@ -26,7 +26,7 @@
     "url": "git://github.com/xinthink/react-native-material-kit.git"
   },
   "peerDependencies": {
-    "react-native": ">=0.13.0 <1.0.0"
+    "react-native": ">=0.16.0 <1.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^4.0.10",
