@@ -560,10 +560,12 @@ which has floating label and underline effect.</p>
   }
 
   _doMeasurement() {
-    <span class="hljs-keyword">this</span>.refs.input.measure(<span class="hljs-keyword">this</span>._onInputMeasured.bind(<span class="hljs-keyword">this</span>));
-    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.floatingLabelEnabled) {
-      <span class="hljs-keyword">this</span>.refs.floatingLabel.measure(<span class="hljs-keyword">this</span>._onLabelMeasured.bind(<span class="hljs-keyword">this</span>));
-    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.refs.input) {
+      <span class="hljs-keyword">this</span>.refs.input.measure(<span class="hljs-keyword">this</span>._onInputMeasured.bind(<span class="hljs-keyword">this</span>));
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.floatingLabelEnabled) {
+          <span class="hljs-keyword">this</span>.refs.floatingLabel.measure(<span class="hljs-keyword">this</span>._onLabelMeasured.bind(<span class="hljs-keyword">this</span>));
+        }
+      }
   }
 
   _onLabelMeasured(left, top, width, height) {

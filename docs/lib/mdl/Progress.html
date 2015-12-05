@@ -96,35 +96,29 @@
     <span class="hljs-keyword">this</span>.buffer = nextProps.buffer;
   }
 
-  componentDidMount() {
-    requestAnimationFrame(() =&gt; {
-      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.refs.bg) {
-        <span class="hljs-keyword">return</span>;
-      }
-
-      <span class="hljs-keyword">this</span>.refs.bg.measure((left, top, width, height) =&gt; {
-        <span class="hljs-keyword">this</span>._totalLength = width;
-        <span class="hljs-keyword">this</span>._height.setValue(height);
-        <span class="hljs-keyword">this</span>._aniUpdateProgress(<span class="hljs-keyword">this</span>.progress);
-        <span class="hljs-keyword">this</span>._aniUpdateBuffer(<span class="hljs-keyword">this</span>.buffer);
-      });
-    });
+  _onLayout({nativeEvent: {layout: {width, height}}}) {
+    <span class="hljs-keyword">if</span> (width &gt; <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-keyword">this</span>._totalLength !== width) {
+      <span class="hljs-keyword">this</span>._totalLength = width;
+      <span class="hljs-keyword">this</span>._height.setValue(height);
+      <span class="hljs-keyword">this</span>._aniUpdateProgress(<span class="hljs-keyword">this</span>.progress);
+      <span class="hljs-keyword">this</span>._aniUpdateBuffer(<span class="hljs-keyword">this</span>.buffer);
+    }
   }
 
   _aniUpdateProgress(theProgress) {
-    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._totalLength &lt;= <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span>._totalLength &gt; <span class="hljs-number">0</span> &amp;&amp; theProgress &gt;= <span class="hljs-number">0</span>)) {
       <span class="hljs-keyword">return</span>;
     }
 
     Animated.timing(<span class="hljs-keyword">this</span>._animatedLength, {
       toValue: theProgress * <span class="hljs-keyword">this</span>._totalLength,
       duration: <span class="hljs-keyword">this</span>.props.progressAniDuration || <span class="hljs-number">300</span>,
-      easing: Easing.quad,
+      easing: Easing.out(Easing.quad),
     }).start();
   }
 
   _aniUpdateBuffer(buffer) {
-    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._totalLength &lt;= <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span>._totalLength &gt; <span class="hljs-number">0</span> &amp;&amp; buffer &gt;= <span class="hljs-number">0</span>)) {
       <span class="hljs-keyword">return</span>;
     }
 
@@ -139,6 +133,7 @@
       <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">View</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">background</span> <span class="hljs-attribute">layer</span>
         <span class="hljs-attribute">ref</span>=<span class="hljs-value">"bg"</span>
         <span class="hljs-attribute">style</span>=<span class="hljs-value">{[Progress.defaultProps.style,</span> <span class="hljs-attribute">this.props.style</span>]}
+        <span class="hljs-attribute">onLayout</span>=<span class="hljs-value">{this._onLayout.bind(this)}</span>
         &gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">Animated.View</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">buffering</span> <span class="hljs-attribute">layer</span>
           <span class="hljs-attribute">ref</span>=<span class="hljs-value">"bufferLayer"</span>
@@ -179,9 +174,11 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  set: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">value</span>) </span>{
-    <span class="hljs-keyword">this</span>._progress = value;
-    <span class="hljs-keyword">this</span>._aniUpdateProgress(value);
+            <div class="content"><div class='highlight'><pre>  set: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">progress</span>) </span>{
+    <span class="hljs-keyword">if</span> (progress &gt;= <span class="hljs-number">0</span> &amp;&amp; progress !== <span class="hljs-keyword">this</span>._progress) {
+      <span class="hljs-keyword">this</span>._progress = progress;
+      <span class="hljs-keyword">this</span>._aniUpdateProgress(progress);
+    }
   },</pre></div></div>
             
         </li>
@@ -220,8 +217,10 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>  set: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">buffer</span>) </span>{
-    <span class="hljs-keyword">this</span>._buffer = buffer;
-    <span class="hljs-keyword">this</span>._aniUpdateBuffer(buffer);
+    <span class="hljs-keyword">if</span> (buffer &gt;= <span class="hljs-number">0</span> &amp;&amp; buffer !== <span class="hljs-keyword">this</span>._buffer) {
+      <span class="hljs-keyword">this</span>._buffer = buffer;
+      <span class="hljs-keyword">this</span>._aniUpdateBuffer(buffer);
+    }
   },</pre></div></div>
             
         </li>
@@ -401,22 +400,16 @@
     <span class="hljs-keyword">this</span>._aniUpdateProgress = <span class="hljs-keyword">this</span>._aniUpdateProgress.bind(<span class="hljs-keyword">this</span>);
   }
 
-  componentDidMount() {
-    requestAnimationFrame(() =&gt; {
-      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.refs.bg) {
-        <span class="hljs-keyword">return</span>;
-      }
-
-      <span class="hljs-keyword">this</span>.refs.bg.measure((left, top, width, height) =&gt; {
-        <span class="hljs-keyword">this</span>._totalLength = width;
-        <span class="hljs-keyword">this</span>._height.setValue(height);
-        <span class="hljs-keyword">this</span>._aniUpdateProgress();
-      });
-    });
+  _onLayout({nativeEvent: {layout: {width, height}}}) {
+    <span class="hljs-keyword">if</span> (width &gt; <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-keyword">this</span>._totalLength !== width) {
+      <span class="hljs-keyword">this</span>._totalLength = width;
+      <span class="hljs-keyword">this</span>._height.setValue(height);
+      <span class="hljs-keyword">this</span>._aniUpdateProgress();
+    }
   }
 
   _aniUpdateProgress() {
-    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._totalLength &lt;= <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span>._totalLength &gt; <span class="hljs-number">0</span>)) {
       <span class="hljs-keyword">return</span>;
     }
 
@@ -438,7 +431,7 @@
         Animated.timing(<span class="hljs-keyword">this</span>._animatedBlock1.left, {
           toValue: <span class="hljs-keyword">this</span>._totalLength,
           duration: <span class="hljs-keyword">this</span>.props.progressAniDuration || <span class="hljs-number">500</span>,
-          easing: Easing.quad,
+          easing: Easing.out(Easing.quad),
         }),
         <span class="hljs-keyword">this</span>._getBlock2Ani(),
       ]),
@@ -458,12 +451,12 @@
         Animated.timing(<span class="hljs-keyword">this</span>._animatedBlock2.left, {
           toValue: <span class="hljs-keyword">this</span>._totalLength,
           duration: <span class="hljs-keyword">this</span>.props.progressAniDuration || <span class="hljs-number">705</span>,
-          easing: Easing.quad,
+          easing: Easing.out(Easing.quad),
         }),
         Animated.timing(<span class="hljs-keyword">this</span>._animatedBlock2.right, {
           toValue: <span class="hljs-number">0</span>,
           duration: <span class="hljs-keyword">this</span>.props.progressAniDuration || <span class="hljs-number">700</span>,
-          easing: Easing.quad,
+          easing: Easing.out(Easing.quad),
         }),
       ]),
     ]);
@@ -474,6 +467,7 @@
       <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">View</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">background</span> <span class="hljs-attribute">layer</span>
         <span class="hljs-attribute">ref</span>=<span class="hljs-value">"bg"</span>
         <span class="hljs-attribute">style</span>=<span class="hljs-value">{[Progress.defaultProps.style,</span> <span class="hljs-attribute">this.props.style</span>]}
+        <span class="hljs-attribute">onLayout</span>=<span class="hljs-value">{this._onLayout.bind(this)}</span>
         &gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">Animated.View</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">1st</span> <span class="hljs-attribute">animated</span> <span class="hljs-attribute">progress</span> <span class="hljs-attribute">block</span>
           <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
