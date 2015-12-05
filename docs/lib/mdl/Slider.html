@@ -428,34 +428,37 @@
             <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Slider</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
   constructor(props) {
     <span class="hljs-keyword">super</span>(props);
+    <span class="hljs-keyword">this</span>._value = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">this</span>._trackTotalLength = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">this</span>._prevPointerX = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">this</span>._animatedTrackLength = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>);
     <span class="hljs-keyword">this</span>._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (evt, gestureState) =&gt; <span class="hljs-literal">true</span>,
       onStartShouldSetPanResponderCapture: (evt, gestureState) =&gt; <span class="hljs-literal">true</span>,
       onMoveShouldSetPanResponder: (evt, gestureState) =&gt; <span class="hljs-literal">true</span>,
       onMoveShouldSetPanResponderCapture: (evt, gestureState) =&gt; <span class="hljs-literal">true</span>,
-      onPanResponderGrant: (evt, gestureState) =&gt; {
-        <span class="hljs-keyword">const</span> e = <span class="hljs-keyword">this</span>._getTouchEvent(<span class="hljs-string">"TOUCH_DOWN"</span>, gestureState);
-        <span class="hljs-keyword">this</span>._onTouchEvent(e);
+      onPanResponderGrant: (evt) =&gt; {
+        <span class="hljs-keyword">this</span>._prevPointerX = evt.nativeEvent.locationX;
+        <span class="hljs-keyword">this</span>._onTouchEvent({
+          type: <span class="hljs-string">'TOUCH_DOWN'</span>,
+          x: <span class="hljs-keyword">this</span>._prevPointerX,
+        });
       },
       onPanResponderMove: (evt, gestureState) =&gt; {
-        <span class="hljs-keyword">const</span> e = <span class="hljs-keyword">this</span>._getTouchEvent(<span class="hljs-string">"TOUCH_MOVE"</span>, gestureState);
-        <span class="hljs-keyword">this</span>._onTouchEvent(e);
+        <span class="hljs-keyword">this</span>._onTouchEvent({
+          type: <span class="hljs-string">'TOUCH_MOVE'</span>,
+          x: <span class="hljs-keyword">this</span>._prevPointerX + gestureState.dx,
+        });
       },
       onPanResponderTerminationRequest: (evt, gestureState) =&gt; <span class="hljs-literal">true</span>,
       onPanResponderRelease: (evt, gestureState) =&gt; {
-        <span class="hljs-keyword">const</span> e = <span class="hljs-keyword">this</span>._getTouchEvent(<span class="hljs-string">"TOUCH_UP"</span>, gestureState);
-        <span class="hljs-keyword">this</span>._onTouchEvent(e);
+        <span class="hljs-keyword">this</span>._onPanResponderEnd(gestureState);
       },
       onPanResponderTerminate: (evt, gestureState) =&gt; {
-        <span class="hljs-keyword">const</span> e = <span class="hljs-keyword">this</span>._getTouchEvent(<span class="hljs-string">"TOUCH_CANCEL"</span>, gestureState);
-        <span class="hljs-keyword">this</span>._onTouchEvent(e);
+        <span class="hljs-keyword">this</span>._onPanResponderEnd(gestureState, <span class="hljs-literal">true</span>);
       },
       onShouldBlockNativeResponder: (evt, gestureState) =&gt; <span class="hljs-literal">true</span>,
     });
-    <span class="hljs-keyword">this</span>._value = <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">this</span>._trackTotalLength = <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">this</span>._pageX = <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">this</span>._animatedTrackLength = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>);
   }
 
   componentWillMount() {
@@ -466,47 +469,8 @@
     <span class="hljs-keyword">this</span>._onThumbRadiiUpdate(nextProps);
   }
 
-  componentDidMount() {
-    requestAnimationFrame(() =&gt; {
-      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.refs.container) {
-        <span class="hljs-keyword">return</span>;
-      }
-
-      <span class="hljs-keyword">this</span>.refs.container.measure((left, top, width, height, pageX, pageY) =&gt; {
-        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'componentDidMount measured pageX: %d'</span>, pageX);
-        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._pageX === <span class="hljs-number">0</span> || pageX &lt; <span class="hljs-keyword">this</span>._pageX) {
-          <span class="hljs-keyword">this</span>._pageX = pageX;
-        }
-      });
-    });
-  }
-
-  _onLayout() {</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-20">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-20">&#182;</a>
-              </div>
-              <p>when layout changed, measure the position on screen</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">this</span>.refs.container.measure((left, top, width, height, pageX) =&gt; {
-      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onLayout measured pageX: %d'</span>, pageX);
-      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._pageX === <span class="hljs-number">0</span> || pageX &lt; <span class="hljs-keyword">this</span>._pageX) {
-        <span class="hljs-keyword">this</span>._pageX = pageX;
-      }
-    });
-  }
-
   _onTrackLayout({nativeEvent: {layout: {width}}}) {
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._trackTotalLength !== width) {
-      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'track len: '</span> + width);
       <span class="hljs-keyword">this</span>._trackTotalLength = width;
       <span class="hljs-keyword">this</span>._aniUpdateValue(<span class="hljs-keyword">this</span>.value);
     }
@@ -536,20 +500,25 @@
     <span class="hljs-keyword">this</span>._confirmMoveThumb(x);
   }
 
-  _getTouchEvent(type, gestureState) {
-    <span class="hljs-keyword">const</span> x = gestureState.x0 - <span class="hljs-keyword">this</span>._pageX + gestureState.dx;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'touch x0:%d dx:%d, _pageX:%d'</span>, gestureState.x0, gestureState.dx, <span class="hljs-keyword">this</span>._pageX);
-    <span class="hljs-keyword">return</span> { type: type, x: x, y: <span class="hljs-number">0</span> };
+  _onPanResponderEnd(gestureState, cancelled) {
+    <span class="hljs-keyword">if</span> (!cancelled) {
+      <span class="hljs-keyword">this</span>._prevPointerX = <span class="hljs-keyword">this</span>._prevPointerX + gestureState.dx;
+    }
+
+    <span class="hljs-keyword">this</span>._onTouchEvent({
+      type: cancelled ? <span class="hljs-string">'TOUCH_CANCEL'</span> : <span class="hljs-string">'TOUCH_DOWN'</span>,
+      x: <span class="hljs-keyword">this</span>._prevPointerX,
+    });
   }</pre></div></div>
             
         </li>
         
         
-        <li id="section-21">
+        <li id="section-20">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
+                <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
               <p>Touch events handling</p>
 
@@ -569,11 +538,11 @@
         </li>
         
         
-        <li id="section-22">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-22">&#182;</a>
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p>should not use the coordination inside a cancelled event</p>
 
@@ -587,11 +556,11 @@
         </li>
         
         
-        <li id="section-23">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-23">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <p>get touch position relative to the track</p>
 
@@ -602,11 +571,11 @@
         </li>
         
         
-        <li id="section-24">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-24">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <p>touch location relative to the track</p>
 
@@ -652,11 +621,11 @@
         </li>
         
         
-        <li id="section-25">
+        <li id="section-24">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-25">&#182;</a>
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <p>when thumb radii updated, re-calc the dimens</p>
 
@@ -676,11 +645,11 @@
         </li>
         
         
-        <li id="section-26">
+        <li id="section-25">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-26">&#182;</a>
+                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <p>making room for the Thumb, cause’s Android doesn’t support <code>overflow: visible</code></p>
 <ul>
@@ -697,18 +666,16 @@
     };
 
     <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">View</span>
-        {<span class="hljs-attribute">...this._panResponder.panHandlers</span>}
-        <span class="hljs-attribute">ref</span>=<span class="hljs-value">"container"</span>
-        <span class="hljs-attribute">style</span>=<span class="hljs-value">{[this.props.style,</span> {
-          <span class="hljs-attribute">padding:</span> <span class="hljs-attribute">0</span>,
-          <span class="hljs-attribute">paddingTop:</span> <span class="hljs-attribute">0</span>,
-          <span class="hljs-attribute">paddingBottom:</span> <span class="hljs-attribute">0</span>,
-          <span class="hljs-attribute">paddingLeft:</span> <span class="hljs-attribute">0</span>,
-          <span class="hljs-attribute">paddingRight:</span> <span class="hljs-attribute">0</span>,
-        }]}
-        <span class="hljs-attribute">pointerEvents</span>=<span class="hljs-value">"box-only"</span>
-        <span class="hljs-attribute">onLayout</span>=<span class="hljs-value">{this._onLayout.bind(this)}</span>
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">View</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"container"</span>
+            <span class="hljs-attribute">style</span>=<span class="hljs-value">{[this.props.style,</span> {
+              <span class="hljs-attribute">padding:</span> <span class="hljs-attribute">0</span>,
+              <span class="hljs-attribute">paddingTop:</span> <span class="hljs-attribute">0</span>,
+              <span class="hljs-attribute">paddingBottom:</span> <span class="hljs-attribute">0</span>,
+              <span class="hljs-attribute">paddingLeft:</span> <span class="hljs-attribute">0</span>,
+              <span class="hljs-attribute">paddingRight:</span> <span class="hljs-attribute">0</span>,
+            }]}
+            <span class="hljs-attribute">pointerEvents</span>=<span class="hljs-value">"box-only"</span>
+            {<span class="hljs-attribute">...this._panResponder.panHandlers</span>}
         &gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">View</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"track"</span>
               <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
@@ -747,11 +714,11 @@
         </li>
         
         
-        <li id="section-27">
+        <li id="section-26">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-27">&#182;</a>
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <p>Public api to update the current value</p>
 
@@ -771,11 +738,11 @@
         </li>
         
         
-        <li id="section-28">
+        <li id="section-27">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-28">&#182;</a>
+                <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
               <h2 id="-section-id-props-props-section-"><section id='props'>Props</section></h2>
 
@@ -786,11 +753,11 @@
         </li>
         
         
-        <li id="section-29">
+        <li id="section-28">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-29">&#182;</a>
+                <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
               <p><a href="https://facebook.github.io/react-native/docs/view.html#props">RN.View Props</a>…</p>
 
@@ -801,11 +768,11 @@
         </li>
         
         
-        <li id="section-30">
+        <li id="section-29">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-30">&#182;</a>
+                <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
               <p>Minimum value of the range, default is <code>0</code></p>
 
@@ -816,11 +783,11 @@
         </li>
         
         
-        <li id="section-31">
+        <li id="section-30">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-31">&#182;</a>
+                <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
               <p>Maximum value of the range, default is <code>100</code></p>
 
@@ -831,11 +798,11 @@
         </li>
         
         
-        <li id="section-32">
+        <li id="section-31">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-32">&#182;</a>
+                <a class="pilcrow" href="#section-31">&#182;</a>
               </div>
               <p>The thickness of the Slider track</p>
 
@@ -846,11 +813,11 @@
         </li>
         
         
-        <li id="section-33">
+        <li id="section-32">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-33">&#182;</a>
+                <a class="pilcrow" href="#section-32">&#182;</a>
               </div>
               <p>Radius of the thumb of the Slider</p>
 
@@ -861,11 +828,11 @@
         </li>
         
         
-        <li id="section-34">
+        <li id="section-33">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-34">&#182;</a>
+                <a class="pilcrow" href="#section-33">&#182;</a>
               </div>
               <p>Color of the lower part of the track, it’s also the color of the thumb</p>
 
@@ -876,11 +843,11 @@
         </li>
         
         
-        <li id="section-35">
+        <li id="section-34">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-35">&#182;</a>
+                <a class="pilcrow" href="#section-34">&#182;</a>
               </div>
               <p>Color of the upper part of the track</p>
 
@@ -891,11 +858,11 @@
         </li>
         
         
-        <li id="section-36">
+        <li id="section-35">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-36">&#182;</a>
+                <a class="pilcrow" href="#section-35">&#182;</a>
               </div>
               <p>Callback when value changed</p>
 
@@ -907,11 +874,11 @@
         </li>
         
         
-        <li id="section-37">
+        <li id="section-36">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-37">&#182;</a>
+                <a class="pilcrow" href="#section-36">&#182;</a>
               </div>
               <h2 id="-section-id-defaults-defaults-section-"><section id='defaults'>Defaults</section></h2>
 
@@ -928,11 +895,11 @@
         </li>
         
         
-        <li id="section-38">
+        <li id="section-37">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-38">&#182;</a>
+                <a class="pilcrow" href="#section-37">&#182;</a>
               </div>
               <hr>
 
@@ -941,11 +908,11 @@
         </li>
         
         
-        <li id="section-39">
+        <li id="section-38">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-39">&#182;</a>
+                <a class="pilcrow" href="#section-38">&#182;</a>
               </div>
               <p>Builder</p>
 
@@ -958,11 +925,11 @@
         </li>
         
         
-        <li id="section-40">
+        <li id="section-39">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-40">&#182;</a>
+                <a class="pilcrow" href="#section-39">&#182;</a>
               </div>
               <h2 id="slider-builder">Slider builder</h2>
 
@@ -979,11 +946,11 @@
         </li>
         
         
-        <li id="section-41">
+        <li id="section-40">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-41">&#182;</a>
+                <a class="pilcrow" href="#section-40">&#182;</a>
               </div>
               <p>define builder method for each prop</p>
 
@@ -994,11 +961,11 @@
         </li>
         
         
-        <li id="section-42">
+        <li id="section-41">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-42">&#182;</a>
+                <a class="pilcrow" href="#section-41">&#182;</a>
               </div>
               <hr>
 
@@ -1007,11 +974,11 @@
         </li>
         
         
-        <li id="section-43">
+        <li id="section-42">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-43">&#182;</a>
+                <a class="pilcrow" href="#section-42">&#182;</a>
               </div>
               <h2 id="-section-id-builders-built-in-builders-section-"><section id="builders">Built-in builders</section></h2>
 
@@ -1024,11 +991,11 @@
         </li>
         
         
-        <li id="section-44">
+        <li id="section-43">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-44">&#182;</a>
+                <a class="pilcrow" href="#section-43">&#182;</a>
               </div>
               <h2 id="public-interface">Public interface</h2>
 

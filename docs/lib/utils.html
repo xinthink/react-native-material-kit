@@ -90,11 +90,23 @@ copies over prototye inherited properties.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>Convert dips to pixels</p>
+              <p>Remove keys with null value from the given object</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> toPixels = PixelRatio.getPixelSizeForLayoutSize.bind(PixelRatio);</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">compact</span>(<span class="hljs-params">o</span>) </span>{
+  <span class="hljs-keyword">const</span> result = {};
+  <span class="hljs-keyword">const</span> propNames = <span class="hljs-built_in">Object</span>.getOwnPropertyNames(o);
+
+  propNames.forEach((k) =&gt; {
+    <span class="hljs-keyword">const</span> v = o[k];
+    <span class="hljs-keyword">if</span> (v) {
+      result[k] = v;
+    }
+  });
+
+  <span class="hljs-keyword">return</span> result;
+}</pre></div></div>
             
         </li>
         
@@ -104,6 +116,21 @@ copies over prototye inherited properties.</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Convert dips to pixels</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> toPixels = PixelRatio.getPixelSizeForLayoutSize.bind(PixelRatio);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
               <p>Convert pixels back to dips</p>
 
@@ -116,11 +143,11 @@ copies over prototye inherited properties.</p>
         </li>
         
         
-        <li id="section-6">
+        <li id="section-7">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-6">&#182;</a>
+                <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <p>Convert native coorindate value into unit used in JSX</p>
 
@@ -133,11 +160,11 @@ copies over prototye inherited properties.</p>
         </li>
         
         
-        <li id="section-7">
+        <li id="section-8">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <p>Get font size according to the screen density</p>
 
@@ -150,11 +177,11 @@ copies over prototye inherited properties.</p>
         </li>
         
         
-        <li id="section-8">
+        <li id="section-9">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
+                <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <p>Extract the specified props from the given component instance.</p>
 <ul>
@@ -181,11 +208,11 @@ copies over prototye inherited properties.</p>
         </li>
         
         
-        <li id="section-9">
+        <li id="section-10">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
+                <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <p>Extract Touchable props from the given component instance.</p>
 <ul>
@@ -201,11 +228,11 @@ copies over prototye inherited properties.</p>
         </li>
         
         
-        <li id="section-10">
+        <li id="section-11">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
+                <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
               <p>Parse stringified color as int</p>
 
@@ -216,17 +243,18 @@ copies over prototye inherited properties.</p>
         </li>
         
         
-        <li id="section-11">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <h2 id="public-interface">Public interface</h2>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>exports.mergeIntoFast = mergeIntoFast;
+exports.compact = compact;
 exports.toPixels = toPixels;
 exports.toDips = toDips;
 exports.convertCoordinate = convertCoordinate;

@@ -57,12 +57,18 @@
   fontColor: <span class="hljs-string">'rgb(117, 117, 117)'</span>,
   fontSize: <span class="hljs-number">14</span>,
   rippleColor: <span class="hljs-string">'rgba(255,255,255,0.125)'</span>,
-  toggleTheme: {
+  toggleStyle: {
     onColor: <span class="hljs-string">'rgba(63,81,181,0.4)'</span>,  <span class="hljs-comment">// Indigo + alpha</span>
     offColor: <span class="hljs-string">'rgba(0,0,0,0.25)'</span>,
     thumbOnColor: MKColor.Indigo,
     thumbOffColor: MKColor.Silver,
     rippleColor: <span class="hljs-string">'rgba(63,81,181,0.2)'</span>,  <span class="hljs-comment">// Indigo + alpha</span>
+  },
+  radioStyle: {
+    borderOnColor: MKColor.Indigo,
+    borderOffColor: MKColor.Indigo,
+    fillColor: MKColor.Indigo,
+    rippleColor: <span class="hljs-string">`rgba(<span class="hljs-subst">${MKColor.RGBIndigo}</span>,.2)`</span>,
   },
 };</pre></div></div>
             
@@ -76,7 +82,7 @@
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
               <h2 id="-section-id-settheme-settheme-section-"><section id='setTheme'>setTheme</section></h2>
-<p>Set the default theme</p>
+<p>Set the current theme</p>
 <ul>
 <li>{object} <code>theme</code> new <a href="#theme">theme</a></li>
 <li>@see <a href="http://www.getmdl.io/customize">http://www.getmdl.io/customize</a></li>
@@ -98,12 +104,12 @@
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
               <h2 id="-section-id-gettheme-gettheme-section-"><section id='getTheme'>getTheme</section></h2>
-<p>Retrieve the default theme</p>
+<p>Retrieve a copy of the current theme</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>exports.getTheme = () =&gt; {
-  <span class="hljs-keyword">return</span> theme;
+  <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.assign({}, theme);
 };</pre></div></div>
             
         </li>

@@ -204,7 +204,14 @@
   }
 
   render() {
-    <span class="hljs-keyword">const</span> rippleColor = <span class="hljs-keyword">this</span>.props.rippleColor || <span class="hljs-string">`rgba(<span class="hljs-subst">${getTheme().RGBPrimaryColor}</span>,.2)`</span>;
+    <span class="hljs-keyword">const</span> defaultStyle = getTheme().radioStyle;
+    <span class="hljs-keyword">const</span> mergedStyle = <span class="hljs-built_in">Object</span>.assign({}, defaultStyle, utils.compact({
+      borderOnColor: <span class="hljs-keyword">this</span>.props.borderOnColor,
+      borderOffColor: <span class="hljs-keyword">this</span>.props.borderOffColor,
+      fillColor: <span class="hljs-keyword">this</span>.props.fillColor,
+      rippleColor: <span class="hljs-keyword">this</span>.props.rippleColor,
+    }));
+    <span class="hljs-keyword">const</span> borderColor = <span class="hljs-keyword">this</span>.state.checked ? mergedStyle.borderOnColor : mergedStyle.borderOffColor;
 
     <span class="hljs-keyword">return</span> (
       <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">TouchableWithoutFeedback</span> {<span class="hljs-attribute">...utils.extractTouchableProps</span>(<span class="hljs-attribute">this</span>)} &gt;</span>
@@ -212,7 +219,7 @@
           {<span class="hljs-attribute">...this.props</span>}
           <span class="hljs-attribute">maskBorderRadiusInPercent</span>=<span class="hljs-value">{50}</span>
           <span class="hljs-attribute">rippleLocation</span>=<span class="hljs-value">"center"</span>
-          <span class="hljs-attribute">rippleColor</span>=<span class="hljs-value">{rippleColor}</span>
+          <span class="hljs-attribute">rippleColor</span>=<span class="hljs-value">{mergedStyle.rippleColor}</span>
           <span class="hljs-attribute">onTouch</span>=<span class="hljs-value">{this._onTouch.bind(this)}</span>
           <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
             <span class="hljs-attribute">justifyContent:</span> '<span class="hljs-attribute">center</span>',
@@ -223,9 +230,8 @@
           &gt;</span>
           <span class="hljs-tag">&lt;<span class="hljs-title">View</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"outerCircle"</span>
                 <span class="hljs-attribute">style</span>=<span class="hljs-value">{[</span>
-                  <span class="hljs-attribute">RadioButton.defaultProps.style</span>, {
-                    <span class="hljs-attribute">borderColor:</span> <span class="hljs-attribute">MKColor.Indigo</span>,
-                  },
+                  <span class="hljs-attribute">RadioButton.defaultProps.style</span>,
+                  {<span class="hljs-attribute">borderColor</span>},
                   <span class="hljs-attribute">this.props.style</span>,
                 ]}
                 <span class="hljs-attribute">onLayout</span>=<span class="hljs-value">{this._onLayout.bind(this)}</span>
@@ -233,7 +239,7 @@
             <span class="hljs-tag">&lt;<span class="hljs-title">Animated.View</span>
               <span class="hljs-attribute">ref</span>=<span class="hljs-value">"innerCircle"</span>
               <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
-                <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">MKColor.Indigo</span>,
+                <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">mergedStyle.fillColor</span>,
                 <span class="hljs-attribute">width:</span> <span class="hljs-attribute">this._animatedSize</span>,
                 <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this._animatedSize</span>,
                 <span class="hljs-attribute">borderRadius:</span> <span class="hljs-attribute">this._animatedRadius</span>,
@@ -341,11 +347,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
-              <p>Toggle status</p>
+              <p>Color of the border (outer circle), when checked</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  checked: PropTypes.bool,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  borderOnColor: PropTypes.string,</pre></div></div>
             
         </li>
         
@@ -356,11 +362,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
-              <p>Group to which the Radio button belongs</p>
+              <p>Color of the border (outer circle), when unchecked</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  group: PropTypes.object,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  borderOffColor: PropTypes.string,</pre></div></div>
             
         </li>
         
@@ -371,11 +377,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
-              <p>Callback when the toggle status is changed</p>
+              <p>Color of the inner circle, when checked</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  onCheckedChange: PropTypes.func,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  fillColor: PropTypes.string,</pre></div></div>
             
         </li>
         
@@ -385,6 +391,51 @@
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>Toggle status</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  checked: PropTypes.bool,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>Group to which the Radio button belongs</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  group: PropTypes.object,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>Callback when the toggle status is changed</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  onCheckedChange: PropTypes.func,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
               <p>How far the ripple can extend outside the RadioButton’s border,
 default is 16</p>
@@ -397,11 +448,11 @@ default is 16</p>
         </li>
         
         
-        <li id="section-16">
+        <li id="section-19">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
+                <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
               <h2 id="-section-id-defaults-defaults-section-"><section id='defaults'>Defaults</section></h2>
 
@@ -423,14 +474,14 @@ default is 16</p>
         </li>
         
         
-        <li id="section-17">
+        <li id="section-20">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-17">&#182;</a>
+                <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
-              <h2 id="-section-id-radiobutton-radiobutton-section-"><section id='RadioButton'>RadioButton</section></h2>
-<p>The <code>RadioButton</code> component.</p>
+              <h2 id="-section-id-group-group-section-"><section id='Group'>Group</section></h2>
+<p>Managing a group of radio buttons.</p>
 
             </div>
             
@@ -455,18 +506,116 @@ default is 16</p>
         </li>
         
         
-        <li id="section-18">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-18">&#182;</a>
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <hr>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>Builder</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> {
+  Builder,
+} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../builder'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <h2 id="radiobutton-builder">RadioButton builder</h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RadioButtonBuilder</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Builder</span> </span>{
+  build() {
+    <span class="hljs-keyword">const</span> BuiltRadioButton = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">RadioButton</span> </span>{};
+    BuiltRadioButton.defaultProps = <span class="hljs-built_in">Object</span>.assign({}, RadioButton.defaultProps, <span class="hljs-keyword">this</span>.toProps());
+    <span class="hljs-keyword">return</span> BuiltRadioButton;
+  }
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>define builder method for each prop</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>RadioButtonBuilder.defineProps(RadioButton.propTypes);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <hr>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <h2 id="-section-id-builders-built-in-builders-section-"><section id="builders">Built-in builders</section></h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">builder</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> RadioButtonBuilder().withBackgroundColor(MKColor.Transparent);
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
               <h2 id="public-interface">Public interface</h2>
 
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = RadioButton;
-RadioButton.Group = Group;</pre></div></div>
+RadioButton.Group = Group;
+RadioButton.builder = builder;
+RadioButton.Builder = RadioButtonBuilder;</pre></div></div>
             
         </li>
         
