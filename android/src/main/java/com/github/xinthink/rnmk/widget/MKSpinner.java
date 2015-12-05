@@ -17,6 +17,7 @@ import android.view.View;
 
 import com.facebook.react.uimanager.ReactCompoundView;
 import com.github.xinthink.rnmk.R;
+import com.github.xinthink.rnmk.utils.Utils;
 
 import static android.animation.ValueAnimator.RESTART;
 
@@ -196,6 +197,10 @@ public class MKSpinner extends View implements ReactCompoundView {
             this.strokeWidth = strokeWidth;
             invalidate();
         }
+    }
+
+    public void setStrokeWidthInDip(float strokeWidthDp) {
+        setStrokeWidth(Utils.toPixels(getContext(), strokeWidthDp));
     }
 
     public long getSpinnerAniDuration() {

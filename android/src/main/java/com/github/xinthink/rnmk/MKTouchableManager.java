@@ -6,7 +6,6 @@ import android.view.View;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.ThemedReactContext;
-import com.facebook.react.uimanager.UIProp;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.facebook.react.views.view.ReactViewManager;
 import com.github.xinthink.rnmk.widget.MKTouchable;
@@ -17,12 +16,6 @@ import com.github.xinthink.rnmk.widget.MKTouchable;
  * Created by ywu on 15/9/23.
  */
 public class MKTouchableManager extends ReactViewManager {
-
-    /**
-     * A workaround having onLayout events available on custom native component
-     */
-    @UIProp(UIProp.Type.BOOLEAN)
-    public static final String PROP_ON_LAYOUT = "onLayout";
 
     @Override
     public String getName() {
