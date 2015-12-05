@@ -369,6 +369,17 @@ The two `Text` tags here, similar to [State List][android-state-list] in *Androi
   />
 ```
 
+You can customize the styles by changing the global theme, which affects all radio buttons across the whole app.
+
+```js
+setTheme({radioStyle: {
+  fillColor: `rgba(${MKColor.RGBTeal},.8)`,
+  borderOnColor: `rgba(${MKColor.RGBTeal},.6)`,
+  borderOffColor: `rgba(${MKColor.RGBTeal},.3)`,
+  rippleColor: `rgba(${MKColor.RGBTeal},.15)`,
+}});
+```
+
 👉 [props reference][radio-props-doc] and [example code][toggles-sample]
 
 [mdl-radio]: http://www.getmdl.io/components/index.html#toggles-section/radio
