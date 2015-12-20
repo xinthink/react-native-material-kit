@@ -120,7 +120,11 @@ public class MKSpinner extends View implements ReactCompoundView {
 
         // load defaults
         strokeWidth = resources.getDimensionPixelSize(R.dimen.mk_spinner_stroke_width);
-        strokeColors = resources.getIntArray(R.array.mk_spinner_stroke_colors);
+        if (isInEditMode()) {
+            strokeColors = new int[DEFAULT_STROKE_COLOR];
+        } else {
+            strokeColors = resources.getIntArray(R.array.mk_spinner_stroke_colors);
+        }
         spinnerAniDuration = resources.getInteger(R.integer.mk_spinner_ani_duration);
     }
 

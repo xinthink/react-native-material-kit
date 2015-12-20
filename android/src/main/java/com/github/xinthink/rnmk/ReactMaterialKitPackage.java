@@ -31,7 +31,8 @@ public class ReactMaterialKitPackage implements ReactPackage {
     public List<ViewManager> createViewManagers(ReactApplicationContext reactApplicationContext) {
         return Arrays.<ViewManager>asList(
                 new MKTouchableManager(),
-                new MKSpinnerManager()
+                new MKSpinnerManager(),
+                new TickViewManager()
         );
     }
 }

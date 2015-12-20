@@ -19,4 +19,7 @@
         <item>@color/mdl_palette_yellow_600</item>
         <item>@color/mdl_palette_green_500</item>
     </integer-array>
+
+    <!-- TickView -->
+    <dimen name="mk_tick_inset">3dp</dimen>
 </resources>

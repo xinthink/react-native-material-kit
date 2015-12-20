@@ -9,7 +9,7 @@ import com.github.xinthink.rnmk.widget.MKSpinner;
 import javax.annotation.Nullable;
 
 /**
- * MKSpinner View Manager, forwarding touch events to JS module
+ * MKSpinner View Manager
  *
  * Created by ywu on 15/9/23.
  */
