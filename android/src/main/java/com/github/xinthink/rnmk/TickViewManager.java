@@ -32,7 +32,7 @@ public class TickViewManager extends SimpleViewManager<TickView> {
      * Insets of the tick
      */
     @ReactProp(name = "inset")
-    public void setInset(TickView view, int dim) {
-        view.setInset(dim);
+    public void setInset(TickView view, float dim) {
+        view.setInsetInDip(dim);
     }
 }

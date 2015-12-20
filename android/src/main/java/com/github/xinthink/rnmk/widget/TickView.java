@@ -13,6 +13,7 @@ import android.view.View;
 
 import com.facebook.react.uimanager.ReactCompoundView;
 import com.github.xinthink.rnmk.R;
+import com.github.xinthink.rnmk.utils.Utils;
 
 /**
  * The 'tick' used in `Checkbox`, for internal use only
@@ -136,6 +137,8 @@ public class TickView extends View implements ReactCompoundView {
 
     public void setFillColor(int fillColor) {
         this.fillColor = fillColor;
+        this.bgPaint = null;
+        initPaints();
         invalidate();
     }
 
@@ -145,6 +148,10 @@ public class TickView extends View implements ReactCompoundView {
             calcTickPath(rect);
             invalidate();
         }
+    }
+
+    public void setInsetInDip(float insetDp) {
+        setInset(Utils.toPixels(getContext(), insetDp));
     }
 
     @Override
