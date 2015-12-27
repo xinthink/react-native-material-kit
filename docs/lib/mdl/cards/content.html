@@ -42,7 +42,6 @@
 <span class="hljs-keyword">var</span> Content = React.createClass({
 
   render(){
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.props);
     <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.props.children.type.displayName === <span class="hljs-string">"Text"</span>){
         <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Text</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{styles.content}</span>&gt;</span>{this.props.children}<span class="hljs-tag">&lt;/<span class="hljs-title">Text</span>&gt;</span>
     }else{

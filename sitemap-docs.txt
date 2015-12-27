@@ -4,7 +4,9 @@ http://www.xinthink.com/react-native-material-kit/docs/lib/MKPropTypes.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/builder.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/index.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/internal/MKTouchable.html
+http://www.xinthink.com/react-native-material-kit/docs/lib/internal/Tick.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Button.html
+http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Checkbox.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/IconToggle.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Progress.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/RadioButton.html

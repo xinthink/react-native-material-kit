@@ -791,14 +791,14 @@ which has floating label and underline effect.</p>
     <span class="hljs-keyword">this</span>._callback(<span class="hljs-string">'onChangeText'</span>, text);
   }
 
-  _onFocus() {
+  _onFocus(e) {
     <span class="hljs-keyword">this</span>._aniStartHighlight(<span class="hljs-literal">true</span>);
-    <span class="hljs-keyword">this</span>._callback(<span class="hljs-string">'onFocus'</span>);
+    <span class="hljs-keyword">this</span>._callback(<span class="hljs-string">'onFocus'</span>, e);
   }
 
-  _onBlur() {
+  _onBlur(e) {
     <span class="hljs-keyword">this</span>._aniStopHighlight();
-    <span class="hljs-keyword">this</span>._callback(<span class="hljs-string">'onBlur'</span>);
+    <span class="hljs-keyword">this</span>._callback(<span class="hljs-string">'onBlur'</span>, e);
   }
 
   _callback(name, e) {

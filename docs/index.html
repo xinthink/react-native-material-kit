@@ -32,7 +32,11 @@
                 
                   <li><a href="lib&#x2F;internal&#x2F;MKTouchable.html">lib&#x2F;internal&#x2F;MKTouchable.js</a></li>
                 
+                  <li><a href="lib&#x2F;internal&#x2F;Tick.html">lib&#x2F;internal&#x2F;Tick.js</a></li>
+                
                   <li><a href="lib&#x2F;mdl&#x2F;Button.html">lib&#x2F;mdl&#x2F;Button.js</a></li>
+                
+                  <li><a href="lib&#x2F;mdl&#x2F;Checkbox.html">lib&#x2F;mdl&#x2F;Checkbox.js</a></li>
                 
                   <li><a href="lib&#x2F;mdl&#x2F;IconToggle.html">lib&#x2F;mdl&#x2F;IconToggle.js</a></li>
                 
@@ -78,7 +82,7 @@
             </td>
             <td class="readme">
 <p><a href="https://www.npmjs.com/package/react-native-material-kit"><img src="https://img.shields.io/npm/v/react-native-material-kit.svg" alt="npm" title="" /></a>
-<a href="https://facebook.github.io/react-native"><img src="https://img.shields.io/badge/react--native-v0.16.x-05A5D1.svg" alt="react-native" title="" /></a>
+<a href="https://facebook.github.io/react-native"><img src="https://img.shields.io/badge/react--native-v0.17.x-05A5D1.svg" alt="react-native" title="" /></a>
 <a href="https://raw.githubusercontent.com/xinthink/react-native-material-kit/master/LICENSE.md"><img src="https://img.shields.io/dub/l/vibe-d.svg" alt="MIT" title="" /></a>
 <a href="https://www.bithound.io/github/xinthink/react-native-material-kit"><img src="https://www.bithound.io/github/xinthink/react-native-material-kit/badges/score.svg" alt="bitHound Score" title="" /></a></p>
 
@@ -161,8 +165,9 @@ mReactInstanceManager = ReactInstanceManager.builder()
 <li><a href="#sliders">Sliders</a></li>
 <li><a href="#text-fields">Textfields</a></li>
 <li><a href="#toggles">Toggles</a>
-<ul><li><a href="#icon-toggle">Icon toggle</a></li>
+<ul><li><a href="#checkbox">Checkbox</a></li>
 <li><a href="#radio-button">Radio button</a></li>
+<li><a href="#icon-toggle">Icon toggle</a></li>
 <li><a href="#switch">Switch</a></li></ul></li>
 </ul>
 
@@ -384,6 +389,27 @@ const Textfield = MKTextField.textfield()
 
 <p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Switch.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/toggles.js">example code</a></p>
 
+<h4 id="checkbox">Checkbox</h4>
+
+<p>[<img src="http://www.getmdl.io/components/index.html#toggles-section/checkbox" alt="img-checkbox]" title="" /></p>
+
+<pre><code class="jsx">  &lt;MKCheckbox
+    checked={true}
+  /&gt;
+</code></pre>
+
+<p>You can customize the styles by changing the global theme, which affects all checkboxes across the whole app.</p>
+
+<pre><code class="js">setTheme({checkboxStyle: {
+  fillColor: MKColor.Teal,
+  borderOnColor: MKColor.Teal,
+  borderOffColor: MKColor.Teal,
+  rippleColor: `rgba(${MKColor.RGBTeal},.15)`,
+}});
+</code></pre>
+
+<p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Checkbox.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/toggles.js">example code</a></p>
+
 <h4 id="radiobutton">Radio button</h4>
 
 <p>[<img src="http://www.getmdl.io/components/index.html#toggles-section/radio" alt="img-radio]" title="" /></p>
@@ -397,6 +423,16 @@ const Textfield = MKTextField.textfield()
     checked={true}
     group={this.radioGroup}
   /&gt;
+</code></pre>
+
+<p>You can customize the styles by changing the global theme, which affects all radio buttons across the whole app.</p>
+
+<pre><code class="js">setTheme({radioStyle: {
+  fillColor: `rgba(${MKColor.RGBTeal},.8)`,
+  borderOnColor: `rgba(${MKColor.RGBTeal},.6)`,
+  borderOffColor: `rgba(${MKColor.RGBTeal},.3)`,
+  rippleColor: `rgba(${MKColor.RGBTeal},.15)`,
+}});
 </code></pre>
 
 <p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/RadioButton.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/toggles.js">example code</a></p>
