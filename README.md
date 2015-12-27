@@ -87,8 +87,9 @@ Have fun! :metal:
 - [Sliders](#sliders)
 - [Textfields](#text-fields)
 - [Toggles](#toggles)
-  - [Icon toggle](#icon-toggle)
+  - [Checkbox](#checkbox)
   - [Radio button](#radio-button)
+  - [Icon toggle](#icon-toggle)
   - [Switch](#switch)
 
 ### Buttons
@@ -352,6 +353,34 @@ The two `Text` tags here, similar to [State List][android-state-list] in *Androi
 
 [toggles-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/toggles.js
 [switch-js-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Switch.html#props
+
+#### Checkbox
+
+[![img-checkbox]][mdl-checkbox]
+
+```jsx
+  <MKCheckbox
+    checked={true}
+  />
+```
+
+You can customize the styles by changing the global theme, which affects all checkboxes across the whole app.
+
+```js
+setTheme({checkboxStyle: {
+  fillColor: MKColor.Teal,
+  borderOnColor: MKColor.Teal,
+  borderOffColor: MKColor.Teal,
+  rippleColor: `rgba(${MKColor.RGBTeal},.15)`,
+}});
+```
+
+👉 [props reference][checkbox-props-doc] and [example code][toggles-sample]
+
+[mdl-checkbox]: http://www.getmdl.io/components/index.html#toggles-section/checkbox
+[img-checkbox]: https://cloud.githubusercontent.com/assets/390805/12009445/0f938cee-acb2-11e5-9732-434382f6cd84.gif
+[checkbox-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Checkbox.html#props
+
 
 #### Radio button
 
