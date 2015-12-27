@@ -228,7 +228,7 @@ const {
 [spinner-demo]: https://cloud.githubusercontent.com/assets/390805/9291361/6e7a75bc-43ec-11e5-95be-2b33eb7f8734.gif
 [progress-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/progress.js
 [prog-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Progress.html#props
-[spinner-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Spinner.html#props
+[spinner-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Spinner.ios.html#props
 
 ### Sliders
 [MDL Slider][mdl-slider] components.
