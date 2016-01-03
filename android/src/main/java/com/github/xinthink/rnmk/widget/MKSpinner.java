@@ -11,6 +11,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Property;
 import android.view.View;
@@ -318,6 +319,9 @@ public class MKSpinner extends View implements ReactCompoundView {
 
         canvas.rotate(containerAngle, getWidth() / 2f, getHeight() / 2f);  // rotate the whole spinner
         canvas.drawArc(rect, arcStartAngle, arcSweepAngle, false, arcPaint);
-        canvas.restore();
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {  // fix #69
+            canvas.restore();
+        }
     }
 }
