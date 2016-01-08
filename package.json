@@ -25,9 +25,6 @@
     "type": "git",
     "url": "git://github.com/xinthink/react-native-material-kit.git"
   },
-  "peerDependencies": {
-    "react-native": ">=0.16.0 <1.0.0"
-  },
   "devDependencies": {
     "babel-eslint": "^4.0.10",
     "eslint": "^1.1.0",
