@@ -50,7 +50,14 @@ Now run `pod install`. This will create an Xcode workspace containing all necess
   project(':RNMaterialKit').projectDir = file('../node_modules/react-native-material-kit/android')
 
   ```
-1. Add `compile project(':RNMaterialKit')` to your `android/app/build.gradle`
+1. Declare the dependency in your `android/app/build.gradle`
+  ```gradle
+  dependencies {
+      ...
+      compile project(':RNMaterialKit')
+  }
+
+  ```
 1. Import `com.github.xinthink.rnmk.ReactMaterialKitPackage` and register it to the `ReactInstanceManager`, in your `MainActivity` (or equivalent):
   ```java
   mReactInstanceManager = ReactInstanceManager.builder()
