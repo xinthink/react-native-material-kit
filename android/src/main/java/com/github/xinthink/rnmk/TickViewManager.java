@@ -1,6 +1,6 @@
 package com.github.xinthink.rnmk;
 
-import com.facebook.react.uimanager.ReactProp;
+import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.github.xinthink.rnmk.widget.TickView;
