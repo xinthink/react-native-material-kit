@@ -269,8 +269,8 @@ const SliderWithRange = mdl.RangeSlider.slider()
   .withStyle(styles.slider)
   .withMin(10)
   .withMax(100)
-  .withSliderMin(30)
-  .withSliderMax(50)
+  .withMinValue(30)
+  .withMaxValue(50)
   .build();
 …
 <SliderWithRange
