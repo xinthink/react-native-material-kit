@@ -46,6 +46,7 @@
 {
     self.inset = 1;
     self.fillColor = [UIColor indigo];
+    [self setOpaque:false];
 }
 
 - (void)drawRect:(CGRect)rect
