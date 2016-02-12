@@ -92,6 +92,7 @@ Have fun! :metal:
   - [Progress bar](#progress-bar)
   - [Spinner](#spinner)
 - [Sliders](#sliders)
+  - [Range Slider](#range-slider)
 - [Textfields](#text-fields)
 - [Toggles](#toggles)
   - [Checkbox](#checkbox)
@@ -258,10 +259,38 @@ const SliderWithValue = mdl.Slider.slider()
 
 👉 [props reference][slider-props-doc] and [example code][slider-sample]
 
+### Range Slider
+![range-slider-demo]
+
+```jsx
+<mdl.RangeSlider style={styles.slider}/>
+…
+const SliderWithRange = mdl.RangeSlider.slider()
+  .withStyle(styles.slider)
+  .withMin(10)
+  .withMax(100)
+  .withMinValue(30)
+  .withMaxValue(50)
+  .build();
+…
+<SliderWithRange
+  ref=“sliderWithRange”
+  onChange={(curValue) => this.setState({
+    min: curValue.min,
+    max: curValue.max,
+    })
+  }
+  />
+```
+
+👉 [props reference][range-slider-props-doc] and [example code][slider-sample]
+
 [mdl-slider]: http://www.getmdl.io/components/index.html#sliders-section
 [slider-demo]: https://cloud.githubusercontent.com/assets/390805/10123318/6c502e6e-6569-11e5-924a-62c8b850511c.gif
+[range-slider-demo]: https://cloud.githubusercontent.com/assets/16245422/12763284/63a2dafc-c9a8-11e5-8fde-37b6f42a60c2.gif
 [slider-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/sliders.js
 [slider-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Slider.html#props
+[range-slider-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/RangeSlider.html#props
 
 ### Text Fields
 
