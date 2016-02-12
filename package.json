@@ -31,5 +31,8 @@
     "eslint-plugin-react": "^3.2.3",
     "gulp": "^3.9.0",
     "gulp-docco": "0.0.4"
+  },
+  "dependencies": {
+    "ramda": "^0.19.1"
   }
 }
