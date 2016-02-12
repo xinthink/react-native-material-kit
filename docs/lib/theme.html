@@ -32,7 +32,34 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./MKColor'</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./MKColor'</span>);
+
+<span class="hljs-keyword">let</span> theme;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AttrReference</span> </span>{
+  constructor(attr) {
+    <span class="hljs-keyword">this</span>.attr = attr;
+  }
+
+  get value() {
+    <span class="hljs-keyword">return</span> theme[<span class="hljs-keyword">this</span>.attr]
+  }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RGBAttrReference</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AttrReference</span> </span>{
+  constructor(attr, alpha) {
+    <span class="hljs-keyword">super</span>(attr);
+    <span class="hljs-keyword">this</span>.alpha = alpha;
+  }
+
+  get value() {
+    <span class="hljs-keyword">const</span> v = <span class="hljs-keyword">super</span>.value;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.alpha &gt; <span class="hljs-number">0</span> ? <span class="hljs-string">`rgba(<span class="hljs-subst">${v}</span>,<span class="hljs-subst">${this.alpha}</span>)`</span> : <span class="hljs-string">`rgb(<span class="hljs-subst">${v}</span>)`</span>;
+  }
+}
+
+<span class="hljs-keyword">const</span> primaryColorRef = <span class="hljs-keyword">new</span> AttrReference(<span class="hljs-string">'primaryColor'</span>);
+<span class="hljs-keyword">const</span> accentColorRef = <span class="hljs-keyword">new</span> AttrReference(<span class="hljs-string">'accentColor'</span>);</pre></div></div>
             
         </li>
         
@@ -47,37 +74,123 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> theme = {
+            <div class="content"><div class='highlight'><pre>theme = {
   primaryColor: MKColor.Indigo,
-  RGBPrimaryColor: MKColor.RGBIndigo,
+  primaryColorRGB: MKColor.RGBIndigo,
   accentColor: MKColor.Pink,
-  RGBAccentColor: MKColor.RGBPink,
+  accentColorRGB: MKColor.RGBPink,
   bgPlain: <span class="hljs-string">'rgba(158,158,158,.2)'</span>,
   bgDisabled: <span class="hljs-string">'rgba(0,0,0,.12)'</span>,
   fontColor: <span class="hljs-string">'rgb(117, 117, 117)'</span>,
   fontSize: <span class="hljs-number">14</span>,
-  rippleColor: <span class="hljs-string">'rgba(255,255,255,0.125)'</span>,
-  toggleStyle: {
-    onColor: <span class="hljs-string">`rgba(<span class="hljs-subst">${MKColor.RGBIndigo}</span>,.4)`</span>,
-    offColor: <span class="hljs-string">'rgba(0,0,0,0.25)'</span>,
-    thumbOnColor: MKColor.Indigo,
+  rippleColor: <span class="hljs-string">'rgba(255,255,255,.125)'</span>,
+  textfieldStyle: {
+    tintColor: <span class="hljs-string">'rgba(0,0,0,.12)'</span>,
+    highlightColor: primaryColorRef,
+    textInputStyle: {
+      color: <span class="hljs-keyword">new</span> AttrReference(<span class="hljs-string">'fontColor'</span>),
+      fontSize: <span class="hljs-number">16</span>,
+      paddingLeft: <span class="hljs-number">0</span>,
+      paddingRight: <span class="hljs-number">0</span>,
+    },
+    floatingLabelFont: {
+      fontSize: <span class="hljs-number">12</span>,
+      color: <span class="hljs-string">'red'</span>,
+    },
+  },
+  progressStyle: {
+    backgroundColor: <span class="hljs-keyword">new</span> RGBAttrReference(<span class="hljs-string">'primaryColorRGB'</span>, <span class="hljs-number">.3</span>),
+    progressColor: primaryColorRef,
+    bufferColor: <span class="hljs-keyword">new</span> RGBAttrReference(<span class="hljs-string">'primaryColorRGB'</span>, <span class="hljs-number">.3</span>),
+  },
+  spinnerStyle: {
+    strokeColor: [
+      MKColor.palette_blue_400,
+      MKColor.palette_red_500,
+      MKColor.palette_yellow_600,
+      MKColor.palette_green_500,
+    ],
+  },
+  sliderStyle: {
+    lowerTrackColor: primaryColorRef,
+    upperTrackColor: <span class="hljs-string">'#cccccc'</span>,
+  },
+  iconToggleStyle: {
+    onColor: <span class="hljs-keyword">new</span> RGBAttrReference(<span class="hljs-string">'primaryColorRGB'</span>, <span class="hljs-number">.4</span>),
+    offColor: <span class="hljs-string">'rgba(0,0,0,.25)'</span>,
+    rippleColor: <span class="hljs-keyword">new</span> AttrReference(<span class="hljs-string">'bgPlain'</span>),
+  },
+  switchStyle: {
+    onColor: <span class="hljs-keyword">new</span> RGBAttrReference(<span class="hljs-string">'primaryColorRGB'</span>, <span class="hljs-number">.4</span>),
+    offColor: <span class="hljs-string">'rgba(0,0,0,.25)'</span>,
+    thumbOnColor: primaryColorRef,
     thumbOffColor: MKColor.Silver,
-    rippleColor: <span class="hljs-string">`rgba(<span class="hljs-subst">${MKColor.RGBIndigo}</span>,.2)`</span>,
+    rippleColor: <span class="hljs-keyword">new</span> RGBAttrReference(<span class="hljs-string">'primaryColorRGB'</span>, <span class="hljs-number">.2</span>),
   },
   radioStyle: {
-    borderOnColor: MKColor.Indigo,
-    borderOffColor: MKColor.Indigo,
-    fillColor: MKColor.Indigo,
-    rippleColor: <span class="hljs-string">`rgba(<span class="hljs-subst">${MKColor.RGBIndigo}</span>,.2)`</span>,
+    borderOnColor: primaryColorRef,
+    borderOffColor: primaryColorRef,
+    fillColor: primaryColorRef,
+    rippleColor: <span class="hljs-keyword">new</span> RGBAttrReference(<span class="hljs-string">'primaryColorRGB'</span>, <span class="hljs-number">.2</span>),
   },
   checkboxStyle: {
-    borderOnColor: MKColor.Indigo,
+    borderOnColor: primaryColorRef,
     borderOffColor: <span class="hljs-string">'rgba(0,0,0,.56)'</span>,
-    fillColor: MKColor.Indigo,
-    rippleColor: <span class="hljs-string">`rgba(<span class="hljs-subst">${MKColor.RGBIndigo}</span>,.2)`</span>,
+    fillColor: primaryColorRef,
+    rippleColor: <span class="hljs-keyword">new</span> RGBAttrReference(<span class="hljs-string">'primaryColorRGB'</span>, <span class="hljs-number">.2</span>),
     inset: <span class="hljs-number">0</span>,
   },
-};</pre></div></div>
+  cardStyle: {
+    flex: <span class="hljs-number">1</span>,
+    backgroundColor: <span class="hljs-string">'#ffffff'</span>,
+    borderRadius: <span class="hljs-number">2</span>,
+    borderColor: <span class="hljs-string">'#ffffff'</span>,
+    borderWidth: <span class="hljs-number">1</span>,
+    shadowColor: <span class="hljs-string">'rgba(0,0,0,.12)'</span>,
+    shadowOpacity: <span class="hljs-number">0.8</span>,
+    shadowRadius: <span class="hljs-number">2</span>,
+    shadowOffset: {
+      height: <span class="hljs-number">1</span>,
+      width: <span class="hljs-number">2</span>,
+    },
+  },
+  cardImageStyle: {
+    flex: <span class="hljs-number">1</span>,
+    height: <span class="hljs-number">170</span>,
+    resizeMode: <span class="hljs-string">'cover'</span>,
+  },
+  cardTitleStyle: {
+    position: <span class="hljs-string">'absolute'</span>,
+    top: <span class="hljs-number">120</span>,
+    left: <span class="hljs-number">26</span>,
+    backgroundColor: <span class="hljs-string">'transparent'</span>,
+    padding: <span class="hljs-number">16</span>,
+    fontSize: <span class="hljs-number">24</span>,
+    color: <span class="hljs-string">'#000000'</span>,
+    fontWeight: <span class="hljs-string">'bold'</span>,
+  },
+  cardContentStyle: {
+    padding: <span class="hljs-number">15</span>,
+    color: <span class="hljs-string">'rgba(0,0,0,.54)'</span>,
+  },
+  cardActionStyle: {
+    borderStyle: <span class="hljs-string">'solid'</span>,
+    borderTopColor: <span class="hljs-string">'rgba(0,0,0,.1)'</span>,
+    borderTopWidth: <span class="hljs-number">1</span>,
+    padding: <span class="hljs-number">15</span>,
+  },
+  cardMenuStyle: {
+    position: <span class="hljs-string">'absolute'</span>,
+    top: <span class="hljs-number">16</span>,
+    right: <span class="hljs-number">16</span>,
+    backgroundColor: <span class="hljs-string">'transparent'</span>,
+  },
+};
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isPlainObject</span>(<span class="hljs-params">o</span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">typeof</span> o === <span class="hljs-string">'object'</span> &amp;&amp; !<span class="hljs-built_in">Array</span>.isArray(o) &amp;&amp; o !== <span class="hljs-literal">null</span> &amp;&amp;
+    !(o <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">String</span>) &amp;&amp; !(o <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Function</span>);
+}</pre></div></div>
             
         </li>
         
@@ -88,18 +201,18 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <h2 id="-section-id-settheme-settheme-section-"><section id='setTheme'>setTheme</section></h2>
-<p>Set the current theme</p>
-<ul>
-<li>{object} <code>theme</code> new <a href="#theme">theme</a></li>
-<li>@see <a href="http://www.getmdl.io/customize">http://www.getmdl.io/customize</a></li>
-</ul>
+              <p>Wrap style object with custom getter, for resolving the attribute references.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>exports.setTheme = (aTheme) =&gt; {
-  <span class="hljs-built_in">Object</span>.assign(theme, aTheme);
-};</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">wrapAttrRef</span>(<span class="hljs-params">style, attr, attrValue</span>) </span>{
+  <span class="hljs-built_in">Object</span>.defineProperty(style, attr, {
+    enumerable: <span class="hljs-literal">true</span>,
+    get: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+      <span class="hljs-keyword">return</span> attrValue.value;
+    },
+  });
+}</pre></div></div>
             
         </li>
         
@@ -110,13 +223,85 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
+              <p>Wrap all style attributes with custom getter, recursively</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">wrapStyle</span>(<span class="hljs-params">style</span>) </span>{
+  <span class="hljs-built_in">Object</span>.getOwnPropertyNames(style).forEach((attr) =&gt; {
+    <span class="hljs-keyword">const</span> v = style[attr];
+    <span class="hljs-keyword">if</span> (v <span class="hljs-keyword">instanceof</span> AttrReference) {
+      wrapAttrRef(style, attr, v);
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (isPlainObject(v)) {
+      wrapStyle(v);
+    }
+  });
+
+  <span class="hljs-keyword">return</span> style;
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Wrap the theme object, in order to resolving the attribute references.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>wrapStyle(theme);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <h2 id="-section-id-settheme-settheme-section-"><section id='setTheme'>setTheme</section></h2>
+<p>Set the current theme</p>
+<ul>
+<li>{object} <code>theme</code> new <a href="#theme">theme</a></li>
+<li>@see <a href="http://www.getmdl.io/customize">http://www.getmdl.io/customize</a></li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setTheme</span>(<span class="hljs-params">aTheme</span>) </span>{
+  <span class="hljs-built_in">Object</span>.assign(theme, aTheme);
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
               <h2 id="-section-id-gettheme-gettheme-section-"><section id='getTheme'>getTheme</section></h2>
 <p>Retrieve a copy of the current theme</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>exports.getTheme = () =&gt; {
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getTheme</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.assign({}, theme);
+}
+
+exports.setTheme = setTheme;
+exports.getTheme = getTheme;
+exports.theme = {
+  AttrReference,
+  RGBAttrReference,
+  primaryColorRef,
+  accentColorRef,
 };</pre></div></div>
             
         </li>

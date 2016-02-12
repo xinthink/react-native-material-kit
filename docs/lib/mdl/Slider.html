@@ -42,6 +42,7 @@
 <span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
 <span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../MKColor'</span>);
 <span class="hljs-keyword">const</span> {getTheme} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../theme'</span>);
+<span class="hljs-keyword">const</span> Thumb = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../internal/Thumb'</span>);
 
 <span class="hljs-keyword">const</span> {
   Component,
@@ -60,11 +61,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Default color of the upper part of the track</p>
+              <p>The max scale of the thumb</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> DEFAULT_UPPER_TRACK_COLOR = <span class="hljs-string">'#cccccc'</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> THUMB_SCALE_RATIO = <span class="hljs-number">1.3</span>;</pre></div></div>
             
         </li>
         
@@ -75,11 +76,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Color of the thumb when lowest value is chosen</p>
+              <p>Width of the thumb border</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> LOWEST_VALUE_THUMB_COLOR = <span class="hljs-string">'white'</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> THUMB_BORDER_WIDTH = <span class="hljs-number">2</span>;</pre></div></div>
             
         </li>
         
@@ -89,36 +90,6 @@
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
-              </div>
-              <p>The max scale of the thumb</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> THUMB_SCALE_RATIO = <span class="hljs-number">1.3</span>;</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-5">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-5">&#182;</a>
-              </div>
-              <p>Width of the thumb border</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> THUMB_BORDER_WIDTH = <span class="hljs-number">2</span></pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-6">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
               <p>extra spacing enlarging the touchable area</p>
 
@@ -130,296 +101,11 @@
         </li>
         
         
-        <li id="section-7">
+        <li id="section-5">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
-              </div>
-              <h2 id="-section-id-thumb-thumb-section-"><section id='Thumb'>Thumb</section></h2>
-<p><code>Thumb</code> component of the <a href="#Slider"><code>Slider</code></a>.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Thumb</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
-  constructor(props) {
-    <span class="hljs-keyword">super</span>(props);
-    <span class="hljs-keyword">this</span>.x = <span class="hljs-number">0</span>;  <span class="hljs-comment">// current x-axis position</span>
-    <span class="hljs-keyword">this</span>._animatedLeft = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>);
-    <span class="hljs-keyword">this</span>._animatedScale = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">1</span>);
-    <span class="hljs-keyword">this</span>.state = {
-      color: LOWEST_VALUE_THUMB_COLOR,
-      borderColor: DEFAULT_UPPER_TRACK_COLOR,
-    };
-  }
-
-  componentWillMount() {
-    <span class="hljs-keyword">this</span>._onRadiiUpdate(<span class="hljs-keyword">this</span>.props);
-    <span class="hljs-keyword">this</span>.setState({
-      borderColor: <span class="hljs-keyword">this</span>.props.upperTrackColor,
-      borderWidth: <span class="hljs-keyword">this</span>.props.trackSize,
-    });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    <span class="hljs-keyword">this</span>._onRadiiUpdate(nextProps);
-  }
-
-  componentDidMount() {
-    <span class="hljs-keyword">this</span>._animatedLeft.addListener(<span class="hljs-keyword">this</span>._getOnSliding());
-  }
-
-  componentWillUnmount() {
-    <span class="hljs-keyword">this</span>._animatedLeft.removeAllListeners();
-  }</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-8">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
-              </div>
-              <p>when thumb radii updated, re-calc the dimens</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  _onRadiiUpdate(props) {
-    <span class="hljs-keyword">this</span>._radii = props.radius;
-    <span class="hljs-keyword">this</span>._dia = <span class="hljs-keyword">this</span>._radii * <span class="hljs-number">2</span>;
-    <span class="hljs-keyword">this</span>._containerRadii = <span class="hljs-keyword">this</span>._radii + THUMB_BORDER_WIDTH;
-    <span class="hljs-keyword">this</span>._containerDia = <span class="hljs-keyword">this</span>._containerRadii * <span class="hljs-number">2</span>;
-  }</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-9">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
-              </div>
-              <p>return a memoized function to handle sliding animation events</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  _getOnSliding() {
-    <span class="hljs-keyword">let</span> prevX = <span class="hljs-keyword">this</span>.x;  <span class="hljs-comment">// memorize the previous x</span></pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-10">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
-              </div>
-              <p>on sliding of the thumb
-<code>value</code> - the <code>left</code> of the thumb, relative to the container</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">return</span> ({value}) =&gt; {</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-11">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
-              </div>
-              <p>convert to value relative to the track</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">const</span> x = value + <span class="hljs-keyword">this</span>._containerRadii - <span class="hljs-keyword">this</span>.props.trackMarginH;
-
-      <span class="hljs-keyword">if</span> (prevX &lt;= <span class="hljs-number">0</span> &amp;&amp; x &gt; <span class="hljs-number">0</span>) {</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-12">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-12">&#182;</a>
-              </div>
-              <p>leaving the lowest value, scale up the thumb</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">this</span>._onExplode();
-      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (prevX &gt; <span class="hljs-number">0</span> &amp;&amp; x &lt;= <span class="hljs-number">0</span>) {</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-13">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
-              </div>
-              <p>at lowest value, scale down the thumb</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">this</span>._onCollapse();
-      }
-
-      prevX = x;
-    };
-  }</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-14">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
-              </div>
-              <p>animate the sliding
-<code>x</code> - target position, relative to the track</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  moveTo(x) {
-    <span class="hljs-keyword">this</span>.x = x;
-    <span class="hljs-keyword">const</span> x0 = <span class="hljs-keyword">this</span>.x + <span class="hljs-keyword">this</span>.props.trackMarginH;
-
-    Animated.parallel([
-      Animated.timing(<span class="hljs-keyword">this</span>._animatedScale, {
-        toValue: THUMB_SCALE_RATIO,
-        duration: <span class="hljs-number">100</span>,
-      }),
-      Animated.timing(<span class="hljs-keyword">this</span>._animatedLeft, {
-        toValue: x0 - <span class="hljs-keyword">this</span>._containerRadii,
-        duration: <span class="hljs-number">0</span>,
-      }),
-    ]).start();
-  }</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-15">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-15">&#182;</a>
-              </div>
-              <p>stop sliding</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  confirmMoveTo() {
-    Animated.timing(<span class="hljs-keyword">this</span>._animatedScale, {
-      toValue: <span class="hljs-number">1</span>,
-      duration: <span class="hljs-number">100</span>,
-    }).start();
-  }</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-16">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
-              </div>
-              <p>from ‘lowest’ to ‘non-lowest’</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  _onExplode() {
-    <span class="hljs-keyword">this</span>.setState({
-      borderColor: <span class="hljs-keyword">this</span>.props.lowerTrackColor,
-      color: <span class="hljs-keyword">this</span>.props.lowerTrackColor,
-    });
-  }</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-17">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-17">&#182;</a>
-              </div>
-              <p>from ‘non-lowest’ to ‘lowest’</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  _onCollapse() {
-    <span class="hljs-keyword">this</span>.setState({
-      borderColor: <span class="hljs-keyword">this</span>.props.upperTrackColor,
-      color: LOWEST_VALUE_THUMB_COLOR,
-    });
-  }</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-18">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-18">&#182;</a>
-              </div>
-              <p>Rendering the <code>Thumb</code></p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  render() {
-    <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Animated.View</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{[</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">outer</span> <span class="hljs-attribute">circle</span> <span class="hljs-attribute">to</span> <span class="hljs-attribute">draw</span> <span class="hljs-attribute">the</span> <span class="hljs-attribute">border</span>
-          <span class="hljs-attribute">this.props.style</span>,
-          {
-            <span class="hljs-attribute">width:</span> <span class="hljs-attribute">this._containerDia</span>,
-            <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this._containerDia</span>,
-            <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this.state.borderColor</span>,
-            <span class="hljs-attribute">borderRadius:</span> <span class="hljs-attribute">this._containerRadii</span>,
-            <span class="hljs-attribute">position:</span> '<span class="hljs-attribute">absolute</span>',
-            <span class="hljs-attribute">left:</span> <span class="hljs-attribute">this._animatedLeft</span>,
-            <span class="hljs-attribute">transform:</span> [
-              {<span class="hljs-attribute">scale:</span> <span class="hljs-attribute">this._animatedScale</span>},
-            ],
-          },
-        ]}
-        &gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">View</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">inner</span> <span class="hljs-attribute">circle</span>
-            <span class="hljs-attribute">width:</span> <span class="hljs-attribute">this._dia</span>,
-            <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this._dia</span>,
-            <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this.state.color</span>,
-            <span class="hljs-attribute">borderRadius:</span> <span class="hljs-attribute">this._radii</span>,
-            <span class="hljs-attribute">top:</span> <span class="hljs-attribute">THUMB_BORDER_WIDTH</span>,
-            <span class="hljs-attribute">left:</span> <span class="hljs-attribute">THUMB_BORDER_WIDTH</span>,
-          }}
-          /&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-title">Animated.View</span>&gt;</span>
-    )</span>;
-  }
-}</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-19">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-19">&#182;</a>
+                <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
               <h2 id="-section-id-slider-slider-section-"><section id='Slider'>Slider</section></h2>
 
@@ -428,15 +114,16 @@
             <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Slider</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
   constructor(props) {
     <span class="hljs-keyword">super</span>(props);
+    <span class="hljs-keyword">this</span>.theme = getTheme();
     <span class="hljs-keyword">this</span>._value = <span class="hljs-number">0</span>;
     <span class="hljs-keyword">this</span>._trackTotalLength = <span class="hljs-number">0</span>;
     <span class="hljs-keyword">this</span>._prevPointerX = <span class="hljs-number">0</span>;
     <span class="hljs-keyword">this</span>._animatedTrackLength = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>);
     <span class="hljs-keyword">this</span>._panResponder = PanResponder.create({
-      onStartShouldSetPanResponder: (evt, gestureState) =&gt; <span class="hljs-literal">true</span>,
-      onStartShouldSetPanResponderCapture: (evt, gestureState) =&gt; <span class="hljs-literal">true</span>,
-      onMoveShouldSetPanResponder: (evt, gestureState) =&gt; <span class="hljs-literal">true</span>,
-      onMoveShouldSetPanResponderCapture: (evt, gestureState) =&gt; <span class="hljs-literal">true</span>,
+      onStartShouldSetPanResponder: () =&gt; <span class="hljs-literal">true</span>,
+      onStartShouldSetPanResponderCapture: () =&gt; <span class="hljs-literal">true</span>,
+      onMoveShouldSetPanResponder: () =&gt; <span class="hljs-literal">true</span>,
+      onMoveShouldSetPanResponderCapture: () =&gt; <span class="hljs-literal">true</span>,
       onPanResponderGrant: (evt) =&gt; {
         <span class="hljs-keyword">this</span>._prevPointerX = evt.nativeEvent.locationX;
         <span class="hljs-keyword">this</span>._onTouchEvent({
@@ -450,14 +137,14 @@
           x: <span class="hljs-keyword">this</span>._prevPointerX + gestureState.dx,
         });
       },
-      onPanResponderTerminationRequest: (evt, gestureState) =&gt; <span class="hljs-literal">true</span>,
+      onPanResponderTerminationRequest: () =&gt; <span class="hljs-literal">true</span>,
       onPanResponderRelease: (evt, gestureState) =&gt; {
         <span class="hljs-keyword">this</span>._onPanResponderEnd(gestureState);
       },
       onPanResponderTerminate: (evt, gestureState) =&gt; {
         <span class="hljs-keyword">this</span>._onPanResponderEnd(gestureState, <span class="hljs-literal">true</span>);
       },
-      onShouldBlockNativeResponder: (evt, gestureState) =&gt; <span class="hljs-literal">true</span>,
+      onShouldBlockNativeResponder: () =&gt; <span class="hljs-literal">true</span>,
     });
   }
 
@@ -506,7 +193,7 @@
     }
 
     <span class="hljs-keyword">this</span>._onTouchEvent({
-      type: cancelled ? <span class="hljs-string">'TOUCH_CANCEL'</span> : <span class="hljs-string">'TOUCH_DOWN'</span>,
+      type: cancelled ? <span class="hljs-string">'TOUCH_CANCEL'</span> : <span class="hljs-string">'TOUCH_UP'</span>,
       x: <span class="hljs-keyword">this</span>._prevPointerX,
     });
   }</pre></div></div>
@@ -514,11 +201,11 @@
         </li>
         
         
-        <li id="section-20">
+        <li id="section-6">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-20">&#182;</a>
+                <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
               <p>Touch events handling</p>
 
@@ -538,11 +225,11 @@
         </li>
         
         
-        <li id="section-21">
+        <li id="section-7">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
+                <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <p>should not use the coordination inside a cancelled event</p>
 
@@ -556,11 +243,11 @@
         </li>
         
         
-        <li id="section-22">
+        <li id="section-8">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-22">&#182;</a>
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <p>get touch position relative to the track</p>
 
@@ -571,11 +258,11 @@
         </li>
         
         
-        <li id="section-23">
+        <li id="section-9">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-23">&#182;</a>
+                <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <p>touch location relative to the track</p>
 
@@ -621,11 +308,11 @@
         </li>
         
         
-        <li id="section-24">
+        <li id="section-10">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-24">&#182;</a>
+                <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <p>when thumb radii updated, re-calc the dimens</p>
 
@@ -645,11 +332,11 @@
         </li>
         
         
-        <li id="section-25">
+        <li id="section-11">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-25">&#182;</a>
+                <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
               <p>making room for the Thumb, cause’s Android doesn’t support <code>overflow: visible</code></p>
 <ul>
@@ -664,6 +351,10 @@
       marginTop: <span class="hljs-keyword">this</span>._trackMarginV,
       marginBottom: <span class="hljs-keyword">this</span>._trackMarginV,
     };
+
+    <span class="hljs-keyword">const</span> sliderStyle = <span class="hljs-keyword">this</span>.theme.sliderStyle;
+    <span class="hljs-keyword">const</span> lowerTrackColor = <span class="hljs-keyword">this</span>.props.lowerTrackColor || sliderStyle.lowerTrackColor;
+    <span class="hljs-keyword">const</span> upperTrackColor = <span class="hljs-keyword">this</span>.props.upperTrackColor || sliderStyle.upperTrackColor;
 
     <span class="hljs-keyword">return</span> (
       <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">View</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"container"</span>
@@ -680,7 +371,7 @@
         <span class="hljs-tag">&lt;<span class="hljs-title">View</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"track"</span>
               <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
                 <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this.props.trackSize</span>,
-                <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this.props.upperTrackColor</span>,
+                <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">upperTrackColor</span>,
                 <span class="hljs-attribute">...trackMargin</span>,
               }}
               <span class="hljs-attribute">onLayout</span>=<span class="hljs-value">{this._onTrackLayout.bind(this)}</span>
@@ -691,7 +382,7 @@
               <span class="hljs-attribute">position:</span> '<span class="hljs-attribute">absolute</span>',
               <span class="hljs-attribute">width:</span> <span class="hljs-attribute">this._animatedTrackLength</span>,
               <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this.props.trackSize</span>,
-              <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this.props.lowerTrackColor</span> || <span class="hljs-attribute">getTheme</span>()<span class="hljs-attribute">.primaryColor</span>,
+              <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">lowerTrackColor</span>,
             }}
             /&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-title">View</span>&gt;</span>
@@ -700,8 +391,8 @@
           <span class="hljs-attribute">radius</span>=<span class="hljs-value">{this.props.thumbRadius}</span>
           <span class="hljs-attribute">trackSize</span>=<span class="hljs-value">{this.props.trackSize}</span>
           <span class="hljs-attribute">trackMarginH</span>=<span class="hljs-value">{this._trackMarginH}</span>
-          <span class="hljs-attribute">lowerTrackColor</span>=<span class="hljs-value">{this.props.lowerTrackColor</span> || <span class="hljs-attribute">getTheme</span>()<span class="hljs-attribute">.primaryColor</span>}
-          <span class="hljs-attribute">upperTrackColor</span>=<span class="hljs-value">{this.props.upperTrackColor}</span>
+          <span class="hljs-attribute">enabledColor</span>=<span class="hljs-value">{lowerTrackColor}</span>
+          <span class="hljs-attribute">disabledColor</span>=<span class="hljs-value">{upperTrackColor}</span>
           <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
             <span class="hljs-attribute">top:</span> <span class="hljs-attribute">this._thumbRadiiWithBorder</span> * (<span class="hljs-attribute">THUMB_SCALE_RATIO</span> <span class="hljs-attribute">-</span> <span class="hljs-attribute">1</span>) + <span class="hljs-attribute">TRACK_EXTRA_MARGIN_V</span>,
           }}
@@ -714,11 +405,11 @@
         </li>
         
         
-        <li id="section-26">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-26">&#182;</a>
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <p>Public api to update the current value</p>
 
@@ -738,11 +429,11 @@
         </li>
         
         
-        <li id="section-27">
+        <li id="section-13">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-27">&#182;</a>
+                <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
               <h2 id="-section-id-props-props-section-"><section id='props'>Props</section></h2>
 
@@ -753,11 +444,11 @@
         </li>
         
         
-        <li id="section-28">
+        <li id="section-14">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-28">&#182;</a>
+                <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <p><a href="https://facebook.github.io/react-native/docs/view.html#props">RN.View Props</a>…</p>
 
@@ -768,11 +459,11 @@
         </li>
         
         
-        <li id="section-29">
+        <li id="section-15">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-29">&#182;</a>
+                <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
               <p>Minimum value of the range, default is <code>0</code></p>
 
@@ -783,11 +474,11 @@
         </li>
         
         
-        <li id="section-30">
+        <li id="section-16">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-30">&#182;</a>
+                <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <p>Maximum value of the range, default is <code>100</code></p>
 
@@ -798,11 +489,11 @@
         </li>
         
         
-        <li id="section-31">
+        <li id="section-17">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-31">&#182;</a>
+                <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
               <p>The thickness of the Slider track</p>
 
@@ -813,11 +504,11 @@
         </li>
         
         
-        <li id="section-32">
+        <li id="section-18">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-32">&#182;</a>
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
               <p>Radius of the thumb of the Slider</p>
 
@@ -828,11 +519,11 @@
         </li>
         
         
-        <li id="section-33">
+        <li id="section-19">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-33">&#182;</a>
+                <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
               <p>Color of the lower part of the track, it’s also the color of the thumb</p>
 
@@ -843,11 +534,11 @@
         </li>
         
         
-        <li id="section-34">
+        <li id="section-20">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-34">&#182;</a>
+                <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
               <p>Color of the upper part of the track</p>
 
@@ -858,11 +549,11 @@
         </li>
         
         
-        <li id="section-35">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-35">&#182;</a>
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p>Callback when value changed</p>
 
@@ -874,11 +565,11 @@
         </li>
         
         
-        <li id="section-36">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-36">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <h2 id="-section-id-defaults-defaults-section-"><section id='defaults'>Defaults</section></h2>
 
@@ -889,17 +580,16 @@
   trackSize: <span class="hljs-number">2</span>,
   min: <span class="hljs-number">0</span>,
   max: <span class="hljs-number">100</span>,
-  upperTrackColor: DEFAULT_UPPER_TRACK_COLOR,
 };</pre></div></div>
             
         </li>
         
         
-        <li id="section-37">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-37">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <hr>
 
@@ -908,11 +598,11 @@
         </li>
         
         
-        <li id="section-38">
+        <li id="section-24">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-38">&#182;</a>
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <p>Builder</p>
 
@@ -925,11 +615,11 @@
         </li>
         
         
-        <li id="section-39">
+        <li id="section-25">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-39">&#182;</a>
+                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <h2 id="slider-builder">Slider builder</h2>
 
@@ -946,11 +636,11 @@
         </li>
         
         
-        <li id="section-40">
+        <li id="section-26">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-40">&#182;</a>
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <p>define builder method for each prop</p>
 
@@ -961,11 +651,11 @@
         </li>
         
         
-        <li id="section-41">
+        <li id="section-27">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-41">&#182;</a>
+                <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
               <hr>
 
@@ -974,28 +664,28 @@
         </li>
         
         
-        <li id="section-42">
+        <li id="section-28">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-42">&#182;</a>
+                <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
               <h2 id="-section-id-builders-built-in-builders-section-"><section id="builders">Built-in builders</section></h2>
 
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">slider</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> SliderBuilder().withBackgroundColor(MKColor.Transparent);
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> SliderBuilder();
 }</pre></div></div>
             
         </li>
         
         
-        <li id="section-43">
+        <li id="section-29">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-43">&#182;</a>
+                <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
               <h2 id="public-interface">Public interface</h2>
 

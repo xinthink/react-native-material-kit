@@ -99,26 +99,6 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>default stroke colors</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> DEF_STROKE_COLORS = [
-  <span class="hljs-string">'rgb(66,165,245)'</span>,  <span class="hljs-comment">// mdl palette-blue-400</span>
-  <span class="hljs-string">'rgb(244,67,54)'</span>,   <span class="hljs-comment">// mdl palette-red-500</span>
-  <span class="hljs-string">'rgb(253,216,53)'</span>,  <span class="hljs-comment">// mdl palette-yellow-600</span>
-  <span class="hljs-string">'rgb(76,175,80)'</span>,   <span class="hljs-comment">// mdl palette-green-500</span>
-];</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-4">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-4">&#182;</a>
-              </div>
               <h2 id="-section-id-spinner-spinner-section-"><section id='Spinner'>Spinner</section></h2>
 <p>The default <code>Spinner</code> component.</p>
 
@@ -127,14 +107,15 @@
             <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Spinner</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
   constructor(props) {
     <span class="hljs-keyword">super</span>(props);
-    <span class="hljs-keyword">this</span>.state = {
-      strokeColor: DEF_STROKE_COLORS[<span class="hljs-number">0</span>],
-      dimen: {},
-    };
     <span class="hljs-keyword">this</span>._nextStrokeColorIndex = <span class="hljs-number">0</span>;
     <span class="hljs-keyword">this</span>._animatedContainerAngle = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>);
     <span class="hljs-keyword">this</span>._animatedArcAngle = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>);
     <span class="hljs-keyword">this</span>._aniUpdateSpinner = <span class="hljs-keyword">this</span>._aniUpdateSpinner.bind(<span class="hljs-keyword">this</span>);
+    <span class="hljs-keyword">this</span>.theme = getTheme();
+    <span class="hljs-keyword">this</span>.state = {
+      strokeColor: <span class="hljs-keyword">this</span>.theme.primaryColor,
+      dimen: {},
+    };
   }
 
   _onLayout({nativeEvent: {layout: {width, height}}}) {
@@ -146,11 +127,11 @@
         </li>
         
         
-        <li id="section-5">
+        <li id="section-4">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-5">&#182;</a>
+                <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
               <p>rotation &amp; arc animation</p>
 
@@ -183,11 +164,11 @@
         </li>
         
         
-        <li id="section-6">
+        <li id="section-5">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-6">&#182;</a>
+                <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
               <p>render the specified part (left or right) of the arc</p>
 
@@ -241,7 +222,7 @@
   }
 
   _updateStrokeColor(cb) {
-    <span class="hljs-keyword">const</span> colors = <span class="hljs-keyword">this</span>.props.strokeColor;
+    <span class="hljs-keyword">const</span> colors = <span class="hljs-keyword">this</span>.props.strokeColor || <span class="hljs-keyword">this</span>.theme.spinnerStyle.strokeColor;
     <span class="hljs-keyword">let</span> nextColor;
 
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Array</span>.isArray(colors)) {
@@ -252,7 +233,7 @@
       nextColor = colors;
     }
 
-    <span class="hljs-keyword">this</span>.setState({strokeColor: nextColor || DEF_STROKE_COLORS[<span class="hljs-number">0</span>]}, cb);
+    <span class="hljs-keyword">this</span>.setState({strokeColor: nextColor || <span class="hljs-keyword">this</span>.theme.primaryColor}, cb);
   }
 
   render() {
@@ -279,11 +260,11 @@
         </li>
         
         
-        <li id="section-7">
+        <li id="section-6">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
+                <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
               <h2 id="-section-id-props-props-section-"><section id='props'>Props</section></h2>
 
@@ -294,11 +275,11 @@
         </li>
         
         
-        <li id="section-8">
+        <li id="section-7">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
+                <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <p><a href="https://facebook.github.io/react-native/docs/view.html#props">View Props</a>…</p>
 
@@ -309,11 +290,11 @@
         </li>
         
         
-        <li id="section-9">
+        <li id="section-8">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <p>Colors of the progress stroke</p>
 <ul>
@@ -328,11 +309,11 @@ or a single one</li>
         </li>
         
         
-        <li id="section-10">
+        <li id="section-9">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
+                <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <p>Width of the progress stroke</p>
 
@@ -343,11 +324,11 @@ or a single one</li>
         </li>
         
         
-        <li id="section-11">
+        <li id="section-10">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
+                <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <p>Duration of the spinner animation, in milliseconds</p>
 
@@ -359,11 +340,11 @@ or a single one</li>
         </li>
         
         
-        <li id="section-12">
+        <li id="section-11">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-12">&#182;</a>
+                <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
               <h2 id="-section-id-defaults-defaults-section-"><section id='defaults'>Defaults</section></h2>
 
@@ -371,7 +352,6 @@ or a single one</li>
             
             <div class="content"><div class='highlight'><pre>Spinner.defaultProps = {
   strokeWidth: <span class="hljs-number">3</span>,
-  strokeColor: DEF_STROKE_COLORS,
   spinnerAniDuration: <span class="hljs-number">1333</span>,
   style: {
     width: <span class="hljs-number">28</span>,
@@ -382,11 +362,11 @@ or a single one</li>
         </li>
         
         
-        <li id="section-13">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <hr>
 
@@ -395,11 +375,11 @@ or a single one</li>
         </li>
         
         
-        <li id="section-14">
+        <li id="section-13">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
+                <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
               <p>Builder</p>
 
@@ -412,11 +392,11 @@ or a single one</li>
         </li>
         
         
-        <li id="section-15">
+        <li id="section-14">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-15">&#182;</a>
+                <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <h2 id="spinner-builder">Spinner builder</h2>
 
@@ -433,11 +413,11 @@ or a single one</li>
         </li>
         
         
-        <li id="section-16">
+        <li id="section-15">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
+                <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
               <p>define builder method for each prop</p>
 
@@ -448,11 +428,11 @@ or a single one</li>
         </li>
         
         
-        <li id="section-17">
+        <li id="section-16">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-17">&#182;</a>
+                <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <hr>
 
@@ -461,18 +441,18 @@ or a single one</li>
         </li>
         
         
-        <li id="section-18">
+        <li id="section-17">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-18">&#182;</a>
+                <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
               <h2 id="-section-id-builders-built-in-builders-section-"><section id="builders">Built-in builders</section></h2>
 
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">spinner</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> SpinnerBuilder().withBackgroundColor(MKColor.Transparent);
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> SpinnerBuilder();
 }
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">singleColorSpinner</span>(<span class="hljs-params"></span>) </span>{
@@ -482,11 +462,11 @@ or a single one</li>
         </li>
         
         
-        <li id="section-19">
+        <li id="section-18">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-19">&#182;</a>
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
               <h2 id="public-interface">Public interface</h2>
 

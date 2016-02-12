@@ -52,7 +52,10 @@
 <span class="hljs-keyword">const</span> MKPropTypes = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../MKPropTypes'</span>);
 <span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../MKColor'</span>);
 <span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../utils'</span>);
-<span class="hljs-keyword">const</span> {getTheme} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../theme'</span>);</pre></div></div>
+<span class="hljs-keyword">const</span> {getTheme} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../theme'</span>);
+<span class="hljs-keyword">import</span> {
+  pick,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'ramda'</span>;</pre></div></div>
             
         </li>
         
@@ -116,29 +119,12 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p><strong><i>FIXME</i></strong> color has to be wrapped into the style object since RN 0.13</p>
+              <p>color has to be wrapped into the style object since RN 0.13</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">this</span>.refs.label.setNativeProps({style:{color: utils.parseColor(color)}});</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-4">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-4">&#182;</a>
-              </div>
-              <p>color has to be an int since RN v0.12, <a href="https://github.com/facebook/react-native/issues/3300">https://github.com/facebook/react-native/issues/3300</a>, use this with RN 0.12
-this.refs.label.setNativeProps({color: utils.parseColor(color)});
-use this with RN before 0.12
-this.refs.label.setNativeProps({color});</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  }
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">this</span>.refs.label.setNativeProps({style:{color: utils.parseColor(color)}});
+  }
 
   aniFloatLabel() {
     <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.props.floatingLabelEnabled) {
@@ -201,11 +187,11 @@ this.refs.label.setNativeProps({color});</p>
         </li>
         
         
-        <li id="section-5">
+        <li id="section-4">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-5">&#182;</a>
+                <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
               <h2 id="-section-id-floatinglabelprops-floatinglabel-props-section-"><section id='floatingLabelProps'>FloatingLabel Props</section></h2>
 
@@ -216,11 +202,11 @@ this.refs.label.setNativeProps({color});</p>
         </li>
         
         
-        <li id="section-6">
+        <li id="section-5">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-6">&#182;</a>
+                <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
               <p>Enable floating label effect</p>
 
@@ -231,11 +217,11 @@ this.refs.label.setNativeProps({color});</p>
         </li>
         
         
-        <li id="section-7">
+        <li id="section-6">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
+                <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
               <p>Duration of floating transition, also affect underline animation</p>
 
@@ -246,11 +232,11 @@ this.refs.label.setNativeProps({color});</p>
         </li>
         
         
-        <li id="section-8">
+        <li id="section-7">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
+                <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <p>Spacing between floating label and input text</p>
 
@@ -261,11 +247,11 @@ this.refs.label.setNativeProps({color});</p>
         </li>
         
         
-        <li id="section-9">
+        <li id="section-8">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <p><a href="MKPropTypes.html#font">Font</a> of floating label
 <strong><i>FIXME</i></strong> causing warning: <code>typeChecker is not a function</code></p>
@@ -281,11 +267,11 @@ FloatingLabel.propTypes = {
         </li>
         
         
-        <li id="section-10">
+        <li id="section-9">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
+                <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <p>internal props</p>
 
@@ -304,11 +290,11 @@ FloatingLabel.defaultProps = {
         </li>
         
         
-        <li id="section-11">
+        <li id="section-10">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
+                <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <h2 id="-section-id-underline-underline-section-"><section id='Underline'>Underline</section></h2>
 <p><code>Underline</code> component of the <a href="#Textfield"><code>Textfield</code></a>.</p>
@@ -328,11 +314,11 @@ FloatingLabel.defaultProps = {
         </li>
         
         
-        <li id="section-12">
+        <li id="section-11">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-12">&#182;</a>
+                <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
               <p>update the length of stretched underline</p>
 
@@ -345,11 +331,11 @@ FloatingLabel.defaultProps = {
         </li>
         
         
-        <li id="section-13">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <p>stretch the line, from center</p>
 
@@ -376,11 +362,11 @@ FloatingLabel.defaultProps = {
         </li>
         
         
-        <li id="section-14">
+        <li id="section-13">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
+                <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
               <p>collapse the the line to a single point at center</p>
 
@@ -412,11 +398,11 @@ FloatingLabel.defaultProps = {
         </li>
         
         
-        <li id="section-15">
+        <li id="section-14">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-15">&#182;</a>
+                <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <p>top: -this.props.underlineSize,</p>
 
@@ -439,11 +425,11 @@ FloatingLabel.defaultProps = {
         </li>
         
         
-        <li id="section-16">
+        <li id="section-15">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
+                <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
               <p>the colorful forefront line, animation enabled</p>
 
@@ -473,11 +459,11 @@ Underline.propTypes = {</pre></div></div>
         </li>
         
         
-        <li id="section-17">
+        <li id="section-16">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-17">&#182;</a>
+                <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <p>internal props</p>
 
@@ -499,11 +485,11 @@ Underline.defaultProps = {
         </li>
         
         
-        <li id="section-18">
+        <li id="section-17">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-18">&#182;</a>
+                <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
               <h2 id="-section-id-textfield-textfield-section-"><section id='Textfield'>Textfield</section></h2>
 <p><code>Textfield</code> component,
@@ -517,7 +503,7 @@ which has floating label and underline effect.</p>
             <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Textfield</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
   constructor(props) {
     <span class="hljs-keyword">super</span>(props);
-
+    <span class="hljs-keyword">this</span>.theme = getTheme();
     <span class="hljs-keyword">this</span>.inputFrame = {};
     <span class="hljs-keyword">this</span>.state = {
       inputMarginTop: <span class="hljs-number">0</span>,
@@ -550,8 +536,10 @@ which has floating label and underline effect.</p>
   }
 
   componentWillReceiveProps(nextProps) {
-    <span class="hljs-keyword">this</span>.bufferedValue = nextProps.value || nextProps.text ||
-      nextProps.defaultValue;
+    <span class="hljs-keyword">const</span> newText = nextProps.value || nextProps.text || nextProps.defaultValue;
+    <span class="hljs-keyword">if</span> (newText) {
+      <span class="hljs-keyword">this</span>.bufferedValue = newText;
+    }
     <span class="hljs-keyword">this</span>._originPlaceholder = nextProps.placeholder;
   }
 
@@ -597,11 +585,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-19">
+        <li id="section-18">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-19">&#182;</a>
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
               <p>animation when textfield focused</p>
 
@@ -613,11 +601,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-20">
+        <li id="section-19">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-20">&#182;</a>
+                <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
               <p>hide fixed placeholder, if floating</p>
 
@@ -628,11 +616,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-21">
+        <li id="section-20">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
+                <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
               <p>and show floating label
 <strong><i>FIXME</i></strong> workaround <a href="https://github.com/facebook/react-native/issues/3220">https://github.com/facebook/react-native/issues/3220</a></p>
@@ -645,11 +633,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-22">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-22">&#182;</a>
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p>stretch the underline if enabled</p>
 
@@ -660,11 +648,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-23">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-23">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <p>and lift the floating label, if enabled</p>
 
@@ -682,11 +670,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-24">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-24">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <p>animation when textfield lost focus</p>
 
@@ -697,11 +685,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-25">
+        <li id="section-24">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-25">&#182;</a>
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <p>shrink the underline</p>
 
@@ -712,11 +700,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-26">
+        <li id="section-25">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-26">&#182;</a>
+                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <p>pull down the label, or keep position if input is not empty</p>
 
@@ -727,11 +715,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-27">
+        <li id="section-26">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-27">&#182;</a>
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <p>input is empty, label should be pulled down</p>
 
@@ -747,11 +735,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-28">
+        <li id="section-27">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-28">&#182;</a>
+                <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
               <p>then show fixed placeholder</p>
 
@@ -762,11 +750,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-29">
+        <li id="section-28">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-29">&#182;</a>
+                <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
               <p>and hide floating label
 <strong><i>FIXME</i></strong> workaround <a href="https://github.com/facebook/react-native/issues/3220">https://github.com/facebook/react-native/issues/3220</a></p>
@@ -808,32 +796,39 @@ which has floating label and underline effect.</p>
   }
 
   render() {
-    <span class="hljs-keyword">let</span> floatingLabel, defaultDim;
+    <span class="hljs-keyword">const</span> tfTheme = <span class="hljs-keyword">this</span>.theme.textfieldStyle;
+    <span class="hljs-keyword">let</span> floatingLabel;
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.floatingLabelEnabled) {</pre></div></div>
             
         </li>
         
         
-        <li id="section-30">
+        <li id="section-29">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-30">&#182;</a>
+                <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
               <p>the floating label</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      floatingLabel = (
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">const</span> props = <span class="hljs-built_in">Object</span>.assign(
+        pick([<span class="hljs-string">'tintColor'</span>, <span class="hljs-string">'highlightColor'</span>, <span class="hljs-string">'floatingLabelFont'</span>], tfTheme),
+        utils.extractProps(<span class="hljs-keyword">this</span>, FloatingLabel.propTypes));
+
+      floatingLabel = (
         <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">FloatingLabel</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"floatingLabel"</span>
-          {<span class="hljs-attribute">...utils.extractProps</span>(<span class="hljs-attribute">this</span>, <span class="hljs-attribute">FloatingLabel.propTypes</span>)}
+          {<span class="hljs-attribute">...props</span>}
           <span class="hljs-attribute">text</span>=<span class="hljs-value">{this.props.placeholder}</span>
         /&gt;</span>
       )</span>;
     }
 
-    <span class="hljs-keyword">const</span> underlineProps = utils.extractProps(<span class="hljs-keyword">this</span>, [<span class="hljs-string">'tintColor'</span>,
-      <span class="hljs-string">'highlightColor'</span>, <span class="hljs-string">'underlineSize'</span>, <span class="hljs-string">'underlineEnabled'</span>]);
+    <span class="hljs-keyword">const</span> underlineProps = <span class="hljs-built_in">Object</span>.assign(
+      pick([<span class="hljs-string">'tintColor'</span>, <span class="hljs-string">'highlightColor'</span>], tfTheme),
+      utils.extractProps(<span class="hljs-keyword">this</span>, [<span class="hljs-string">'tintColor'</span>,
+        <span class="hljs-string">'highlightColor'</span>, <span class="hljs-string">'underlineSize'</span>, <span class="hljs-string">'underlineEnabled'</span>]));
     <span class="hljs-keyword">const</span> inputProps = utils.extractProps(<span class="hljs-keyword">this</span>, {
       ...TextInput.propTypes,
       password: <span class="hljs-number">1</span>,
@@ -851,7 +846,7 @@ which has floating label and underline effect.</p>
              <span class="hljs-attribute">paddingTop:</span> <span class="hljs-attribute">2</span>, <span class="hljs-attribute">paddingBottom:</span> <span class="hljs-attribute">2</span>,
              <span class="hljs-attribute">marginTop:</span> <span class="hljs-attribute">this.state.inputMarginTop</span>,
             },
-            <span class="hljs-attribute">Textfield.defaultProps.textInputStyle</span>,
+            <span class="hljs-attribute">this.theme.textfieldStyle.textInputStyle</span>,
             <span class="hljs-attribute">this.props.textInputStyle</span>,
           ]}
           <span class="hljs-attribute">onChangeText</span>=<span class="hljs-value">{this._onTextChange.bind(this)}</span>
@@ -871,11 +866,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-31">
+        <li id="section-30">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-31">&#182;</a>
+                <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
               <h2 id="-section-id-props-props-section-"><section id='props'>Props</section></h2>
 
@@ -886,11 +881,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-32">
+        <li id="section-31">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-32">&#182;</a>
+                <a class="pilcrow" href="#section-31">&#182;</a>
               </div>
               <p><a href="https://facebook.github.io/react-native/docs/textinput.html#props">TextInput Props</a>…</p>
 
@@ -901,11 +896,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-33">
+        <li id="section-32">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-33">&#182;</a>
+                <a class="pilcrow" href="#section-32">&#182;</a>
               </div>
               <p>Alias to <code>value</code></p>
 
@@ -916,11 +911,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-34">
+        <li id="section-33">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-34">&#182;</a>
+                <a class="pilcrow" href="#section-33">&#182;</a>
               </div>
               <p>alias to <code>onChangeText</code></p>
 
@@ -931,11 +926,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-35">
+        <li id="section-34">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-35">&#182;</a>
+                <a class="pilcrow" href="#section-34">&#182;</a>
               </div>
               <p>Alias to <code>secureTextEntry</code></p>
 
@@ -946,11 +941,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-36">
+        <li id="section-35">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-36">&#182;</a>
+                <a class="pilcrow" href="#section-35">&#182;</a>
               </div>
               <p><a href="#floatingLabelProps">Floating Label Props</a>…</p>
 
@@ -961,11 +956,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-37">
+        <li id="section-36">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-37">&#182;</a>
+                <a class="pilcrow" href="#section-36">&#182;</a>
               </div>
               <p>The highlighted bottom border effect</p>
 
@@ -976,11 +971,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-38">
+        <li id="section-37">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-38">&#182;</a>
+                <a class="pilcrow" href="#section-37">&#182;</a>
               </div>
               <p>The thickness of the Underline</p>
 
@@ -991,11 +986,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-39">
+        <li id="section-38">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-39">&#182;</a>
+                <a class="pilcrow" href="#section-38">&#182;</a>
               </div>
               <p>Color of the highlighted underline, and also the floating label</p>
 
@@ -1006,11 +1001,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-40">
+        <li id="section-39">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-40">&#182;</a>
+                <a class="pilcrow" href="#section-39">&#182;</a>
               </div>
               <p>Color of the un-highlighted underline, and the placeholder</p>
 <ul>
@@ -1025,11 +1020,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-41">
+        <li id="section-40">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-41">&#182;</a>
+                <a class="pilcrow" href="#section-40">&#182;</a>
               </div>
               <p>Style applied to the <code>TextInput</code> component, ok to use <code>StyleSheet</code></p>
 
@@ -1041,34 +1036,38 @@ which has floating label and underline effect.</p>
         </li>
         
         
+        <li id="section-41">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-41">&#182;</a>
+              </div>
+              <h2 id="-section-id-defaults-defaults-section-"><section id='defaults'>Defaults</section></h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Textfield.defaultProps = {</pre></div></div>
+            
+        </li>
+        
+        
         <li id="section-42">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-42">&#182;</a>
               </div>
-              <h2 id="-section-id-defaults-defaults-section-"><section id='defaults'>Defaults</section></h2>
+              <p>tintColor: ‘rgba(0,0,0,.12)’,
+highlightColor: getTheme().primaryColor,
+floatingLabelFont: {
+ fontSize: getTheme().fontSize - 2,
+},</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Textfield.defaultProps = {
-  tintColor: <span class="hljs-string">'rgba(0,0,0,.12)'</span>,
-  highlightColor: getTheme().primaryColor,
-  floatingLabelFont: {
-    fontSize: getTheme().fontSize - <span class="hljs-number">2</span>,
-  },
-  style: {
-    width: <span class="hljs-number">100</span>,
+            <div class="content"><div class='highlight'><pre>  style: {
     height: <span class="hljs-number">39</span>,
-  },
-  textInputStyle: {
-    color: getTheme().fontColor,
-    fontSize: getTheme().fontSize + <span class="hljs-number">2</span>,
-    paddingLeft: <span class="hljs-number">0</span>,
-    paddingRight: <span class="hljs-number">0</span>,
-  },
-  underlineEnabled: <span class="hljs-literal">true</span>,
-};</pre></div></div>
+  },</pre></div></div>
             
         </li>
         
@@ -1079,9 +1078,17 @@ which has floating label and underline effect.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-43">&#182;</a>
               </div>
-              <hr>
+              <p>textInputStyle: {
+ color: getTheme().fontColor,
+ fontSize: getTheme().fontSize + 2,
+ paddingLeft: 0,
+ paddingRight: 0,
+},</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre>  underlineEnabled: <span class="hljs-literal">true</span>,
+};</pre></div></div>
             
         </li>
         
@@ -1091,6 +1098,19 @@ which has floating label and underline effect.</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-44">&#182;</a>
+              </div>
+              <hr>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-45">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-45">&#182;</a>
               </div>
               <p>Builder</p>
 
@@ -1103,11 +1123,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-45">
+        <li id="section-46">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-45">&#182;</a>
+                <a class="pilcrow" href="#section-46">&#182;</a>
               </div>
               <h2 id="textfield-builder">Textfield builder</h2>
 
@@ -1116,17 +1136,16 @@ which has floating label and underline effect.</p>
             <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TextfieldBuilder</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Builder</span> </span>{
   constructor() {
     <span class="hljs-keyword">super</span>();
-    <span class="hljs-keyword">this</span>.withBackgroundColor(MKColor.Transparent);
   }</pre></div></div>
             
         </li>
         
         
-        <li id="section-46">
+        <li id="section-47">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-46">&#182;</a>
+                <a class="pilcrow" href="#section-47">&#182;</a>
               </div>
               <p>For compatibility with RN version older than 0.9.0.</p>
 <blockquote>
@@ -1159,11 +1178,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-47">
+        <li id="section-48">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-47">&#182;</a>
+                <a class="pilcrow" href="#section-48">&#182;</a>
               </div>
               <p>define builder method for each prop</p>
 
@@ -1174,11 +1193,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-48">
+        <li id="section-49">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-48">&#182;</a>
+                <a class="pilcrow" href="#section-49">&#182;</a>
               </div>
               <hr>
 
@@ -1187,11 +1206,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-49">
+        <li id="section-50">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-49">&#182;</a>
+                <a class="pilcrow" href="#section-50">&#182;</a>
               </div>
               <h2 id="-section-id-builders-built-in-builders-section-"><section id="builders">Built-in builders</section></h2>
 
@@ -1208,11 +1227,11 @@ which has floating label and underline effect.</p>
         </li>
         
         
-        <li id="section-50">
+        <li id="section-51">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-50">&#182;</a>
+                <a class="pilcrow" href="#section-51">&#182;</a>
               </div>
               <h2 id="public-interface">Public interface</h2>
 

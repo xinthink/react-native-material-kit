@@ -32,6 +32,8 @@
                 
                   <li><a href="lib&#x2F;internal&#x2F;MKTouchable.html">lib&#x2F;internal&#x2F;MKTouchable.js</a></li>
                 
+                  <li><a href="lib&#x2F;internal&#x2F;Thumb.html">lib&#x2F;internal&#x2F;Thumb.js</a></li>
+                
                   <li><a href="lib&#x2F;internal&#x2F;Tick.html">lib&#x2F;internal&#x2F;Tick.js</a></li>
                 
                   <li><a href="lib&#x2F;mdl&#x2F;Button.html">lib&#x2F;mdl&#x2F;Button.js</a></li>
@@ -43,6 +45,8 @@
                   <li><a href="lib&#x2F;mdl&#x2F;Progress.html">lib&#x2F;mdl&#x2F;Progress.js</a></li>
                 
                   <li><a href="lib&#x2F;mdl&#x2F;RadioButton.html">lib&#x2F;mdl&#x2F;RadioButton.js</a></li>
+                
+                  <li><a href="lib&#x2F;mdl&#x2F;RangeSlider.html">lib&#x2F;mdl&#x2F;RangeSlider.js</a></li>
                 
                   <li><a href="lib&#x2F;mdl&#x2F;Ripple.html">lib&#x2F;mdl&#x2F;Ripple.js</a></li>
                 
@@ -56,20 +60,6 @@
                 
                   <li><a href="lib&#x2F;mdl&#x2F;Textfield.html">lib&#x2F;mdl&#x2F;Textfield.js</a></li>
                 
-                  <li><a href="lib&#x2F;mdl&#x2F;cards&#x2F;action.html">lib&#x2F;mdl&#x2F;cards&#x2F;action.js</a></li>
-                
-                  <li><a href="lib&#x2F;mdl&#x2F;cards&#x2F;container.html">lib&#x2F;mdl&#x2F;cards&#x2F;container.js</a></li>
-                
-                  <li><a href="lib&#x2F;mdl&#x2F;cards&#x2F;content.html">lib&#x2F;mdl&#x2F;cards&#x2F;content.js</a></li>
-                
-                  <li><a href="lib&#x2F;mdl&#x2F;cards&#x2F;image.html">lib&#x2F;mdl&#x2F;cards&#x2F;image.js</a></li>
-                
-                  <li><a href="lib&#x2F;mdl&#x2F;cards&#x2F;menu.html">lib&#x2F;mdl&#x2F;cards&#x2F;menu.js</a></li>
-                
-                  <li><a href="lib&#x2F;mdl&#x2F;cards&#x2F;styles.html">lib&#x2F;mdl&#x2F;cards&#x2F;styles.js</a></li>
-                
-                  <li><a href="lib&#x2F;mdl&#x2F;cards&#x2F;title.html">lib&#x2F;mdl&#x2F;cards&#x2F;title.js</a></li>
-                
                   <li><a href="lib&#x2F;mdl&#x2F;index.html">lib&#x2F;mdl&#x2F;index.js</a></li>
                 
                   <li><a href="lib&#x2F;theme.html">lib&#x2F;theme.js</a></li>
@@ -82,7 +72,7 @@
             </td>
             <td class="readme">
 <p><a href="https://www.npmjs.com/package/react-native-material-kit"><img src="https://img.shields.io/npm/v/react-native-material-kit.svg" alt="npm" title="" /></a>
-<a href="https://facebook.github.io/react-native"><img src="https://img.shields.io/badge/react--native-v0.17.x-05A5D1.svg" alt="react-native" title="" /></a>
+<a href="https://facebook.github.io/react-native"><img src="https://img.shields.io/badge/react--native-v0.20.x-05A5D1.svg" alt="react-native" title="" /></a>
 <a href="https://raw.githubusercontent.com/xinthink/react-native-material-kit/master/LICENSE.md"><img src="https://img.shields.io/dub/l/vibe-d.svg" alt="MIT" title="" /></a>
 <a href="https://www.bithound.io/github/xinthink/react-native-material-kit"><img src="https://www.bithound.io/github/xinthink/react-native-material-kit/badges/score.svg" alt="bitHound Score" title="" /></a></p>
 
@@ -127,7 +117,14 @@ include ':RNMaterialKit'
 project(':RNMaterialKit').projectDir = file('../node_modules/react-native-material-kit/android')</p>
 
 <p>```</p></li>
-<li>Add <code>compile project(':RNMaterialKit')</code> to your <code>android/app/build.gradle</code></li>
+<li><p>Declare the dependency in your <code>android/app/build.gradle</code>
+```gradle
+dependencies {
+  ...
+  compile project(':RNMaterialKit')
+}</p>
+
+<p>```</p></li>
 <li><p>Import <code>com.github.xinthink.rnmk.ReactMaterialKitPackage</code> and register it to the <code>ReactInstanceManager</code>, in your <code>MainActivity</code> (or equivalent):
 ```java
 mReactInstanceManager = ReactInstanceManager.builder()
@@ -162,7 +159,8 @@ mReactInstanceManager = ReactInstanceManager.builder()
 <li><a href="#loading">Loading</a>
 <ul><li><a href="#progress-bar">Progress bar</a></li>
 <li><a href="#spinner">Spinner</a></li></ul></li>
-<li><a href="#sliders">Sliders</a></li>
+<li><a href="#sliders">Sliders</a>
+<ul><li><a href="#range-slider">Range Slider</a></li></ul></li>
 <li><a href="#text-fields">Textfields</a></li>
 <li><a href="#toggles">Toggles</a>
 <ul><li><a href="#checkbox">Checkbox</a></li>
@@ -312,6 +310,32 @@ const SliderWithValue = mdl.Slider.slider()
 </code></pre>
 
 <p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Slider.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/sliders.js">example code</a></p>
+
+<h3 id="rangeslider">Range Slider</h3>
+
+<p>!<a href="https://cloud.githubusercontent.com/assets/16245422/12763284/63a2dafc-c9a8-11e5-8fde-37b6f42a60c2.gif">range-slider-demo</a></p>
+
+<pre><code class="jsx">&lt;mdl.RangeSlider style={styles.slider}/&gt;
+…
+const SliderWithRange = mdl.RangeSlider.slider()
+  .withStyle(styles.slider)
+  .withMin(10)
+  .withMax(100)
+  .withMinValue(30)
+  .withMaxValue(50)
+  .build();
+…
+&lt;SliderWithRange
+  ref=“sliderWithRange”
+  onChange={(curValue) =&gt; this.setState({
+    min: curValue.min,
+    max: curValue.max,
+    })
+  }
+  /&gt;
+</code></pre>
+
+<p>👉 <a href="http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/RangeSlider.html#props">props reference</a> and <a href="https://github.com/xinthink/rnmk-demo/blob/master/app/sliders.js">example code</a></p>
 
 <h3 id="textfields">Text Fields</h3>
 

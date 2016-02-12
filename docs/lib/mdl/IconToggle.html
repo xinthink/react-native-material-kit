@@ -46,7 +46,6 @@
   TouchableWithoutFeedback,
 } = React;
 
-<span class="hljs-keyword">const</span> MKPropTypes = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../MKPropTypes'</span>);
 <span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../MKColor'</span>);
 <span class="hljs-keyword">const</span> Ripple = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./Ripple'</span>);
 <span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../utils'</span>);
@@ -75,6 +74,7 @@
             <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IconToggle</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
   constructor(props) {
     <span class="hljs-keyword">super</span>(props);
+    <span class="hljs-keyword">this</span>.theme = getTheme();
     <span class="hljs-keyword">this</span>.state = { checked: <span class="hljs-literal">false</span> };
   }
 
@@ -151,10 +151,15 @@
   }
 
   render() {
+    <span class="hljs-keyword">const</span> mergedStyle = <span class="hljs-built_in">Object</span>.assign({}, <span class="hljs-keyword">this</span>.theme.iconToggleStyle, utils.compact({
+      rippleColor: <span class="hljs-keyword">this</span>.props.rippleColor,
+    }));
+
     <span class="hljs-keyword">return</span> (
       <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">TouchableWithoutFeedback</span> {<span class="hljs-attribute">...utils.extractTouchableProps</span>(<span class="hljs-attribute">this</span>)}&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">Ripple</span>
           {<span class="hljs-attribute">...this.props</span>}
+          <span class="hljs-attribute">rippleColor</span>=<span class="hljs-value">{mergedStyle.rippleColor}</span>
           <span class="hljs-attribute">style</span>=<span class="hljs-value">{[IconToggle.defaultProps.style,</span> <span class="hljs-attribute">this.props.style</span>]}
           <span class="hljs-attribute">maskBorderRadiusInPercent</span>=<span class="hljs-value">{50}</span>
           <span class="hljs-attribute">rippleLocation</span>=<span class="hljs-value">"center"</span>
@@ -260,7 +265,6 @@
   pointerEvents: <span class="hljs-string">'box-only'</span>,
   enabled: <span class="hljs-literal">true</span>,
   maskColor: MKColor.Transparent,
-  rippleColor: getTheme().bgPlain,
   style: {
     justifyContent: <span class="hljs-string">'center'</span>,
     alignItems: <span class="hljs-string">'center'</span>,

@@ -42,6 +42,8 @@
             <div class="content"><div class='highlight'><pre>
 <span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
 <span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../MKColor'</span>);
+<span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../utils'</span>);
+<span class="hljs-keyword">const</span> {getTheme} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../theme'</span>);
 
 <span class="hljs-keyword">const</span> {
   Component,
@@ -383,6 +385,7 @@ Thumb.propTypes = {</pre></div></div>
             <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Switch</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
   constructor(props) {
     <span class="hljs-keyword">super</span>(props);
+    <span class="hljs-keyword">this</span>.theme = getTheme();
     <span class="hljs-keyword">this</span>._animatedThumbLeft = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>);
     <span class="hljs-keyword">this</span>.state = {
       trackSize: <span class="hljs-number">0</span>,
@@ -563,8 +566,10 @@ in order to access the component functions defined in <code>Thumb</code></p>
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.refs.thumb.refs.node;
   }
 
-  _getBgColor() {
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.state.checked ? <span class="hljs-keyword">this</span>.props.onColor : <span class="hljs-keyword">this</span>.props.offColor;
+  _getBgColor(theme) {
+    <span class="hljs-keyword">const</span> onColor = <span class="hljs-keyword">this</span>.props.onColor || theme.onColor;
+    <span class="hljs-keyword">const</span> offColor = <span class="hljs-keyword">this</span>.props.offColor || theme.offColor;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.state.checked ? onColor : offColor;
   }
 
   _onPress() {
@@ -609,12 +614,20 @@ in order to access the component functions defined in <code>Thumb</code></p>
       onLongPress: <span class="hljs-keyword">this</span>.props.onLongPress,
     };
 
+    <span class="hljs-keyword">const</span> mergedStyle = <span class="hljs-built_in">Object</span>.assign({}, <span class="hljs-keyword">this</span>.theme.switchStyle, utils.compact({
+      onColor: <span class="hljs-keyword">this</span>.props.onColor,
+      offColor: <span class="hljs-keyword">this</span>.props.offColor,
+      thumbOnColor: <span class="hljs-keyword">this</span>.props.thumbOnColor,
+      thumbOffColor: <span class="hljs-keyword">this</span>.props.thumbOffColor,
+      rippleColor: <span class="hljs-keyword">this</span>.props.rippleColor,
+    }));
+
     <span class="hljs-keyword">const</span> thumbFrame = <span class="hljs-keyword">this</span>.state.thumbFrame;
     <span class="hljs-keyword">const</span> thumbProps = {
       checked: <span class="hljs-keyword">this</span>.state.checked,
-      onColor: <span class="hljs-keyword">this</span>.props.thumbOnColor,
-      offColor: <span class="hljs-keyword">this</span>.props.thumbOffColor,
-      rippleColor: <span class="hljs-keyword">this</span>.props.rippleColor,
+      onColor: mergedStyle.thumbOnColor,
+      offColor: mergedStyle.thumbOffColor,
+      rippleColor: mergedStyle.rippleColor,
       rippleRadius: thumbFrame.rippleRadii,
       rippleAniDuration: <span class="hljs-keyword">this</span>.props.rippleAniDuration,
       radius: <span class="hljs-keyword">this</span>.props.thumbRadius,
@@ -646,7 +659,7 @@ in order to access the component functions defined in <code>Thumb</code></p>
                 <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
                         <span class="hljs-attribute">width:</span> <span class="hljs-attribute">this.props.trackLength</span>,
                         <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this.props.trackSize</span>,
-                        <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this._getBgColor</span>(),
+                        <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this._getBgColor</span>(<span class="hljs-attribute">mergedStyle</span>),
                         <span class="hljs-attribute">borderRadius:</span> <span class="hljs-attribute">this.state.trackRadii</span>,
                         <span class="hljs-attribute">margin:</span> <span class="hljs-attribute">this.state.trackMargin</span>,
                       }}
@@ -886,14 +899,9 @@ in order to access the component functions defined in <code>Thumb</code></p>
             
             <div class="content"><div class='highlight'><pre>Switch.defaultProps = {
   checked: <span class="hljs-literal">false</span>,
-  onColor: <span class="hljs-string">'rgba(63,81,181,0.4)'</span>,  <span class="hljs-comment">// Indigo + alpha</span>
-  offColor: <span class="hljs-string">'rgba(0,0,0,0.25)'</span>,
   trackLength: <span class="hljs-number">48</span>,
   trackSize: <span class="hljs-number">20</span>,
   thumbRadius: <span class="hljs-number">14</span>,
-  thumbOnColor: MKColor.Indigo,
-  thumbOffColor: MKColor.Silver,
-  rippleColor: <span class="hljs-string">'rgba(63,81,181,0.2)'</span>,  <span class="hljs-comment">// Indigo + alpha</span>
 };</pre></div></div>
             
         </li>

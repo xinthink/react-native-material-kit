@@ -33,12 +33,15 @@
             <div class="content"><div class='highlight'><pre><span class="hljs-comment">/**
  * Created by ywu on 15/6/1.
  */</span>
-exports.setTheme = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./theme'</span>).setTheme;
-exports.getTheme = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./theme'</span>).getTheme;
+<span class="hljs-keyword">export</span> {
+  setTheme,
+  getTheme,
+  theme,
+} from <span class="hljs-string">'./theme'</span>;
 
-exports.mdl = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./mdl'</span>);
-
-exports.MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./MKColor'</span>);</pre></div></div>
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> mdl <span class="hljs-keyword">from</span> <span class="hljs-string">'./mdl'</span>;
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> MKColor <span class="hljs-keyword">from</span> <span class="hljs-string">'./MKColor'</span>;
+<span class="hljs-keyword">export</span> { mdl, MKColor };</pre></div></div>
             
         </li>
         
@@ -53,25 +56,20 @@ exports.MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-s
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>exports.MKButton = exports.mdl.Button;
-exports.MKTextField = exports.mdl.Textfield;
-exports.MKSwitch = exports.mdl.Switch;
-exports.MKIconToggle = exports.mdl.IconToggle;
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">export</span> {
+  Button <span class="hljs-keyword">as</span> MKButton,
+  Textfield <span class="hljs-keyword">as</span> MKTextField,
+  Switch <span class="hljs-keyword">as</span> MKSwitch,
+  IconToggle <span class="hljs-keyword">as</span> MKIconToggle,
 
-exports.MKRipple = exports.mdl.Ripple;
-exports.MKProgress = exports.mdl.Progress;
-exports.MKSlider = exports.mdl.Slider;
-exports.MKSpinner = exports.mdl.Spinner;
-exports.MKRadioButton = exports.mdl.RadioButton;
-exports.MKCheckbox = exports.mdl.Checkbox;
-
-exports.MKCard = exports.mdl.Card;
-exports.MKCardTitle = exports.mdl.Title;
-exports.MKCardImage = exports.mdl.MKCardImage;
-exports.MKCardContent = exports.mdl.MKCardContent;
-exports.MKCardMenu = exports.mdl.MKCardMenu;
-exports.MKCardAction = exports.mdl.MKCardAction;
-exports.MKCardStyles = exports.mdl.MKCardStyles;</pre></div></div>
+  Ripple <span class="hljs-keyword">as</span> MKRipple,
+  Progress <span class="hljs-keyword">as</span> MKProgress,
+  Slider <span class="hljs-keyword">as</span> MKSlider,
+  RangeSlider <span class="hljs-keyword">as</span> MKRangeSlider,
+  Spinner <span class="hljs-keyword">as</span> MKSpinner,
+  RadioButton <span class="hljs-keyword">as</span> MKRadioButton,
+  Checkbox <span class="hljs-keyword">as</span> MKCheckbox,
+} from <span class="hljs-string">'./mdl'</span>;</pre></div></div>
             
         </li>
         
