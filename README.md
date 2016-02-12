@@ -83,6 +83,7 @@ Have fun! :metal:
 - Refer to the [Annotated Source][docs] as API docs
 - Source code of [Demo app][]
 - For contributors, please refer to [How to debug local RNMK module][debug-with-demo]
+- Chat about bugs/features on [Gitter][gitter-rnmk]
 
 [docs]: http://xinthink.github.io/react-native-material-kit/docs/index.html
 [Demo app]: https://github.com/xinthink/rnmk-demo
