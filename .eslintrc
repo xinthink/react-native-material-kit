@@ -1,23 +1,11 @@
 // @see https://github.com/airbnb/javascript/blob/master/linters/.eslintrc
 {
   "parser": "babel-eslint",          // https://github.com/babel/babel-eslint
+  "extends": "airbnb",
   "plugins": [
     "react"                          // https://github.com/yannickcr/eslint-plugin-react
   ],
-  "env": {
-    "es6": true,
-    "node": true
-  },
-  "ecmaFeatures": {
-    "modules": true,
-    "jsx": true
-  },
   "rules": {
-    "comma-dangle": [1, "always-multiline"],
-    "no-underscore-dangle": 0,
-    "quotes": [1, "single", "avoid-escape"]
-  },
-  "globals": {
-    "requestAnimationFrame": false
+    "react/prop-types": 1
   }
 }
