@@ -1,3 +1,4 @@
+/*eslint-disable */
 var gulp = require('gulp');
 var docco = require('gulp-docco');
 
