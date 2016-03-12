@@ -33,6 +33,7 @@
 @interface UIColor (MKColor)
 
 + (instancetype)colorWithHex:(int)hex;
++ (instancetype)solidColorWithHex:(int)hex;
 + (instancetype)colorWithHex:(int)hex alpha:(CGFloat)alpha;
 
 + (instancetype)transparent;

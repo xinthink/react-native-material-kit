@@ -13,7 +13,6 @@
 
 @interface TickView : UIControl
 
-@property UIColor *fillColor;  // Background color of the tick
 @property float inset;  // Insets of the tick
 
 @end

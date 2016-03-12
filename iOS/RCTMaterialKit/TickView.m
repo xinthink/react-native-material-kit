@@ -13,10 +13,10 @@
 
 @implementation TickView
 {
+    UIColor *_fillColor;
     UIBezierPath *tickPath;
 }
 
-@synthesize fillColor;
 @synthesize inset;
 
 - (instancetype)init {
@@ -45,7 +45,7 @@
 - (void)initDefaults
 {
     self.inset = 1;
-    self.fillColor = [UIColor indigo];
+    _fillColor = [UIColor indigo];
     [self setOpaque:false];
 }
 
@@ -55,7 +55,7 @@
         [self updateTickPathWithRect:rect];
     }
 
-    [fillColor setFill];
+    [_fillColor setFill];
     [tickPath fill];
 
 }
@@ -69,17 +69,10 @@
     [self setNeedsDisplay];
 }
 
-- (void)setFillColor:(UIColor *)color
+- (void)setFillColor:(int)color
 {
-    if (color) {
-        fillColor = color;
-        [self setNeedsDisplay];
-    }
-}
-
-- (UIColor*)fillColor
-{
-    return fillColor;
+    _fillColor = [UIColor colorWithHex:color];
+    [self setNeedsDisplay];
 }
 
 - (void)setInset:(float)anInset

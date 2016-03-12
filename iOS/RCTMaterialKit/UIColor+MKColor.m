@@ -10,16 +10,25 @@
 
 @implementation UIColor (MKColor)
 
-+ (instancetype)colorWithHex:(int)hex
++ (UIColor *)colorWithHex:(int)hex
+{
+    CGFloat a = ((hex >> 24) & 0xFF) / 255.0f;
+    CGFloat r = ((hex >> 16) & 0xFF) / 255.0f;
+    CGFloat g = ((hex >> 8) & 0xFF) / 255.0f;
+    CGFloat b = (hex & 0xFF) / 255.0f;
+    return [UIColor colorWithRed:r green:g blue:b alpha:a];
+}
+
++ (instancetype)solidColorWithHex:(int)hex
 {
     return [UIColor colorWithHex:hex alpha:1];
 }
 
 + (instancetype)colorWithHex:(int)hex alpha:(CGFloat)alpha
 {
-    CGFloat r = ((hex & 0xFF0000) >> 16) / 255.0;
-    CGFloat g = ((hex & 0x00FF00) >> 8) / 255.0;
-    CGFloat b = (hex & 0x0000FF) / 255.0;
+    CGFloat r = ((hex & 0xFF0000) >> 16) / 255.0f;
+    CGFloat g = ((hex & 0x00FF00) >> 8) / 255.0f;
+    CGFloat b = (hex & 0x0000FF) / 255.0f;
     return [UIColor colorWithRed:r green:g blue:b alpha:alpha];
 }
 
@@ -39,7 +48,7 @@
     static UIColor *color = nil;
 
     if (!color) {
-        color = [UIColor colorWithHex:MK_COLOR_INDIGO];
+        color = [UIColor solidColorWithHex:MK_COLOR_INDIGO];
     }
 
     return color;
@@ -50,7 +59,7 @@
     static UIColor *color = nil;
 
     if (!color) {
-        color = [UIColor colorWithHex:MK_COLOR_SILVER];
+        color = [UIColor solidColorWithHex:MK_COLOR_SILVER];
     }
 
     return color;
