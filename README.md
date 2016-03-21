@@ -284,6 +284,10 @@ const SliderWithRange = mdl.RangeSlider.slider()
     max: curValue.max,
     })
   }
+  onEnd={(curValue) => {
+    console.log("Slider drag ended");
+    console.log(curValue);
+  }}
   />
 ```
 
