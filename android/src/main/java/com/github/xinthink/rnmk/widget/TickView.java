@@ -107,7 +107,7 @@ public class TickView extends View implements ReactCompoundView {
         float tickWidth = (float) ((baseSize - this.inset) / Math.sqrt(2));
         float a = (float) (tickWidth / Math.sqrt(2));
         float x0 = left + inset;
-        float y0 = bottom - this.inset - (baseSize - inset);
+        float y0 = bottom - this.inset - (baseSize - inset) - 2; // Leaving 2px gap from bottom
 
         tickPath = new Path();
         tickPath.setFillType(Path.FillType.INVERSE_EVEN_ODD);
