@@ -101,13 +101,14 @@ public class TickView extends View implements ReactCompoundView {
         final float top = bounds.top;
         final float bottom = bounds.bottom;
 
+        float extraBottomInset = 2;  // #117 Leaving 2px gap from bottom
         float width = right - left;
         float baseSize = width / 3f;  // choose a box at the left bottom corner which defines the width of the tick
-        float tickBottomY = bottom - this.inset;
-        float tickWidth = (float) ((baseSize - this.inset) / Math.sqrt(2));
+        float tickBottomY = bottom - this.inset - extraBottomInset;
+        float tickWidth = (float) ((baseSize - this.inset - extraBottomInset) / Math.sqrt(2));
         float a = (float) (tickWidth / Math.sqrt(2));
         float x0 = left + inset;
-        float y0 = bottom - this.inset - (baseSize - inset);
+        float y0 = tickBottomY - (baseSize - inset);
 
         tickPath = new Path();
         tickPath.setFillType(Path.FillType.INVERSE_EVEN_ODD);
@@ -124,7 +125,7 @@ public class TickView extends View implements ReactCompoundView {
         tickBoundsPath.addRect(0, 0, inset, bottom, Path.Direction.CW);
         tickBoundsPath.addRect(right - inset, 0, right, bottom, Path.Direction.CW);
         tickBoundsPath.addRect(inset, 0, right - inset, top + a + inset, Path.Direction.CW);
-        tickBoundsPath.addRect(inset, bottom - this.inset, right - inset, bottom, Path.Direction.CW);
+        tickBoundsPath.addRect(inset, tickBottomY, right - inset, bottom, Path.Direction.CW);
     }
 
     private void initPaints() {
