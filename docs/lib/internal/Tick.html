@@ -27,6 +27,20 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/* eslint react/prefer-stateless-function:0 */</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
               <p>The <code>tick</code> used in <code>Checkbox</code>, for internal use only</p>
 <ul>
 <li><a href="#props">Props</a></li>
@@ -38,29 +52,11 @@
 <span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
 
 <span class="hljs-keyword">const</span> {
-  Component,
-  View,
   PropTypes,
   requireNativeComponent,
   Animated,
-} = React;
-
-<span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../utils'</span>);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-2">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-2">&#182;</a>
-              </div>
-              <h2 id="-section-id-props-props-section-"><section id='props'>Props</section></h2>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> PROP_TYPES = {</pre></div></div>
+  processColor,
+} = React;</pre></div></div>
             
         </li>
         
@@ -71,11 +67,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p><a href="https://facebook.github.io/react-native/docs/view.html#props">View Props</a>…</p>
+              <h2 id="-section-id-props-props-section-"><section id='props'>Props</section></h2>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  ...View.propTypes,</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> PROP_TYPES = {</pre></div></div>
             
         </li>
         
@@ -86,11 +82,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>Background color of the tick</p>
+              <p><a href="https://facebook.github.io/react-native/docs/view.html#props">View Props</a>…</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  fillColor: PropTypes.any,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  ...React.View.propTypes,</pre></div></div>
             
         </li>
         
@@ -100,6 +96,21 @@
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Background color of the tick</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  fillColor: PropTypes.any,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
               <p>Insets of the tick</p>
 
@@ -116,38 +127,38 @@
         </li>
         
         
-        <li id="section-6">
+        <li id="section-7">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-6">&#182;</a>
+                <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <h2 id="-section-id-tick-tick-section-"><section id='Tick'>Tick</section></h2>
 <p>The <code>Tick</code> used in <code>Checkbox</code> component.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Tick</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Tick</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
+  static propTypes = PROP_TYPES;
+
   render() {
     <span class="hljs-keyword">return</span> (
       <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">NativeTick</span>
         {<span class="hljs-attribute">...this.props</span>}
-        <span class="hljs-attribute">fillColor</span>=<span class="hljs-value">{utils.parseColor(this.props.fillColor)}</span>
+        <span class="hljs-attribute">fillColor</span>=<span class="hljs-value">{processColor(this.props.fillColor)}</span>
       /&gt;</span>
     )</span>;
   }
-}
-
-Tick.propTypes = PROP_TYPES;</pre></div></div>
+}</pre></div></div>
             
         </li>
         
         
-        <li id="section-7">
+        <li id="section-8">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <h2 id="public-interface">Public interface</h2>
 

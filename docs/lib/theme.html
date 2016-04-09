@@ -34,7 +34,7 @@
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./MKColor'</span>);
 
-<span class="hljs-keyword">let</span> theme;
+<span class="hljs-keyword">const</span> theme = {};
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AttrReference</span> </span>{
   constructor(attr) {
@@ -42,7 +42,7 @@
   }
 
   get value() {
-    <span class="hljs-keyword">return</span> theme[<span class="hljs-keyword">this</span>.attr]
+    <span class="hljs-keyword">return</span> theme[<span class="hljs-keyword">this</span>.attr];
   }
 }
 
@@ -54,7 +54,7 @@
 
   get value() {
     <span class="hljs-keyword">const</span> v = <span class="hljs-keyword">super</span>.value;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.alpha &gt; <span class="hljs-number">0</span> ? <span class="hljs-string">`rgba(<span class="hljs-subst">${v}</span>,<span class="hljs-subst">${this.alpha}</span>)`</span> : <span class="hljs-string">`rgb(<span class="hljs-subst">${v}</span>)`</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.alpha &gt; <span class="hljs-number">0</span> ? <span class="hljs-string">`rgba(<span class="hljs-subst">${v}</span>, <span class="hljs-subst">${this.alpha}</span>)`</span> : <span class="hljs-string">`rgb(<span class="hljs-subst">${v}</span>)`</span>;
   }
 }
 
@@ -74,34 +74,30 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>theme = {
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">Object</span>.assign(theme, {
   primaryColor: MKColor.Indigo,
   primaryColorRGB: MKColor.RGBIndigo,
   accentColor: MKColor.Pink,
   accentColorRGB: MKColor.RGBPink,
-  bgPlain: <span class="hljs-string">'rgba(158,158,158,.2)'</span>,
-  bgDisabled: <span class="hljs-string">'rgba(0,0,0,.12)'</span>,
+  bgPlain: <span class="hljs-string">'rgba(158, 158, 158, 0.2)'</span>,
+  bgDisabled: <span class="hljs-string">'rgba(0, 0, 0, 0.12)'</span>,
   fontColor: <span class="hljs-string">'rgb(117, 117, 117)'</span>,
   fontSize: <span class="hljs-number">14</span>,
-  rippleColor: <span class="hljs-string">'rgba(255,255,255,.125)'</span>,
+  rippleColor: <span class="hljs-string">'rgba(255, 255, 255, 0.125)'</span>,
   textfieldStyle: {
-    tintColor: <span class="hljs-string">'rgba(0,0,0,.12)'</span>,
-    highlightColor: primaryColorRef,
+    tintColor: <span class="hljs-string">'rgba(0, 0, 0, 0.12)'</span>,
+    highlightColor: <span class="hljs-keyword">new</span> RGBAttrReference(<span class="hljs-string">'primaryColorRGB'</span>, <span class="hljs-number">0.9</span>),
     textInputStyle: {
       color: <span class="hljs-keyword">new</span> AttrReference(<span class="hljs-string">'fontColor'</span>),
       fontSize: <span class="hljs-number">16</span>,
       paddingLeft: <span class="hljs-number">0</span>,
       paddingRight: <span class="hljs-number">0</span>,
     },
-    floatingLabelFont: {
-      fontSize: <span class="hljs-number">12</span>,
-      color: <span class="hljs-string">'red'</span>,
-    },
   },
   progressStyle: {
-    backgroundColor: <span class="hljs-keyword">new</span> RGBAttrReference(<span class="hljs-string">'primaryColorRGB'</span>, <span class="hljs-number">.3</span>),
+    backgroundColor: <span class="hljs-keyword">new</span> RGBAttrReference(<span class="hljs-string">'primaryColorRGB'</span>, <span class="hljs-number">0.3</span>),
     progressColor: primaryColorRef,
-    bufferColor: <span class="hljs-keyword">new</span> RGBAttrReference(<span class="hljs-string">'primaryColorRGB'</span>, <span class="hljs-number">.3</span>),
+    bufferColor: <span class="hljs-keyword">new</span> RGBAttrReference(<span class="hljs-string">'primaryColorRGB'</span>, <span class="hljs-number">0.3</span>),
   },
   spinnerStyle: {
     strokeColor: [
@@ -116,28 +112,28 @@
     upperTrackColor: <span class="hljs-string">'#cccccc'</span>,
   },
   iconToggleStyle: {
-    onColor: <span class="hljs-keyword">new</span> RGBAttrReference(<span class="hljs-string">'primaryColorRGB'</span>, <span class="hljs-number">.4</span>),
-    offColor: <span class="hljs-string">'rgba(0,0,0,.25)'</span>,
+    onColor: <span class="hljs-keyword">new</span> RGBAttrReference(<span class="hljs-string">'primaryColorRGB'</span>, <span class="hljs-number">0.4</span>),
+    offColor: <span class="hljs-string">'rgba(0, 0, 0, 0.25)'</span>,
     rippleColor: <span class="hljs-keyword">new</span> AttrReference(<span class="hljs-string">'bgPlain'</span>),
   },
   switchStyle: {
-    onColor: <span class="hljs-keyword">new</span> RGBAttrReference(<span class="hljs-string">'primaryColorRGB'</span>, <span class="hljs-number">.4</span>),
-    offColor: <span class="hljs-string">'rgba(0,0,0,.25)'</span>,
+    onColor: <span class="hljs-keyword">new</span> RGBAttrReference(<span class="hljs-string">'primaryColorRGB'</span>, <span class="hljs-number">0.4</span>),
+    offColor: <span class="hljs-string">'rgba(0, 0, 0, 0.25)'</span>,
     thumbOnColor: primaryColorRef,
     thumbOffColor: MKColor.Silver,
-    rippleColor: <span class="hljs-keyword">new</span> RGBAttrReference(<span class="hljs-string">'primaryColorRGB'</span>, <span class="hljs-number">.2</span>),
+    rippleColor: <span class="hljs-keyword">new</span> RGBAttrReference(<span class="hljs-string">'primaryColorRGB'</span>, <span class="hljs-number">0.2</span>),
   },
   radioStyle: {
     borderOnColor: primaryColorRef,
     borderOffColor: primaryColorRef,
     fillColor: primaryColorRef,
-    rippleColor: <span class="hljs-keyword">new</span> RGBAttrReference(<span class="hljs-string">'primaryColorRGB'</span>, <span class="hljs-number">.2</span>),
+    rippleColor: <span class="hljs-keyword">new</span> RGBAttrReference(<span class="hljs-string">'primaryColorRGB'</span>, <span class="hljs-number">0.2</span>),
   },
   checkboxStyle: {
     borderOnColor: primaryColorRef,
-    borderOffColor: <span class="hljs-string">'rgba(0,0,0,.56)'</span>,
+    borderOffColor: <span class="hljs-string">'rgba(0, 0, 0, 0.56)'</span>,
     fillColor: primaryColorRef,
-    rippleColor: <span class="hljs-keyword">new</span> RGBAttrReference(<span class="hljs-string">'primaryColorRGB'</span>, <span class="hljs-number">.2</span>),
+    rippleColor: <span class="hljs-keyword">new</span> RGBAttrReference(<span class="hljs-string">'primaryColorRGB'</span>, <span class="hljs-number">0.2</span>),
     inset: <span class="hljs-number">0</span>,
   },
   cardStyle: {
@@ -146,7 +142,7 @@
     borderRadius: <span class="hljs-number">2</span>,
     borderColor: <span class="hljs-string">'#ffffff'</span>,
     borderWidth: <span class="hljs-number">1</span>,
-    shadowColor: <span class="hljs-string">'rgba(0,0,0,.12)'</span>,
+    shadowColor: <span class="hljs-string">'rgba(0, 0, 0, 0.12)'</span>,
     shadowOpacity: <span class="hljs-number">0.8</span>,
     shadowRadius: <span class="hljs-number">2</span>,
     shadowOffset: {
@@ -171,11 +167,11 @@
   },
   cardContentStyle: {
     padding: <span class="hljs-number">15</span>,
-    color: <span class="hljs-string">'rgba(0,0,0,.54)'</span>,
+    color: <span class="hljs-string">'rgba(0, 0, 0, 0.54)'</span>,
   },
   cardActionStyle: {
     borderStyle: <span class="hljs-string">'solid'</span>,
-    borderTopColor: <span class="hljs-string">'rgba(0,0,0,.1)'</span>,
+    borderTopColor: <span class="hljs-string">'rgba(0, 0, 0, 0.1)'</span>,
     borderTopWidth: <span class="hljs-number">1</span>,
     padding: <span class="hljs-number">15</span>,
   },
@@ -185,7 +181,7 @@
     right: <span class="hljs-number">16</span>,
     backgroundColor: <span class="hljs-string">'transparent'</span>,
   },
-};
+});
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isPlainObject</span>(<span class="hljs-params">o</span>) </span>{
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">typeof</span> o === <span class="hljs-string">'object'</span> &amp;&amp; !<span class="hljs-built_in">Array</span>.isArray(o) &amp;&amp; o !== <span class="hljs-literal">null</span> &amp;&amp;
@@ -208,7 +204,7 @@
             <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">wrapAttrRef</span>(<span class="hljs-params">style, attr, attrValue</span>) </span>{
   <span class="hljs-built_in">Object</span>.defineProperty(style, attr, {
     enumerable: <span class="hljs-literal">true</span>,
-    get: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    get() {
       <span class="hljs-keyword">return</span> attrValue.value;
     },
   });

@@ -31,7 +31,6 @@
 <ul>
 <li><a href="#props">Props</a></li>
 <li><a href="#defaults">Defaults</a></li>
-<li><a href="#builders">Built-in builders</a></li>
 </ul>
 <p>Created by ywu on 15/8/2.</p>
 
@@ -78,7 +77,8 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>[Android] set initial size &gt; 0 to avoid NPE at <code>ReactViewBackgroundDrawable.drawRoundedBackgroun</code>
+              <p>[Android] set initial size &gt; 0 to avoid NPE
+at <code>ReactViewBackgroundDrawable.drawRoundedBackgroundWithBorders</code>
 @see <a href="https://github.com/facebook/react-native/issues/3069">https://github.com/facebook/react-native/issues/3069</a></p>
 
             </div>
@@ -88,7 +88,7 @@
       height: <span class="hljs-number">1</span>,
       maskBorderRadius: <span class="hljs-number">0</span>,
       shadowOffsetY: <span class="hljs-number">1</span>,
-      ripple: {radii: <span class="hljs-number">0</span>, dia: <span class="hljs-number">0</span>, offset: {top: <span class="hljs-number">0</span>, left: <span class="hljs-number">0</span>}},
+      ripple: { radii: <span class="hljs-number">0</span>, dia: <span class="hljs-number">0</span>, offset: { top: <span class="hljs-number">0</span>, left: <span class="hljs-number">0</span> } },
     };
   }</pre></div></div>
             
@@ -101,11 +101,32 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
+              <p>property initializers begin</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  _onLayout = (evt) =&gt; {
+    <span class="hljs-keyword">this</span>._onLayoutChange(evt.nativeEvent.layout);
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.onLayout) {
+      <span class="hljs-keyword">this</span>.props.onLayout(evt);
+    }
+  };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
               <p>Touch events handling</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  _onTouchEvent(evt) {
+            <div class="content"><div class='highlight'><pre>  _onTouchEvent = (evt) =&gt; {
     <span class="hljs-keyword">switch</span> (evt.type) {
       <span class="hljs-keyword">case</span> <span class="hljs-string">'TOUCH_DOWN'</span>:
         <span class="hljs-keyword">this</span>._onPointerDown(evt);
@@ -114,26 +135,34 @@
       <span class="hljs-keyword">case</span> <span class="hljs-string">'TOUCH_CANCEL'</span>:
         <span class="hljs-keyword">this</span>._onPointerUp();
         <span class="hljs-keyword">break</span>;
+      <span class="hljs-keyword">default</span>:
+        <span class="hljs-keyword">break</span>;
     }
 
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.onTouch) {
       <span class="hljs-keyword">this</span>.props.onTouch(evt);
     }
-  }
+  };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>property initializers end</p>
 
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
   measure(cb) {
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.refs.container.measure(cb);
   }
 
-  _onLayout(evt) {
-    <span class="hljs-keyword">this</span>._onLayoutChange(evt.nativeEvent.layout);
-
-    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.onLayout) {
-      <span class="hljs-keyword">this</span>.props.onLayout(evt);
-    }
-  }
-
-  _onLayoutChange({width, height}) {
+  _onLayoutChange({ width, height }) {
     <span class="hljs-keyword">if</span> (width === <span class="hljs-keyword">this</span>.state.width &amp;&amp; height === <span class="hljs-keyword">this</span>.state.height) {
       <span class="hljs-keyword">return</span>;
     }
@@ -148,11 +177,11 @@
         </li>
         
         
-        <li id="section-5">
+        <li id="section-7">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-5">&#182;</a>
+                <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <p>update Mask layer’s dimen</p>
 
@@ -166,42 +195,44 @@
       maskBorderRadius = <span class="hljs-built_in">Math</span>.min(width, height) * maskRadiiPercent / <span class="hljs-number">100</span>;
     }
 
-    <span class="hljs-keyword">return</span> {maskBorderRadius};
+    <span class="hljs-keyword">return</span> { maskBorderRadius };
   }</pre></div></div>
             
         </li>
         
         
-        <li id="section-6">
+        <li id="section-8">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-6">&#182;</a>
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <p>update Ripple layer’s dimen</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>  _calcRippleLayer(x0, y0) {
-    <span class="hljs-keyword">const</span> {width, height, maskBorderRadius} = <span class="hljs-keyword">this</span>.state;
-    <span class="hljs-keyword">const</span> {maskBorderRadiusInPercent} = <span class="hljs-keyword">this</span>.props;
-    <span class="hljs-keyword">let</span> offsetX, offsetY, radii, hotSpotX = x0, hotSpotY = y0;
+    <span class="hljs-keyword">const</span> { width, height, maskBorderRadius } = <span class="hljs-keyword">this</span>.state;
+    <span class="hljs-keyword">const</span> { maskBorderRadiusInPercent } = <span class="hljs-keyword">this</span>.props;
+    <span class="hljs-keyword">let</span> radii;
+    <span class="hljs-keyword">let</span> hotSpotX = x0;
+    <span class="hljs-keyword">let</span> hotSpotY = y0;
 
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.rippleLocation === <span class="hljs-string">'center'</span>) {
       hotSpotX = width / <span class="hljs-number">2</span>;
       hotSpotY = height / <span class="hljs-number">2</span>;
     }
-    offsetX = <span class="hljs-built_in">Math</span>.max(hotSpotX, (width - hotSpotX));
-    offsetY = <span class="hljs-built_in">Math</span>.max(hotSpotY, (height - hotSpotY));</pre></div></div>
+    <span class="hljs-keyword">const</span> offsetX = <span class="hljs-built_in">Math</span>.max(hotSpotX, (width - hotSpotX));
+    <span class="hljs-keyword">const</span> offsetY = <span class="hljs-built_in">Math</span>.max(hotSpotY, (height - hotSpotY));</pre></div></div>
             
         </li>
         
         
-        <li id="section-7">
+        <li id="section-9">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
+                <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <p><strong><i>FIXME</i></strong> Workaround for Android not respect <code>overflow</code>
 @see <a href="https://github.com/facebook/react-native/issues/3198">https://github.com/facebook/react-native/issues/3198</a></p>
@@ -215,11 +246,11 @@
         </li>
         
         
-        <li id="section-8">
+        <li id="section-10">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
+                <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <p>limit ripple to the bounds of mask</p>
 
@@ -256,11 +287,11 @@
         </li>
         
         
-        <li id="section-9">
+        <li id="section-11">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
+                <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
               <p>Start the ripple effect</p>
 
@@ -268,16 +299,16 @@
             
             <div class="content"><div class='highlight'><pre>  showRipple() {
     <span class="hljs-keyword">this</span>._animatedAlpha.setValue(<span class="hljs-number">1</span>);
-    <span class="hljs-keyword">this</span>._animatedRippleScale.setValue(<span class="hljs-number">.3</span>);</pre></div></div>
+    <span class="hljs-keyword">this</span>._animatedRippleScale.setValue(<span class="hljs-number">0.3</span>);</pre></div></div>
             
         </li>
         
         
-        <li id="section-10">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <p>scaling up the ripple layer</p>
 
@@ -291,18 +322,18 @@
         </li>
         
         
-        <li id="section-11">
+        <li id="section-13">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
+                <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
               <p>enlarge the shadow, if enabled</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.shadowAniEnabled) {
-      <span class="hljs-keyword">this</span>.setState({shadowOffsetY: <span class="hljs-number">1.5</span>});
+      <span class="hljs-keyword">this</span>.setState({ shadowOffsetY: <span class="hljs-number">1.5</span> });
     }
 
     <span class="hljs-keyword">this</span>._rippleAni.start(() =&gt; {
@@ -311,11 +342,11 @@
         </li>
         
         
-        <li id="section-12">
+        <li id="section-14">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-12">&#182;</a>
+                <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <p>if any pending animation, do it</p>
 
@@ -330,11 +361,11 @@
         </li>
         
         
-        <li id="section-13">
+        <li id="section-15">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
+                <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
               <p>Stop the ripple effect</p>
 
@@ -346,11 +377,11 @@
         </li>
         
         
-        <li id="section-14">
+        <li id="section-16">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
+                <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <p>hide the ripple layer</p>
 
@@ -364,18 +395,18 @@
         </li>
         
         
-        <li id="section-15">
+        <li id="section-17">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-15">&#182;</a>
+                <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
               <p>scale down the shadow</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.shadowAniEnabled) {
-        <span class="hljs-keyword">this</span>.setState({shadowOffsetY: <span class="hljs-number">1</span>});
+        <span class="hljs-keyword">this</span>.setState({ shadowOffsetY: <span class="hljs-number">1</span> });
       }
 
       <span class="hljs-keyword">this</span>._pendingRippleAni = <span class="hljs-literal">undefined</span>;
@@ -386,11 +417,11 @@
         </li>
         
         
-        <li id="section-16">
+        <li id="section-18">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
               <p>previous ripple animation is done, good to go</p>
 
@@ -411,11 +442,11 @@
 
     <span class="hljs-keyword">return</span> (
       <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">MKTouchable</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"container"</span>
-                   {<span class="hljs-attribute">...this.props</span>}
-                   <span class="hljs-attribute">style</span>=<span class="hljs-value">{[this.props.style,</span> <span class="hljs-attribute">shadowStyle</span>]}
-                   <span class="hljs-attribute">onTouch</span>=<span class="hljs-value">{this._onTouchEvent.bind(this)}</span>
-                   <span class="hljs-attribute">onLayout</span>=<span class="hljs-value">{this._onLayout.bind(this)}</span>
-        &gt;</span>
+        {<span class="hljs-attribute">...this.props</span>}
+        <span class="hljs-attribute">style</span>=<span class="hljs-value">{[this.props.style,</span> <span class="hljs-attribute">shadowStyle</span>]}
+        <span class="hljs-attribute">onTouch</span>=<span class="hljs-value">{this._onTouchEvent}</span>
+        <span class="hljs-attribute">onLayout</span>=<span class="hljs-value">{this._onLayout}</span>
+      &gt;</span>
         {this.props.children}
         <span class="hljs-tag">&lt;<span class="hljs-title">Animated.View</span>
           <span class="hljs-attribute">ref</span>=<span class="hljs-value">"maskLayer"</span>
@@ -430,7 +461,7 @@
             <span class="hljs-attribute">borderRadius:</span> <span class="hljs-attribute">this.state.maskBorderRadius</span>,
             <span class="hljs-attribute">overflow:</span> <span class="hljs-attribute">this.props.maskEnabled</span> ? '<span class="hljs-attribute">hidden</span>' <span class="hljs-attribute">:</span> '<span class="hljs-attribute">visible</span>',
           }}
-          &gt;</span>
+        &gt;</span>
           <span class="hljs-tag">&lt;<span class="hljs-title">Animated.View</span>
             <span class="hljs-attribute">ref</span>=<span class="hljs-value">"rippleLayer"</span>
             <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
@@ -439,11 +470,11 @@
         </li>
         
         
-        <li id="section-17">
+        <li id="section-19">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-17">&#182;</a>
+                <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
               <p>position: ‘absolute’,</p>
 
@@ -455,45 +486,15 @@
               ...this.state.ripple.offset,
               borderRadius: <span class="hljs-keyword">this</span>.state.ripple.radii,
               transform: [
-                {scale: <span class="hljs-keyword">this</span>._animatedRippleScale},
+                { scale: <span class="hljs-keyword">this</span>._animatedRippleScale },
               ],
             }}
-            /&gt;
+          /&gt;
         <span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">Animated.View</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-title">MKTouchable</span>&gt;</span>
     )</span>;
   }
 }</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-18">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-18">&#182;</a>
-              </div>
-              <h2 id="-section-id-props-props-section-"><section id='props'>Props</section></h2>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>Ripple.propTypes = {</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-19">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-19">&#182;</a>
-              </div>
-              <p><a href="https://facebook.github.io/react-native/docs/view.html#props">RN.View Props</a>…</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  ...View.propTypes,</pre></div></div>
             
         </li>
         
@@ -504,11 +505,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
-              <p>Color of the <code>Ripple</code> layer</p>
+              <h2 id="-section-id-props-props-section-"><section id='props'>Props</section></h2>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  rippleColor: PropTypes.string,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>Ripple.propTypes = {</pre></div></div>
             
         </li>
         
@@ -519,11 +520,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
-              <p>Duration of the ripple effect, in milliseconds</p>
+              <p><a href="https://facebook.github.io/react-native/docs/view.html#props">RN.View Props</a>…</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  rippleDuration: PropTypes.number,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  ...View.propTypes,</pre></div></div>
             
         </li>
         
@@ -534,11 +535,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
-              <p>Hot-spot position of the ripple effect, <a href="../MKPropTypes.html#rippleLocation">available values</a></p>
+              <p>Color of the <code>Ripple</code> layer</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  rippleLocation: MKPropTypes.rippleLocation,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  rippleColor: PropTypes.string,</pre></div></div>
             
         </li>
         
@@ -548,6 +549,36 @@
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>Duration of the ripple effect, in milliseconds</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  rippleDuration: PropTypes.number,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>Hot-spot position of the ripple effect, <a href="../MKPropTypes.html#rippleLocation">available values</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  rippleLocation: MKPropTypes.rippleLocation,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <p>Whether a <code>Mask</code> layer should be used, to clip the ripple to the container’s bounds,
 default is <code>true</code></p>
@@ -559,11 +590,11 @@ default is <code>true</code></p>
         </li>
         
         
-        <li id="section-24">
+        <li id="section-26">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-24">&#182;</a>
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <p>Color of the <code>Mask</code> layer</p>
 
@@ -574,11 +605,11 @@ default is <code>true</code></p>
         </li>
         
         
-        <li id="section-25">
+        <li id="section-27">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-25">&#182;</a>
+                <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
               <p>Border radius of the <code>Mask</code> layer</p>
 
@@ -589,11 +620,11 @@ default is <code>true</code></p>
         </li>
         
         
-        <li id="section-26">
+        <li id="section-28">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-26">&#182;</a>
+                <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
               <p>Border radius of the <code>Mask</code> layer, in percentage (of min(width, height))</p>
 
@@ -604,11 +635,11 @@ default is <code>true</code></p>
         </li>
         
         
-        <li id="section-27">
+        <li id="section-29">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-27">&#182;</a>
+                <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
               <p>Duration of the mask effect (alpha), in milliseconds</p>
 
@@ -619,11 +650,11 @@ default is <code>true</code></p>
         </li>
         
         
-        <li id="section-28">
+        <li id="section-30">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-28">&#182;</a>
+                <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
               <p>Animating the shadow (on pressed/released) or not</p>
 
@@ -634,11 +665,11 @@ default is <code>true</code></p>
         </li>
         
         
-        <li id="section-29">
+        <li id="section-31">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-29">&#182;</a>
+                <a class="pilcrow" href="#section-31">&#182;</a>
               </div>
               <p>Touch events callback</p>
 
@@ -652,11 +683,11 @@ default is <code>true</code></p>
         </li>
         
         
-        <li id="section-30">
+        <li id="section-32">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-30">&#182;</a>
+                <a class="pilcrow" href="#section-32">&#182;</a>
               </div>
               <h2 id="-section-id-defaults-defaults-section-"><section id='defaults'>Defaults</section></h2>
 
@@ -676,116 +707,17 @@ default is <code>true</code></p>
         </li>
         
         
-        <li id="section-31">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-31">&#182;</a>
-              </div>
-              <hr>
-
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-32">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-32">&#182;</a>
-              </div>
-              <p>Builder</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> {Builder} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../builder'</span>);</pre></div></div>
-            
-        </li>
-        
-        
         <li id="section-33">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-33">&#182;</a>
               </div>
-              <h2 id="ripple-builder">Ripple builder</h2>
-<ul>
-<li>@see <a href="../builder.html#Builder">Builder</a></li>
-</ul>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RippleBuilder</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Builder</span> </span>{
-  build() {
-    <span class="hljs-keyword">const</span> BuiltRipple = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Ripple</span> </span>{};
-    BuiltRipple.defaultProps = <span class="hljs-built_in">Object</span>.assign({}, Ripple.defaultProps, <span class="hljs-keyword">this</span>.toProps());
-    <span class="hljs-keyword">return</span> BuiltRipple;
-  }
-}</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-34">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-34">&#182;</a>
-              </div>
-              <p>define builder method for each prop</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>RippleBuilder.defineProps(Ripple.propTypes);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-35">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-35">&#182;</a>
-              </div>
-              <hr>
-
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-36">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-36">&#182;</a>
-              </div>
-              <h2 id="-section-id-builders-built-in-builders-section-"><section id="builders">Built-in builders</section></h2>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ripple</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> RippleBuilder();
-}</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-37">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-37">&#182;</a>
-              </div>
               <h2 id="public-interface">Public interface</h2>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = Ripple;
-Ripple.Builder = RippleBuilder;
-Ripple.ripple = ripple;</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = Ripple;</pre></div></div>
             
         </li>
         

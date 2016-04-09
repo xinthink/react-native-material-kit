@@ -32,7 +32,6 @@
 <li>@see <a href="http://bit.ly/1OUYzem">MDL Icon Toggle</a></li>
 <li><a href="#props">Props</a></li>
 <li><a href="#defaults">Defaults</a></li>
-<li><a href="#builders">Built-in builders</a></li>
 </ul>
 <p>Created by ywu on 15/10/07.</p>
 
@@ -49,7 +48,7 @@
 <span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../MKColor'</span>);
 <span class="hljs-keyword">const</span> Ripple = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./Ripple'</span>);
 <span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../utils'</span>);
-<span class="hljs-keyword">const</span> {getTheme} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../theme'</span>);
+<span class="hljs-keyword">const</span> { getTheme } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../theme'</span>);
 
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isViewForState</span>(<span class="hljs-params">view, state</span>) </span>{
@@ -71,22 +70,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IconToggle</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
-  constructor(props) {
-    <span class="hljs-keyword">super</span>(props);
-    <span class="hljs-keyword">this</span>.theme = getTheme();
-    <span class="hljs-keyword">this</span>.state = { checked: <span class="hljs-literal">false</span> };
-  }
-
-  componentWillMount() {
-    <span class="hljs-keyword">this</span>.setState({checked: <span class="hljs-keyword">this</span>.props.checked});
-  }
-
-  componentWillReceiveProps(nextProps) {
-    <span class="hljs-keyword">if</span> (nextProps.checked !== <span class="hljs-keyword">this</span>.props.checked) {
-      <span class="hljs-keyword">this</span>.setState({checked: nextProps.checked});
-    }
-  }</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IconToggle</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{</pre></div></div>
             
         </li>
         
@@ -97,17 +81,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Touch events handling</p>
+              <h2 id="-section-id-props-props-section-"><section id='props'>Props</section></h2>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  _onTouch(evt) {
-    <span class="hljs-keyword">switch</span> (evt.type) {
-      <span class="hljs-keyword">case</span> <span class="hljs-string">'TOUCH_UP'</span>:
-        <span class="hljs-keyword">this</span>.confirmToggle();
-        <span class="hljs-keyword">break</span>;
-    }
-  }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  static propTypes = {</pre></div></div>
             
         </li>
         
@@ -118,18 +96,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>When a toggle action (from the given state) is confirmed.</p>
+              <p><a href="Ripple.html#props">Ripple Props</a>…</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  confirmToggle() {
-    <span class="hljs-keyword">const</span> prevState = <span class="hljs-keyword">this</span>.state.checked;
-    <span class="hljs-keyword">this</span>.setState({checked: !prevState}, () =&gt; {
-      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.onCheckedChange) {
-        <span class="hljs-keyword">this</span>.props.onCheckedChange({checked: <span class="hljs-keyword">this</span>.state.checked});
-      }
-    });
-  }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    ...Ripple.propTypes,</pre></div></div>
             
         </li>
         
@@ -140,6 +111,151 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
+              <p>Touchable…</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    ...TouchableWithoutFeedback.propTypes,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Toggle status</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    checked: React.PropTypes.bool,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Callback when the toggle status is changed</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    onCheckedChange: React.PropTypes.func,
+
+    children: React.PropTypes.node,
+  };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <h2 id="-section-id-defaults-defaults-section-"><section id='defaults'>Defaults</section></h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  static defaultProps = {
+    pointerEvents: <span class="hljs-string">'box-only'</span>,
+    enabled: <span class="hljs-literal">true</span>,
+    maskColor: MKColor.Transparent,
+    style: {
+      justifyContent: <span class="hljs-string">'center'</span>,
+      alignItems: <span class="hljs-string">'center'</span>,
+      borderColor: <span class="hljs-string">'rgba(0,0,0,.54)'</span>,
+      width: <span class="hljs-number">56</span>,
+      height: <span class="hljs-number">56</span>,
+    },
+  };
+
+  constructor(props) {
+    <span class="hljs-keyword">super</span>(props);
+    <span class="hljs-keyword">this</span>.theme = getTheme();
+    <span class="hljs-keyword">this</span>.state = { checked: <span class="hljs-literal">false</span> };
+  }
+
+  componentWillMount() {
+    <span class="hljs-keyword">this</span>.setState({ checked: <span class="hljs-keyword">this</span>.props.checked });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    <span class="hljs-keyword">if</span> (nextProps.checked !== <span class="hljs-keyword">this</span>.props.checked) {
+      <span class="hljs-keyword">this</span>.setState({ checked: nextProps.checked });
+    }
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>property initializers begin
+Touch events handling</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  _onTouch = (evt) =&gt; {
+    <span class="hljs-keyword">if</span> (evt.type === <span class="hljs-string">'TOUCH_UP'</span>) {
+      <span class="hljs-keyword">this</span>.confirmToggle();
+    }
+  };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>property initializers end</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>When a toggle action (from the given state) is confirmed.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  confirmToggle() {
+    <span class="hljs-keyword">const</span> prevState = <span class="hljs-keyword">this</span>.state.checked;
+    <span class="hljs-keyword">this</span>.setState({ checked: !prevState }, () =&gt; {
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.onCheckedChange) {
+        <span class="hljs-keyword">this</span>.props.onCheckedChange({ checked: <span class="hljs-keyword">this</span>.state.checked });
+      }
+    });
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
               <p>Select a child element to show for the current toggle status.</p>
 <p>@see <a href="http://developer.android.com/guide/topics/resources/drawable-resource.html#StateList">State List</a> in Android development</p>
 
@@ -147,7 +263,8 @@
             
             <div class="content"><div class='highlight'><pre>  _renderChildren() {
     <span class="hljs-keyword">return</span> React.Children.map(<span class="hljs-keyword">this</span>.props.children,
-      (child) =&gt; isViewForState(child, <span class="hljs-keyword">this</span>.state.checked) ? child : <span class="hljs-literal">null</span>);
+      (child) =&gt; isViewForState(child, <span class="hljs-keyword">this</span>.state.checked) &amp;&amp; child
+    );
   }
 
   render() {
@@ -160,11 +277,11 @@
         <span class="hljs-tag">&lt;<span class="hljs-title">Ripple</span>
           {<span class="hljs-attribute">...this.props</span>}
           <span class="hljs-attribute">rippleColor</span>=<span class="hljs-value">{mergedStyle.rippleColor}</span>
-          <span class="hljs-attribute">style</span>=<span class="hljs-value">{[IconToggle.defaultProps.style,</span> <span class="hljs-attribute">this.props.style</span>]}
+          <span class="hljs-attribute">style</span>=<span class="hljs-value">{[IconToggle.defaultProps.style]}</span>
           <span class="hljs-attribute">maskBorderRadiusInPercent</span>=<span class="hljs-value">{50}</span>
           <span class="hljs-attribute">rippleLocation</span>=<span class="hljs-value">"center"</span>
-          <span class="hljs-attribute">onTouch</span>=<span class="hljs-value">{this._onTouch.bind(this)}</span>
-          &gt;</span>
+          <span class="hljs-attribute">onTouch</span>=<span class="hljs-value">{this._onTouch}</span>
+        &gt;</span>
           {this._renderChildren()}
         <span class="hljs-tag">&lt;/<span class="hljs-title">Ripple</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-title">TouchableWithoutFeedback</span>&gt;</span>
@@ -175,225 +292,17 @@
         </li>
         
         
-        <li id="section-6">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-6">&#182;</a>
-              </div>
-              <h2 id="-section-id-props-props-section-"><section id='props'>Props</section></h2>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>IconToggle.propTypes = {</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-7">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
-              </div>
-              <p><a href="Ripple.html#props">Ripple Props</a>…</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  ...Ripple.propTypes,</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-8">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
-              </div>
-              <p>Touchable…</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  ...TouchableWithoutFeedback.propTypes,</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-9">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
-              </div>
-              <p>Toggle status</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  checked: React.PropTypes.bool,</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-10">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
-              </div>
-              <p>Callback when the toggle status is changed</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  onCheckedChange: React.PropTypes.func,
-};</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-11">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
-              </div>
-              <h2 id="-section-id-defaults-defaults-section-"><section id='defaults'>Defaults</section></h2>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>IconToggle.defaultProps = {
-  pointerEvents: <span class="hljs-string">'box-only'</span>,
-  enabled: <span class="hljs-literal">true</span>,
-  maskColor: MKColor.Transparent,
-  style: {
-    justifyContent: <span class="hljs-string">'center'</span>,
-    alignItems: <span class="hljs-string">'center'</span>,
-    borderColor: <span class="hljs-string">'rgba(0,0,0,.54)'</span>,
-    width: <span class="hljs-number">56</span>,
-    height: <span class="hljs-number">56</span>,
-  },
-};</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-12">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-12">&#182;</a>
-              </div>
-              <hr>
-
-            </div>
-            
-        </li>
-        
-        
         <li id="section-13">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
-              <p>Builder</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> {
-  Builder,
-} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../builder'</span>);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-14">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
-              </div>
-              <h2 id="toggle-builder">Toggle builder</h2>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IconToggleBuilder</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Builder</span> </span>{
-  build() {
-    <span class="hljs-keyword">const</span> props = <span class="hljs-keyword">this</span>.toProps();
-
-    <span class="hljs-keyword">return</span> React.createClass({
-      render: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-        <span class="hljs-keyword">return</span> (
-          <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">IconToggle</span> {<span class="hljs-attribute">...Object.assign</span>({}, <span class="hljs-attribute">props</span>, <span class="hljs-attribute">this.props</span>)}&gt;</span>
-            {this.props.children}
-          <span class="hljs-tag">&lt;/<span class="hljs-title">IconToggle</span>&gt;</span>
-        )</span>;
-      },
-    });
-  }
-}</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-15">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-15">&#182;</a>
-              </div>
-              <p>define builder method for each prop</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>IconToggleBuilder.defineProps(IconToggle.propTypes);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-16">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
-              </div>
-              <hr>
-
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-17">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-17">&#182;</a>
-              </div>
-              <h2 id="-section-id-builders-built-in-builders-section-"><section id="builders">Built-in builders</section></h2>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">builder</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> IconToggleBuilder().withBackgroundColor(MKColor.Transparent);
-}</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-18">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-18">&#182;</a>
-              </div>
               <h2 id="public-interface">Public interface</h2>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = IconToggle;
-IconToggle.Builder = IconToggleBuilder;
-IconToggle.builder = builder;</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = IconToggle;</pre></div></div>
             
         </li>
         

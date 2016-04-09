@@ -48,8 +48,7 @@
   requireNativeComponent,
 } = React;
 
-<span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../MKColor'</span>);
-<span class="hljs-keyword">const</span> {getTheme} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../theme'</span>);
+<span class="hljs-keyword">const</span> { getTheme } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../theme'</span>);
 <span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../utils'</span>);</pre></div></div>
             
         </li>
@@ -174,27 +173,8 @@ or a single one</li>
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Spinner</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
-  constructor(props) {
-    <span class="hljs-keyword">super</span>(props);
-    <span class="hljs-keyword">this</span>.theme = getTheme();
-  }
 
-  render() {
-    <span class="hljs-keyword">const</span> strokeColors = utils.parseColor(<span class="hljs-keyword">this</span>.props.strokeColor || <span class="hljs-keyword">this</span>.theme.spinnerStyle.strokeColor);
-    <span class="hljs-keyword">const</span> props = <span class="hljs-built_in">Object</span>.assign({}, <span class="hljs-keyword">this</span>.props, {
-      strokeColors: <span class="hljs-built_in">Array</span>.isArray(strokeColors) ? strokeColors : [strokeColors],
-    });
-
-    <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">NativeSpinner</span>
-        {<span class="hljs-attribute">...props</span>}
-        <span class="hljs-attribute">style</span>=<span class="hljs-value">{[Spinner.defaultProps.style,</span> <span class="hljs-attribute">props.style</span>]}
-      /&gt;</span>
-    )</span>;
-  }
-}
-
-Spinner.propTypes = PROP_TYPES;</pre></div></div>
+  static propTypes = PROP_TYPES;</pre></div></div>
             
         </li>
         
@@ -209,14 +189,35 @@ Spinner.propTypes = PROP_TYPES;</pre></div></div>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Spinner.defaultProps = {
-  strokeWidth: <span class="hljs-number">3</span>,
-  spinnerAniDuration: <span class="hljs-number">1333</span>,
-  style: {
-    width: <span class="hljs-number">28</span>,
-    height: <span class="hljs-number">28</span>,
-  },
-};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  static defaultProps = {
+    strokeWidth: <span class="hljs-number">3</span>,
+    spinnerAniDuration: <span class="hljs-number">1333</span>,
+    style: {
+      width: <span class="hljs-number">28</span>,
+      height: <span class="hljs-number">28</span>,
+    },
+  };
+
+  constructor(props) {
+    <span class="hljs-keyword">super</span>(props);
+    <span class="hljs-keyword">this</span>.theme = getTheme();
+  }
+
+  render() {
+    <span class="hljs-keyword">const</span> strokeColors = utils.parseColor(<span class="hljs-keyword">this</span>.props.strokeColor ||
+      <span class="hljs-keyword">this</span>.theme.spinnerStyle.strokeColor);
+    <span class="hljs-keyword">const</span> props = <span class="hljs-built_in">Object</span>.assign({}, <span class="hljs-keyword">this</span>.props, {
+      strokeColors: <span class="hljs-built_in">Array</span>.isArray(strokeColors) ? strokeColors : [strokeColors],
+    });
+
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">NativeSpinner</span>
+        {<span class="hljs-attribute">...props</span>}
+        <span class="hljs-attribute">style</span>=<span class="hljs-value">{[Spinner.defaultProps.style,</span> <span class="hljs-attribute">props.style</span>]}
+      /&gt;</span>
+    )</span>;
+  }
+}</pre></div></div>
             
         </li>
         

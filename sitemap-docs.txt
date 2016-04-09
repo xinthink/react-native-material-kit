@@ -9,6 +9,7 @@ http://www.xinthink.com/react-native-material-kit/docs/lib/internal/Tick.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Button.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Checkbox.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/IconToggle.html
+http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/IndeterminateProgress.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Progress.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/RadioButton.html
 http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/RangeSlider.html

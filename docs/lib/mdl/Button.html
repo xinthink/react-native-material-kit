@@ -42,7 +42,7 @@
 <span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../MKColor'</span>);
 <span class="hljs-keyword">const</span> Ripple = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./Ripple'</span>);
 <span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../utils'</span>);
-<span class="hljs-keyword">const</span> {getTheme} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../theme'</span>);
+<span class="hljs-keyword">const</span> { getTheme } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../theme'</span>);
 
 <span class="hljs-keyword">const</span> {
   Component,
@@ -74,7 +74,7 @@
     };
   }
 
-  _onLayout({nativeEvent: {layout: {width, height}}}) {
+  _onLayout({ nativeEvent: { layout: { width, height } } }) {
     <span class="hljs-keyword">if</span> (width !== <span class="hljs-keyword">this</span>.state.width || height !== <span class="hljs-keyword">this</span>.state.height) {
       <span class="hljs-keyword">this</span>.setState({
         width,
@@ -108,7 +108,8 @@
             
             <div class="content"><div class='highlight'><pre>    touchableProps.onLayout = <span class="hljs-keyword">this</span>._onLayout.bind(<span class="hljs-keyword">this</span>);
 
-    <span class="hljs-keyword">const</span> fabStyle = {}, maskProps = {};
+    <span class="hljs-keyword">const</span> fabStyle = {};
+    <span class="hljs-keyword">const</span> maskProps = {};
 
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.fab) {
       maskProps.maskBorderRadiusInPercent = <span class="hljs-number">50</span>;
@@ -128,13 +129,13 @@
     <span class="hljs-keyword">return</span> (
       <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">TouchableWithoutFeedback</span> {<span class="hljs-attribute">...touchableProps</span>}&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">Ripple</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"container"</span>
-                {<span class="hljs-attribute">...this.props</span>}
-                {<span class="hljs-attribute">...maskProps</span>}
-                <span class="hljs-attribute">style</span>=<span class="hljs-value">{[</span>
-                  <span class="hljs-attribute">this.props.style</span>,
-                  <span class="hljs-attribute">fabStyle</span>,
-                ]}
-          &gt;</span>
+          {<span class="hljs-attribute">...this.props</span>}
+          {<span class="hljs-attribute">...maskProps</span>}
+          <span class="hljs-attribute">style</span>=<span class="hljs-value">{[</span>
+            <span class="hljs-attribute">this.props.style</span>,
+            <span class="hljs-attribute">fabStyle</span>,
+          ]}
+        &gt;</span>
           {this._renderChildren()}
         <span class="hljs-tag">&lt;/<span class="hljs-title">Ripple</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-title">TouchableWithoutFeedback</span>&gt;</span>
@@ -277,7 +278,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> {TextViewBuilder} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../builder'</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> { TextViewBuilder } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../builder'</span>);</pre></div></div>
             
         </li>
         
@@ -418,8 +419,8 @@
     .withStyle({
       borderRadius: <span class="hljs-number">2</span>,
       shadowRadius: <span class="hljs-number">1</span>,
-      shadowOffset: {width: <span class="hljs-number">0</span>, height: <span class="hljs-number">.5</span>},
-      shadowOpacity: <span class="hljs-number">.7</span>,
+      shadowOffset: { width: <span class="hljs-number">0</span>, height: <span class="hljs-number">0.5</span> },
+      shadowOpacity: <span class="hljs-number">0.7</span>,
       shadowColor: <span class="hljs-string">'black'</span>,
       elevation: <span class="hljs-number">4</span>,
     })
@@ -503,7 +504,7 @@
                 <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <p>.withStyle({
- shadowOffset: {width: 0.3, height: 0},
+  shadowOffset: {width: 0.3, height: 0},
 })</p>
 
             </div>
@@ -603,8 +604,8 @@
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ButtonBuilder()
     .withStyle({
       shadowRadius: <span class="hljs-number">1</span>,
-      shadowOffset: {width: <span class="hljs-number">0</span>, height: <span class="hljs-number">.5</span>},
-      shadowOpacity: <span class="hljs-number">.4</span>,
+      shadowOffset: { width: <span class="hljs-number">0</span>, height: <span class="hljs-number">0.5</span> },
+      shadowOpacity: <span class="hljs-number">0.4</span>,
       shadowColor: <span class="hljs-string">'black'</span>,
       elevation: <span class="hljs-number">4</span>,
     })
