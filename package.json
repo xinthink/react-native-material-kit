@@ -27,14 +27,14 @@
   },
   "devDependencies": {
     "babel-eslint": "^6.0.2",
-    "eslint": "^2.7.0",
+    "eslint": "^2.9.0",
     "eslint-config-airbnb": "^6.2.0",
     "eslint-plugin-react": "^4.3.0",
     "gulp": "^3.9.0",
     "gulp-docco": "0.0.4"
   },
   "dependencies": {
-    "ramda": "^0.20.1"
+    "ramda": "^0.21.0"
   },
   "scripts": {
     "lint": "eslint lib"
