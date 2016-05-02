@@ -187,20 +187,22 @@ the jsx equivalent:
 
 Apply [`Card Style`][cards-mdl] with only few styles !.
 ```jsx
-const MK = require('react-native-material-kit');
-const {
-  MKCardStyles
-} = MK;
+import {
+  getTheme,
+  ...
+} from 'react-native-material-kit';
 
-<View style={MKCardStyles.card}>
-  <Image source={{uri : base64Icon}} style={MKCardStyles.image}/>
-  <Text style={MKCardStyles.title}>Welcome</Text>
-  <Text style={MKCardStyles.content}>
+const theme = getTheme();
+
+<View style={them.cardStyle}>
+  <Image source={{uri : base64Icon}} style={theme.cardImageStyle}/>
+  <Text style={theme.cardTitleStyle}>Welcome</Text>
+  <Text style={theme.cardContentStyle}>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
     Mauris sagittis pellentesque lacus eleifend lacinia...
   </Text>
-  <View style={MKCardStyles.menu}>{menu}</View>
-  <Text style={MKCardStyles.action}>My Action</Text>
+  <View style={theme.cardMenuStyle}>{menu}</View>
+  <Text style={theme.cardActionStyle}>My Action</Text>
 </View>
 
 ```
