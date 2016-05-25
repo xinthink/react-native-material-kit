@@ -120,7 +120,7 @@ const ColoredRaisedButton = MKButton.coloredButton()
   .build();
 
 ...
-<ColoredRaisedButton/>
+<ColoredRaisedButton />
 ```
 
 And you can definitely build customized buttons from scratch.
@@ -145,7 +145,7 @@ const CustomButton = new MKButton.Builder()
   .build();
 
 ...
-<CustomButton/>
+<CustomButton />
 ```
 
 the jsx equivalent:
@@ -197,7 +197,7 @@ import {
 const theme = getTheme();
 
 <View style={theme.cardStyle}>
-  <Image source={{uri : base64Icon}} style={theme.cardImageStyle}/>
+  <Image source={{uri : base64Icon}} style={theme.cardImageStyle} />
   <Text style={theme.cardTitleStyle}>Welcome</Text>
   <Text style={theme.cardContentStyle}>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -234,7 +234,7 @@ const theme = getTheme();
 [![spinner-demo]][mdl-loading]
 
 ```jsx
-<mdl.Spinner/>
+<mdl.Spinner />
 ```
 
 👉 [props reference][spinner-props-doc] and [example code][progress-sample]
@@ -251,7 +251,7 @@ const theme = getTheme();
 [![slider-demo]][mdl-slider]
 
 ```jsx
-<mdl.Slider style={styles.slider}/>
+<mdl.Slider style={styles.slider} />
 …
 const SliderWithValue = mdl.Slider.slider()
   .withStyle(styles.slider)
@@ -271,7 +271,7 @@ const SliderWithValue = mdl.Slider.slider()
 ![range-slider-demo]
 
 ```jsx
-<mdl.RangeSlider style={styles.slider}/>
+<mdl.RangeSlider style={styles.slider} />
 …
 const SliderWithRange = mdl.RangeSlider.slider()
   .withStyle(styles.slider)
@@ -318,7 +318,7 @@ const Textfield = MKTextField.textfield()
   .build();
 
 ...
-<Textfield/>
+<Textfield />
 ```
 
 Customizing textfields through builder:
@@ -331,7 +331,7 @@ const ColoredTextfield = mdl.Textfield.textfield()
   .withTextInputStyle({color: MKColor.Orange})
   .build();
 ...
-<CustomTexfield/>
+<CustomTexfield />
 ```
 
 the jsx equivalent:
