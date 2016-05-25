@@ -194,7 +194,7 @@ import {
 
 const theme = getTheme();
 
-<View style={them.cardStyle}>
+<View style={theme.cardStyle}>
   <Image source={{uri : base64Icon}} style={theme.cardImageStyle}/>
   <Text style={theme.cardTitleStyle}>Welcome</Text>
   <Text style={theme.cardContentStyle}>
