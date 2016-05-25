@@ -160,9 +160,11 @@ the jsx equivalent:
   onPress={() => {
     console.log('hi, raised button!');
   }}
+>
+  <Text
+    pointerEvents="none"
+    style={{color: 'white', fontWeight: 'bold',}}
   >
-  <Text pointerEvents="none"
-        style={{color: 'white', fontWeight: 'bold',}}>
     RAISED BUTTON
   </Text>
 </MKButton>
@@ -223,7 +225,7 @@ const theme = getTheme();
 <mdl.Progress
   style={styles.progress}
   progress={0.2}
-  />
+/>
 ```
 
 👉 [props reference][prog-props-doc] and [example code][progress-sample]
@@ -260,7 +262,7 @@ const SliderWithValue = mdl.Slider.slider()
 <SliderWithValue
   ref=“sliderWithValue”
   onChange={(curValue) => this.setState({curValue})}
-  />
+/>
 ```
 
 👉 [props reference][slider-props-doc] and [example code][slider-sample]
@@ -290,7 +292,7 @@ const SliderWithRange = mdl.RangeSlider.slider()
     console.log("Slider drag ended");
     console.log(curValue);
   }}
-  />
+/>
 ```
 
 👉 [props reference][range-slider-props-doc] and [example code][slider-sample]
@@ -339,7 +341,8 @@ the jsx equivalent:
   tintColor={MKColor.Lime}
   textInputStyle={{color: MKColor.Orange}}
   placeholder=“Text…”
-  style={styles.textfield}/>
+  style={styles.textfield}
+/>
 ```
 
 👉 [props reference][tf-props-doc] and [example code][tf-sample]
@@ -366,12 +369,20 @@ the jsx equivalent:
   checked={true}
   onCheckedChange={this._onIconChecked}
   onPress={this._onIconClicked}
+>
+  <Text 
+    pointerEvents="none"
+    style={styles.toggleTextOff}
   >
-  <Text pointerEvents="none"
-        style={styles.toggleTextOff}>Off</Text>
-  <Text state_checked={true}
-        pointerEvents="none"
-        style={[styles.toggleText, styles.toggleTextOn]}>On</Text>
+    Off
+  </Text>
+  <Text 
+    state_checked={true}
+    pointerEvents="none"
+    style={[styles.toggleText, styles.toggleTextOn]}
+  >
+    On
+  </Text>
 </MKIconToggle>
 ```
 
@@ -386,12 +397,13 @@ The two `Text` tags here, similar to [State List][android-state-list] in *Androi
 #### Switch
 
 ```jsx
-<mdl.Switch style={styles.appleSwitch}
-          onColor="rgba(255,152,0,.3)"
-          thumbOnColor={MKColor.Orange}
-          rippleColor="rgba(255,152,0,.2)"
-          onPress={() => console.log('orange switch pressed')}
-          onCheckedChange={(e) => console.log('orange switch checked', e)}
+<mdl.Switch 
+  style={styles.appleSwitch}
+  onColor="rgba(255,152,0,.3)"
+  thumbOnColor={MKColor.Orange}
+  rippleColor="rgba(255,152,0,.2)"
+  onPress={() => console.log('orange switch pressed')}
+  onCheckedChange={(e) => console.log('orange switch checked', e)}
 />
 ```
 
@@ -405,9 +417,9 @@ The two `Text` tags here, similar to [State List][android-state-list] in *Androi
 [![img-checkbox]][mdl-checkbox]
 
 ```jsx
-  <MKCheckbox
-    checked={true}
-  />
+<MKCheckbox
+  checked={true}
+/>
 ```
 
 You can customize the styles by changing the global theme, which affects all checkboxes across the whole app.
@@ -433,15 +445,15 @@ setTheme({checkboxStyle: {
 [![img-radio]][mdl-radio]
 
 ```jsx
-  constructor() {
-    super();
-    this.radioGroup = new MKRadioButton.Group();
-  }
-  ...
-  <MKRadioButton
-    checked={true}
-    group={this.radioGroup}
-  />
+constructor() {
+  super();
+  this.radioGroup = new MKRadioButton.Group();
+}
+...
+<MKRadioButton
+  checked={true}
+  group={this.radioGroup}
+/>
 ```
 
 You can customize the styles by changing the global theme, which affects all radio buttons across the whole app.
