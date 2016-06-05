@@ -9,7 +9,7 @@ A set of UI components, in the purpose of introducing [Material Design][md] to a
 
 [npm-badge]: https://img.shields.io/npm/v/react-native-material-kit.svg
 [npm]: https://www.npmjs.com/package/react-native-material-kit
-[rn-badge]: https://img.shields.io/badge/react--native-v0.24.x-05A5D1.svg
+[rn-badge]: https://img.shields.io/badge/react--native-v0.27.x-05A5D1.svg
 [rn]: https://facebook.github.io/react-native
 [md]: http://www.google.com/design/spec/material-design/introduction.html
 [license-badge]: https://img.shields.io/dub/l/vibe-d.svg
@@ -21,13 +21,13 @@ A set of UI components, in the purpose of introducing [Material Design][md] to a
 
 ## Getting Started
 
-First, `cd` to your RN project directory, and install RNMK through [rnpm](https://github.com/rnpm/rnpm) . If you don't have rnpm, you can install RNMK from npm with the command `npm i -S react-native-material-kit` and link it manually (see below). 
+First, `cd` to your RN project directory, and install RNMK through [rnpm](https://github.com/rnpm/rnpm) . If you don't have rnpm, you can install RNMK from npm with the command `npm i -S react-native-material-kit` and link it manually (see below).
 
 ### iOS
 #### Using rnpm
 `rnpm install react-native-material-kit`
 
-#### Manualy 
+#### Manualy
 1. Add `node_modules/react-native-material-kit/iOS/RCTMaterialKit.xcodeproj` to your xcode project, usually under the `Libraries` group
 1. Add `libRCTMaterialKit.a` (from `Products` under `RCTMaterialKit.xcodeproj`) to build target's `Linked Frameworks and Libraries` list
 
@@ -52,7 +52,7 @@ Now run `pod install`. This will create an Xcode workspace containing all necess
 
 ### Android
 
-#### Using rnpm 
+#### Using rnpm
 `rnpm install react-native-material-kit`
 
 #### Manually
@@ -377,7 +377,7 @@ the jsx equivalent:
   onCheckedChange={this._onIconChecked}
   onPress={this._onIconClicked}
 >
-  <Text 
+  <Text
     pointerEvents="none"
     style={styles.toggleTextOff}>Off</Text>
   <Text state_checked={true}
@@ -397,7 +397,7 @@ The two `Text` tags here, similar to [State List][android-state-list] in *Androi
 #### Switch
 
 ```jsx
-<mdl.Switch 
+<mdl.Switch
   style={styles.appleSwitch}
   onColor="rgba(255,152,0,.3)"
   thumbOnColor={MKColor.Orange}

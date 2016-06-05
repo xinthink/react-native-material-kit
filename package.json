@@ -1,11 +1,12 @@
 {
   "name": "react-native-material-kit",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Bringing Material Design to React Native",
   "main": "lib/index.js",
   "author": "Yingxin Wu <yingxinwu.g@gmail.com>",
   "contributors": [
-    "All Contributors (https://github.com/xinthink/react-native-material-kit/graphs/contributors)"
+    "Quentin Valmori (https://github.com/Crash--)",
+    "Alexander Price (https://github.com/alexprice91)"
   ],
   "license": "MIT",
   "keywords": [
