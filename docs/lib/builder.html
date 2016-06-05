@@ -36,7 +36,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> { getTheme } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./theme'</span>);
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">import</span> { getTheme } <span class="hljs-keyword">from</span> <span class="hljs-string">'./theme'</span>;
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">capitalize</span>(<span class="hljs-params">str</span>) </span>{
   <span class="hljs-keyword">return</span> str.substring(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>).toUpperCase() + str.substring(<span class="hljs-number">1</span>);
@@ -71,7 +71,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  static defineProp(name) {
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">static</span> defineProp(name) {
     <span class="hljs-keyword">const</span> methodName = <span class="hljs-string">`with<span class="hljs-subst">${capitalize(name)}</span>`</span>;
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.prototype[methodName]) {
       <span class="hljs-keyword">return</span>;
@@ -103,7 +103,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  static defineProps(propTypes, filter = () =&gt; <span class="hljs-literal">true</span>) {
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">static</span> defineProps(propTypes, filter = () =&gt; <span class="hljs-literal">true</span>) {
     <span class="hljs-keyword">const</span> self = <span class="hljs-keyword">this</span>;
     <span class="hljs-built_in">Object</span>.getOwnPropertyNames(propTypes).forEach((prop) =&gt; {
       <span class="hljs-keyword">if</span> (!self.hasOwnProperty(prop) &amp;&amp; filter(prop)) {

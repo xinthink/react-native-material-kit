@@ -36,17 +36,20 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
-<span class="hljs-keyword">const</span> MKPropTypes = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../MKPropTypes'</span>);
-<span class="hljs-keyword">const</span> MKTouchable = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../internal/MKTouchable'</span>);
-
-<span class="hljs-keyword">const</span> {
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">import</span> React, {
   Component,
-  Animated,
-  View,
   PropTypes,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">import</span> {
+  Animated,
   Platform,
-} = React;</pre></div></div>
+  View,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native'</span>;
+
+<span class="hljs-keyword">import</span> MKPropTypes <span class="hljs-keyword">from</span> <span class="hljs-string">'../MKPropTypes'</span>;
+<span class="hljs-keyword">import</span> MKTouchable <span class="hljs-keyword">from</span> <span class="hljs-string">'../internal/MKTouchable'</span>;</pre></div></div>
             
         </li>
         
@@ -63,7 +66,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Ripple</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
-  constructor(props) {
+  <span class="hljs-keyword">constructor</span>(props) {
     <span class="hljs-keyword">super</span>(props);
     <span class="hljs-keyword">this</span>._animatedAlpha = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>);
     <span class="hljs-keyword">this</span>._animatedRippleScale = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>);</pre></div></div>
@@ -441,31 +444,30 @@ at <code>ReactViewBackgroundDrawable.drawRoundedBackgroundWithBorders</code>
     }
 
     <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">MKTouchable</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"container"</span>
-        {<span class="hljs-attribute">...this.props</span>}
-        <span class="hljs-attribute">style</span>=<span class="hljs-value">{[this.props.style,</span> <span class="hljs-attribute">shadowStyle</span>]}
-        <span class="hljs-attribute">onTouch</span>=<span class="hljs-value">{this._onTouchEvent}</span>
-        <span class="hljs-attribute">onLayout</span>=<span class="hljs-value">{this._onLayout}</span>
-      &gt;</span>
+      &lt;MKTouchable ref="container"
+        {...this.props}
+        style={[this.props.style, shadowStyle]}
+        onTouch={this._onTouchEvent}
+        onLayout={this._onLayout}
+      &gt;
         {this.props.children}
-        <span class="hljs-tag">&lt;<span class="hljs-title">Animated.View</span>
-          <span class="hljs-attribute">ref</span>=<span class="hljs-value">"maskLayer"</span>
-          <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
-            <span class="hljs-attribute">position:</span> '<span class="hljs-attribute">absolute</span>',
-            <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this.props.maskColor</span>,
-            <span class="hljs-attribute">opacity:</span> <span class="hljs-attribute">this._animatedAlpha</span>,
-            <span class="hljs-attribute">top:</span> <span class="hljs-attribute">0</span>,
-            <span class="hljs-attribute">left:</span> <span class="hljs-attribute">0</span>,
-            <span class="hljs-attribute">width:</span> <span class="hljs-attribute">this.state.width</span>,
-            <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this.state.height</span>,
-            <span class="hljs-attribute">borderRadius:</span> <span class="hljs-attribute">this.state.maskBorderRadius</span>,
-            <span class="hljs-attribute">overflow:</span> <span class="hljs-attribute">this.props.maskEnabled</span> ? '<span class="hljs-attribute">hidden</span>' <span class="hljs-attribute">:</span> '<span class="hljs-attribute">visible</span>',
+        &lt;Animated.View
+          ref="maskLayer"
+          style={{
+            position: 'absolute',
+            backgroundColor: this.props.maskColor,
+            opacity: this._animatedAlpha,
+            top: 0,
+            left: 0,
+            width: this.state.width,
+            height: this.state.height,
+            borderRadius: this.state.maskBorderRadius,
+            overflow: this.props.maskEnabled ? 'hidden' : 'visible',
           }}
-        &gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-title">Animated.View</span>
-            <span class="hljs-attribute">ref</span>=<span class="hljs-value">"rippleLayer"</span>
-            <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
-</span></span></pre></div></div>
+        &gt;
+          &lt;Animated.View
+            ref="rippleLayer"
+            style={{</pre></div></div>
             
         </li>
         
@@ -490,9 +492,9 @@ at <code>ReactViewBackgroundDrawable.drawRoundedBackgroundWithBorders</code>
               ],
             }}
           /&gt;
-        <span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">Animated.View</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-title">MKTouchable</span>&gt;</span>
-    )</span>;
+        <span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">Animated.View</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">MKTouchable</span>&gt;</span></span>
+    );
   }
 }</pre></div></div>
             
@@ -675,9 +677,9 @@ default is <code>true</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  onTouch: React.PropTypes.func,
+            <div class="content"><div class='highlight'><pre>  onTouch: PropTypes.func,
 
-  onLayout: React.PropTypes.func,
+  onLayout: PropTypes.func,
 };</pre></div></div>
             
         </li>

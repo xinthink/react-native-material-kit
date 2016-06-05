@@ -49,14 +49,17 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
-
-<span class="hljs-keyword">const</span> {
+<span class="hljs-keyword">import</span> React, {
+  Component,
   PropTypes,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">import</span> {
   requireNativeComponent,
   Animated,
   processColor,
-} = React;</pre></div></div>
+  View,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native'</span>;</pre></div></div>
             
         </li>
         
@@ -86,7 +89,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  ...React.View.propTypes,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  ...View.propTypes,</pre></div></div>
             
         </li>
         
@@ -138,18 +141,21 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Tick</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
-  static propTypes = PROP_TYPES;
+            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Tick</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+  <span class="hljs-keyword">static</span> propTypes = PROP_TYPES;
 
   render() {
     <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">NativeTick</span>
-        {<span class="hljs-attribute">...this.props</span>}
-        <span class="hljs-attribute">fillColor</span>=<span class="hljs-value">{processColor(this.props.fillColor)}</span>
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">NativeTick</span>
+        {<span class="hljs-attr">...this.props</span>}
+        <span class="hljs-attr">fillColor</span>=<span class="hljs-string">{processColor(this.props.fillColor)}</span>
       /&gt;</span>
-    )</span>;
+    );
   }
-}</pre></div></div>
+}
+
+
+</span></pre></div></div>
             
         </li>
         

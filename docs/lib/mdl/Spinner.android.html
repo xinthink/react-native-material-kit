@@ -39,17 +39,18 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
-
-<span class="hljs-keyword">const</span> {
+<span class="hljs-keyword">import</span> React, {
   Component,
-  View,
   PropTypes,
-  requireNativeComponent,
-} = React;
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
 
-<span class="hljs-keyword">const</span> { getTheme } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../theme'</span>);
-<span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../utils'</span>);</pre></div></div>
+<span class="hljs-keyword">import</span> {
+  requireNativeComponent,
+  View,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native'</span>;
+
+<span class="hljs-keyword">import</span> { getTheme } <span class="hljs-keyword">from</span> <span class="hljs-string">'../theme'</span>;
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> utils <span class="hljs-keyword">from</span> <span class="hljs-string">'../utils'</span>;</pre></div></div>
             
         </li>
         
@@ -174,7 +175,7 @@ or a single one</li>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Spinner</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
 
-  static propTypes = PROP_TYPES;</pre></div></div>
+  <span class="hljs-keyword">static</span> propTypes = PROP_TYPES;</pre></div></div>
             
         </li>
         
@@ -189,7 +190,7 @@ or a single one</li>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  static defaultProps = {
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">static</span> defaultProps = {
     strokeWidth: <span class="hljs-number">3</span>,
     spinnerAniDuration: <span class="hljs-number">1333</span>,
     style: {
@@ -198,7 +199,7 @@ or a single one</li>
     },
   };
 
-  constructor(props) {
+  <span class="hljs-keyword">constructor</span>(props) {
     <span class="hljs-keyword">super</span>(props);
     <span class="hljs-keyword">this</span>.theme = getTheme();
   }
@@ -211,13 +212,16 @@ or a single one</li>
     });
 
     <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">NativeSpinner</span>
-        {<span class="hljs-attribute">...props</span>}
-        <span class="hljs-attribute">style</span>=<span class="hljs-value">{[Spinner.defaultProps.style,</span> <span class="hljs-attribute">props.style</span>]}
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">NativeSpinner</span>
+        {<span class="hljs-attr">...props</span>}
+        <span class="hljs-attr">style</span>=<span class="hljs-string">{[Spinner.defaultProps.style,</span> <span class="hljs-attr">props.style</span>]}
       /&gt;</span>
-    )</span>;
+    );
   }
-}</pre></div></div>
+}
+
+
+</span></pre></div></div>
             
         </li>
         

@@ -38,17 +38,19 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
-<span class="hljs-keyword">const</span> { getTheme } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../theme'</span>);
-<span class="hljs-keyword">const</span> Thumb = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../internal/Thumb'</span>);
-
-<span class="hljs-keyword">const</span> {
+<span class="hljs-keyword">import</span> React, {
   Component,
-  Animated,
-  View,
-  PanResponder,
   PropTypes,
-} = React;</pre></div></div>
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">import</span> {
+  Animated,
+  PanResponder,
+  View,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native'</span>;
+
+<span class="hljs-keyword">import</span> { getTheme } <span class="hljs-keyword">from</span> <span class="hljs-string">'../theme'</span>;
+<span class="hljs-keyword">import</span> Thumb <span class="hljs-keyword">from</span> <span class="hljs-string">'../internal/Thumb'</span>;</pre></div></div>
             
         </li>
         
@@ -125,7 +127,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  static propTypes = {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">static</span> propTypes = {</pre></div></div>
             
         </li>
         
@@ -291,7 +293,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  static defaultProps = {
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">static</span> defaultProps = {
     thumbRadius: <span class="hljs-number">6</span>,
     trackSize: <span class="hljs-number">2</span>,
     min: <span class="hljs-number">0</span>,
@@ -312,7 +314,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>
-  constructor(props) {
+  <span class="hljs-keyword">constructor</span>(props) {
     <span class="hljs-keyword">super</span>(props);
     <span class="hljs-keyword">this</span>.theme = getTheme();
     <span class="hljs-keyword">this</span>._value = <span class="hljs-number">0</span>;
@@ -337,7 +339,7 @@
           x: <span class="hljs-keyword">this</span>._prevPointerX + gestureState.dx,
         });
       },
-      onPanResponderTerminationRequest: () =&gt; <span class="hljs-literal">true</span>,
+      onPanResponderTerminationRequest: () =&gt; <span class="hljs-literal">false</span>,
       onPanResponderRelease: (evt, gestureState) =&gt; {
         <span class="hljs-keyword">this</span>._onPanResponderEnd(gestureState);
       },
@@ -595,48 +597,48 @@
     <span class="hljs-keyword">const</span> upperTrackColor = <span class="hljs-keyword">this</span>.props.upperTrackColor || sliderStyle.upperTrackColor;
 
     <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">View</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"container"</span>
-        <span class="hljs-attribute">style</span>=<span class="hljs-value">{[this.props.style,</span> {
-          <span class="hljs-attribute">padding:</span> <span class="hljs-attribute">0</span>,
-          <span class="hljs-attribute">paddingTop:</span> <span class="hljs-attribute">0</span>,
-          <span class="hljs-attribute">paddingBottom:</span> <span class="hljs-attribute">0</span>,
-          <span class="hljs-attribute">paddingLeft:</span> <span class="hljs-attribute">0</span>,
-          <span class="hljs-attribute">paddingRight:</span> <span class="hljs-attribute">0</span>,
+      &lt;View ref="container"
+        style={[this.props.style, {
+          padding: 0,
+          paddingTop: 0,
+          paddingBottom: 0,
+          paddingLeft: 0,
+          paddingRight: 0,
         }]}
-        <span class="hljs-attribute">pointerEvents</span>=<span class="hljs-value">"box-only"</span>
-        {<span class="hljs-attribute">...this._panResponder.panHandlers</span>}
-      &gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">View</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"track"</span>
-          <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
-            <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this.props.trackSize</span>,
-            <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">upperTrackColor</span>,
-            <span class="hljs-attribute">...trackMargin</span>,
+        pointerEvents="box-only"
+        {...this._panResponder.panHandlers}
+      &gt;
+        &lt;View ref="track"
+          style={{
+            height: this.props.trackSize,
+            backgroundColor: upperTrackColor,
+            ...trackMargin,
           }}
-          <span class="hljs-attribute">onLayout</span>=<span class="hljs-value">{this._onTrackLayout}</span>
-        &gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-title">Animated.View</span>
-            <span class="hljs-attribute">ref</span>=<span class="hljs-value">"lowerTrack"</span>
-            <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
-              <span class="hljs-attribute">position:</span> '<span class="hljs-attribute">absolute</span>',
-              <span class="hljs-attribute">width:</span> <span class="hljs-attribute">this._animatedTrackLength</span>,
-              <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this.props.trackSize</span>,
-              <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">lowerTrackColor</span>,
+          onLayout={this._onTrackLayout}
+        &gt;
+          &lt;Animated.View
+            ref="lowerTrack"
+            style={{
+              position: 'absolute',
+              width: this._animatedTrackLength,
+              height: this.props.trackSize,
+              backgroundColor: lowerTrackColor,
             }}
-          /&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">View</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">Thumb</span>
-          <span class="hljs-attribute">ref</span>=<span class="hljs-value">"thumb"</span>
-          <span class="hljs-attribute">radius</span>=<span class="hljs-value">{this.props.thumbRadius}</span>
-          <span class="hljs-attribute">trackSize</span>=<span class="hljs-value">{this.props.trackSize}</span>
-          <span class="hljs-attribute">trackMarginH</span>=<span class="hljs-value">{this._trackMarginH}</span>
-          <span class="hljs-attribute">enabledColor</span>=<span class="hljs-value">{lowerTrackColor}</span>
-          <span class="hljs-attribute">disabledColor</span>=<span class="hljs-value">{upperTrackColor}</span>
-          <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
-            <span class="hljs-attribute">top:</span> <span class="hljs-attribute">this._thumbRadiiWithBorder</span> * (<span class="hljs-attribute">THUMB_SCALE_RATIO</span> <span class="hljs-attribute">-</span> <span class="hljs-attribute">1</span>) + <span class="hljs-attribute">TRACK_EXTRA_MARGIN_V</span>,
+          /&gt;
+        &lt;/View&gt;
+        &lt;Thumb
+          ref="thumb"
+          radius={this.props.thumbRadius}
+          trackSize={this.props.trackSize}
+          trackMarginH={this._trackMarginH}
+          enabledColor={lowerTrackColor}
+          disabledColor={upperTrackColor}
+          style={{
+            top: this._thumbRadiiWithBorder * (THUMB_SCALE_RATIO - 1) + TRACK_EXTRA_MARGIN_V,
           }}
-        /&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-title">View</span>&gt;</span>
-    )</span>;
+        /&gt;
+      &lt;/View&gt;
+    );
   }
 }</pre></div></div>
             

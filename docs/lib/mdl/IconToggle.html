@@ -38,18 +38,20 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
-
-<span class="hljs-keyword">const</span> {
+<span class="hljs-keyword">import</span> React, {
+  Children,
   Component,
+  PropTypes,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">import</span> {
   TouchableWithoutFeedback,
-} = React;
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native'</span>;
 
-<span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../MKColor'</span>);
-<span class="hljs-keyword">const</span> Ripple = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./Ripple'</span>);
-<span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../utils'</span>);
-<span class="hljs-keyword">const</span> { getTheme } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../theme'</span>);
-
+<span class="hljs-keyword">import</span> MKColor <span class="hljs-keyword">from</span> <span class="hljs-string">'../MKColor'</span>;
+<span class="hljs-keyword">import</span> Ripple <span class="hljs-keyword">from</span> <span class="hljs-string">'./Ripple'</span>;
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> utils <span class="hljs-keyword">from</span> <span class="hljs-string">'../utils'</span>;
+<span class="hljs-keyword">import</span> { getTheme } <span class="hljs-keyword">from</span> <span class="hljs-string">'../theme'</span>;
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isViewForState</span>(<span class="hljs-params">view, state</span>) </span>{
   <span class="hljs-keyword">return</span> (view.props.state_checked &amp;&amp; state) ||
@@ -85,7 +87,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  static propTypes = {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">static</span> propTypes = {</pre></div></div>
             
         </li>
         
@@ -130,7 +132,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    checked: React.PropTypes.bool,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    checked: PropTypes.bool,</pre></div></div>
             
         </li>
         
@@ -145,9 +147,9 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    onCheckedChange: React.PropTypes.func,
+            <div class="content"><div class='highlight'><pre>    onCheckedChange: PropTypes.func,
 
-    children: React.PropTypes.node,
+    children: PropTypes.node,
   };</pre></div></div>
             
         </li>
@@ -163,7 +165,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  static defaultProps = {
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">static</span> defaultProps = {
     pointerEvents: <span class="hljs-string">'box-only'</span>,
     enabled: <span class="hljs-literal">true</span>,
     maskColor: MKColor.Transparent,
@@ -176,7 +178,7 @@
     },
   };
 
-  constructor(props) {
+  <span class="hljs-keyword">constructor</span>(props) {
     <span class="hljs-keyword">super</span>(props);
     <span class="hljs-keyword">this</span>.theme = getTheme();
     <span class="hljs-keyword">this</span>.state = { checked: <span class="hljs-literal">false</span> };
@@ -262,7 +264,7 @@ Touch events handling</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>  _renderChildren() {
-    <span class="hljs-keyword">return</span> React.Children.map(<span class="hljs-keyword">this</span>.props.children,
+    <span class="hljs-keyword">return</span> Children.map(<span class="hljs-keyword">this</span>.props.children,
       (child) =&gt; isViewForState(child, <span class="hljs-keyword">this</span>.state.checked) &amp;&amp; child
     );
   }
@@ -273,19 +275,19 @@ Touch events handling</p>
     }));
 
     <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">TouchableWithoutFeedback</span> {<span class="hljs-attribute">...utils.extractTouchableProps</span>(<span class="hljs-attribute">this</span>)}&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">Ripple</span>
-          {<span class="hljs-attribute">...this.props</span>}
-          <span class="hljs-attribute">rippleColor</span>=<span class="hljs-value">{mergedStyle.rippleColor}</span>
-          <span class="hljs-attribute">style</span>=<span class="hljs-value">{[IconToggle.defaultProps.style]}</span>
-          <span class="hljs-attribute">maskBorderRadiusInPercent</span>=<span class="hljs-value">{50}</span>
-          <span class="hljs-attribute">rippleLocation</span>=<span class="hljs-value">"center"</span>
-          <span class="hljs-attribute">onTouch</span>=<span class="hljs-value">{this._onTouch}</span>
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">TouchableWithoutFeedback</span> {<span class="hljs-attr">...utils.extractTouchableProps</span>(<span class="hljs-attr">this</span>)}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Ripple</span>
+          {<span class="hljs-attr">...this.props</span>}
+          <span class="hljs-attr">rippleColor</span>=<span class="hljs-string">{mergedStyle.rippleColor}</span>
+          <span class="hljs-attr">style</span>=<span class="hljs-string">{[IconToggle.defaultProps.style]}</span>
+          <span class="hljs-attr">maskBorderRadiusInPercent</span>=<span class="hljs-string">{50}</span>
+          <span class="hljs-attr">rippleLocation</span>=<span class="hljs-string">"center"</span>
+          <span class="hljs-attr">onTouch</span>=<span class="hljs-string">{this._onTouch}</span>
         &gt;</span>
           {this._renderChildren()}
-        <span class="hljs-tag">&lt;/<span class="hljs-title">Ripple</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-title">TouchableWithoutFeedback</span>&gt;</span>
-    )</span>;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Ripple</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">TouchableWithoutFeedback</span>&gt;</span></span>
+    );
   }
 }</pre></div></div>
             

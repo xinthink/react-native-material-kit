@@ -38,17 +38,21 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
-<span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../MKColor'</span>);
-<span class="hljs-keyword">const</span> Ripple = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./Ripple'</span>);
-<span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../utils'</span>);
-<span class="hljs-keyword">const</span> { getTheme } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../theme'</span>);
-
-<span class="hljs-keyword">const</span> {
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">import</span> React, {
   Component,
-  TouchableWithoutFeedback,
   PropTypes,
-} = React;</pre></div></div>
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">import</span> {
+  TouchableWithoutFeedback,
+  Text,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native'</span>;
+
+<span class="hljs-keyword">import</span> MKColor <span class="hljs-keyword">from</span> <span class="hljs-string">'../MKColor'</span>;
+<span class="hljs-keyword">import</span> Ripple <span class="hljs-keyword">from</span> <span class="hljs-string">'./Ripple'</span>;
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> utils <span class="hljs-keyword">from</span> <span class="hljs-string">'../utils'</span>;
+<span class="hljs-keyword">import</span> { getTheme } <span class="hljs-keyword">from</span> <span class="hljs-string">'../theme'</span>;</pre></div></div>
             
         </li>
         
@@ -65,7 +69,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Button</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
-  constructor(props) {
+  <span class="hljs-keyword">constructor</span>(props) {
     <span class="hljs-keyword">super</span>(props);
     <span class="hljs-keyword">this</span>.theme = getTheme();
     <span class="hljs-keyword">this</span>.state = {
@@ -127,19 +131,19 @@
     }
 
     <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">TouchableWithoutFeedback</span> {<span class="hljs-attribute">...touchableProps</span>}&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">Ripple</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"container"</span>
-          {<span class="hljs-attribute">...this.props</span>}
-          {<span class="hljs-attribute">...maskProps</span>}
-          <span class="hljs-attribute">style</span>=<span class="hljs-value">{[</span>
-            <span class="hljs-attribute">this.props.style</span>,
-            <span class="hljs-attribute">fabStyle</span>,
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">TouchableWithoutFeedback</span> {<span class="hljs-attr">...touchableProps</span>}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Ripple</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"container"</span>
+          {<span class="hljs-attr">...this.props</span>}
+          {<span class="hljs-attr">...maskProps</span>}
+          <span class="hljs-attr">style</span>=<span class="hljs-string">{[</span>
+            <span class="hljs-attr">this.props.style</span>,
+            <span class="hljs-attr">fabStyle</span>,
           ]}
         &gt;</span>
           {this._renderChildren()}
-        <span class="hljs-tag">&lt;/<span class="hljs-title">Ripple</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-title">TouchableWithoutFeedback</span>&gt;</span>
-    )</span>;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Ripple</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">TouchableWithoutFeedback</span>&gt;</span></span>
+    );
   }
 }</pre></div></div>
             
@@ -347,10 +351,10 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">return</span> theBuilder.text ? (
-          <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">React.Text</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{theBuilder.textStyle</span> || {}}&gt;</span>
+          <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Text</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{theBuilder.textStyle</span> || {}}&gt;</span>
             {theBuilder.text}
-          <span class="hljs-tag">&lt;/<span class="hljs-title">React.Text</span>&gt;</span>
-        )</span> : <span class="hljs-keyword">this</span>.props.children;
+          <span class="hljs-tag">&lt;/<span class="hljs-name">Text</span>&gt;</span></span>
+        ) : <span class="hljs-keyword">this</span>.props.children;
       }
     };
     BuiltButton.defaultProps = <span class="hljs-built_in">Object</span>.assign({}, Button.defaultProps, props);

@@ -39,18 +39,19 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
-
-<span class="hljs-keyword">const</span> {
+<span class="hljs-keyword">import</span> React, {
   Component,
-  View,
   PropTypes,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">import</span> {
   Animated,
   Platform,
-} = React;
+  View,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native'</span>;
 
-<span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../MKColor'</span>);
-<span class="hljs-keyword">const</span> { getTheme } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../theme'</span>);</pre></div></div>
+<span class="hljs-keyword">import</span> MKColor <span class="hljs-keyword">from</span> <span class="hljs-string">'../MKColor'</span>;
+<span class="hljs-keyword">import</span> { getTheme } <span class="hljs-keyword">from</span> <span class="hljs-string">'../theme'</span>;</pre></div></div>
             
         </li>
         
@@ -119,7 +120,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  static propTypes = {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">static</span> propTypes = {</pre></div></div>
             
         </li>
         
@@ -199,7 +200,7 @@ or a single one</li>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  static defaultProps = {
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">static</span> defaultProps = {
     strokeWidth: <span class="hljs-number">3</span>,
     spinnerAniDuration: <span class="hljs-number">1333</span>,
     style: {
@@ -208,7 +209,7 @@ or a single one</li>
     },
   };
 
-  constructor(props) {
+  <span class="hljs-keyword">constructor</span>(props) {
     <span class="hljs-keyword">super</span>(props);
     <span class="hljs-keyword">this</span>._nextStrokeColorIndex = <span class="hljs-number">0</span>;
     <span class="hljs-keyword">this</span>._animatedContainerAngle = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>);
@@ -335,56 +336,56 @@ or a single one</li>
     ];
 
     <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">View</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">clipper</span> <span class="hljs-attribute">layer</span>
-        <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
-          <span class="hljs-attribute">height</span>,
-          <span class="hljs-attribute">width:</span> <span class="hljs-attribute">radii</span>,
-          <span class="hljs-attribute">overflow:</span> '<span class="hljs-attribute">hidden</span>',
-          <span class="hljs-attribute">position:</span> '<span class="hljs-attribute">absolute</span>',
-          <span class="hljs-attribute">left:</span> <span class="hljs-attribute">left</span> ? <span class="hljs-attribute">0</span> <span class="hljs-attribute">:</span> <span class="hljs-attribute">radii</span>,
+      &lt;View  // the clipper layer
+        style={{
+          height,
+          width: radii,
+          overflow: 'hidden',
+          position: 'absolute',
+          left: left ? 0 : radii,
         }}
-      &gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">Animated.View</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">arc</span>
-          <span class="hljs-attribute">style</span>=<span class="hljs-value">{arcStyle}</span>
-        /&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-title">View</span>&gt;</span>
-    )</span>;
+      &gt;
+        &lt;Animated.View  // the arc
+          style={arcStyle}
+        /&gt;
+      &lt;/View&gt;
+    );
   }
 
   _updateStrokeColor(cb) {
-    <span class="hljs-keyword">const</span> colors = <span class="hljs-keyword">this</span>.props.strokeColor || <span class="hljs-keyword">this</span>.theme.spinnerStyle.strokeColor;
-    <span class="hljs-keyword">let</span> nextColor;
+    const colors = this.props.strokeColor || this.theme.spinnerStyle.strokeColor;
+    let nextColor;
 
-    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Array</span>.isArray(colors)) {
-      <span class="hljs-keyword">const</span> index = <span class="hljs-keyword">this</span>._nextStrokeColorIndex % colors.length || <span class="hljs-number">0</span>;
-      <span class="hljs-keyword">this</span>._nextStrokeColorIndex = index + <span class="hljs-number">1</span>;
+    if (Array.isArray(colors)) {
+      const index = this._nextStrokeColorIndex % colors.length || 0;
+      this._nextStrokeColorIndex = index + 1;
       nextColor = colors[index];
-    } <span class="hljs-keyword">else</span> {
+    } else {
       nextColor = colors;
     }
 
-    <span class="hljs-keyword">this</span>.setState({ strokeColor: nextColor || <span class="hljs-keyword">this</span>.theme.primaryColor }, cb);
+    this.setState({ strokeColor: nextColor || this.theme.primaryColor }, cb);
   }
 
   render() {
-    <span class="hljs-keyword">return</span> (
-        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Animated.View</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">container</span> <span class="hljs-attribute">layer</span>
-          <span class="hljs-attribute">ref</span>=<span class="hljs-value">"container"</span>
-          <span class="hljs-attribute">style</span>=<span class="hljs-value">{[</span>
+    return (
+        &lt;Animated.View  // the container layer
+          ref="container"
+          style={[
             {
-              <span class="hljs-attribute">transform:</span> [
-                { <span class="hljs-attribute">rotate:</span> <span class="hljs-attribute">this._animatedContainerAngle.interpolate</span>(<span class="hljs-attribute">SPINNER_ROTATE_INTERP</span>) },
+              transform: [
+                { rotate: this._animatedContainerAngle.interpolate(SPINNER_ROTATE_INTERP) },
               ],
             },
-            <span class="hljs-attribute">Spinner.defaultProps.style</span>,
-            <span class="hljs-attribute">this.props.style</span>,
+            Spinner.defaultProps.style,
+            this.props.style,
           ]}
-          <span class="hljs-attribute">onLayout</span>=<span class="hljs-value">{this._onLayout}</span>
-        &gt;</span>
+          onLayout={this._onLayout}
+        &gt;
           {this._renderSpinnerLayer(true)  /* spinner-left */}
           {this._renderSpinnerLayer(false)  /* spinner-right */}
-        <span class="hljs-tag">&lt;/<span class="hljs-title">Animated.View</span>&gt;</span>
-    )</span>;
+        &lt;/Animated.View&gt;
+    );
   }
 }</pre></div></div>
             

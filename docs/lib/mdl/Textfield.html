@@ -53,20 +53,22 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
-
-<span class="hljs-keyword">const</span> {
+<span class="hljs-keyword">import</span> React, {
   Component,
-  View,
-  TextInput,
   PropTypes,
-  Animated,
-} = React;
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
 
-<span class="hljs-keyword">const</span> MKPropTypes = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../MKPropTypes'</span>);
-<span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../MKColor'</span>);
-<span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../utils'</span>);
-<span class="hljs-keyword">const</span> { getTheme } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../theme'</span>);
+<span class="hljs-keyword">import</span> {
+  Animated,
+  TextInput,
+  View,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native'</span>;
+
+<span class="hljs-keyword">import</span> MKPropTypes <span class="hljs-keyword">from</span> <span class="hljs-string">'../MKPropTypes'</span>;
+<span class="hljs-keyword">import</span> MKColor <span class="hljs-keyword">from</span> <span class="hljs-string">'../MKColor'</span>;
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> utils <span class="hljs-keyword">from</span> <span class="hljs-string">'../utils'</span>;
+<span class="hljs-keyword">import</span> { getTheme } <span class="hljs-keyword">from</span> <span class="hljs-string">'../theme'</span>;
+
 <span class="hljs-keyword">import</span> {
   pick,
 } <span class="hljs-keyword">from</span> <span class="hljs-string">'ramda'</span>;</pre></div></div>
@@ -86,7 +88,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FloatingLabel</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
-  constructor(props) {
+  <span class="hljs-keyword">constructor</span>(props) {
     <span class="hljs-keyword">super</span>(props);
     <span class="hljs-keyword">this</span>.labelDim = {};
     <span class="hljs-keyword">this</span>.offsetX = <span class="hljs-number">0</span>;
@@ -126,7 +128,7 @@
     <span class="hljs-keyword">const</span> height = layout.height;
 
     <span class="hljs-keyword">if</span> (width &amp;&amp; !<span class="hljs-keyword">this</span>.offsetX) {
-      <span class="hljs-keyword">this</span>.offsetX = ((width - (width * <span class="hljs-number">0.8</span>)) / <span class="hljs-number">2</span> * -<span class="hljs-number">1</span>) - x;
+      <span class="hljs-keyword">this</span>.offsetX = ((width - (width * <span class="hljs-number">0.8</span>)) / <span class="hljs-number">2</span> * <span class="hljs-number">-1</span>) - x;
     }
 
     <span class="hljs-keyword">if</span> (height &amp;&amp; !<span class="hljs-keyword">this</span>.placeholderHeight) {
@@ -216,31 +218,33 @@
     });
 
     <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Animated.Text</span>
-        <span class="hljs-attribute">ref</span>=<span class="hljs-value">"label"</span>
-        <span class="hljs-attribute">pointerEvents</span>=<span class="hljs-value">"none"</span>
-        <span class="hljs-attribute">style</span>=<span class="hljs-value">{[{</span>
-          <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">MKColor.Transparent</span>,
-          <span class="hljs-attribute">position:</span> '<span class="hljs-attribute">absolute</span>',
-          <span class="hljs-attribute">top:</span> <span class="hljs-attribute">labelY</span>,
-          <span class="hljs-attribute">left:</span> <span class="hljs-attribute">labelX</span>,
-          <span class="hljs-attribute">color:</span> <span class="hljs-attribute">labelColor</span>,
-          <span class="hljs-attribute">opacity:</span> <span class="hljs-attribute">this.state.opacity</span>,
-          <span class="hljs-attribute">fontSize:</span> <span class="hljs-attribute">16</span>,
-          <span class="hljs-attribute">transform:</span> [
-            { <span class="hljs-attribute">scale:</span> <span class="hljs-attribute">labelScale</span> },
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Animated.Text</span>
+        <span class="hljs-attr">ref</span>=<span class="hljs-string">"label"</span>
+        <span class="hljs-attr">pointerEvents</span>=<span class="hljs-string">"none"</span>
+        <span class="hljs-attr">style</span>=<span class="hljs-string">{[{</span>
+          <span class="hljs-attr">backgroundColor:</span> <span class="hljs-attr">MKColor.Transparent</span>,
+          <span class="hljs-attr">position:</span> '<span class="hljs-attr">absolute</span>',
+          <span class="hljs-attr">top:</span> <span class="hljs-attr">labelY</span>,
+          <span class="hljs-attr">left:</span> <span class="hljs-attr">labelX</span>,
+          <span class="hljs-attr">color:</span> <span class="hljs-attr">labelColor</span>,
+          <span class="hljs-attr">opacity:</span> <span class="hljs-attr">this.state.opacity</span>,
+          <span class="hljs-attr">fontSize:</span> <span class="hljs-attr">16</span>,
+          <span class="hljs-attr">transform:</span> [
+            { <span class="hljs-attr">scale:</span> <span class="hljs-attr">labelScale</span> },
           ],
-          <span class="hljs-attribute">marginBottom:</span> <span class="hljs-attribute">this.props.floatingLabelBottomMargin</span>,
+          <span class="hljs-attr">marginBottom:</span> <span class="hljs-attr">this.props.floatingLabelBottomMargin</span>,
         },
-        <span class="hljs-attribute">this.props.floatingLabelFont</span>,
+        <span class="hljs-attr">this.props.floatingLabelFont</span>,
         ]}
-        <span class="hljs-attribute">onLayout</span>=<span class="hljs-value">{this._onLabelLayout}</span>
+        <span class="hljs-attr">onLayout</span>=<span class="hljs-string">{this._onLabelLayout}</span>
       &gt;</span>
         {this.state.text}
-      <span class="hljs-tag">&lt;/<span class="hljs-title">Animated.Text</span>&gt;</span>
-    )</span>;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">Animated.Text</span>&gt;</span>
+    );
   }
-}</pre></div></div>
+}
+
+</span></pre></div></div>
             
         </li>
         
@@ -360,7 +364,7 @@ FloatingLabel.defaultProps = {
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Underline</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
-  constructor(props) {
+  <span class="hljs-keyword">constructor</span>(props) {
     <span class="hljs-keyword">super</span>(props);
     <span class="hljs-keyword">this</span>.animatedLeft = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>);
     <span class="hljs-keyword">this</span>.animatedLineLength = <span class="hljs-keyword">new</span> Animated.Value(<span class="hljs-number">0</span>);
@@ -462,22 +466,21 @@ FloatingLabel.defaultProps = {
             
             <div class="content"><div class='highlight'><pre>  renderUnderline() {
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.props.underlineEnabled &amp;&amp; (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Animated.View</span>
-        <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
-          <span class="hljs-attribute">position:</span> '<span class="hljs-attribute">absolute</span>',
-          <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this.props.highlightColor</span>,
-          <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this.props.underlineSize</span>,
-          <span class="hljs-attribute">left:</span> <span class="hljs-attribute">this.animatedLeft</span>,
-          <span class="hljs-attribute">width:</span> <span class="hljs-attribute">this.animatedLineLength</span>,
+      &lt;Animated.View
+        style={{
+          position: 'absolute',
+          backgroundColor: this.props.highlightColor,
+          height: this.props.underlineSize,
+          left: this.animatedLeft,
+          width: this.animatedLineLength,
         }}
-      /&gt;</span>)</span>;
+      /&gt;);
   }
 
   render() {
-    <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">View</span> <span class="hljs-attribute">pointerEvents</span>=<span class="hljs-value">"none"</span>
-        <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
-</span></span></pre></div></div>
+    return (
+      &lt;View pointerEvents="none"
+        style={{</pre></div></div>
             
         </li>
         
@@ -495,17 +498,17 @@ FloatingLabel.defaultProps = {
             <div class="content"><div class='highlight'><pre>          height: <span class="hljs-keyword">this</span>.props.underlineSize,
         }}
       &gt;
-        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">View</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">default</span> <span class="hljs-attribute">silver</span> <span class="hljs-attribute">border</span>
-          <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
-            <span class="hljs-attribute">position:</span> '<span class="hljs-attribute">absolute</span>',
-            <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this.props.tintColor</span>,
-            <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this.props.underlineSize</span>,
-            <span class="hljs-attribute">width:</span> <span class="hljs-attribute">this.state.lineLength</span>,
+        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span>  // <span class="hljs-attr">the</span> <span class="hljs-attr">default</span> <span class="hljs-attr">silver</span> <span class="hljs-attr">border</span>
+          <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span>
+            <span class="hljs-attr">position:</span> '<span class="hljs-attr">absolute</span>',
+            <span class="hljs-attr">backgroundColor:</span> <span class="hljs-attr">this.props.tintColor</span>,
+            <span class="hljs-attr">height:</span> <span class="hljs-attr">this.props.underlineSize</span>,
+            <span class="hljs-attr">width:</span> <span class="hljs-attr">this.state.lineLength</span>,
           }}
         /&gt;</span>
         {this.renderUnderline()}
-      <span class="hljs-tag">&lt;/<span class="hljs-title">View</span>&gt;</span>
-    )</span>;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span>
+    );
   }
 }
 
@@ -556,7 +559,7 @@ which has floating label and underline effect.</p>
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Textfield</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
-  constructor(props) {
+  <span class="hljs-keyword">constructor</span>(props) {
     <span class="hljs-keyword">super</span>(props);
     <span class="hljs-keyword">this</span>.theme = getTheme();
     <span class="hljs-keyword">this</span>.inputFrame = {};
@@ -918,48 +921,48 @@ which has floating label and underline effect.</p>
         utils.extractProps(<span class="hljs-keyword">this</span>, FloatingLabel.propTypes));
 
       floatingLabel = (
-        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">FloatingLabel</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"floatingLabel"</span>
-          {<span class="hljs-attribute">...props</span>}
-          <span class="hljs-attribute">text</span>=<span class="hljs-value">{this.props.placeholder}</span>
-        /&gt;</span>
-      )</span>;
+        &lt;FloatingLabel ref="floatingLabel"
+          {...props}
+          text={this.props.placeholder}
+        /&gt;
+      );
     }
 
-    <span class="hljs-keyword">const</span> underlineProps = <span class="hljs-built_in">Object</span>.assign(
-      pick([<span class="hljs-string">'tintColor'</span>, <span class="hljs-string">'highlightColor'</span>], tfTheme),
-      utils.extractProps(<span class="hljs-keyword">this</span>, [<span class="hljs-string">'tintColor'</span>,
-        <span class="hljs-string">'highlightColor'</span>, <span class="hljs-string">'underlineSize'</span>, <span class="hljs-string">'underlineEnabled'</span>]));
-    <span class="hljs-keyword">const</span> inputProps = utils.extractProps(<span class="hljs-keyword">this</span>, {
+    const underlineProps = Object.assign(
+      pick(['tintColor', 'highlightColor'], tfTheme),
+      utils.extractProps(this, ['tintColor',
+        'highlightColor', 'underlineSize', 'underlineEnabled']));
+    const inputProps = utils.extractProps(this, {
       ...TextInput.propTypes,
-      password: <span class="hljs-number">1</span>,
+      password: 1,
     });
 
-    <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">View</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{this.props.style}</span> &gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">TextInput</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">input</span>
-          <span class="hljs-attribute">ref</span>=<span class="hljs-value">"input"</span>
-          {<span class="hljs-attribute">...inputProps</span>}
-          <span class="hljs-attribute">style</span>=<span class="hljs-value">{[{</span>
-            <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">MKColor.Transparent</span>,
-            <span class="hljs-attribute">flex:</span> <span class="hljs-attribute">1</span>,
-            <span class="hljs-attribute">alignSelf:</span> '<span class="hljs-attribute">stretch</span>',
-            <span class="hljs-attribute">paddingTop:</span> <span class="hljs-attribute">2</span>, <span class="hljs-attribute">paddingBottom:</span> <span class="hljs-attribute">2</span>,
-            <span class="hljs-attribute">marginTop:</span> <span class="hljs-attribute">this.state.inputMarginTop</span>,
+    return (
+      &lt;View style={this.props.style} &gt;
+        &lt;TextInput  // the input
+          ref="input"
+          {...inputProps}
+          style={[{
+            backgroundColor: MKColor.Transparent,
+            flex: 1,
+            alignSelf: 'stretch',
+            paddingTop: 2, paddingBottom: 2,
+            marginTop: this.state.inputMarginTop,
           },
-          <span class="hljs-attribute">this.theme.textfieldStyle.textInputStyle</span>,
-          <span class="hljs-attribute">this.props.textInputStyle</span>,
+          this.theme.textfieldStyle.textInputStyle,
+          this.props.textInputStyle,
           ]}
-          <span class="hljs-attribute">onChangeText</span>=<span class="hljs-value">{this._onTextChange}</span>
-          <span class="hljs-attribute">onFocus</span>=<span class="hljs-value">{this._onFocus}</span>
-          <span class="hljs-attribute">onBlur</span>=<span class="hljs-value">{this._onBlur}</span>
-        /&gt;</span>
+          onChangeText={this._onTextChange}
+          onFocus={this._onFocus}
+          onBlur={this._onBlur}
+        /&gt;
         {floatingLabel}
-        <span class="hljs-tag">&lt;<span class="hljs-title">Underline</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"underline"</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">underline</span>
-          {<span class="hljs-attribute">...underlineProps</span>}
-          <span class="hljs-attribute">underlineAniDur</span>=<span class="hljs-value">{this.props.floatingLabelAniDuration}</span>
-        /&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-title">View</span>&gt;</span>
-    )</span>;
+        &lt;Underline ref="underline"  // the underline
+          {...underlineProps}
+          underlineAniDur={this.props.floatingLabelAniDuration}
+        /&gt;
+      &lt;/View&gt;
+    );
   }
 }</pre></div></div>
             

@@ -33,13 +33,17 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
-<span class="hljs-keyword">const</span> { convertCoordinate } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../utils'</span>);
-
-<span class="hljs-keyword">const</span> {
+<span class="hljs-keyword">import</span> React, {
   Component,
+  PropTypes,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">import</span> {
   requireNativeComponent,
-} = React;</pre></div></div>
+  View,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native'</span>;
+
+<span class="hljs-keyword">import</span> { convertCoordinate } <span class="hljs-keyword">from</span> <span class="hljs-string">'../utils'</span>;</pre></div></div>
             
         </li>
         
@@ -98,16 +102,16 @@
 
   render() {
     <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">NativeTouchable</span>
-        <span class="hljs-attribute">ref</span>=<span class="hljs-value">"node"</span>
-        {<span class="hljs-attribute">...this.props</span>}
-        <span class="hljs-attribute">style</span>=<span class="hljs-value">{this.props.style}</span>
-        <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this._onTouchEvent}</span>
-        <span class="hljs-attribute">onLayout</span>=<span class="hljs-value">{this.props.onLayout}</span>
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">NativeTouchable</span>
+        <span class="hljs-attr">ref</span>=<span class="hljs-string">"node"</span>
+        {<span class="hljs-attr">...this.props</span>}
+        <span class="hljs-attr">style</span>=<span class="hljs-string">{this.props.style}</span>
+        <span class="hljs-attr">onChange</span>=<span class="hljs-string">{this._onTouchEvent}</span>
+        <span class="hljs-attr">onLayout</span>=<span class="hljs-string">{this.props.onLayout}</span>
       &gt;</span>
         {this.props.children}
-      <span class="hljs-tag">&lt;/<span class="hljs-title">NativeTouchable</span>&gt;</span>
-    )</span>;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">NativeTouchable</span>&gt;</span></span>
+    );
   }
 }</pre></div></div>
             
@@ -139,7 +143,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  ...React.View.propTypes,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  ...View.propTypes,</pre></div></div>
             
         </li>
         
@@ -154,7 +158,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  onTouch: React.PropTypes.func,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  onTouch: PropTypes.func,</pre></div></div>
             
         </li>
         
@@ -169,7 +173,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  nativeBackgroundAndroid: React.PropTypes.object,
+            <div class="content"><div class='highlight'><pre>  nativeBackgroundAndroid: PropTypes.object,
 };
 
 <span class="hljs-keyword">const</span> NativeTouchable = requireNativeComponent(<span class="hljs-string">'MKTouchable'</span>, {

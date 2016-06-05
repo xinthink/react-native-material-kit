@@ -38,15 +38,16 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
-
-<span class="hljs-keyword">const</span> {
+<span class="hljs-keyword">import</span> React, {
   Component,
-  View,
   PropTypes,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">import</span> {
   Animated,
   Easing,
-} = React;
+  View,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native'</span>;
 
 <span class="hljs-keyword">import</span> { getTheme } <span class="hljs-keyword">from</span> <span class="hljs-string">'../theme'</span>;</pre></div></div>
             
@@ -79,7 +80,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  static propTypes = {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">static</span> propTypes = {</pre></div></div>
             
         </li>
         
@@ -200,13 +201,13 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  static defaultProps = {
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">static</span> defaultProps = {
     style: {
       height: <span class="hljs-number">4</span>,
     },
   };
 
-  constructor(props) {
+  <span class="hljs-keyword">constructor</span>(props) {
     <span class="hljs-keyword">super</span>(props);
     <span class="hljs-keyword">this</span>.theme = getTheme();
     <span class="hljs-keyword">this</span>._progress = <span class="hljs-number">0</span>;  <span class="hljs-comment">// initial progress</span>
@@ -295,35 +296,35 @@
     <span class="hljs-keyword">const</span> progressColor = <span class="hljs-keyword">this</span>.props.progressColor || progressTheme.progressColor;
 
     <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">View</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">background</span> <span class="hljs-attribute">layer</span>
-        <span class="hljs-attribute">ref</span>=<span class="hljs-value">"bg"</span>
-        <span class="hljs-attribute">style</span>=<span class="hljs-value">{[Progress.defaultProps.style,</span> <span class="hljs-attribute">style</span>, <span class="hljs-attribute">this.props.style</span>]}
-        <span class="hljs-attribute">onLayout</span>=<span class="hljs-value">{this._onLayout}</span>
-      &gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">Animated.View</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">buffering</span> <span class="hljs-attribute">layer</span>
-          <span class="hljs-attribute">ref</span>=<span class="hljs-value">"bufferLayer"</span>
-          <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
-            <span class="hljs-attribute">position:</span> '<span class="hljs-attribute">absolute</span>',
-            <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">bufferColor</span>,
-            <span class="hljs-attribute">width:</span> <span class="hljs-attribute">this._animatedBufferLength</span>,
-            <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this._height</span>,
+      &lt;View  // the background layer
+        ref="bg"
+        style={[Progress.defaultProps.style, style, this.props.style]}
+        onLayout={this._onLayout}
+      &gt;
+        &lt;Animated.View  // the buffering layer
+          ref="bufferLayer"
+          style={{
+            position: 'absolute',
+            backgroundColor: bufferColor,
+            width: this._animatedBufferLength,
+            height: this._height,
           }}
-        /&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">Animated.View</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">forefront</span> <span class="hljs-attribute">layer</span> <span class="hljs-attribute">showing</span> <span class="hljs-attribute">progress</span>
-          <span class="hljs-attribute">ref</span>=<span class="hljs-value">"progressLayer"</span>
-          <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
-            <span class="hljs-attribute">position:</span> '<span class="hljs-attribute">absolute</span>',
-            <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">progressColor</span>,
-            <span class="hljs-attribute">width:</span> <span class="hljs-attribute">this._animatedLength</span>,
-            <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this._height</span>,
+        /&gt;
+        &lt;Animated.View  // the forefront layer showing progress
+          ref="progressLayer"
+          style={{
+            position: 'absolute',
+            backgroundColor: progressColor,
+            width: this._animatedLength,
+            height: this._height,
           }}
-        /&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-title">View</span>&gt;</span>
-    )</span>;
+        /&gt;
+      &lt;/View&gt;
+    );
   }
 }
 
-<span class="hljs-built_in">Object</span>.defineProperty(Progress.prototype, <span class="hljs-string">'progress'</span>, {</pre></div></div>
+Object.defineProperty(Progress.prototype, 'progress', {</pre></div></div>
             
         </li>
         

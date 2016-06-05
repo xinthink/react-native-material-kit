@@ -32,12 +32,12 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> MKColor = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./MKColor'</span>);
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">import</span> MKColor <span class="hljs-keyword">from</span> <span class="hljs-string">'./MKColor'</span>;
 
 <span class="hljs-keyword">const</span> theme = {};
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AttrReference</span> </span>{
-  constructor(attr) {
+  <span class="hljs-keyword">constructor</span>(attr) {
     <span class="hljs-keyword">this</span>.attr = attr;
   }
 
@@ -47,7 +47,7 @@
 }
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RGBAttrReference</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AttrReference</span> </span>{
-  constructor(attr, alpha) {
+  <span class="hljs-keyword">constructor</span>(attr, alpha) {
     <span class="hljs-keyword">super</span>(attr);
     <span class="hljs-keyword">this</span>.alpha = alpha;
   }

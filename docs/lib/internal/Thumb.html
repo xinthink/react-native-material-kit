@@ -38,15 +38,16 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-native'</span>);
-
-<span class="hljs-keyword">const</span> {
+<span class="hljs-keyword">import</span> React, {
   Component,
-  Animated,
-  View,
-  PanResponder,
   PropTypes,
-} = React;</pre></div></div>
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">import</span> {
+  Animated,
+  PanResponder,
+  View,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native'</span>;</pre></div></div>
             
         </li>
         
@@ -138,7 +139,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Thumb</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
-  constructor(props) {
+  <span class="hljs-keyword">constructor</span>(props) {
     <span class="hljs-keyword">super</span>(props);
     <span class="hljs-keyword">this</span>.x = <span class="hljs-number">0</span>;  <span class="hljs-comment">// current x-axis position</span>
 
@@ -159,7 +160,7 @@
       onStartShouldSetPanResponderCapture: () =&gt; <span class="hljs-literal">true</span>,
       onMoveShouldSetPanResponder: () =&gt; <span class="hljs-literal">true</span>,
       onMoveShouldSetPanResponderCapture: () =&gt; <span class="hljs-literal">true</span>,
-      onPanResponderTerminationRequest: () =&gt; <span class="hljs-literal">true</span>,
+      onPanResponderTerminationRequest: () =&gt; <span class="hljs-literal">false</span>,
       onShouldBlockNativeResponder: () =&gt; <span class="hljs-literal">true</span>,
 
       onPanResponderGrant: (evt) =&gt; { <span class="hljs-keyword">this</span>.props.onGrant(<span class="hljs-keyword">this</span>, evt); },
@@ -396,35 +397,35 @@
             
             <div class="content"><div class='highlight'><pre>  render() {
     <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Animated.View</span>
-        <span class="hljs-attribute">style</span>=<span class="hljs-value">{[</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">outer</span> <span class="hljs-attribute">circle</span> <span class="hljs-attribute">to</span> <span class="hljs-attribute">draw</span> <span class="hljs-attribute">the</span> <span class="hljs-attribute">border</span>
-          <span class="hljs-attribute">this.props.style</span>,
+      &lt;Animated.View
+        style={[  // the outer circle to draw the border
+          this.props.style,
           {
-            <span class="hljs-attribute">width:</span> <span class="hljs-attribute">this._containerDia</span>,
-            <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this._containerDia</span>,
-            <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this.state.borderColor</span>,
-            <span class="hljs-attribute">borderRadius:</span> <span class="hljs-attribute">this._containerRadii</span>,
-            <span class="hljs-attribute">position:</span> '<span class="hljs-attribute">absolute</span>',
-            <span class="hljs-attribute">left:</span> <span class="hljs-attribute">this._animatedLeft</span>,
-            <span class="hljs-attribute">transform:</span> [
-              { <span class="hljs-attribute">scale:</span> <span class="hljs-attribute">this._animatedScale</span> },
+            width: this._containerDia,
+            height: this._containerDia,
+            backgroundColor: this.state.borderColor,
+            borderRadius: this._containerRadii,
+            position: 'absolute',
+            left: this._animatedLeft,
+            transform: [
+              { scale: this._animatedScale },
             ],
           },
         ]}
-        { <span class="hljs-attribute">...this._panResponder.panHandlers</span> }
-      &gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">View</span>
-          <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>  // <span class="hljs-attribute">the</span> <span class="hljs-attribute">inner</span> <span class="hljs-attribute">circle</span>
-            <span class="hljs-attribute">width:</span> <span class="hljs-attribute">this._dia</span>,
-            <span class="hljs-attribute">height:</span> <span class="hljs-attribute">this._dia</span>,
-            <span class="hljs-attribute">backgroundColor:</span> <span class="hljs-attribute">this.state.color</span>,
-            <span class="hljs-attribute">borderRadius:</span> <span class="hljs-attribute">this._radii</span>,
-            <span class="hljs-attribute">top:</span> <span class="hljs-attribute">THUMB_BORDER_WIDTH</span>,
-            <span class="hljs-attribute">left:</span> <span class="hljs-attribute">THUMB_BORDER_WIDTH</span>,
+        { ...this._panResponder.panHandlers }
+      &gt;
+        &lt;View
+          style={{  // the inner circle
+            width: this._dia,
+            height: this._dia,
+            backgroundColor: this.state.color,
+            borderRadius: this._radii,
+            top: THUMB_BORDER_WIDTH,
+            left: THUMB_BORDER_WIDTH,
           }}
-        /&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-title">Animated.View</span>&gt;</span>
-    )</span>;
+        /&gt;
+      &lt;/Animated.View&gt;
+    );
   }
 }
 
