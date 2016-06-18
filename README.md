@@ -27,7 +27,7 @@ First, `cd` to your RN project directory, and install RNMK through [rnpm](https:
 #### Using rnpm
 `rnpm install react-native-material-kit`
 
-#### Manualy
+#### Manually
 1. Add `node_modules/react-native-material-kit/iOS/RCTMaterialKit.xcodeproj` to your xcode project, usually under the `Libraries` group
 1. Add `libRCTMaterialKit.a` (from `Products` under `RCTMaterialKit.xcodeproj`) to build target's `Linked Frameworks and Libraries` list
 
