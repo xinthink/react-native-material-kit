@@ -331,14 +331,14 @@ const Textfield = MKTextField.textfield()
 Customizing textfields through builder:
 
 ```jsx
-const ColoredTextfield = mdl.Textfield.textfield()
+const CustomTextfield = mdl.Textfield.textfield()
   .withPlaceholder(‘Text…’)
   .withStyle(styles.textfield)
   .withTintColor(MKColor.Lime)
   .withTextInputStyle({color: MKColor.Orange})
   .build();
 ...
-<CustomTexfield />
+<CustomTextfield />
 ```
 
 the jsx equivalent:
