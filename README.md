@@ -24,8 +24,17 @@ A set of UI components, in the purpose of introducing [Material Design][md] to a
 First, `cd` to your RN project directory, and install RNMK through [rnpm](https://github.com/rnpm/rnpm) . If you don't have rnpm, you can install RNMK from npm with the command `npm i -S react-native-material-kit` and link it manually (see below).
 
 ### iOS
-#### Using rnpm
-`rnpm install react-native-material-kit`
+
+* ####React Native < 0.29 (Using rnpm)
+
+  `rnpm install react-native-material-kit`
+  
+* ####React Native >= 0.29
+  `$npm install -S react-native-material-kit`
+
+  `$react-native link react-native-material-kit`
+  
+
 
 #### Manually
 1. Add `node_modules/react-native-material-kit/iOS/RCTMaterialKit.xcodeproj` to your xcode project, usually under the `Libraries` group
@@ -52,8 +61,14 @@ Now run `pod install`. This will create an Xcode workspace containing all necess
 
 ### Android
 
-#### Using rnpm
-`rnpm install react-native-material-kit`
+* ####React Native < 0.29 (Using rnpm)
+
+  `rnpm install react-native-material-kit`
+  
+* ####React Native >= 0.29
+  `$npm install -S react-native-material-kit`
+
+  `$react-native link react-native-material-kit`
 
 #### Manually
 1. JDK 7+ is required
