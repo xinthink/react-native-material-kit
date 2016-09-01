@@ -86,7 +86,7 @@ Now run `pod install`. This will create an Xcode workspace containing all necess
   }
 
   ```
-1. Import `com.github.xinthink.rnmk.ReactMaterialKitPackage` and register it in your `MainActivity` (or equivalent):
+1. Import `com.github.xinthink.rnmk.ReactMaterialKitPackage` and register it in your `MainActivity` (or equivalent, RN >= 0.32 MainApplication.java):
   ```java
   @Override
   protected List<ReactPackage> getPackages() {
