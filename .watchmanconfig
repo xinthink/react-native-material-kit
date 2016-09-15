@@ -1,0 +1,12 @@
+{
+  "root_dirs": [
+    "lib",
+    "index*.js"
+  ],
+  "ignore_dirs": [
+    ".git",
+    "*/node_modules",
+    ".idea",
+    "*/build"
+  ]
+}
