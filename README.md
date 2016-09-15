@@ -193,8 +193,6 @@ the jsx equivalent:
 </MKButton>
 ```
 
-> For this time, [Shadows are unavailable on Android][android-issue-shadow]
-
 👉 [props reference][button-props-doc] and [example code][buttons-sample]
 
 > Why builders? See the ‘[Builder vs. configuration object][issue-3]’ discussion.
@@ -205,7 +203,6 @@ the jsx equivalent:
 [buttons-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/buttons.js
 [issue-3]: https://github.com/xinthink/react-native-material-kit/issues/3
 [button-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Button.html#props
-[android-issue-shadow]: https://facebook.github.io/react-native/docs/known-issues.html#no-support-for-shadows-on-android
 
 ### Cards
 [![img-cards]][cards-mdl]
