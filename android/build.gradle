@@ -30,5 +30,5 @@ repositories {
 }
 
 dependencies {
-    provided 'com.facebook.react:react-native:0.+'
+    compile 'com.facebook.react:react-native:0.+'
 }
