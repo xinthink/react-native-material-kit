@@ -9,7 +9,7 @@ A set of UI components, in the purpose of introducing [Material Design][md] to a
 
 [npm-badge]: https://img.shields.io/npm/v/react-native-material-kit.svg
 [npm]: https://www.npmjs.com/package/react-native-material-kit
-[rn-badge]: https://img.shields.io/badge/react--native-v0.27.x-05A5D1.svg
+[rn-badge]: https://img.shields.io/badge/react--native-v0.34-05A5D1.svg
 [rn]: https://facebook.github.io/react-native
 [md]: http://www.google.com/design/spec/material-design/introduction.html
 [license-badge]: https://img.shields.io/dub/l/vibe-d.svg
@@ -28,12 +28,12 @@ First, `cd` to your RN project directory, and install RNMK through [rnpm](https:
 * ####React Native < 0.29 (Using rnpm)
 
   `rnpm install react-native-material-kit`
-  
+
 * ####React Native >= 0.29
   `$npm install -S react-native-material-kit`
 
   `$react-native link react-native-material-kit`
-  
+
 
 
 #### Manually
@@ -64,7 +64,7 @@ Now run `pod install`. This will create an Xcode workspace containing all necess
 * ####React Native < 0.29 (Using rnpm)
 
   `rnpm install react-native-material-kit`
-  
+
 * ####React Native >= 0.29
   `$npm install -S react-native-material-kit`
 
