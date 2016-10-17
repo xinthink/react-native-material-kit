@@ -30,7 +30,6 @@ public class ReactMaterialKitPackage implements ReactPackage {
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactApplicationContext) {
         return Arrays.<ViewManager>asList(
-                new MKEditTextManager(),
                 new MKTouchableManager(),
                 new MKSpinnerManager(),
                 new TickViewManager()
