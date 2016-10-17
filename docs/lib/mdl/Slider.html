@@ -277,8 +277,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    onConfirm: PropTypes.func,
-  };</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    onConfirm: PropTypes.func,</pre></div></div>
             
         </li>
         
@@ -289,15 +288,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
-              <h2 id="-section-id-defaults-defaults-section-"><section id='defaults'>Defaults</section></h2>
+              <p>Step value of the RangeSlider, must be a divisor of max</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">static</span> defaultProps = {
-    thumbRadius: <span class="hljs-number">6</span>,
-    trackSize: <span class="hljs-number">2</span>,
-    min: <span class="hljs-number">0</span>,
-    max: <span class="hljs-number">100</span>,
+            <div class="content"><div class='highlight'><pre>    step: PropTypes.number,
   };</pre></div></div>
             
         </li>
@@ -308,6 +303,27 @@
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <h2 id="-section-id-defaults-defaults-section-"><section id='defaults'>Defaults</section></h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">static</span> defaultProps = {
+    thumbRadius: <span class="hljs-number">6</span>,
+    trackSize: <span class="hljs-number">2</span>,
+    min: <span class="hljs-number">0</span>,
+    max: <span class="hljs-number">100</span>,
+    step: <span class="hljs-number">1</span>,
+  };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
               <p>endregion</p>
 
@@ -358,16 +374,17 @@
   componentWillReceiveProps(nextProps) {
     <span class="hljs-keyword">this</span>._onThumbRadiiUpdate(nextProps);
     <span class="hljs-keyword">this</span>._internalSetValue(nextProps.value, <span class="hljs-literal">false</span>);
+    <span class="hljs-keyword">this</span>._aniUpdateValue(nextProps.value);
   }</pre></div></div>
             
         </li>
         
         
-        <li id="section-19">
+        <li id="section-20">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-19">&#182;</a>
+                <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
               <p>region Property initializers</p>
 
@@ -383,11 +400,11 @@
         </li>
         
         
-        <li id="section-20">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-20">&#182;</a>
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p>endregion</p>
 
@@ -395,6 +412,7 @@
             
             <div class="content"><div class='highlight'><pre>
   _internalSetValue(value, fireChange = <span class="hljs-literal">true</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._value === value) <span class="hljs-keyword">return</span>;
     <span class="hljs-keyword">this</span>._value = value;
     <span class="hljs-keyword">if</span> (fireChange) {
       <span class="hljs-keyword">this</span>._emitChange(value);
@@ -438,11 +456,11 @@
         </li>
         
         
-        <li id="section-21">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <p>Touch events handling</p>
 
@@ -462,11 +480,11 @@
         </li>
         
         
-        <li id="section-22">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-22">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <p>should not use the coordination inside a cancelled event</p>
 
@@ -482,11 +500,11 @@
         </li>
         
         
-        <li id="section-23">
+        <li id="section-24">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-23">&#182;</a>
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <p>get touch position relative to the track</p>
 
@@ -497,18 +515,18 @@
         </li>
         
         
-        <li id="section-24">
+        <li id="section-25">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-24">&#182;</a>
+                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <p>touch location relative to the track</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">let</span> x = <span class="hljs-built_in">Math</span>.max(evt.x - <span class="hljs-keyword">this</span>._trackMarginH, <span class="hljs-number">0</span>);
-    x = <span class="hljs-built_in">Math</span>.min(x, <span class="hljs-keyword">this</span>._trackTotalLength);
+    x = <span class="hljs-keyword">this</span>._snap(<span class="hljs-built_in">Math</span>.min(x, <span class="hljs-keyword">this</span>._trackTotalLength));
 
     <span class="hljs-keyword">const</span> ratio = x / <span class="hljs-keyword">this</span>._trackTotalLength;
 
@@ -520,7 +538,72 @@
     <span class="hljs-keyword">const</span> _value = ratio * (<span class="hljs-keyword">this</span>.props.max - <span class="hljs-keyword">this</span>.props.min) + <span class="hljs-keyword">this</span>.props.min;
     <span class="hljs-keyword">this</span>._internalSetValue(_value);  <span class="hljs-comment">// report changes in 'real-time'</span>
     <span class="hljs-keyword">this</span>._moveThumb(x);
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <p>Scale global xy coordinate values to track values</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  _toSliderScale(value) {
+    <span class="hljs-keyword">const</span> trackToRange = (<span class="hljs-keyword">this</span>.props.max - <span class="hljs-keyword">this</span>.props.min) / <span class="hljs-keyword">this</span>._trackTotalLength;
+    <span class="hljs-keyword">return</span> (value * trackToRange) + <span class="hljs-keyword">this</span>.props.min;
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <p>Scale track values to global xy coordinate system</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  _toPixelScale(value) {
+    <span class="hljs-keyword">const</span> rangeToTrack = <span class="hljs-keyword">this</span>._trackTotalLength / (<span class="hljs-keyword">this</span>.props.max - <span class="hljs-keyword">this</span>.props.min);
+    <span class="hljs-keyword">return</span> (value - <span class="hljs-keyword">this</span>.props.min) * rangeToTrack;
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <p>Snap thumb by step, default step = 1</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  _snap = (val, inc = <span class="hljs-keyword">this</span>._defaultStepIncrement()) =&gt; {
+    <span class="hljs-keyword">const</span> current = <span class="hljs-built_in">Math</span>.round(val);
+    <span class="hljs-keyword">const</span> half = inc * <span class="hljs-number">0.5</span>;
+    <span class="hljs-keyword">const</span> diff = current % inc;
+
+    <span class="hljs-keyword">if</span> (diff &gt;= half) {
+      <span class="hljs-keyword">const</span> multiplier = <span class="hljs-built_in">Math</span>.round(current / inc);
+      <span class="hljs-keyword">return</span> (inc * multiplier);
+    }
+
+    <span class="hljs-keyword">return</span> (current - diff);
   }
+
+  _defaultStepIncrement = () =&gt;
+    <span class="hljs-keyword">this</span>._toPixelScale(<span class="hljs-keyword">this</span>.props.max) / ((<span class="hljs-keyword">this</span>.props.max - <span class="hljs-keyword">this</span>.props.min) / (<span class="hljs-keyword">this</span>.props.step));
 
   _confirmUpdateValueByTouch(evt) {
     <span class="hljs-keyword">if</span> (evt) {
@@ -548,11 +631,11 @@
         </li>
         
         
-        <li id="section-25">
+        <li id="section-29">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-25">&#182;</a>
+                <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
               <p>when thumb radii updated, re-calc the dimens</p>
 
@@ -567,16 +650,26 @@
       TRACK_EXTRA_MARGIN_H;
   }
 
-  render() {</pre></div></div>
+  _verifyStep() {
+    <span class="hljs-keyword">const</span> divisor = <span class="hljs-keyword">this</span>.props.max / <span class="hljs-keyword">this</span>.props.step;
+    <span class="hljs-keyword">if</span> (divisor % <span class="hljs-number">1</span> !== <span class="hljs-number">0</span>) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(
+        <span class="hljs-string">`Given step ( <span class="hljs-subst">${this.props.step}</span> ) must be a divisor of max ( <span class="hljs-subst">${this.props.max}</span> )`</span>
+      );
+    }
+  }
+
+  render() {
+    <span class="hljs-keyword">this</span>._verifyStep();</pre></div></div>
             
         </li>
         
         
-        <li id="section-26">
+        <li id="section-30">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-26">&#182;</a>
+                <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
               <p>making room for the Thumb, cause’s Android doesn’t support <code>overflow: visible</code></p>
 <ul>
@@ -645,11 +738,11 @@
         </li>
         
         
-        <li id="section-27">
+        <li id="section-31">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-27">&#182;</a>
+                <a class="pilcrow" href="#section-31">&#182;</a>
               </div>
               <p>Public api to update the current value</p>
 
@@ -669,11 +762,11 @@
         </li>
         
         
-        <li id="section-28">
+        <li id="section-32">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-28">&#182;</a>
+                <a class="pilcrow" href="#section-32">&#182;</a>
               </div>
               <h2 id="public-interface">Public interface</h2>
 

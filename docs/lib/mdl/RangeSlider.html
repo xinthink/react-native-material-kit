@@ -130,6 +130,8 @@
 
   componentWillReceiveProps(nextProps) {
     <span class="hljs-keyword">this</span>._onThumbRadiiUpdate(nextProps);
+    <span class="hljs-keyword">this</span>._setRange({ min: nextProps.minValue, max: nextProps.maxValue });
+    <span class="hljs-keyword">this</span>._updateValue(<span class="hljs-keyword">this</span>._range);
   }</pre></div></div>
             
         </li>
@@ -172,7 +174,7 @@
     }
 
     <span class="hljs-keyword">this</span>._updateValueByTouch(ref, evt);
-  }</pre></div></div>
+  };</pre></div></div>
             
         </li>
         
@@ -537,6 +539,11 @@
       <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Given step ( <span class="hljs-subst">${this.props.step}</span> ) must be \
         a divisor of max ( <span class="hljs-subst">${this.props.max}</span> )`</span>);
     }
+  }
+
+  _rollbackSlider(range) {
+    <span class="hljs-keyword">this</span>._setRange({ min: range.minValue, max: range.maxValue });
+    <span class="hljs-keyword">this</span>._updateValue(<span class="hljs-keyword">this</span>._range);
   }
 
   render() {

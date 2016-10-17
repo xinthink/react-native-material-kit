@@ -279,7 +279,7 @@ Touch events handling</p>
         <span class="hljs-tag">&lt;<span class="hljs-name">Ripple</span>
           {<span class="hljs-attr">...this.props</span>}
           <span class="hljs-attr">rippleColor</span>=<span class="hljs-string">{mergedStyle.rippleColor}</span>
-          <span class="hljs-attr">style</span>=<span class="hljs-string">{[IconToggle.defaultProps.style]}</span>
+          <span class="hljs-attr">style</span>=<span class="hljs-string">{[IconToggle.defaultProps.style,</span> <span class="hljs-attr">this.props.style</span>]}
           <span class="hljs-attr">maskBorderRadiusInPercent</span>=<span class="hljs-string">{50}</span>
           <span class="hljs-attr">rippleLocation</span>=<span class="hljs-string">"center"</span>
           <span class="hljs-attr">onTouch</span>=<span class="hljs-string">{this._onTouch}</span>

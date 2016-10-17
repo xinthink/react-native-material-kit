@@ -39,7 +39,7 @@
   Platform,
   processColor,
 } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native'</span>;
-
+<span class="hljs-keyword">import</span> { PropTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
 <span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> R <span class="hljs-keyword">from</span> <span class="hljs-string">'ramda'</span>;</pre></div></div>
             
         </li>
@@ -204,7 +204,10 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">extractTouchableProps</span>(<span class="hljs-params">view</span>) </span>{
-  <span class="hljs-keyword">return</span> extractProps(view, TouchableWithoutFeedback.propTypes);
+  <span class="hljs-keyword">return</span> extractProps(view, {
+    ...TouchableWithoutFeedback.propTypes,
+    testID: PropTypes.string,
+  });
 }</pre></div></div>
             
         </li>

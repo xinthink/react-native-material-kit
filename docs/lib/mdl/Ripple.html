@@ -46,9 +46,12 @@
   Animated,
   Platform,
   View,
+  NativeModules,
+  findNodeHandle,
 } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native'</span>;
+<span class="hljs-keyword">const</span> UIManager = NativeModules.UIManager;
 
-<span class="hljs-keyword">import</span> MKPropTypes <span class="hljs-keyword">from</span> <span class="hljs-string">'../MKPropTypes'</span>;
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> MKPropTypes <span class="hljs-keyword">from</span> <span class="hljs-string">'../MKPropTypes'</span>;
 <span class="hljs-keyword">import</span> MKTouchable <span class="hljs-keyword">from</span> <span class="hljs-string">'../internal/MKTouchable'</span>;</pre></div></div>
             
         </li>
@@ -162,7 +165,7 @@ at <code>ReactViewBackgroundDrawable.drawRoundedBackgroundWithBorders</code>
             
             <div class="content"><div class='highlight'><pre>
   measure(cb) {
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.refs.container.measure(cb);
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.refs.container &amp;&amp; UIManager.measure(findNodeHandle(<span class="hljs-keyword">this</span>.refs.container), cb);
   }
 
   _onLayoutChange({ width, height }) {
@@ -443,6 +446,8 @@ at <code>ReactViewBackgroundDrawable.drawRoundedBackgroundWithBorders</code>
       };
     }
 
+    <span class="hljs-keyword">const</span> borderWidth = <span class="hljs-keyword">this</span>.props.borderWidth || <span class="hljs-number">0</span>;
+
     <span class="hljs-keyword">return</span> (
       &lt;MKTouchable ref="container"
         {...this.props}
@@ -457,8 +462,8 @@ at <code>ReactViewBackgroundDrawable.drawRoundedBackgroundWithBorders</code>
             position: 'absolute',
             backgroundColor: this.props.maskColor,
             opacity: this._animatedAlpha,
-            top: 0,
-            left: 0,
+            top: - borderWidth,
+            left: - borderWidth,
             width: this.state.width,
             height: this.state.height,
             borderRadius: this.state.maskBorderRadius,

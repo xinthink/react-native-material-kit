@@ -41,7 +41,10 @@
 <span class="hljs-keyword">import</span> {
   requireNativeComponent,
   View,
+  NativeModules,
+  findNodeHandle,
 } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native'</span>;
+<span class="hljs-keyword">const</span> UIManager = NativeModules.UIManager;
 
 <span class="hljs-keyword">import</span> { convertCoordinate } <span class="hljs-keyword">from</span> <span class="hljs-string">'../utils'</span>;</pre></div></div>
             
@@ -97,7 +100,7 @@
             
             <div class="content"><div class='highlight'><pre>
   measure(cb) {
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.refs.node.measure(cb);
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.refs.node &amp;&amp; UIManager.measure(findNodeHandle(<span class="hljs-keyword">this</span>.refs.node), cb);
   }
 
   render() {

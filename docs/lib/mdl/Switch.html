@@ -186,7 +186,11 @@ Which is displayed as a circle with shadow and ripple effect.</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>  confirmToggle(fromState) {
-    <span class="hljs-keyword">this</span>.state.checked = !fromState;
+    <span class="hljs-keyword">this</span>.setState(
+      {
+        checked: !fromState,
+      }
+    );
   }</pre></div></div>
             
         </li>
@@ -411,19 +415,24 @@ Which is displayed as a circle with shadow and ripple effect.</p>
       trackRadii: <span class="hljs-number">0</span>,
       trackMargin: <span class="hljs-number">0</span>,
       thumbFrame: { x: <span class="hljs-number">0</span>, padding: <span class="hljs-number">0</span>, r: <span class="hljs-number">0</span>, rippleRadii: <span class="hljs-number">0</span> },
+      checked: <span class="hljs-literal">false</span>,
     };
   }
 
   componentWillMount() {
-    <span class="hljs-keyword">this</span>.setState({ checked: <span class="hljs-keyword">this</span>.props.checked });
-    <span class="hljs-keyword">this</span>._layoutThumb(<span class="hljs-keyword">this</span>.props);
+    <span class="hljs-keyword">const</span> nextState = <span class="hljs-keyword">this</span>._layoutThumb(<span class="hljs-keyword">this</span>.props.checked,
+      <span class="hljs-keyword">this</span>.props.thumbRadius,
+      <span class="hljs-keyword">this</span>.props.trackLength,
+      <span class="hljs-keyword">this</span>.props.trackSize);
+    <span class="hljs-keyword">this</span>.setState(<span class="hljs-built_in">Object</span>.assign(nextState, { checked: <span class="hljs-keyword">this</span>.props.checked }));
   }
 
   componentWillReceiveProps(nextProps) {
-    <span class="hljs-keyword">if</span> (nextProps.checked !== <span class="hljs-keyword">this</span>.props.checked) {
-      <span class="hljs-keyword">this</span>.setState({ checked: nextProps.checked });
-    }
-    <span class="hljs-keyword">this</span>._layoutThumb(nextProps);
+    <span class="hljs-keyword">const</span> nextState = <span class="hljs-keyword">this</span>._layoutThumb(nextProps.checked,
+      nextProps.thumbRadius,
+      nextProps.trackLength,
+      nextProps.trackSize);
+    <span class="hljs-keyword">this</span>.setState(<span class="hljs-built_in">Object</span>.assign(nextState, { checked: nextProps.checked }));
   }</pre></div></div>
             
         </li>
@@ -441,7 +450,10 @@ in order to access the component functions defined in <code>Thumb</code></p>
             </div>
             
             <div class="content"><div class='highlight'><pre>  getThumb() {
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.refs.thumb.refs.node;
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">this</span>.refs.thumb.refs.node !== <span class="hljs-string">'undefined'</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.refs.thumb.refs.node;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.refs.thumb._component;
   }</pre></div></div>
             
         </li>
@@ -504,14 +516,15 @@ in order to access the component functions defined in <code>Thumb</code></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  _layoutThumb({ checked, trackLength, trackSize }) {
+            <div class="content"><div class='highlight'><pre>  _layoutThumb(checked, thumbRadius, trackLength, trackSize) {
     <span class="hljs-keyword">const</span> trackRadii = trackSize / <span class="hljs-number">2</span>;
-    <span class="hljs-keyword">const</span> thumbRadii = <span class="hljs-keyword">this</span>.props.thumbRadius;
+    <span class="hljs-keyword">const</span> thumbRadii = thumbRadius;
     <span class="hljs-keyword">const</span> rippleRadii = trackLength - trackSize;
     <span class="hljs-keyword">const</span> trackMargin = rippleRadii - trackRadii;  <span class="hljs-comment">// make room for ripple</span>
     <span class="hljs-keyword">const</span> thumbLeft = checked ? trackMargin + trackRadii : <span class="hljs-number">0</span>;
     <span class="hljs-keyword">this</span>._animatedThumbLeft.setValue(thumbLeft);
-    <span class="hljs-keyword">this</span>.setState({
+
+    <span class="hljs-keyword">return</span> {
       trackSize,
       trackLength,
       trackRadii,
@@ -522,7 +535,7 @@ in order to access the component functions defined in <code>Thumb</code></p>
         r: thumbRadii,
         padding: rippleRadii - thumbRadii,
       },
-    });
+    };
   }</pre></div></div>
             
         </li>
