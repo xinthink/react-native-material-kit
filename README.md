@@ -405,7 +405,7 @@ The two `Text` tags here, similar to [State List][android-state-list] in *Androi
 
 [android-state-list]: http://developer.android.com/guide/topics/resources/drawable-resource.html#StateList
 [rn-icons]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/Switch.html
-[icon-toggle-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/MKIconToggle.html#props
+[icon-toggle-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/IconToggle.html#props
 
 #### Switch
 
