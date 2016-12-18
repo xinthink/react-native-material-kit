@@ -611,9 +611,10 @@
           trackMarginH={this._trackMarginH}
           enabledColor={lowerTrackColor}
           disabledColor={upperTrackColor}
-          onGrant = {this._beginMove}
-          onMove = {this._updateValueByTouch}
-          onEnd = {this._endMove}
+          onGrant={this._beginMove}
+          onMove={this._updateValueByTouch}
+          onEnd={this._endMove}
+          touchPadding={this.props.thumbPadding}
           style={{
             top: this._thumbRadiiWithBorder * (THUMB_SCALE_RATIO - 1) + TRACK_EXTRA_MARGIN_V,
           }}
@@ -625,9 +626,10 @@
           trackMarginH={this._trackMarginH}
           enabledColor={lowerTrackColor}
           disabledColor={upperTrackColor}
-          onGrant = {this._beginMove}
-          onMove = {this._updateValueByTouch}
-          onEnd = {this._endMove}
+          onGrant={this._beginMove}
+          onMove={this._updateValueByTouch}
+          onEnd={this._endMove}
+          touchPadding={this.props.thumbPadding}
           style={{
             top: this._thumbRadiiWithBorder * (THUMB_SCALE_RATIO - 1) + TRACK_EXTRA_MARGIN_V,
           }}
@@ -809,11 +811,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-32">&#182;</a>
               </div>
-              <p>Color of the lower part of the track, it’s also the color of the thumb</p>
+              <p>Padding for the hitSlop on the RangeSlider thumb</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  lowerTrackColor: PropTypes.string,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  thumbPadding: PropTypes.number,</pre></div></div>
             
         </li>
         
@@ -824,11 +826,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-33">&#182;</a>
               </div>
-              <p>Color of the upper part of the track</p>
+              <p>Color of the lower part of the track, it’s also the color of the thumb</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  upperTrackColor: PropTypes.string,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  lowerTrackColor: PropTypes.string,</pre></div></div>
             
         </li>
         
@@ -839,11 +841,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-34">&#182;</a>
               </div>
-              <p>Callback when drag gesture begins</p>
+              <p>Color of the upper part of the track</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  onStart: PropTypes.func,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  upperTrackColor: PropTypes.string,</pre></div></div>
             
         </li>
         
@@ -854,11 +856,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-35">&#182;</a>
               </div>
-              <p>Callback when value changed</p>
+              <p>Callback when drag gesture begins</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  onChange: PropTypes.func,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  onStart: PropTypes.func,</pre></div></div>
             
         </li>
         
@@ -869,11 +871,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-36">&#182;</a>
               </div>
-              <p>Callback when the value range is confirmed</p>
+              <p>Callback when value changed</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  onConfirm: PropTypes.func,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  onChange: PropTypes.func,</pre></div></div>
             
         </li>
         
@@ -883,6 +885,21 @@
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-37">&#182;</a>
+              </div>
+              <p>Callback when the value range is confirmed</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  onConfirm: PropTypes.func,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-38">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-38">&#182;</a>
               </div>
               <p>Step value of the RangeSlider, must be a divisor of max</p>
 
@@ -894,17 +911,18 @@
         </li>
         
         
-        <li id="section-38">
+        <li id="section-39">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-38">&#182;</a>
+                <a class="pilcrow" href="#section-39">&#182;</a>
               </div>
               <h2 id="-section-id-defaults-defaults-section-"><section id='defaults'>Defaults</section></h2>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>RangeSlider.defaultProps = {
+  thumbPadding: <span class="hljs-number">0</span>,
   thumbRadius: <span class="hljs-number">6</span>,
   trackSize: <span class="hljs-number">2</span>,
   min: <span class="hljs-number">0</span>,
@@ -915,11 +933,11 @@
         </li>
         
         
-        <li id="section-39">
+        <li id="section-40">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-39">&#182;</a>
+                <a class="pilcrow" href="#section-40">&#182;</a>
               </div>
               <h2 id="public-interface">Public interface</h2>
 

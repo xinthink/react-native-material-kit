@@ -228,11 +228,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
-              <p>Color of the lower part of the track, it’s also the color of the thumb</p>
+              <p>Padding for the hitSlop on the Slider thumb</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    lowerTrackColor: PropTypes.string,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    thumbPadding: PropTypes.number,</pre></div></div>
             
         </li>
         
@@ -243,11 +243,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
-              <p>Color of the upper part of the track</p>
+              <p>Color of the lower part of the track, it’s also the color of the thumb</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    upperTrackColor: PropTypes.string,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    lowerTrackColor: PropTypes.string,</pre></div></div>
             
         </li>
         
@@ -258,11 +258,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
-              <p>Callback when value changed</p>
+              <p>Color of the upper part of the track</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    onChange: PropTypes.func,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    upperTrackColor: PropTypes.string,</pre></div></div>
             
         </li>
         
@@ -273,11 +273,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
-              <p>Callback when the value is confirmed</p>
+              <p>Callback when value changed</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    onConfirm: PropTypes.func,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    onChange: PropTypes.func,</pre></div></div>
             
         </li>
         
@@ -287,6 +287,21 @@
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>Callback when the value is confirmed</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    onConfirm: PropTypes.func,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
               <p>Step value of the RangeSlider, must be a divisor of max</p>
 
@@ -298,17 +313,18 @@
         </li>
         
         
-        <li id="section-18">
+        <li id="section-19">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-18">&#182;</a>
+                <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
               <h2 id="-section-id-defaults-defaults-section-"><section id='defaults'>Defaults</section></h2>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">static</span> defaultProps = {
+    thumbPadding: <span class="hljs-number">0</span>,
     thumbRadius: <span class="hljs-number">6</span>,
     trackSize: <span class="hljs-number">2</span>,
     min: <span class="hljs-number">0</span>,
@@ -319,11 +335,11 @@
         </li>
         
         
-        <li id="section-19">
+        <li id="section-20">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-19">&#182;</a>
+                <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
               <p>endregion</p>
 
@@ -380,11 +396,11 @@
         </li>
         
         
-        <li id="section-20">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-20">&#182;</a>
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p>region Property initializers</p>
 
@@ -400,11 +416,11 @@
         </li>
         
         
-        <li id="section-21">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <p>endregion</p>
 
@@ -456,11 +472,11 @@
         </li>
         
         
-        <li id="section-22">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-22">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <p>Touch events handling</p>
 
@@ -480,11 +496,11 @@
         </li>
         
         
-        <li id="section-23">
+        <li id="section-24">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-23">&#182;</a>
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <p>should not use the coordination inside a cancelled event</p>
 
@@ -500,11 +516,11 @@
         </li>
         
         
-        <li id="section-24">
+        <li id="section-25">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-24">&#182;</a>
+                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <p>get touch position relative to the track</p>
 
@@ -515,11 +531,11 @@
         </li>
         
         
-        <li id="section-25">
+        <li id="section-26">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-25">&#182;</a>
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <p>touch location relative to the track</p>
 
@@ -543,11 +559,11 @@
         </li>
         
         
-        <li id="section-26">
+        <li id="section-27">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-26">&#182;</a>
+                <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
               <p>Scale global xy coordinate values to track values</p>
 
@@ -561,11 +577,11 @@
         </li>
         
         
-        <li id="section-27">
+        <li id="section-28">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-27">&#182;</a>
+                <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
               <p>Scale track values to global xy coordinate system</p>
 
@@ -579,11 +595,11 @@
         </li>
         
         
-        <li id="section-28">
+        <li id="section-29">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-28">&#182;</a>
+                <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
               <p>Snap thumb by step, default step = 1</p>
 
@@ -631,11 +647,11 @@
         </li>
         
         
-        <li id="section-29">
+        <li id="section-30">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-29">&#182;</a>
+                <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
               <p>when thumb radii updated, re-calc the dimens</p>
 
@@ -665,11 +681,11 @@
         </li>
         
         
-        <li id="section-30">
+        <li id="section-31">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-30">&#182;</a>
+                <a class="pilcrow" href="#section-31">&#182;</a>
               </div>
               <p>making room for the Thumb, cause’s Android doesn’t support <code>overflow: visible</code></p>
 <ul>
@@ -726,6 +742,7 @@
           trackMarginH={this._trackMarginH}
           enabledColor={lowerTrackColor}
           disabledColor={upperTrackColor}
+          touchPadding={this.props.thumbPadding}
           style={{
             top: this._thumbRadiiWithBorder * (THUMB_SCALE_RATIO - 1) + TRACK_EXTRA_MARGIN_V,
           }}
@@ -738,11 +755,11 @@
         </li>
         
         
-        <li id="section-31">
+        <li id="section-32">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-31">&#182;</a>
+                <a class="pilcrow" href="#section-32">&#182;</a>
               </div>
               <p>Public api to update the current value</p>
 
@@ -762,11 +779,11 @@
         </li>
         
         
-        <li id="section-32">
+        <li id="section-33">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-32">&#182;</a>
+                <a class="pilcrow" href="#section-33">&#182;</a>
               </div>
               <h2 id="public-interface">Public interface</h2>
 

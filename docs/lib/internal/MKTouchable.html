@@ -161,7 +161,18 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  onTouch: PropTypes.func,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  onTouch: PropTypes.func,
+};
+
+<span class="hljs-keyword">const</span> NativeTouchable = requireNativeComponent(<span class="hljs-string">'MKTouchable'</span>, {
+  name: <span class="hljs-string">'MKTouchable'</span>,
+  propTypes: MKTouchable.propTypes,
+}, {
+  nativeOnly: {
+    nativeBackgroundAndroid: <span class="hljs-literal">true</span>,
+    nativeForegroundAndroid: <span class="hljs-literal">true</span>,
+  },
+});</pre></div></div>
             
         </li>
         
@@ -171,27 +182,6 @@
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
-              </div>
-              <p><strong><i>FIXME</i></strong> <code>no propType for native prop</code> error on Android</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  nativeBackgroundAndroid: PropTypes.object,
-};
-
-<span class="hljs-keyword">const</span> NativeTouchable = requireNativeComponent(<span class="hljs-string">'MKTouchable'</span>, {
-  name: <span class="hljs-string">'MKTouchable'</span>,
-  propTypes: MKTouchable.propTypes,
-});</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-9">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <h2 id="public-interface">Public interface</h2>
 

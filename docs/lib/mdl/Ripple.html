@@ -133,6 +133,10 @@ at <code>ReactViewBackgroundDrawable.drawRoundedBackgroundWithBorders</code>
             </div>
             
             <div class="content"><div class='highlight'><pre>  _onTouchEvent = (evt) =&gt; {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.disabled === <span class="hljs-literal">true</span>) {
+      <span class="hljs-keyword">return</span>;
+    }
+    
     <span class="hljs-keyword">switch</span> (evt.type) {
       <span class="hljs-keyword">case</span> <span class="hljs-string">'TOUCH_DOWN'</span>:
         <span class="hljs-keyword">this</span>._onPointerDown(evt);

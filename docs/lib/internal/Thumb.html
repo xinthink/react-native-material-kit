@@ -413,6 +413,12 @@
           },
         ]}
         { ...this._panResponder.panHandlers }
+        hitSlop={{
+          top: this.props.touchPadding,
+          left: this.props.touchPadding,
+          bottom: this.props.touchPadding,
+          right: this.props.touchPadding,
+        }}
       &gt;
         &lt;View
           style={{  // the inner circle
@@ -534,8 +540,7 @@ Thumb.propTypes = {</pre></div></div>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  radius: PropTypes.number,
-};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  radius: PropTypes.number,</pre></div></div>
             
         </li>
         
@@ -546,13 +551,11 @@ Thumb.propTypes = {</pre></div></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
-              <h2 id="-section-id-defaults-defaults-section-"><section id='defaults'>Defaults</section></h2>
+              <p>Padding for the hitSlop on the Thumb component</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Thumb.defaultProps = {
-  radius: <span class="hljs-number">6</span>,
-  disabledColor: DEFAULT_UPPER_TRACK_COLOR,
+            <div class="content"><div class='highlight'><pre>  touchPadding: PropTypes.number,
 };</pre></div></div>
             
         </li>
@@ -563,6 +566,25 @@ Thumb.propTypes = {</pre></div></div>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <h2 id="-section-id-defaults-defaults-section-"><section id='defaults'>Defaults</section></h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Thumb.defaultProps = {
+  radius: <span class="hljs-number">6</span>,
+  disabledColor: DEFAULT_UPPER_TRACK_COLOR,
+  touchPadding: <span class="hljs-number">0</span>,
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
               <h2 id="public-interface">Public interface</h2>
 
