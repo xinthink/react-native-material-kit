@@ -6,9 +6,9 @@
 //  Copyright © 2015年 xinthink. All rights reserved.
 //
 
-#import "RCTViewManager.h"
-#import "RCTEventDispatcher.h"
-#import "UIView+React.h"
+#import <React/RCTViewManager.h>
+#import <React/RCTEventDispatcher.h>
+#import <React/UIView+React.h>
 #import "MKTouchable.h"
 
 @interface MKTouchableManager : RCTViewManager <MKTouchableDelegate>
