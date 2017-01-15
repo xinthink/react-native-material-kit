@@ -26,8 +26,9 @@ First, `cd` to your RN project directory, and install RNMK through [rnpm](https:
 
 ## NOTICE:
 
-react-native-material-kil >= 0.4.0 only supports react-native >= 0.40.0
-react-native-svg < 0.4.0 only supports react-native < 0.40.0
+react-native-material-kit >= 0.4.0 only supports react-native >= 0.40.0
+
+react-native-material-kit < 0.4.0 only supports react-native < 0.40.0
 
 ### iOS
 
