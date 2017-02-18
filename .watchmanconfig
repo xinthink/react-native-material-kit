@@ -1,13 +1,11 @@
 {
-  "root_dirs": [
-    "lib",
-    "index*.js"
-  ],
   "ignore_dirs": [
-    ".git",
-    "*/node_modules",
+    ".*",
     ".idea",
-    "*/build",
-    "iOS"
+    "node_modules",
+    "build",
+    "iOS",
+    "android",
+    "gradle"
   ]
 }
