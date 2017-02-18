@@ -35,7 +35,7 @@
     "gulp-docco": "0.0.4"
   },
   "dependencies": {
-    "ramda": "^0.23.0"
+    "ramda": "~0.23.0"
   },
   "scripts": {
     "lint": "eslint lib"
