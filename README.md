@@ -4,8 +4,8 @@
 [![bitHound Score][bithound-badge]][bithound]
 [![Gitter][gitter-badge]][gitter-rnmk]
 
-<a href="https://www.jetbrains.com/" title="Supported by JetBrains">
-  <img src="http://www.xinthink.com/react-native-material-kit/images/logo_JetBrains_1.svg" alt="Supported by JetBrains" width="64">
+<a href="https://www.jetbrains.com/" title="Built with JetBrains IDEs">
+  <img src="http://www.xinthink.com/react-native-material-kit/images/logo_JetBrains_1.svg" alt="Built with JetBrains IDEs" width="64">
 </a>
 
 A set of UI components, in the purpose of introducing [Material Design][md] to apps built with [React Native][rn], quickly and painlessly.
