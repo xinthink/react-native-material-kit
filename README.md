@@ -35,14 +35,14 @@ react-native-material-kit < 0.4.0 only supports react-native < 0.40.0
 
 ### iOS
 
-* ####React Native < 0.29 (Using rnpm)
+* #### React Native < 0.29 (Using rnpm)
 
-  `rnpm install react-native-material-kit`
+  `$ rnpm install react-native-material-kit`
 
-* ####React Native >= 0.29
-  `$npm install -S react-native-material-kit`
+* #### React Native >= 0.29
+  `$ npm install -S react-native-material-kit`
 
-  `$react-native link react-native-material-kit`
+  `$ react-native link react-native-material-kit`
 
 
 
@@ -71,14 +71,14 @@ Now run `pod install`. This will create an Xcode workspace containing all necess
 
 ### Android
 
-* ####React Native < 0.29 (Using rnpm)
+* #### React Native < 0.29 (Using rnpm)
 
-  `rnpm install react-native-material-kit`
+  `$ rnpm install react-native-material-kit`
 
-* ####React Native >= 0.29
-  `$npm install -S react-native-material-kit`
+* #### React Native >= 0.29
+  `$ npm install -S react-native-material-kit`
 
-  `$react-native link react-native-material-kit`
+  `$ react-native link react-native-material-kit`
 
 #### Manually
 1. JDK 7+ is required
