@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "react-native-material-kit"
-  s.version      = "0.3.3"
+  s.version      = "0.3.4"
   s.summary      = "Introducing Material Design to apps built with React Native."
   s.requires_arc = true
   s.author       = { 'xinthink' => 'yingxinwu.g@gmail.com' }

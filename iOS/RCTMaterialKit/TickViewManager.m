@@ -6,8 +6,8 @@
 //  Copyright © 2015年 https://github.com/xinthink. All rights reserved.
 //
 
-#import "RCTViewManager.h"
-#import "UIView+React.h"
+#import <RCTViewManager.h>
+#import <UIView+React.h>
 #import "TickView.h"
 
 @interface TickViewManager : RCTViewManager

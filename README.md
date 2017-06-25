@@ -4,12 +4,15 @@
 [![bitHound Score][bithound-badge]][bithound]
 [![Gitter][gitter-badge]][gitter-rnmk]
 
+<a href="https://www.jetbrains.com/" title="Built with JetBrains IDEs">
+  <img src="http://www.xinthink.com/react-native-material-kit/images/logo_JetBrains_1.svg" alt="Built with JetBrains IDEs" width="64">
+</a>
 
 A set of UI components, in the purpose of introducing [Material Design][md] to apps built with [React Native][rn], quickly and painlessly.
 
 [npm-badge]: https://img.shields.io/npm/v/react-native-material-kit.svg
 [npm]: https://www.npmjs.com/package/react-native-material-kit
-[rn-badge]: https://img.shields.io/badge/react--native-v0.35-05A5D1.svg
+[rn-badge]: https://img.shields.io/badge/react--native-v0.39-05A5D1.svg
 [rn]: https://facebook.github.io/react-native
 [md]: http://www.google.com/design/spec/material-design/introduction.html
 [license-badge]: https://img.shields.io/dub/l/vibe-d.svg
@@ -22,6 +25,13 @@ A set of UI components, in the purpose of introducing [Material Design][md] to a
 ## Getting Started
 
 First, `cd` to your RN project directory, and install RNMK through [rnpm](https://github.com/rnpm/rnpm) . If you don't have rnpm, you can install RNMK from npm with the command `npm i -S react-native-material-kit` and link it manually (see below).
+
+
+## NOTICE:
+
+react-native-material-kit >= 0.4.0 only supports react-native >= 0.40.0
+
+react-native-material-kit < 0.4.0 only supports react-native < 0.40.0
 
 ### iOS
 
