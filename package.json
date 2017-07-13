@@ -35,6 +35,7 @@
     "gulp-docco": "0.0.4"
   },
   "dependencies": {
+    "prop-types": "^15.5.10",
     "ramda": "^0.24.1"
   },
   "scripts": {
