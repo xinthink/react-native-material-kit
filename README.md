@@ -497,6 +497,9 @@ setTheme({radioStyle: {
 [radio-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/RadioButton.html#props
 
 
+## Problem
+If you found trouble in android, you can ignore manually steps for android, you don't need to follow that manually steps.
+
 ## About
 This project is inspired by [MaterialKit][], thanks [@nghialv][] for the great work!👍🖖
 
