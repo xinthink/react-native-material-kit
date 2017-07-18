@@ -107,6 +107,10 @@ Now run `pod install`. This will create an Xcode workspace containing all necess
       );
   }
   ```
+  
+#### Manual Installation Issues
+If you experience any trouble manually installing `react-native-material-kit` on Android,
+you should be able to safely skip it.
 
 Finally, you're good to go, feel free to require `react-native-material-kit` in your JS files.
 
@@ -496,9 +500,6 @@ setTheme({radioStyle: {
 [img-radio]: https://cloud.githubusercontent.com/assets/390805/10442805/bdb08bc0-7188-11e5-8565-4ee0049ad590.gif
 [radio-props-doc]: http://www.xinthink.com/react-native-material-kit/docs/lib/mdl/RadioButton.html#props
 
-
-## Problem
-If you found trouble in android, you can ignore manually steps for android, you don't need to follow that manually steps.
 
 ## About
 This project is inspired by [MaterialKit][], thanks [@nghialv][] for the great work!👍🖖
