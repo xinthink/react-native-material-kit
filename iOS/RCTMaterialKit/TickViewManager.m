@@ -6,7 +6,7 @@
 //  Copyright © 2015年 https://github.com/xinthink. All rights reserved.
 //
 
-#import <RCTViewManager.h>
+#import <React/RCTViewManager.h>
 #import <UIView+React.h>
 #import "TickView.h"
 
