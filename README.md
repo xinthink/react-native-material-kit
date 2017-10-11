@@ -107,6 +107,10 @@ Now run `pod install`. This will create an Xcode workspace containing all necess
       );
   }
   ```
+  
+#### Manual Installation Issues
+If you experience any trouble manually installing `react-native-material-kit` on Android,
+you should be able to safely skip it.
 
 Finally, you're good to go, feel free to require `react-native-material-kit` in your JS files.
 
