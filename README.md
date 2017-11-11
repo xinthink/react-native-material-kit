@@ -294,7 +294,7 @@ const SliderWithValue = mdl.Slider.slider()
   .build();
 …
 <SliderWithValue
-  ref=“sliderWithValue”
+  ref="sliderWithValue"
   onChange={(curValue) => this.setState({curValue})}
 />
 ```
@@ -316,7 +316,7 @@ const SliderWithRange = mdl.RangeSlider.slider()
   .build();
 …
 <SliderWithRange
-  ref=“sliderWithRange”
+  ref="sliderWithRange"
   onChange={(curValue) => this.setState({
     min: curValue.min,
     max: curValue.max,
@@ -359,7 +359,7 @@ Customizing textfields through builder:
 
 ```jsx
 const CustomTextfield = mdl.Textfield.textfield()
-  .withPlaceholder(‘Text…’)
+  .withPlaceholder("Text...")
   .withStyle(styles.textfield)
   .withTintColor(MKColor.Lime)
   .withTextInputStyle({color: MKColor.Orange})
