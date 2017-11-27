@@ -40,9 +40,9 @@ react-native-material-kit < 0.4.0 only supports react-native < 0.40.0
   `rnpm install react-native-material-kit`
 
 * ####React Native >= 0.29
-  `$npm install -S react-native-material-kit`
+  `npm install -S react-native-material-kit`
 
-  `$react-native link react-native-material-kit`
+  `react-native link react-native-material-kit`
 
 
 
@@ -76,9 +76,9 @@ Now run `pod install`. This will create an Xcode workspace containing all necess
   `rnpm install react-native-material-kit`
 
 * ####React Native >= 0.29
-  `$npm install -S react-native-material-kit`
+  `npm install -S react-native-material-kit`
 
-  `$react-native link react-native-material-kit`
+  `react-native link react-native-material-kit`
 
 #### Manually
 1. JDK 7+ is required
@@ -294,7 +294,7 @@ const SliderWithValue = mdl.Slider.slider()
   .build();
 …
 <SliderWithValue
-  ref=“sliderWithValue”
+  ref="sliderWithValue"
   onChange={(curValue) => this.setState({curValue})}
 />
 ```
@@ -316,7 +316,7 @@ const SliderWithRange = mdl.RangeSlider.slider()
   .build();
 …
 <SliderWithRange
-  ref=“sliderWithRange”
+  ref="sliderWithRange"
   onChange={(curValue) => this.setState({
     min: curValue.min,
     max: curValue.max,
@@ -359,7 +359,7 @@ Customizing textfields through builder:
 
 ```jsx
 const CustomTextfield = mdl.Textfield.textfield()
-  .withPlaceholder(‘Text…’)
+  .withPlaceholder("Text...")
   .withStyle(styles.textfield)
   .withTintColor(MKColor.Lime)
   .withTextInputStyle({color: MKColor.Orange})
