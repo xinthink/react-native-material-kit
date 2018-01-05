@@ -5,7 +5,7 @@
 [![Gitter][gitter-badge]][gitter-rnmk]
 
 <a href="https://www.jetbrains.com/" title="Built with JetBrains IDEs">
-  <img src="http://www.xinthink.com/react-native-material-kit/images/logo_JetBrains_1.svg" alt="Built with JetBrains IDEs" width="64">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/1/1a/JetBrains_Logo_2016.svg" alt="Built with JetBrains IDEs" width="64">
 </a>
 
 A set of UI components, in the purpose of introducing [Material Design][md] to apps built with [React Native][rn], quickly and painlessly.
@@ -35,11 +35,11 @@ react-native-material-kit < 0.4.0 only supports react-native < 0.40.0
 
 ### iOS
 
-* ####React Native < 0.29 (Using rnpm)
+* #### React Native < 0.29 (Using rnpm)
 
   `rnpm install react-native-material-kit`
 
-* ####React Native >= 0.29
+* #### React Native >= 0.29
   `npm install -S react-native-material-kit`
 
   `react-native link react-native-material-kit`
@@ -71,11 +71,11 @@ Now run `pod install`. This will create an Xcode workspace containing all necess
 
 ### Android
 
-* ####React Native < 0.29 (Using rnpm)
+* #### React Native < 0.29 (Using rnpm)
 
   `rnpm install react-native-material-kit`
 
-* ####React Native >= 0.29
+* #### React Native >= 0.29
   `npm install -S react-native-material-kit`
 
   `react-native link react-native-material-kit`
@@ -389,6 +389,7 @@ the jsx equivalent:
 ### Toggles
 
 [Icon toggle][mdl-icon-toggle] & [Switch][mdl-switch]
+
 [![img-toggles]][mdl-toggles]
 
 [mdl-toggles]: http://www.getmdl.io/components/index.html#toggles-section
