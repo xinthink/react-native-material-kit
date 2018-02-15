@@ -8,7 +8,7 @@
 
 #import <React/RCTViewManager.h>
 #import <React/RCTEventDispatcher.h>
-#import <UIView+React.h>
+#import "UIView+React.h"
 #import "MKTouchable.h"
 
 @interface MKTouchableManager : RCTViewManager <MKTouchableDelegate>
