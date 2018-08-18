@@ -1,7 +1,6 @@
 [![npm][npm-badge]][npm]
 [![react-native][rn-badge]][rn]
 [![MIT][license-badge]][license]
-[![bitHound Score][bithound-badge]][bithound]
 [![Gitter][gitter-badge]][gitter-rnmk]
 
 <a href="https://www.jetbrains.com/" title="Built with JetBrains IDEs">
@@ -17,8 +16,6 @@ A set of UI components, in the purpose of introducing [Material Design][md] to a
 [md]: http://www.google.com/design/spec/material-design/introduction.html
 [license-badge]: https://img.shields.io/dub/l/vibe-d.svg
 [license]: https://raw.githubusercontent.com/xinthink/react-native-material-kit/master/LICENSE.md
-[bithound-badge]: https://www.bithound.io/github/xinthink/react-native-material-kit/badges/score.svg
-[bithound]: https://www.bithound.io/github/xinthink/react-native-material-kit
 [gitter-badge]: https://img.shields.io/gitter/room/xinthink/react-native-material-kit.svg
 [gitter-rnmk]: https://gitter.im/xinthink/react-native-material-kit
 
@@ -107,7 +104,7 @@ Now run `pod install`. This will create an Xcode workspace containing all necess
       );
   }
   ```
-  
+
 #### Manual Installation Issues
 If you experience any trouble manually installing `react-native-material-kit` on Android,
 you should be able to safely skip it.
