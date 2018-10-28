@@ -27,15 +27,17 @@
     "url": "git://github.com/xinthink/react-native-material-kit.git"
   },
   "devDependencies": {
-    "babel-eslint": "^6.0.2",
-    "eslint": "^2.9.0",
-    "eslint-config-airbnb": "^6.2.0",
-    "eslint-plugin-react": "^4.3.0",
+    "babel-eslint": "^9.0.0",
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
     "gulp": "^3.9.0",
     "gulp-docco": "0.0.4"
   },
   "dependencies": {
-    "ramda": "^0.24.1"
+    "ramda": "^0.25.0"
   },
   "peerDependencies": {
     "react": "*",
