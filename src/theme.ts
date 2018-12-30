@@ -2,27 +2,38 @@
 //
 // Created by ywu on 15/7/18.
 //
-import MKColor from './MKColor';
+import MKColor from './MKColor'
 
-const theme = {};
+export type AttrValue = string | number | Theme | AttrReference
+export type NullableAttrValue = AttrValue | null | undefined
+export type Theme = {[name: string]: AttrValue}
+export type Style = object | Array<any>
+export type NullableStyle = object | Array<any> | null | undefined
+
+const theme: Theme = {};
 
 class AttrReference {
-  constructor(attr) {
+  attr: string
+
+  constructor(attr: string) {
     this.attr = attr;
   }
 
-  get value() {
+  get value(): AttrValue {
     return theme[this.attr];
   }
 }
 
 class RGBAttrReference extends AttrReference {
-  constructor(attr, alpha) {
+  alpha: number
+
+  constructor(attr: string, alpha: number) {
     super(attr);
     this.alpha = alpha;
   }
 
-  get value() {
+  get value(): AttrValue {
+    // @ts-ignore: https://github.com/Microsoft/TypeScript/issues/4465
     const v = super.value;
     return this.alpha > 0 ? `rgba(${v}, ${this.alpha})` : `rgb(${v})`;
   }
@@ -141,7 +152,7 @@ Object.assign(theme, {
   },
 });
 
-function isPlainObject(o) {
+function isPlainObject(o: any): boolean {
   return typeof o === 'object' && !Array.isArray(o) && o !== null
     && !(o instanceof String) && !(o instanceof Function);
 }
@@ -149,7 +160,7 @@ function isPlainObject(o) {
 //
 // Wrap style object with custom getter, for resolving the attribute references.
 //
-function wrapAttrRef(style, attr, attrValue) {
+function wrapAttrRef(style: any, attr: string, attrValue: AttrReference) {
   Object.defineProperty(style, attr, {
     enumerable: true,
     get() {
@@ -161,7 +172,7 @@ function wrapAttrRef(style, attr, attrValue) {
 //
 // Wrap all style attributes with custom getter, recursively
 //
-function wrapStyle(style) {
+function wrapStyle(style: any) {
   Object.getOwnPropertyNames(style).forEach((attr) => {
     const v = style[attr];
     if (v instanceof AttrReference) {
@@ -183,7 +194,7 @@ wrapStyle(theme);
 // - {object} `theme` new [theme](#theme)
 // - @see http://www.getmdl.io/customize
 //
-function setTheme(aTheme) {
+export function setTheme(aTheme: Theme) {
   Object.assign(theme, aTheme);
 }
 
@@ -191,17 +202,13 @@ function setTheme(aTheme) {
 // ## <section id='getTheme'>getTheme</section>
 // Retrieve a copy of the current theme
 //
-function getTheme() {
+export function getTheme(): Theme {
   return Object.assign({}, theme);
 }
 
 export default {
-  setTheme,
-  getTheme,
-  theme: {
-    AttrReference,
-    RGBAttrReference,
-    primaryColorRef,
-    accentColorRef,
-  },
-};
+  AttrReference,
+  RGBAttrReference,
+  primaryColorRef,
+  accentColorRef,
+}

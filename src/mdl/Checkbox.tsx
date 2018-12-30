@@ -30,7 +30,7 @@ const DEFAULT_EXTRA_RIPPLE_RADII = 5;
 //
 // ## <section id='Checkbox'>Checkbox</section>
 // The `Checkbox` component.
-class Checkbox extends Component {
+export default class Checkbox extends Component {
   // ## <section id='props'>Props</section>
   static propTypes = {
     // [Ripple Props](Ripple.html#props)...
@@ -205,7 +205,3 @@ class Checkbox extends Component {
     );
   }
 }
-
-
-// ## Public interface
-module.exports = Checkbox;

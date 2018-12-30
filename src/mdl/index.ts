@@ -9,7 +9,8 @@ exports.Progress.Indeterminate = require('./IndeterminateProgress');
 exports.Spinner = require('./Spinner');
 exports.Slider = require('./Slider');
 exports.RangeSlider = require('./RangeSlider');
-exports.Button = require('./Button');
 exports.Ripple = require('./Ripple');
 exports.RadioButton = require('./RadioButton');
-exports.Checkbox = require('./Checkbox');
+
+export { default as Button } from './Button'
+export { default as Checkbox } from './Checkbox'

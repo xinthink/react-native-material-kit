@@ -5,20 +5,39 @@
 //
 // Created by ywu on 15/7/16.
 //
-import { getTheme } from './theme';
+import {
+  getTheme,
 
-function capitalize(str) {
-  return str.substring(0, 1).toUpperCase() + str.substring(1);
-}
+  // types
+  AttrValue,
+  NullableAttrValue,
+  NullableStyle,
+  Style,
+} from './theme';
+import {
+  capitalize,
+  NullableString,
+} from './utils'
 
 
 //
 // ## <section id='Builder'>Builder</section>
 // Base class of MK Component builder
 //
-class Builder {
+export class Builder {
+  [index: string]: any // index signature
+
+  // Background color
+  backgroundColor: NullableAttrValue = undefined
+
+  // Accent color
+  accent: NullableAttrValue = undefined
+
+  // Style
+  style: NullableStyle = undefined
+
   // Define builder method `withXxx` for prop `xxx`
-  static defineProp(name) {
+  static defineProp(name: string) {
     const methodName = `with${capitalize(name)}`;
     if (this.prototype[methodName]) {
       return;
@@ -26,7 +45,7 @@ class Builder {
 
     Object.defineProperty(this.prototype, methodName, {
       enumerable: false,
-      value(v) {
+      value(v: any) {
         this[name] = v;
         return this;
       },
@@ -36,7 +55,7 @@ class Builder {
   // Convenient util to define a builder method for each prop of the component
   // - {`object`} `propTypes` propTypes of the given component
   // - {`():boolean`} `filter` predictor to determine which prop would has a builder method
-  static defineProps(propTypes, filter = () => true) {
+  static defineProps(propTypes: object, filter = (p: string) => true) {
     const self = this;
     Object.getOwnPropertyNames(propTypes).forEach((prop) => {
       if (!self.hasOwnProperty(prop) && filter(prop)) {
@@ -45,21 +64,20 @@ class Builder {
     });
   }
 
-  getTheme() {
-    return getTheme();
-  }
+  getTheme = getTheme;
 
-  withAccent(v) {
+  // Accent color
+  withAccent(v: string) {
     this.accent = v;
     return this;
   }
 
-  withBackgroundColor(color) {
+  withBackgroundColor(color: string) {
     this.backgroundColor = color;
     return this;
   }
 
-  withStyle(v) {
+  withStyle(v: Style) {
     this.style = this.style ? [this.style, v] : v;
     return this;
   }
@@ -72,8 +90,12 @@ class Builder {
     return Object.assign({}, this);
   }
 
-  getThemeColor() {
+  getThemeColor(): AttrValue {
     return this.accent ? getTheme().accentColor : getTheme().primaryColor;
+  }
+
+  choseBackgroundColor() {
+    this.backgroundColor = this.backgroundColor || this.getThemeColor();
   }
 
   mergeStyle() {
@@ -82,12 +104,8 @@ class Builder {
     });
   }
 
-  choseBackgroundColor() {
-    this.backgroundColor = this.backgroundColor || this.getThemeColor();
-  }
-
-  mergeStyleWith(base) {
-    this.style = [].concat(base, this.style);
+  mergeStyleWith(base: Style) {
+    this.style = ([] as NullableStyle[]).concat(base, this.style);
   }
 }
 
@@ -96,19 +114,22 @@ class Builder {
 // ## <section id='TextViewBuilder'>TextViewBuilder</section>
 // Text-based component builder
 //
-class TextViewBuilder extends Builder {
-  withText(text) {
+export class TextViewBuilder extends Builder {
+  text: NullableString = undefined
+  textStyle: NullableStyle = undefined
+
+  withText(text: string) {
     this.text = text;
     return this;
   }
 
-  withTextStyle(style) {
+  withTextStyle(style: Style) {
     this.textStyle = style;
     return this;
   }
 
-  mergeTextStyleWith(base) {
-    this.textStyle = [].concat(base, this.textStyle);
+  mergeTextStyleWith(base: Style) {
+    this.textStyle = ([] as Array<NullableStyle>).concat(base, this.textStyle);
   }
 
   mergeStyle() {
@@ -123,8 +144,3 @@ class TextViewBuilder extends Builder {
     });
   }
 }
-
-
-// ## Public interface
-exports.Builder = Builder;
-exports.TextViewBuilder = TextViewBuilder;

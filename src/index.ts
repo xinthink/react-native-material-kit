@@ -1,12 +1,10 @@
 /**
  * Created by ywu on 15/6/1.
  */
-import * as mdl from './mdl';
-import * as MKColor from './MKColor';
+export {default as mdl} from './mdl'
+export {default as MKColor} from './MKColor'
 
-export { mdl, MKColor };
-
-export { default } from './theme';
+export * from './theme'
 
 // Shortcuts, and also compatibility for legacy native components like MKButton
 export {
@@ -22,4 +20,4 @@ export {
   Spinner as MKSpinner,
   RadioButton as MKRadioButton,
   Checkbox as MKCheckbox,
-} from './mdl';
+} from './mdl'

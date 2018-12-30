@@ -10,30 +10,29 @@ import { Text } from 'react-native';
 // ## Data types
 
 // <section id="dimen">Dimension</section>
-const dimen = PropTypes.shape({
-  width: PropTypes.number,
+export const dimen = PropTypes.shape({
   height: PropTypes.number,
+  width: PropTypes.number,
 });
 
 // <section id="font">Font</section>
-const font = PropTypes.shape({
+export const font = PropTypes.shape({
   color: PropTypes.string,
-  fontSize: PropTypes.number,
-  fontWeight: Text.propTypes.style.fontWeight,
-  fontStyle: Text.propTypes.style.fontStyle,
   fontFamily: PropTypes.string,
+  fontSize: PropTypes.number,
+  // @ts-ignore
+  fontStyle: Text.propTypes.style.fontStyle,
+  // @ts-ignore
+  fontWeight: Text.propTypes.style.fontWeight,
 });
 
 // <section id="rippleLocation">Ripple hot-spot location</section>
-const rippleLocation = PropTypes.oneOf([
+export const rippleLocation = PropTypes.oneOf([
   'tapLocation',
   'center',
   // 'left',
   // 'right',
 ]);
 
-
-// ## Public interface
-exports.dimen = dimen;
-exports.font = font;
-exports.rippleLocation = rippleLocation;
+// <section id="RippleLocation">Ripple hot-spot location</section>
+export type RippleLocation = 'tapLocation' | 'center'

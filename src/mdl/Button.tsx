@@ -9,59 +9,87 @@
 // Created by ywu on 15/7/2.
 //
 
-import React, {
-  Component,
-} from 'react';
-import PropTypes from 'prop-types';
+import React, {Component} from 'react'
 
 import {
-  TouchableWithoutFeedback,
+  LayoutChangeEvent,
   Text,
-} from 'react-native';
+  TextStyle,
+  TouchableWithoutFeedback,
+  TouchableWithoutFeedbackProps,
+} from 'react-native'
 
-import MKColor from '../MKColor';
-import Ripple from './Ripple';
-import * as utils from '../utils';
-import { getTheme } from '../theme';
+import {TextViewBuilder} from '../builder'
+import MKColor from '../MKColor'
+import {getTheme, Theme} from '../theme'
+import * as utils from '../utils'
+import Ripple, {RippleProps} from './Ripple'
+
+// ## <section id='props'>ButtonProps</section>
+export interface ButtonProps extends TouchableWithoutFeedbackProps, RippleProps {
+  // Whether this's a FAB
+  fab: boolean
+
+  // Whether the button is enabled
+  enabled?: boolean,
+}
+
+interface ButtonState {
+  width: number,
+  height: number,
+}
+
 
 //
 // ## <section id='Button'>Button</section>
 // The `Button` component. With configurable shadow, ripple effect, and FAB style.
 //
-class Button extends Component {
-  constructor(props) {
+export default class Button extends Component<ButtonProps, ButtonState> {
+
+  // ## <section id='defaults'>Defaults</section>
+  static defaultProps: ButtonProps = {
+    // [Ripple defaults](Ripple.html#defaults)...
+    ...Ripple.defaultProps,
+    enabled: true,
+    fab: false,
+    pointerEvents: 'box-only',
+  };
+
+  theme: Theme;
+
+  constructor(props: ButtonProps) {
     super(props);
     this.theme = getTheme();
     this.state = {
-      width: 0,
       height: 0,
+      width: 0,
     };
   }
 
-  _onLayout({ nativeEvent: { layout: { width, height } } }) {
+  _onLayout = ({nativeEvent: {layout: {width, height}}}: LayoutChangeEvent) => {
     if (width !== this.state.width || height !== this.state.height) {
       this.setState({
-        width,
         height,
+        width,
       });
     }
-  }
+  };
 
   _renderChildren() {
     return this.props.children;
   }
 
   render() {
-    const touchableProps = {};
+    const touchableProps: TouchableWithoutFeedbackProps = {};
     if (this.props.enabled) {
       Object.assign(touchableProps, utils.extractTouchableProps(this));
     }
 
     // fix #57 applying `onLayout` to <Ripple>, <TouchableXXX> clones `onLayout` to it's child
-    touchableProps.onLayout = this._onLayout.bind(this);
+    touchableProps.onLayout = this._onLayout;
 
-    const fabStyle = {};
-    const maskProps = {};
+    const fabStyle: TextStyle = {};
+    const maskProps: RippleProps = {};
 
     if (this.props.fab) {
       maskProps.maskBorderRadiusInPercent = 50;
@@ -96,34 +124,10 @@ class Button extends Component {
   }
 }
 
-// ## <section id='props'>Props</section>
-Button.propTypes = {
-  // [Ripple Props](Ripple.html#props)...
-  ...Ripple.propTypes,
-
-  // [RN.TouchableWithoutFeedback Props](https://facebook.github.io/react-native/docs/touchablewithoutfeedback.html#props)...
-  ...TouchableWithoutFeedback.propTypes,
-
-  // Whether this's a FAB
-  fab: PropTypes.bool,
-
-  // Whether the button is enabled
-  enabled: PropTypes.bool,
-};
-
-// ## <section id='defaults'>Defaults</section>
-Button.defaultProps = {
-  // [Ripple defaults](Ripple.html#defaults)...
-  ...Ripple.defaultProps,
-  pointerEvents: 'box-only',
-  enabled: true,
-};
-
 
 // --------------------------
 // Builder
 //
-const { TextViewBuilder } = require('../builder');
 
 //
 // ## Button builder
@@ -282,8 +286,6 @@ function plainFab() {
 
 
 // ## Public interface
-module.exports = Button;
-
 Button.Builder = ButtonBuilder;
 Button.button = plainRaisedButton;
 Button.coloredButton = coloredRaisedButton;
