@@ -101,7 +101,7 @@ export default class Ripple extends Component<RippleProps, RippleState> {
     shadowAniEnabled: true,
   };
 
-  private ref = createRef<Component>();
+  private containerRef = createRef<Component>();
   private maskRef = createRef<Component>();
   private rippleRef = createRef<Component>();
   private _animatedAlpha = new Animated.Value(0);
@@ -126,8 +126,8 @@ export default class Ripple extends Component<RippleProps, RippleState> {
   }
 
   measure(cb: MeasureOnSuccessCallback) {
-    return this.ref.current &&
-      UIManager.measure(findNodeHandle(this.ref.current), cb);
+    return this.containerRef.current &&
+      UIManager.measure(findNodeHandle(this.containerRef.current), cb);
   }
 
   // Start the ripple effect
@@ -192,7 +192,7 @@ export default class Ripple extends Component<RippleProps, RippleState> {
 
     return (
       <MKTouchable
-        ref={this.ref}
+        ref={this.containerRef}
         {...this.props}
         style={[this.props.style, shadowStyle]}
         onTouch={this._onTouchEvent}

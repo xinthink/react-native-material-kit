@@ -33,13 +33,13 @@ function isType(type: string, obj: any): boolean {
   return toString.call(obj) === `[object ${name}]`;
 }
 
-export const isArgument = partial(isType, ['Arguments'])
-export const isFunction = partial(isType, ['Function'])
-export const isString = partial(isType, ['String'])
-export const isNumber = partial(isType, ['Number'])
-export const isDate = partial(isType, ['Date'])
-export const isRegExp = partial(isType, ['RegExp'])
-export const isError = partial(isType, ['Error'])
+export const isArgument = partial(isType, ['Arguments']);
+export const isFunction = partial(isType, ['Function']);
+export const isString = partial(isType, ['String']);
+export const isNumber = partial(isType, ['Number']);
+export const isDate = partial(isType, ['Date']);
+export const isRegExp = partial(isType, ['RegExp']);
+export const isError = partial(isType, ['Error']);
 
 // Remove keys with null value from the given object
 const compact = reject(isNil);
@@ -58,7 +58,7 @@ function toDips(px: number): number {
   return px / PixelRatio.get();
 }
 
-// Convert native coorindate value into unit used in JSX
+// Convert native coordinate value into unit used in JSX
 function convertCoordinate(value: number): number {
   return Platform.OS === 'android' ? toDips(value) : value;
 }

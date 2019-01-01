@@ -73,6 +73,6 @@ const MkColor: Palette = {
   palette_green_500: 'rgb(76,175,80)',
   palette_red_500: 'rgb(244,67,54)',
   palette_yellow_600: 'rgb(253,216,53)',
-}
+};
 
 export default MkColor

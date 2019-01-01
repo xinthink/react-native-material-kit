@@ -6,17 +6,14 @@
 // Created by ywu on 15/7/16.
 //
 import {
-  getTheme,
-
-  // types
   AttrValue,
+  getTheme,
   NullableAttrValue,
   NullableStyle,
   Style,
 } from './theme';
 import {
   capitalize,
-  NullableString,
 } from './utils'
 
 
@@ -106,41 +103,5 @@ export class Builder {
 
   mergeStyleWith(base: Style) {
     this.style = ([] as NullableStyle[]).concat(base, this.style);
-  }
-}
-
-
-//
-// ## <section id='TextViewBuilder'>TextViewBuilder</section>
-// Text-based component builder
-//
-export class TextViewBuilder extends Builder {
-  text: NullableString = undefined
-  textStyle: NullableStyle = undefined
-
-  withText(text: string) {
-    this.text = text;
-    return this;
-  }
-
-  withTextStyle(style: Style) {
-    this.textStyle = style;
-    return this;
-  }
-
-  mergeTextStyleWith(base: Style) {
-    this.textStyle = ([] as Array<NullableStyle>).concat(base, this.textStyle);
-  }
-
-  mergeStyle() {
-    super.mergeStyle();
-    this.mergeStyleWith({
-      padding: 8,
-      justifyContent: 'center',
-      alignItems: 'center',
-    });
-    this.mergeTextStyleWith({
-      fontSize: getTheme().fontSize,
-    });
   }
 }

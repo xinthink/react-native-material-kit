@@ -6,18 +6,30 @@ export {default as MKColor} from './MKColor'
 
 export * from './theme'
 
-// Shortcuts, and also compatibility for legacy native components like MKButton
+// Shortcuts
 export {
-  Button as MKButton,
-  Textfield as MKTextField,
-  Switch as MKSwitch,
-  IconToggle as MKIconToggle,
+  Button,
+  ButtonProps,
+  ButtonStyles,
+  ColoredRaisedButton,
+  RaisedButton,
+  AccentRaisedButton,
+  FlatButton,
+  Fab,
+  ColoredFab,
+  AccentFab,
 
-  Ripple as MKRipple,
-  Progress as MKProgress,
-  Slider as MKSlider,
-  RangeSlider as MKRangeSlider,
-  Spinner as MKSpinner,
-  RadioButton as MKRadioButton,
-  Checkbox as MKCheckbox,
+  // Textfield as MKTextField,
+  // Switch as MKSwitch,
+  // IconToggle as MKIconToggle,
+
+  Ripple,
+  RippleProps,
+
+  // Progress as MKProgress,
+  // Slider as MKSlider,
+  // RangeSlider as MKRangeSlider,
+  // Spinner as MKSpinner,
+  // RadioButton as MKRadioButton,
+  // Checkbox as MKCheckbox,
 } from './mdl'

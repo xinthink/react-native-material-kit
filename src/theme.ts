@@ -1,3 +1,4 @@
+/* tslint:disable:max-classes-per-file */
 // Theme definition
 //
 // Created by ywu on 15/7/18.
@@ -7,13 +8,13 @@ import MKColor from './MKColor'
 export type AttrValue = string | number | Theme | AttrReference
 export type NullableAttrValue = AttrValue | null | undefined
 export type Theme = {[name: string]: AttrValue}
-export type Style = object | Array<any>
-export type NullableStyle = object | Array<any> | null | undefined
+export type Style = object | any[]
+export type NullableStyle = object | any[] | null | undefined
 
 const theme: Theme = {};
 
 class AttrReference {
-  attr: string
+  attr: string;
 
   constructor(attr: string) {
     this.attr = attr;
@@ -25,7 +26,7 @@ class AttrReference {
 }
 
 class RGBAttrReference extends AttrReference {
-  alpha: number
+  alpha: number;
 
   constructor(attr: string, alpha: number) {
     super(attr);
@@ -48,15 +49,17 @@ const accentColorRef = new AttrReference('accentColor');
 Object.assign(theme, {
   primaryColor: MKColor.Indigo,
   primaryColorRGB: MKColor.RGBIndigo,
+
   accentColor: MKColor.Pink,
   accentColorRGB: MKColor.RGBPink,
-  bgPlain: 'rgba(158, 158, 158, 0.2)',
+
   bgDisabled: 'rgba(0, 0, 0, 0.12)',
+  bgPlain: 'rgba(158, 158, 158, 0.2)',
   fontColor: 'rgb(117, 117, 117)',
   fontSize: 14,
   rippleColor: 'rgba(255, 255, 255, 0.125)',
+
   textfieldStyle: {
-    tintColor: 'rgba(0, 0, 0, 0.12)',
     highlightColor: new RGBAttrReference('primaryColorRGB', 0.9),
     textInputStyle: {
       color: new AttrReference('fontColor'),
@@ -64,12 +67,15 @@ Object.assign(theme, {
       paddingLeft: 0,
       paddingRight: 0,
     },
+    tintColor: 'rgba(0, 0, 0, 0.12)',
   },
+
   progressStyle: {
     backgroundColor: new RGBAttrReference('primaryColorRGB', 0.3),
-    progressColor: primaryColorRef,
     bufferColor: new RGBAttrReference('primaryColorRGB', 0.3),
+    progressColor: primaryColorRef,
   },
+
   spinnerStyle: {
     strokeColor: [
       MKColor.palette_blue_400,
@@ -78,77 +84,90 @@ Object.assign(theme, {
       MKColor.palette_green_500,
     ],
   },
+
   sliderStyle: {
     lowerTrackColor: primaryColorRef,
     upperTrackColor: '#cccccc',
   },
+
   iconToggleStyle: {
-    onColor: new RGBAttrReference('primaryColorRGB', 0.4),
     offColor: 'rgba(0, 0, 0, 0.25)',
+    onColor: new RGBAttrReference('primaryColorRGB', 0.4),
     rippleColor: new AttrReference('bgPlain'),
   },
+
   switchStyle: {
-    onColor: new RGBAttrReference('primaryColorRGB', 0.4),
     offColor: 'rgba(0, 0, 0, 0.25)',
-    thumbOnColor: primaryColorRef,
+    onColor: new RGBAttrReference('primaryColorRGB', 0.4),
+    rippleColor: new RGBAttrReference('primaryColorRGB', 0.2),
     thumbOffColor: MKColor.Silver,
-    rippleColor: new RGBAttrReference('primaryColorRGB', 0.2),
+    thumbOnColor: primaryColorRef,
   },
+
   radioStyle: {
-    borderOnColor: primaryColorRef,
     borderOffColor: primaryColorRef,
-    fillColor: primaryColorRef,
-    rippleColor: new RGBAttrReference('primaryColorRGB', 0.2),
-  },
-  checkboxStyle: {
     borderOnColor: primaryColorRef,
-    borderOffColor: 'rgba(0, 0, 0, 0.56)',
     fillColor: primaryColorRef,
     rippleColor: new RGBAttrReference('primaryColorRGB', 0.2),
-    inset: 0,
   },
+
+  checkboxStyle: {
+    borderOffColor: 'rgba(0, 0, 0, 0.56)',
+    borderOnColor: primaryColorRef,
+    fillColor: primaryColorRef,
+    inset: 0,
+    rippleColor: new RGBAttrReference('primaryColorRGB', 0.2),
+  },
+
   cardStyle: {
     backgroundColor: '#ffffff',
-    borderRadius: 2,
     borderColor: '#ffffff',
+    borderRadius: 2,
     borderWidth: 1,
     shadowColor: 'rgba(0, 0, 0, 0.12)',
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
     shadowOffset: {
       height: 1,
       width: 2,
     },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
   },
+
   cardImageStyle: {
     height: 170,
     resizeMode: 'cover',
   },
+
   cardTitleStyle: {
     position: 'absolute',
-    top: 120,
+
     left: 26,
+    top: 120,
+
     backgroundColor: 'transparent',
-    padding: 16,
-    fontSize: 24,
     color: '#000000',
+    fontSize: 24,
     fontWeight: 'bold',
+    padding: 16,
   },
+
   cardContentStyle: {
-    padding: 15,
     color: 'rgba(0, 0, 0, 0.54)',
+    padding: 15,
   },
+
   cardActionStyle: {
     borderStyle: 'solid',
     borderTopColor: 'rgba(0, 0, 0, 0.1)',
     borderTopWidth: 1,
     padding: 15,
   },
+
   cardMenuStyle: {
-    position: 'absolute',
-    top: 16,
-    right: 16,
     backgroundColor: 'transparent',
+    position: 'absolute',
+    right: 16,
+    top: 16,
   },
 });
 
@@ -209,6 +228,6 @@ export function getTheme(): Theme {
 export default {
   AttrReference,
   RGBAttrReference,
-  primaryColorRef,
   accentColorRef,
+  primaryColorRef,
 }

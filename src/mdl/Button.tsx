@@ -9,34 +9,32 @@
 // Created by ywu on 15/7/2.
 //
 
-import React, {Component} from 'react'
+import React, {Component, SFC} from 'react'
 
 import {
   LayoutChangeEvent,
-  Text,
   TextStyle,
   TouchableWithoutFeedback,
   TouchableWithoutFeedbackProps,
 } from 'react-native'
 
-import {TextViewBuilder} from '../builder'
 import MKColor from '../MKColor'
-import {getTheme, Theme} from '../theme'
+import {AttrValue, getTheme, Theme} from '../theme'
 import * as utils from '../utils'
 import Ripple, {RippleProps} from './Ripple'
 
 // ## <section id='props'>ButtonProps</section>
 export interface ButtonProps extends TouchableWithoutFeedbackProps, RippleProps {
   // Whether this's a FAB
-  fab: boolean
+  fab?: boolean
 
   // Whether the button is enabled
-  enabled?: boolean,
+  enabled?: boolean
 }
 
 interface ButtonState {
-  width: number,
-  height: number,
+  width: number
+  height: number
 }
 
 
@@ -75,10 +73,6 @@ export default class Button extends Component<ButtonProps, ButtonState> {
     }
   };
 
-  _renderChildren() {
-    return this.props.children;
-  }
-
   render() {
     const touchableProps: TouchableWithoutFeedbackProps = {};
     if (this.props.enabled) {
@@ -109,190 +103,181 @@ export default class Button extends Component<ButtonProps, ButtonState> {
     return (
       <TouchableWithoutFeedback {...touchableProps}>
         <Ripple
-          ref="container"
           {...this.props}
           {...maskProps}
           style={[
             this.props.style,
             fabStyle,
           ]}
-        >
-          {this._renderChildren()}
-        </Ripple>
+        />
       </TouchableWithoutFeedback>
     );
   }
 }
 
-
 // --------------------------
-// Builder
-//
+// Pre-defined button variances.
+export const RaisedButton: SFC<ButtonProps> = props =>
+  customizedButton(raisedButton(), props);
 
-//
-// ## Button builder
-// - @see [TextViewBuilder](../builder.html#TextViewBuilder)
-//
-class ButtonBuilder extends TextViewBuilder {
-  mergeStyle() {
-    this.choseBackgroundColor();
-    if (this.fab) {
-      this.styleFab();
-    }
-    super.mergeStyle();
-  }
+export const ColoredRaisedButton: SFC<ButtonProps> = props =>
+  customizedButton(coloredRaisedButton(), props);
 
-  // merge default FAB style with custom setting
-  styleFab() {
-    this.mergeStyleWith({
-      width: 48,
-      height: 48,
-      borderRadius: 24,
-    });
-  }
+export const AccentRaisedButton: SFC<ButtonProps> = props =>
+  customizedButton(accentRaisedButton(), props);
 
-  build() {
-    const theBuilder = this;
-    const props = this.toProps();
+export const FlatButton: SFC<ButtonProps> = props =>
+  customizedButton(flatButton(), props);
 
-    const BuiltButton = class extends Button {
-      _renderChildren() {
-        // use a text or a custom content
-        return theBuilder.text ? (
-          <Text style={theBuilder.textStyle || {}}>
-            {theBuilder.text}
-          </Text>
-        ) : this.props.children;
-      }
-    };
-    BuiltButton.defaultProps = Object.assign({}, Button.defaultProps, props);
-    return BuiltButton;
-  }
+export const Fab: SFC<ButtonProps> = props =>
+  customizedButton(fab(), props);
+
+export const ColoredFab: SFC<ButtonProps> = props =>
+  customizedButton(coloredFab(), props);
+
+export const AccentFab: SFC<ButtonProps> = props =>
+  customizedButton(accentFab(), props);
+
+// Factory method to create a button variance
+function customizedButton(
+  {style: baseStyle, ...baseProps}: ButtonProps,
+  {style: customStyle, ...customProps}: ButtonProps
+): JSX.Element {
+  return <Button
+    {...baseProps}
+    {...customProps}
+    style={[baseStyle, customStyle]}
+  />;
 }
 
-// define builder method for each prop
-ButtonBuilder.defineProps(Button.propTypes);
+// (Most of them are defined as functions, in order to lazy-resolve the theme)
+// default button props
+const button: ButtonProps = {
+  style: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 8,
+  },
+};
 
+// Text style for buttons, default color is `black`
+function buttonText(theme = getTheme(), color: AttrValue = 'black'): TextStyle {
+  return {
+    // @ts-ignore AttrValue will be resolved to string
+    color,
+    // @ts-ignore
+    fontSize: theme.fontSize,
+    fontWeight: 'bold',
+  };
+}
 
-// ----------
-// ## <section id="builders">Built-in builders</section>
-//
+// Text style for colored buttons
+function coloredButtonText(theme = getTheme()): TextStyle {
+  return buttonText(theme, 'white');
+}
 
-// Colored raised button
-// FIXME shadow not work on Android
-// @see https://facebook.github.io/react-native/docs/known-issues.html#no-support-for-shadows-on-android
-function coloredRaisedButton() {
-  return new ButtonBuilder()
-    .withStyle({
+// Text style using primary color
+function buttonTextPrimary(theme = getTheme()): TextStyle {
+  return buttonText(theme, theme.primaryColor);
+}
+
+// Text style using accent color
+function buttonTextAccent(theme = getTheme()): TextStyle {
+  return buttonText(theme, theme.accentColor);
+}
+
+// Props for default raised button
+function raisedButton(theme = getTheme()): ButtonProps {
+  return {
+    ...coloredRaisedButton(theme, MKColor.Silver),
+    // @ts-ignore
+    maskColor: theme.bgPlain,
+    // @ts-ignore
+    rippleColor: theme.bgPlain,
+  };
+}
+
+// Props for colored raised button
+function coloredRaisedButton(theme = getTheme(),
+                             backgroundColor: AttrValue = theme.primaryColor): ButtonProps {
+  const {style, ...props} = button;
+  return {
+    ...props,
+    // @ts-ignore
+    style: [style, {
+      backgroundColor,
       borderRadius: 2,
-      shadowRadius: 1,
-      shadowOffset: { width: 0, height: 0.5 },
+      elevation: 4,
+      shadowColor: 'black',
+      shadowOffset: {width: 0, height: 0.5},
       shadowOpacity: 0.7,
-      shadowColor: 'black',
-      elevation: 4,
-    })
-    .withTextStyle({
-      color: 'white',
-      fontWeight: 'bold',
-    });
-}
-
-
-// Accent colored raised button
-function accentColoredRaisedButton() {
-  return coloredRaisedButton().withAccent(true);
-}
-
-// Plain raised button
-function plainRaisedButton() {
-  // FIXME doesn't support translucent bg, has shadow problems
-  return coloredRaisedButton()
-    // .withBackgroundColor(getTheme().bgPlain)
-    .withBackgroundColor(MKColor.Silver)
-    .withMaskColor(getTheme().bgPlain)
-    .withRippleColor(getTheme().bgPlain)
-    // .withStyle({
-    //   shadowOffset: {width: 0.3, height: 0},
-    // })
-    .withTextStyle({
-      color: 'black',
-      fontWeight: 'bold',
-    });
-}
-
-// Plain flat button
-function flatButton() {
-  return new ButtonBuilder()
-    .withBackgroundColor(MKColor.Transparent)
-    .withMaskColor(getTheme().bgPlain)
-    .withRippleColor(getTheme().bgPlain)
-    .withShadowAniEnabled(false)
-    .withStyle({
-      borderRadius: 2,
-    })
-    .withTextStyle({
-      color: 'black',
-      fontWeight: 'bold',
-    });
-}
-
-// Colored flat button
-function coloredFlatButton() {
-  return flatButton()
-    .withRippleColor('rgba(255,255,255,0.2)')
-    .withTextStyle({
-      color: getTheme().primaryColor,
-      fontWeight: 'bold',
-    });
-}
-
-// Accent colored flat button
-function accentColoredFlatButton() {
-  return flatButton()
-    .withRippleColor('rgba(255,255,255,0.2)')
-    .withTextStyle({
-      color: getTheme().accentColor,
-      fontWeight: 'bold',
-    });
-}
-
-// Colored FAB
-function coloredFab() {
-  return new ButtonBuilder()
-    .withStyle({
       shadowRadius: 1,
-      shadowOffset: { width: 0, height: 0.5 },
-      shadowOpacity: 0.4,
-      shadowColor: 'black',
+    }],
+  };
+}
+
+function accentRaisedButton(theme = getTheme()): ButtonProps {
+  return coloredRaisedButton(theme, theme.accentColor);
+}
+
+function flatButton(theme = getTheme(),
+                    rippleColor: AttrValue = theme.bgPlain): ButtonProps {
+  const {style, ...props} = button;
+  return {
+    ...props,
+    // @ts-ignore
+    maskColor: rippleColor,
+    // @ts-ignore
+    rippleColor,
+    shadowAniEnabled: false,
+    // @ts-ignore
+    style: [style, {
+      backgroundColor: MKColor.Transparent,
+      borderRadius: 2,
+    }],
+  };
+}
+
+function coloredFab(theme = getTheme(),
+                    backgroundColor: AttrValue = theme.primaryColor): ButtonProps {
+  const {style, ...props} = button;
+  return {
+    ...props,
+    rippleLocation: 'center',
+    // @ts-ignore
+    style: [style, {
+      backgroundColor,
       elevation: 4,
-    })
-    .withFab(true)
-    .withRippleLocation('center');
+      shadowColor: 'black',
+      shadowOffset: {width: 0, height: 0.5},
+      shadowOpacity: 0.4,
+      shadowRadius: 1,
+
+      borderRadius: 24,
+      height: 48,
+      width: 48,
+    }],
+  };
 }
 
-// Accent colored FAB
-function accentColoredFab() {
-  return coloredFab().withAccent(true);
+function accentFab(theme = getTheme()): ButtonProps {
+  return coloredFab(theme, theme.accentColor);
 }
 
-// Plain FAB
-function plainFab() {
-  // FIXME doesn't support translucent bg, has shadow problems
-  return coloredFab()
-    .withMaskColor(getTheme().bgPlain)
-    .withRippleColor(getTheme().bgPlain)
-    .withBackgroundColor(MKColor.Silver);
+function fab(theme = getTheme()): ButtonProps {
+  return {
+    ...coloredFab(theme, MKColor.Silver),
+    // @ts-ignore
+    maskColor: theme.bgPlain,
+    // @ts-ignore
+    rippleColor: theme.bgPlain,
+  };
 }
 
-
-// ## Public interface
-Button.Builder = ButtonBuilder;
-Button.button = plainRaisedButton;
-Button.coloredButton = coloredRaisedButton;
-Button.accentColoredButton = accentColoredRaisedButton;
-Button.flatButton = flatButton;
-Button.coloredFlatButton = coloredFlatButton;
-Button.accentColoredFlatButton = accentColoredFlatButton;
-Button.plainFab = plainFab;
-Button.coloredFab = coloredFab;
-Button.accentColoredFab = accentColoredFab;
+// Pre-defined Button props/styles for common cases
+export const ButtonStyles = {
+  buttonText,
+  buttonTextAccent,
+  buttonTextPrimary,
+  coloredButtonText,
+};
