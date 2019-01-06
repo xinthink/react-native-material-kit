@@ -26,6 +26,7 @@ interface Palette {
   Transparent: string
 
   // RGB values
+  RGBAmber: string
   RGBIndigo: string
   RGBPink: string
   RGBPurple: string
@@ -63,6 +64,7 @@ const MkColor: Palette = {
   Transparent: 'transparent',
 
   // RGB values
+  RGBAmber: '255,193,7',
   RGBIndigo: '63,81,181',
   RGBPink: '255,64,129',
   RGBPurple: '156,39,176',

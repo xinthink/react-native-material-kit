@@ -7,7 +7,7 @@ import MKColor from './MKColor'
 
 export type AttrValue = string | number | Theme | AttrReference
 export type NullableAttrValue = AttrValue | null | undefined
-export type Theme = {[name: string]: AttrValue}
+export interface Theme {[name: string]: AttrValue}
 export type Style = object | any[]
 export type NullableStyle = object | any[] | null | undefined
 
@@ -214,7 +214,7 @@ wrapStyle(theme);
 // - @see http://www.getmdl.io/customize
 //
 export function setTheme(aTheme: Theme) {
-  Object.assign(theme, aTheme);
+  Object.assign(theme, wrapStyle(aTheme));
 }
 
 //

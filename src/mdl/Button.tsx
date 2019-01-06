@@ -163,10 +163,8 @@ const button: ButtonProps = {
 // Text style for buttons, default color is `black`
 function buttonText(theme = getTheme(), color: AttrValue = 'black'): TextStyle {
   return {
-    // @ts-ignore AttrValue will be resolved to string
-    color,
-    // @ts-ignore
-    fontSize: theme.fontSize,
+    color: color as string, // AttrValue resolved to string or number when retrieved from a Theme
+    fontSize: theme.fontSize as number,
     fontWeight: 'bold',
   };
 }
@@ -190,10 +188,8 @@ function buttonTextAccent(theme = getTheme()): TextStyle {
 function raisedButton(theme = getTheme()): ButtonProps {
   return {
     ...coloredRaisedButton(theme, MKColor.Silver),
-    // @ts-ignore
-    maskColor: theme.bgPlain,
-    // @ts-ignore
-    rippleColor: theme.bgPlain,
+    maskColor: theme.bgPlain as string,
+    rippleColor: theme.bgPlain as string,
   };
 }
 
@@ -203,9 +199,8 @@ function coloredRaisedButton(theme = getTheme(),
   const {style, ...props} = button;
   return {
     ...props,
-    // @ts-ignore
     style: [style, {
-      backgroundColor,
+      backgroundColor: backgroundColor as string,
       borderRadius: 2,
       elevation: 4,
       shadowColor: 'black',
@@ -225,12 +220,9 @@ function flatButton(theme = getTheme(),
   const {style, ...props} = button;
   return {
     ...props,
-    // @ts-ignore
-    maskColor: rippleColor,
-    // @ts-ignore
-    rippleColor,
+    maskColor: rippleColor as string,
+    rippleColor: rippleColor as string,
     shadowAniEnabled: false,
-    // @ts-ignore
     style: [style, {
       backgroundColor: MKColor.Transparent,
       borderRadius: 2,
@@ -244,9 +236,8 @@ function coloredFab(theme = getTheme(),
   return {
     ...props,
     rippleLocation: 'center',
-    // @ts-ignore
     style: [style, {
-      backgroundColor,
+      backgroundColor: backgroundColor as string,
       elevation: 4,
       shadowColor: 'black',
       shadowOffset: {width: 0, height: 0.5},
@@ -267,10 +258,8 @@ function accentFab(theme = getTheme()): ButtonProps {
 function fab(theme = getTheme()): ButtonProps {
   return {
     ...coloredFab(theme, MKColor.Silver),
-    // @ts-ignore
-    maskColor: theme.bgPlain,
-    // @ts-ignore
-    rippleColor: theme.bgPlain,
+    maskColor: theme.bgPlain as string,
+    rippleColor: theme.bgPlain as string,
   };
 }
 
