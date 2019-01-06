@@ -19,6 +19,8 @@ export {
   ColoredFab,
   AccentFab,
 
+  Checkbox,
+
   // Textfield as MKTextField,
   // Switch as MKSwitch,
   // IconToggle as MKIconToggle,

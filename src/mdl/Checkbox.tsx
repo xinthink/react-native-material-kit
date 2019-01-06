@@ -8,149 +8,100 @@
 // Created by ywu on 15/12/13.
 //
 
-import React, {
-  Component,
-} from 'react';
-import PropTypes from 'prop-types';
-
+import React, {Component} from 'react';
 import {
   Animated,
+  LayoutChangeEvent,
   TouchableWithoutFeedback,
+  TouchableWithoutFeedbackProps,
   View,
 } from 'react-native';
 
+import {TouchEvent} from "../internal/MKTouchable";
+import {AnimatedTick, TickProps} from '../internal/Tick';
 import MKColor from '../MKColor';
-import Ripple from './Ripple';
-import Tick from '../internal/Tick';
+import {getTheme} from '../theme';
 import * as utils from '../utils';
-import { getTheme } from '../theme';
+import Ripple, {RippleProps} from './Ripple';
 
 const DEFAULT_EXTRA_RIPPLE_RADII = 5;
+
+// ## <section id='props'>Props</section>
+export type CheckboxProps = {
+  // Color of the border (outer circle), when checked
+  borderOnColor?: string,
+
+  // Color of the border (outer circle), when unchecked
+  borderOffColor?: string,
+
+  // Toggle status
+  checked?: boolean,
+
+  // Callback when the toggle status is changed
+  onCheckedChange?: (event: CheckedEvent) => void,
+
+  // How far the ripple can extend outside the Checkbox's border,
+  // default is 5
+  extraRippleRadius?: number,
+
+  // Toggle Editable
+  editable?: boolean,
+} & TickProps & RippleProps & TouchableWithoutFeedbackProps;
+
+interface CheckboxState {
+  checked: boolean
+  width: number
+  height: number
+  rippleRadii: number
+}
+
+export interface CheckedEvent {
+  checked: boolean
+}
 
 //
 // ## <section id='Checkbox'>Checkbox</section>
 // The `Checkbox` component.
-export default class Checkbox extends Component {
-  // ## <section id='props'>Props</section>
-  static propTypes = {
-    // [Ripple Props](Ripple.html#props)...
-    ...Ripple.propTypes,
-
-    // [Tick Props](../internal/Tick.html#props)...
-    ...Tick.propTypes,
-
-    // Touchable...
-    ...TouchableWithoutFeedback.propTypes,
-
-    // Color of the border (outer circle), when checked
-    borderOnColor: PropTypes.string,
-
-    // Color of the border (outer circle), when unchecked
-    borderOffColor: PropTypes.string,
-
-    // Color of the inner circle, when checked
-    fillColor: PropTypes.string,
-
-    // Toggle status
-    checked: PropTypes.bool,
-
-    // Callback when the toggle status is changed
-    onCheckedChange: PropTypes.func,
-
-    // How far the ripple can extend outside the Checkbox's border,
-    // default is 5
-    extraRippleRadius: PropTypes.number,
-
-    // Toggle Editable
-    editable: PropTypes.bool,
-  };
-
+export default class Checkbox extends Component<CheckboxProps, CheckboxState> {
   // ## <section id='defaults'>Defaults</section>
-  static defaultProps = {
-    pointerEvents: 'box-only',
-    maskColor: MKColor.Transparent,
+  static defaultProps: CheckboxProps = {
+    checked: false,
     editable: true,
+    maskColor: MKColor.Transparent,
+    pointerEvents: 'box-only',
+
     style: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      width: 20,
       height: 20,
-      borderWidth: 2,
+      width: 20,
+
+      alignItems: 'center',
       borderRadius: 1,
+      borderWidth: 2,
+      justifyContent: 'center',
     },
   };
 
-  constructor(props) {
+  private theme = getTheme();
+  private animatedTickAlpha = new Animated.Value(0);
+
+  constructor(props: CheckboxProps) {
     super(props);
-    this.theme = getTheme();
-    this._animatedTickAlpha = new Animated.Value(0);
     this.state = {
       checked: false,
-      width: 0,
       height: 0,
       rippleRadii: 0,
+      width: 0,
     };
   }
 
   componentWillMount() {
-    this._initView(this.props.checked);
+    this.initView(this.props.checked);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: CheckboxProps) {
     if (nextProps.checked !== this.props.checked) {
-      this._initView(nextProps.checked);
+      this.initView(nextProps.checked);
     }
-  }
-
-  // property initializers begin
-  _onLayout = ({ nativeEvent: { layout: { width, height } } }) => {
-    if (width === this.state.width && height === this.state.height) {
-      return;
-    }
-
-    const size = Math.min(width, height);
-    const rippleRadii = size * Math.SQRT2 / 2 + (this.props.extraRippleRadius
-      || DEFAULT_EXTRA_RIPPLE_RADII);
-    this.setState({
-      rippleRadii,
-      width: rippleRadii * 2,
-      height: rippleRadii * 2,
-    });
-  };
-
-  // Touch events handling
-  _onTouch = (evt) => {
-    if (evt.type === 'TOUCH_UP' && this.props.editable) {
-      this.confirmToggle();
-    }
-  };
-  // property initializers end
-
-  _initView(checked) {
-    this.setState({ checked });
-    this._aniToggle(checked);
-  }
-
-  // When a toggle action (from the given state) is confirmed.
-  confirmToggle() {
-    const prevState = this.state.checked;
-    const newState = !prevState;
-
-    this.setState({ checked: newState }, () => {
-      if (this.props.onCheckedChange) {
-        this.props.onCheckedChange({ checked: this.state.checked });
-      }
-    });
-
-    this._aniToggle(newState);
-  }
-
-  // animate the checked state, by scaling the inner circle
-  _aniToggle(checked) {
-    Animated.timing(this._animatedTickAlpha, {
-      toValue: checked ? 1 : 0,
-      duration: 220,
-    }).start();
   }
 
   render() {
@@ -161,7 +112,7 @@ export default class Checkbox extends Component {
       'fillColor',
       'rippleColor',
       'inset',
-    ]));
+    ])) as CheckboxProps;
     const borderColor = this.state.checked ? mergedStyle.borderOnColor : mergedStyle.borderOffColor;
 
     return (
@@ -171,37 +122,86 @@ export default class Checkbox extends Component {
           maskBorderRadiusInPercent={50}
           rippleLocation="center"
           rippleColor={mergedStyle.rippleColor}
-          onTouch={this._onTouch}
+          onTouch={this.onTouch}
           style={{
-            justifyContent: 'center',
             alignItems: 'center',
-            width: this.state.width,
             height: this.state.height,
+            justifyContent: 'center',
+            width: this.state.width,
           }}
         >
           <View
-            ref="container"
             style={[
               Checkbox.defaultProps.style,
-              this.props.style, {
-                borderColor,
+              this.props.style,
+              {
                 alignItems: 'stretch',
+                borderColor,
               },
             ]}
-            onLayout={this._onLayout}
+            onLayout={this.onLayout}
           >
-            <Tick.animated
-              ref="tick"
+            <AnimatedTick
               inset={mergedStyle.inset}
               fillColor={mergedStyle.fillColor}
               style={{
                 flex: 1,
-                opacity: this._animatedTickAlpha,
+                opacity: this.animatedTickAlpha,
               }}
             />
           </View>
         </Ripple>
       </TouchableWithoutFeedback>
     );
+  }
+
+  private initView(checked: boolean = false) {
+    this.setState({checked});
+    this.aniToggle(checked);
+  }
+
+  private onLayout = ({nativeEvent: {layout: {width, height}}}: LayoutChangeEvent) => {
+    if (width === this.state.width && height === this.state.height) {
+      return;
+    }
+
+    const size = Math.min(width, height);
+    const rippleRadii = size * Math.SQRT2 / 2 + (this.props.extraRippleRadius
+      || DEFAULT_EXTRA_RIPPLE_RADII);
+    this.setState({
+      rippleRadii,
+
+      height: rippleRadii * 2,
+      width: rippleRadii * 2,
+    });
+  };
+
+  // Touch events handling
+  private onTouch = ({type}: TouchEvent) => {
+    if (type === 'TOUCH_UP' && this.props.editable) {
+      this.confirmToggle();
+    }
+  };
+
+  // animate the checked state, by scaling the inner circle
+  private aniToggle(checked: boolean) {
+    Animated.timing(this.animatedTickAlpha, {
+      duration: 220,
+      toValue: checked ? 1 : 0,
+    }).start();
+  }
+
+  // When a toggle action (from the given state) is confirmed.
+  private confirmToggle() {
+    const prevState = this.state.checked;
+    const newState = !prevState;
+
+    this.setState({ checked: newState }, () => {
+      if (this.props.onCheckedChange) {
+        this.props.onCheckedChange({ checked: this.state.checked });
+      }
+    });
+
+    this.aniToggle(newState);
   }
 }
