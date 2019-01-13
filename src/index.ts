@@ -19,7 +19,12 @@ export {
   ColoredFab,
   AccentFab,
 
+  CheckedEvent,
+  CheckedListener,
   Checkbox,
+  CheckboxProps,
+  IconToggle,
+  IconToggleProps,
 
   // Textfield as MKTextField,
   // Switch as MKSwitch,

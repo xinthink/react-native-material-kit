@@ -26,8 +26,6 @@ import {
   reject,
 } from 'ramda'
 
-export type NullableString = string | null | undefined
-
 // Add some is-Type methods:
 function isType(type: string, obj: any): boolean {
   return toString.call(obj) === `[object ${name}]`;

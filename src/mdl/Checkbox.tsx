@@ -21,6 +21,7 @@ import {TouchEvent} from "../internal/MKTouchable";
 import {AnimatedTick, TickProps} from '../internal/Tick';
 import MKColor from '../MKColor';
 import {getTheme} from '../theme';
+import {CheckedListener} from '../types';
 import * as utils from '../utils';
 import Ripple, {RippleProps} from './Ripple';
 
@@ -38,7 +39,7 @@ export type CheckboxProps = {
   checked?: boolean,
 
   // Callback when the toggle status is changed
-  onCheckedChange?: (event: CheckedEvent) => void,
+  onCheckedChange?: CheckedListener,
 
   // How far the ripple can extend outside the Checkbox's border,
   // default is 5
@@ -53,10 +54,6 @@ interface CheckboxState {
   width: number
   height: number
   rippleRadii: number
-}
-
-export interface CheckedEvent {
-  checked: boolean
 }
 
 //
