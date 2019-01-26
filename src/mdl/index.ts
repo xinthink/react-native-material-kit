@@ -14,7 +14,6 @@ export {
   default as Button,
   ButtonProps,
   ButtonStyles,
-
   RaisedButton,
   ColoredRaisedButton,
   AccentRaisedButton,
@@ -26,4 +25,5 @@ export {
 export {default as Checkbox, CheckboxProps} from './Checkbox'
 export {default as IconToggle, IconToggleProps} from './IconToggle'
 export {default as Ripple, RippleProps} from './Ripple'
-export * from './Types'
+export {default as Switch, SwitchProps} from './Switch'
+export * from '../types'

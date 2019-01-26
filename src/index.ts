@@ -33,6 +33,9 @@ export {
   Ripple,
   RippleProps,
 
+  Switch,
+  SwitchProps,
+
   // Progress as MKProgress,
   // Slider as MKSlider,
   // RangeSlider as MKRangeSlider,
