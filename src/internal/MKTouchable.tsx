@@ -40,12 +40,8 @@ const MKTouchable = forwardRef<Component, MKTouchableProps>((props, ref) =>
   <NativeTouchable
     ref={ref}
     {...props}
-    style={props.style}
     onChange={partial(onTouch, [props])}
-    onLayout={props.onLayout}
-  >
-    {props.children}
-  </NativeTouchable>
+  />
 );
 
 function onTouch(props: MKTouchableProps, event: NativeTouchEvent) {
