@@ -24,6 +24,8 @@ export {
 } from './Button'
 export {default as Checkbox, CheckboxProps} from './Checkbox'
 export {default as IconToggle, IconToggleProps} from './IconToggle'
+export {default as RadioButton, RadioButtonProps} from './RadioButton'
+export {default as RadioButtonGroup} from './RadioButtonGroup'
 export {default as Ripple, RippleProps} from './Ripple'
 export {default as Switch, SwitchProps} from './Switch'
 export * from '../types'

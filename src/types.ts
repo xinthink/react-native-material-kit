@@ -8,3 +8,5 @@ export interface CheckedEvent {
 }
 
 export type CheckedListener = (event: CheckedEvent) => void
+
+export type Prediction<T> = (obj?: T) => boolean

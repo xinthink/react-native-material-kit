@@ -19,7 +19,7 @@ import {
   TouchableWithoutFeedbackProps,
 } from 'react-native';
 
-import {TouchEvent} from "../internal/MKTouchable";
+import {TouchEvent} from '../internal/MKTouchable';
 import MKColor from '../MKColor';
 import {getTheme} from '../theme';
 import {CheckedListener, NullableReactChild} from '../types';

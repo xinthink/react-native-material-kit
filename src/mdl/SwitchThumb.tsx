@@ -1,5 +1,5 @@
 
-import React, {Component, forwardRef} from 'react';
+import React, {Component} from 'react';
 
 import {
   Animated,

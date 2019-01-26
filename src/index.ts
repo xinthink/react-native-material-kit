@@ -25,14 +25,11 @@ export {
   CheckboxProps,
   IconToggle,
   IconToggleProps,
-
-  // Textfield as MKTextField,
-  // Switch as MKSwitch,
-  // IconToggle as MKIconToggle,
-
+  RadioButton,
+  RadioButtonGroup,
+  RadioButtonProps,
   Ripple,
   RippleProps,
-
   Switch,
   SwitchProps,
 
@@ -40,6 +37,4 @@ export {
   // Slider as MKSlider,
   // RangeSlider as MKRangeSlider,
   // Spinner as MKSpinner,
-  // RadioButton as MKRadioButton,
-  // Checkbox as MKCheckbox,
 } from './mdl'
