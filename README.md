@@ -11,7 +11,7 @@ A set of UI components, in the purpose of introducing [Material Design][md] to a
 
 [npm-badge]: https://img.shields.io/npm/v/react-native-material-kit.svg
 [npm]: https://www.npmjs.com/package/react-native-material-kit
-[rn-badge]: https://img.shields.io/badge/react--native-v0.39-05A5D1.svg
+[rn-badge]: https://img.shields.io/badge/react--native-v0.56-05A5D1.svg
 [rn]: https://facebook.github.io/react-native
 [md]: http://www.google.com/design/spec/material-design/introduction.html
 [license-badge]: https://img.shields.io/dub/l/vibe-d.svg
