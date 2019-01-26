@@ -37,4 +37,19 @@ lib-cov
 
 # WebStorm
 #
-.idea
+.idea/*.iml
+.idea/.name
+.idea/caches
+# .idea/dictionaries
+.idea/gradle.xml
+.idea/jsLibraryMappings.xml
+.idea/libraries
+.idea/misc.xml
+.idea/modules.xml
+.idea/runConfigurations.xml
+.idea/tasks.xml
+.idea/vcs.xml
+.idea/workspace.xml
+
+rn-cli.config.js
+lib
