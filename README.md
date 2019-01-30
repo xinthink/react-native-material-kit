@@ -1,10 +1,8 @@
 [![npm][npm-badge]][npm]
 [![react-native][rn-badge]][rn]
 [![MIT][license-badge]][license]
-[![Gitter][gitter-badge]][gitter-rnmk]
-
-<a href="https://www.jetbrains.com/" title="Built with JetBrains IDEs">
-  <img src="http://xinthink.github.io/react-native-material-kit/images/logo_JetBrains_1.svg" alt="Built with JetBrains IDEs" width="64">
+<a href="https://www.jetbrains.com/?from=react-native-material-kit" title="Built with JetBrains IDEs">
+  <img src="http://xinthink.github.io/react-native-material-kit/images/logo_JetBrains_1.svg" alt="Built with JetBrains IDEs" width="48">
 </a>
 
 A set of UI components, in the purpose of introducing [Material Design][md] to apps built with [React Native][rn], quickly and painlessly.
