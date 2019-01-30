@@ -80,7 +80,7 @@ export default class RadioButton extends Component<RadioButtonProps, RadioButton
   private theme = getTheme();
   private animatedSize = new Animated.Value(0);
   private animatedRadius = new Animated.Value(0);
-  private group: Group | undefined = undefined;
+  private group?: Group;
 
   constructor(props: RadioButtonProps) {
     super(props);
