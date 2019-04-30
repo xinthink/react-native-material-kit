@@ -104,8 +104,11 @@ export default class Checkbox extends Component<CheckboxProps, CheckboxState> {
   // On iPhone X - iOS 12, at times the checkbox doesn't changes it's state. This 
   // will fix that. EDIT : 29/03/2019 - Apparently the last one was only half a fix
   // so added another condition to fix it.
+  // EDIT : 30/04/2019 - There was a problem with the condition that was applied in
+  // #410. It was not allowing the component to change it's state when prop was
+  // changing after the state. Fixed it.
   componentDidUpdate(prevProps: CheckboxProps, prevState: CheckboxState) {
-    if (prevProps.checked !== this.props.checked &&
+    if (prevProps.checked !== this.props.checked ||
         prevState.checked !== this.state.checked){
       this._initView(this.props.checked);
     }
