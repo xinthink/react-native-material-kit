@@ -10,6 +10,7 @@
 #import <React/RCTEventDispatcher.h>
 #import "UIView+React.h"
 #import "MKTouchable.h"
+#import "RCTComponentEvent.h"
 
 @interface MKTouchableManager : RCTViewManager <MKTouchableDelegate>
 @end
