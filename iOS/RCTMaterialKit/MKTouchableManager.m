@@ -56,7 +56,10 @@ RCT_EXPORT_MODULE()
                            @"x": [NSNumber numberWithFloat:location.x],
                            @"y": [NSNumber numberWithFloat:location.y],
                            };
-    [self.bridge.eventDispatcher sendInputEventWithName:@"topChange" body:dict];
+    RCTComponentEvent *event = [[RCTComponentEvent alloc] initWithName:@"topChange"
+                                                               viewTag:source.reactTag body:body];
+    
+    [self.bridge.eventDispatcher sendEvent:event];
 }
 
 @end
