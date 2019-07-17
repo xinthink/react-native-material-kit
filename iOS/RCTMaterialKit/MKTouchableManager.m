@@ -57,8 +57,8 @@ RCT_EXPORT_MODULE()
                            @"y": [NSNumber numberWithFloat:location.y],
                            };
     RCTComponentEvent *event = [[RCTComponentEvent alloc] initWithName:@"topChange"
-                                                               viewTag:source.reactTag body:body];
-    
+                                                               viewTag:source.reactTag body:dict];
+
     [self.bridge.eventDispatcher sendEvent:event];
 }
 
