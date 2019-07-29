@@ -114,7 +114,7 @@ Have fun! :metal:
 ## Resources
 - [Release Notes]
 - Refer to the [Annotated Source][docs] as API docs
-- Source code of [Demo app][]
+- Source code of [Demo app]
 - For contributors, please refer to [How to debug local RNMK module][debug-with-demo]
 - Chat about bugs/features on [Gitter][gitter-rnmk]
 
@@ -494,14 +494,3 @@ setTheme({radioStyle: {
 [mdl-radio]: http://www.getmdl.io/components/index.html#toggles-section/radio
 [img-radio]: https://cloud.githubusercontent.com/assets/390805/10442805/bdb08bc0-7188-11e5-8565-4ee0049ad590.gif
 [radio-props-doc]: http://xinthink.github.io/react-native-material-kit/docs/lib/mdl/RadioButton.html#props
-
-
-## About
-This project is inspired by [MaterialKit][], thanks [@nghialv][] for the great work!👍🖖
-
-But I rewrote almost all the components in JSX, with limited help of native code.
-
-And lastly, it’s lots of work to be done, ***contributions*** are welcome!🎉🍻
-
-[@nghialv]: https://github.com/nghialv
-[MaterialKit]: https://github.com/nghialv/MaterialKit
