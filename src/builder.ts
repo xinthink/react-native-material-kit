@@ -24,15 +24,6 @@ import {
 export class Builder {
   [index: string]: any // index signature
 
-  // Background color
-  backgroundColor: NullableAttrValue = undefined
-
-  // Accent color
-  accent: NullableAttrValue = undefined
-
-  // Style
-  style: NullableStyle = undefined
-
   // Define builder method `withXxx` for prop `xxx`
   static defineProp(name: string) {
     const methodName = `with${capitalize(name)}`;
@@ -61,6 +52,15 @@ export class Builder {
     });
   }
 
+  // Background color
+  backgroundColor: NullableAttrValue = undefined
+
+  // Accent color
+  accent: NullableAttrValue = undefined
+
+  // Style
+  style: NullableStyle = undefined
+
   getTheme = getTheme;
 
   // Accent color
@@ -80,6 +80,7 @@ export class Builder {
   }
 
   build() {
+    // do nothing
   }
 
   toProps() {

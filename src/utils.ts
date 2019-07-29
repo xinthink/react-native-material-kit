@@ -28,7 +28,7 @@ import {
 
 // Add some is-Type methods:
 function isType(type: string, obj: any): boolean {
-  return toString.call(obj) === `[object ${name}]`;
+  return Object.toString.call(obj) === `[object ${type}]`;
 }
 
 export const isArgument = partial(isType, ['Arguments']);

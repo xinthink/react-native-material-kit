@@ -70,11 +70,12 @@ export default class Checkbox extends Component<CheckboxProps, CheckboxState> {
     style: {
       height: 20,
       width: 20,
-      overflow: "hidden", // To fix the Android overflow issue on Android SDK 26
+
       alignItems: 'center',
       borderRadius: 1,
       borderWidth: 2,
       justifyContent: 'center',
+      overflow: "hidden", // To fix the Android overflow issue on Android SDK 26
     },
   };
 
@@ -100,8 +101,8 @@ export default class Checkbox extends Component<CheckboxProps, CheckboxState> {
   //     this.initView(nextProps.checked);
   //   }
   // }
-  
-  // On iPhone X - iOS 12, at times the checkbox doesn't changes it's state. This 
+
+  // On iPhone X - iOS 12, at times the checkbox doesn't changes it's state. This
   // will fix that. EDIT : 29/03/2019 - Apparently the last one was only half a fix
   // so added another condition to fix it.
   // EDIT : 30/04/2019 - There was a problem with the condition that was applied in
@@ -110,7 +111,7 @@ export default class Checkbox extends Component<CheckboxProps, CheckboxState> {
   componentDidUpdate(prevProps: CheckboxProps, prevState: CheckboxState) {
     if (prevProps.checked !== this.props.checked ||
         prevState.checked !== this.state.checked){
-      this._initView(this.props.checked);
+      this.initView(this.props.checked);
     }
   }
 
