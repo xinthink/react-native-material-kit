@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class ReactMaterialKitPackage implements ReactPackage {
 
-    @Override
+    
     public List<NativeModule> createNativeModules(ReactApplicationContext reactApplicationContext) {
         return Collections.emptyList();
     }
@@ -27,7 +27,7 @@ public class ReactMaterialKitPackage implements ReactPackage {
         return Collections.emptyList();
     }
 
-    @Override
+    
     public List<ViewManager> createViewManagers(ReactApplicationContext reactApplicationContext) {
         return Arrays.<ViewManager>asList(
                 new MKTouchableManager(),
