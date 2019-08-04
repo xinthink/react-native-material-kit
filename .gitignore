@@ -53,3 +53,5 @@ lib-cov
 
 rn-cli.config.js
 lib
+temp/
+dist/

@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.0'
+        classpath 'com.android.tools.build:gradle:3.4.1'
     }
 }
 
@@ -33,4 +33,5 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     compileOnly 'com.facebook.react:react-native:+'
+    implementation 'androidx.annotation:annotation:1.1.0'
 }

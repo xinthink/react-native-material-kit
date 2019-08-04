@@ -1,5 +1,4 @@
-
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import {
   Animated,
@@ -12,40 +11,42 @@ import {
 import MKColor from '../MKColor';
 
 export type ThumbProps = {
-  checked: boolean,
-  onColor?: string,
-  offColor?: string,
-  rippleColor?: string,
-  rippleAniDuration: number,
-  rippleRadius: number,
-  thumbStyle?: StyleProp<ViewStyle>,
+  checked: boolean;
+  onColor?: string;
+  offColor?: string;
+  rippleColor?: string;
+  rippleAniDuration: number;
+  rippleRadius: number;
+  thumbStyle?: StyleProp<ViewStyle>;
 } & ViewProps;
 
 interface ThumbState {
-  checked: boolean
+  checked: boolean;
 }
+
+const defaultProps: ThumbProps = {
+  checked: false,
+  pointerEvents: 'none',
+  rippleAniDuration: 250,
+  rippleRadius: 14,
+  style: {
+    elevation: 2,
+    shadowColor: 'black',
+    shadowOffset: {
+      height: 1,
+      width: 0,
+    },
+    shadowOpacity: 0.7,
+    shadowRadius: 1,
+  },
+};
 
 // ## <section id='thumb'>Thumb</section>
 // `Thumb` component of the [`Switch`](#switch).
 // Which is displayed as a circle with shadow and ripple effect.
 export class Thumb extends Component<ThumbProps, ThumbState> {
   // Default props of `Thumb`
-  static defaultProps: ThumbProps = {
-    checked: false,
-    pointerEvents: 'none',
-    rippleAniDuration: 250,
-    rippleRadius: 14,
-    style: {
-      elevation: 2,
-      shadowColor: 'black',
-      shadowOffset: {
-        height: 1,
-        width: 0,
-      },
-      shadowOpacity: 0.7,
-      shadowRadius: 1,
-    },
-  };
+  static defaultProps: ThumbProps = defaultProps;
 
   private animatedRippleScale = new Animated.Value(0);
   private animatedRippleAlpha = new Animated.Value(0);
@@ -59,13 +60,13 @@ export class Thumb extends Component<ThumbProps, ThumbState> {
     };
   }
 
-  // componentWillMount() {
-  //   this.setState({checked: this.props.checked});
-  // }
-
-  componentWillReceiveProps(nextProps: ThumbProps) {
-    if (nextProps.checked !== this.state.checked) {
-      this.setState({checked: nextProps.checked});
+  /**
+   * TODO using controlled components.
+   * @see https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html?#preferred-solutions
+   */
+  UNSAFE_componentWillReceiveProps(nextProps: ThumbProps) {
+    if (nextProps.checked !== this.props.checked && nextProps.checked !== this.state.checked) {
+      this.setState({ checked: nextProps.checked });
     }
   }
 
@@ -82,7 +83,7 @@ export class Thumb extends Component<ThumbProps, ThumbState> {
   // When a toggle action (from the given state) is confirmed.
   // - {`boolean`} `fromState` the previous state
   confirmToggle(fromState: boolean) {
-    this.setState({checked: !fromState});
+    this.setState({ checked: !fromState });
   }
 
   // Start the ripple effect
@@ -147,7 +148,7 @@ export class Thumb extends Component<ThumbProps, ThumbState> {
       >
         <View // the circle
           style={[
-            Thumb.defaultProps.style,
+            defaultProps.style,
             this.props.thumbStyle,
             {backgroundColor: this.state.checked ? this.props.onColor : this.props.offColor},
           ]}

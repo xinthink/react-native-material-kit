@@ -8,76 +8,80 @@
 // Created by ywu on 15/12/13.
 //
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Animated,
-  LayoutChangeEvent,
+  LayoutChangeEvent, Text,
   TouchableWithoutFeedback,
   TouchableWithoutFeedbackProps,
   View,
 } from 'react-native';
 
-import {TouchEvent} from "../internal/MKTouchable";
-import {AnimatedTick, TickProps} from '../internal/Tick';
+import { TouchEvent } from '../internal/MKTouchable';
+import { AnimatedTick, TickProps } from '../internal/Tick';
 import MKColor from '../MKColor';
-import {getTheme} from '../theme';
-import {CheckedListener} from '../types';
+import { getTheme } from '../theme';
+import { CheckedListener } from '../types';
 import * as utils from '../utils';
-import Ripple, {RippleProps} from './Ripple';
+import Ripple, { RippleProps } from './Ripple';
 
 const DEFAULT_EXTRA_RIPPLE_RADII = 5;
 
 // ## <section id='props'>Props</section>
 export type CheckboxProps = {
   // Color of the border (outer circle), when checked
-  borderOnColor?: string,
+  borderOnColor?: string;
 
   // Color of the border (outer circle), when unchecked
-  borderOffColor?: string,
+  borderOffColor?: string;
 
   // Toggle status
-  checked?: boolean,
+  checked?: boolean;
 
   // Callback when the toggle status is changed
-  onCheckedChange?: CheckedListener,
+  onCheckedChange?: CheckedListener;
 
   // How far the ripple can extend outside the Checkbox's border,
   // default is 5
-  extraRippleRadius?: number,
+  extraRippleRadius?: number;
 
   // Toggle Editable
-  editable?: boolean,
-} & TickProps & RippleProps & TouchableWithoutFeedbackProps;
+  editable?: boolean;
+} & TickProps &
+  RippleProps &
+  TouchableWithoutFeedbackProps;
 
 interface CheckboxState {
-  checked: boolean
-  width: number
-  height: number
-  rippleRadii: number
+  checked: boolean;
+  width: number;
+  height: number;
+  rippleRadii: number;
 }
+
+const defaultProps: CheckboxProps = {
+  checked: false,
+  editable: true,
+  maskColor: MKColor.Transparent,
+  pointerEvents: 'box-only',
+
+  style: {
+    height: 20,
+    width: 20,
+
+    alignItems: 'center',
+    borderRadius: 1,
+    borderWidth: 2,
+    justifyContent: 'center',
+    overflow: 'hidden', // To fix the Android overflow issue on Android SDK 26
+  },
+};
 
 //
 // ## <section id='Checkbox'>Checkbox</section>
 // The `Checkbox` component.
 export default class Checkbox extends Component<CheckboxProps, CheckboxState> {
   // ## <section id='defaults'>Defaults</section>
-  static defaultProps: CheckboxProps = {
-    checked: false,
-    editable: true,
-    maskColor: MKColor.Transparent,
-    pointerEvents: 'box-only',
-
-    style: {
-      height: 20,
-      width: 20,
-
-      alignItems: 'center',
-      borderRadius: 1,
-      borderWidth: 2,
-      justifyContent: 'center',
-      overflow: "hidden", // To fix the Android overflow issue on Android SDK 26
-    },
-  };
+  static defaultProps: CheckboxProps = defaultProps;
 
   private theme = getTheme();
   private animatedTickAlpha = new Animated.Value(0);
@@ -92,26 +96,17 @@ export default class Checkbox extends Component<CheckboxProps, CheckboxState> {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.initView(this.props.checked);
   }
 
-  // componentWillReceiveProps(nextProps: CheckboxProps) {
-  //   if (nextProps.checked !== this.props.checked) {
-  //     this.initView(nextProps.checked);
-  //   }
-  // }
-
-  // On iPhone X - iOS 12, at times the checkbox doesn't changes it's state. This
-  // will fix that. EDIT : 29/03/2019 - Apparently the last one was only half a fix
-  // so added another condition to fix it.
-  // EDIT : 30/04/2019 - There was a problem with the condition that was applied in
-  // #410. It was not allowing the component to change it's state when prop was
-  // changing after the state. Fixed it.
-  componentDidUpdate(prevProps: CheckboxProps, prevState: CheckboxState) {
-    if (prevProps.checked !== this.props.checked ||
-        prevState.checked !== this.state.checked){
-      this.initView(this.props.checked);
+  /**
+   * TODO using controlled components.
+   * @see https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html?#preferred-solutions
+   */
+  UNSAFE_componentWillReceiveProps(nextProps: CheckboxProps) {
+    if (nextProps.checked !== this.props.checked && nextProps !== this.state.checked) {
+      this.initView(nextProps.checked || false);
     }
   }
 
@@ -143,7 +138,7 @@ export default class Checkbox extends Component<CheckboxProps, CheckboxState> {
         >
           <View
             style={[
-              Checkbox.defaultProps.style,
+              defaultProps.style,
               this.props.style,
               {
                 alignItems: 'stretch',
@@ -167,7 +162,7 @@ export default class Checkbox extends Component<CheckboxProps, CheckboxState> {
   }
 
   private initView(checked: boolean = false) {
-    this.setState({checked});
+    this.setState({ checked });
     this.aniToggle(checked);
   }
 

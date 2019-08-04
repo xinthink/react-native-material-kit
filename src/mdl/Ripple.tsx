@@ -81,25 +81,27 @@ interface RippleState {
   },
 }
 
+const defaultProps: RippleProps = {
+  borderWidth: 0,
+  disabled: false,
+  maskBorderRadius: 2,
+  maskBorderRadiusInPercent: 0,
+  maskColor: 'rgba(255,255,255,0.15)',
+  maskDuration: 200,
+  maskEnabled: true,
+  rippleColor: 'rgba(255,255,255,0.2)',
+  rippleDuration: 200,
+  rippleLocation: 'tapLocation',
+  shadowAniEnabled: true,
+}
+
 //
 // ## <section id='Ripple'>Ripple</section>
 // Reusable `Ripple` effect.
 //
 export default class Ripple extends Component<RippleProps, RippleState> {
   // ## <section id='defaults'>Defaults</section>
-  static defaultProps: RippleProps = {
-    borderWidth: 0,
-    disabled: false,
-    maskBorderRadius: 2,
-    maskBorderRadiusInPercent: 0,
-    maskColor: 'rgba(255,255,255,0.15)',
-    maskDuration: 200,
-    maskEnabled: true,
-    rippleColor: 'rgba(255,255,255,0.2)',
-    rippleDuration: 200,
-    rippleLocation: 'tapLocation',
-    shadowAniEnabled: true,
-  };
+  static defaultProps: RippleProps = defaultProps;
 
   private containerRef = createRef<Component>();
   private maskRef = createRef<Component>();

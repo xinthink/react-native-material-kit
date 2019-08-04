@@ -10,7 +10,7 @@
 // Created by ywu on 15/7/28.
 //
 
-import React, {Component, createRef} from 'react';
+import React, { Component, createRef } from 'react';
 
 import {
   Animated,
@@ -20,11 +20,10 @@ import {
   View,
 } from 'react-native';
 
-import {getTheme, Theme} from '../theme';
-import {CheckedListener} from "../types";
+import { getTheme, Theme } from '../theme';
+import { CheckedListener } from '../types';
 import * as utils from '../utils';
-import AnimatedThumb, {Thumb} from './SwitchThumb';
-
+import AnimatedThumb, { Thumb } from './SwitchThumb';
 
 const defaultThumbRadius = 14;
 const defaultTrackLength = 48;
@@ -33,54 +32,54 @@ const defaultTrackSize = 20;
 // ## <section id='props'>Props</section>
 export type SwitchProps = {
   // Toggle status of the `Switch`
-  checked?: boolean,
+  checked?: boolean;
 
   // Callback when the toggle status is changed.
-  onCheckedChange?: CheckedListener,
+  onCheckedChange?: CheckedListener;
 
   // Color of the track, when switch is checked
-  onColor?: string,
+  onColor?: string;
 
   // Color of the track, when switch is off
-  offColor?: string,
+  offColor?: string;
 
   // The thickness of the Switch track
-  trackSize?: number,
+  trackSize?: number;
 
   // The length of the Switch track
-  trackLength?: number,
+  trackLength?: number;
 
   // Radius of the thumb button
-  thumbRadius?: number,
+  thumbRadius?: number;
 
   // Color of the thumb, when switch is checked
-  thumbOnColor?: string,
+  thumbOnColor?: string;
 
   // Color of the thumb, when switch is off
-  thumbOffColor?: string,
+  thumbOffColor?: string;
 
   // Duration of the thumb sliding animation, in milliseconds
-  thumbAniDuration?: number,
+  thumbAniDuration?: number;
 
   // Color of the ripple layer
-  rippleColor?: string,
+  rippleColor?: string;
 
   // Duration of the ripple effect, in milliseconds
-  rippleAniDuration?: number,
+  rippleAniDuration?: number;
 } & TouchableWithoutFeedbackProps;
 
 interface SwitchState {
-  checked: boolean,
+  checked: boolean;
   thumbFrame: {
-    padding: number,
-    r: number,
-    rippleRadii: number,
-    x: number,
-  },
-  trackLength: number,
-  trackMargin: number,
-  trackRadii: number,
-  trackSize: number,
+    padding: number;
+    r: number;
+    rippleRadii: number;
+    x: number;
+  };
+  trackLength: number;
+  trackMargin: number;
+  trackRadii: number;
+  trackSize: number;
 }
 
 // ## <section id='switch'>Switch</section>
@@ -103,7 +102,10 @@ export default class Switch extends Component<SwitchProps, SwitchState> {
     this.state = {
       checked: false,
       thumbFrame: {
-        padding: 0, r: 0, rippleRadii: 0, x: 0,
+        padding: 0,
+        r: 0,
+        rippleRadii: 0,
+        x: 0,
       },
       trackLength: 0,
       trackMargin: 0,
@@ -112,12 +114,16 @@ export default class Switch extends Component<SwitchProps, SwitchState> {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
+    // console.log('--- Switch.componentWillReceiveProps');
     this.initLayout(this.props);
   }
 
-  componentWillReceiveProps(nextProps: SwitchProps) {
-    this.initLayout(nextProps);
+  UNSAFE_componentWillReceiveProps(nextProps: SwitchProps) {
+    // console.log('--- Switch.componentWillReceiveProps');
+    if (nextProps.checked !== this.props.checked && nextProps.checked !== this.state.checked) {
+      this.initLayout(nextProps);
+    }
   }
 
   // Rendering the `Switch`
@@ -248,10 +254,12 @@ export default class Switch extends Component<SwitchProps, SwitchState> {
 
   // init layout according to the props
   private initLayout(props: SwitchProps) {
-    const nextState = this.layoutThumb(props.checked,
+    const nextState = this.layoutThumb(
+      props.checked || false,
       props.thumbRadius,
       props.trackLength,
-      props.trackSize);
+      props.trackSize,
+    );
     this.setState({
       ...nextState,
       checked: props.checked || false,

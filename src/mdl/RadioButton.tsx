@@ -8,7 +8,7 @@
 // Created by ywu on 15/10/12.
 //
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import {
   Animated,
@@ -18,64 +18,67 @@ import {
   View,
 } from 'react-native';
 
-import {TouchEvent} from '../internal/MKTouchable';
+import { TouchEvent } from '../internal/MKTouchable';
 import MKColor from '../MKColor';
-import {getTheme} from '../theme';
-import {CheckedListener} from '../types';
+import { getTheme } from '../theme';
+import { CheckedListener } from '../types';
 import * as utils from '../utils';
 import Group from './RadioButtonGroup';
-import Ripple, {RippleProps} from './Ripple';
+import Ripple, { RippleProps } from './Ripple';
 
 const DEFAULT_EXTRA_RIPPLE_RADII = 16;
 
 // ## <section id='props'>Props</section>
 export type RadioButtonProps = {
   // Color of the border (outer circle), when checked
-  borderOnColor?: string,
+  borderOnColor?: string;
 
   // Color of the border (outer circle), when unchecked
-  borderOffColor?: string,
+  borderOffColor?: string;
 
   // Color of the inner circle, when checked
-  fillColor?: string,
+  fillColor?: string;
 
   // Toggle status
-  checked?: boolean,
+  checked?: boolean;
 
   // Group to which the Radio button belongs
-  group?: Group,
+  group?: Group;
 
   // Callback when the toggle status is changed
-  onCheckedChange?: CheckedListener,
+  onCheckedChange?: CheckedListener;
 
   // How far the ripple can extend outside the RadioButton's border,
   // default is 16
-  extraRippleRadius?: number,
-} & RippleProps & TouchableWithoutFeedbackProps;
+  extraRippleRadius?: number;
+} & RippleProps &
+  TouchableWithoutFeedbackProps;
 
 interface RadioButtonState {
-  checked: boolean
-  height: number
-  width: number
+  checked: boolean;
+  height: number;
+  width: number;
 }
+
+const defaultProps: RadioButtonProps = {
+  maskColor: MKColor.Transparent,
+  pointerEvents: 'box-only',
+  style: {
+    alignItems: 'center',
+    borderRadius: 10,
+    borderWidth: 2,
+    height: 20,
+    justifyContent: 'center',
+    width: 20,
+  },
+};
 
 //
 // ## <section id='RadioButton'>RadioButton</section>
 // The `RadioButton` component.
 export default class RadioButton extends Component<RadioButtonProps, RadioButtonState> {
   // ## <section id='defaults'>Defaults</section>
-  static defaultProps: RadioButtonProps = {
-    maskColor: MKColor.Transparent,
-    pointerEvents: 'box-only',
-    style: {
-      alignItems: 'center',
-      borderRadius: 10,
-      borderWidth: 2,
-      height: 20,
-      justifyContent: 'center',
-      width: 20,
-    },
-  };
+  static defaultProps: RadioButtonProps = defaultProps;
 
   private theme = getTheme();
   private animatedSize = new Animated.Value(0);
@@ -92,20 +95,20 @@ export default class RadioButton extends Component<RadioButtonProps, RadioButton
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.group = this.props.group;
     this.initView(this.props.checked);
     this.group && this.group.add(this);
   }
 
-  componentWillReceiveProps(nextProps: RadioButtonProps) {
+  UNSAFE_componentWillReceiveProps(nextProps: RadioButtonProps) {
     if (this.group !== nextProps.group) {
       this.group && this.group.remove(this);
       this.group = nextProps.group;
       this.group && this.group.add(this);
     }
 
-    if (nextProps.checked !== this.props.checked) {
+    if (nextProps.checked !== this.props.checked && nextProps.checked !== this.state.checked) {
       this.initView(nextProps.checked);
     }
   }
@@ -161,7 +164,7 @@ export default class RadioButton extends Component<RadioButtonProps, RadioButton
         >
           <View
             style={[
-              RadioButton.defaultProps.style,
+              defaultProps.style,
               {borderColor},
               this.props.style,
             ]}
@@ -182,12 +185,12 @@ export default class RadioButton extends Component<RadioButtonProps, RadioButton
   }
 
   private initView(checked: boolean = false) {
-    this.setState({checked});
+    this.setState({ checked });
     this.aniChecked(checked);
   }
 
   private emitCheckedChange(checked: boolean) {
-    this.props.onCheckedChange && this.props.onCheckedChange({checked});
+    this.props.onCheckedChange && this.props.onCheckedChange({ checked });
   }
 
   // animate the checked state, by scaling the inner circle
