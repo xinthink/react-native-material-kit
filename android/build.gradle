@@ -12,7 +12,8 @@ buildscript {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion project.hasProperty('compileSdkVersion') ? project.compileSdkVersion : 28
+    if (project.hasProperty('buildToolsVersion')) buildToolsVersion project.buildToolsVersion
 
     defaultConfig {
         minSdkVersion 16
