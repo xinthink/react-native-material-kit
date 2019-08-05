@@ -1,3 +1,4 @@
+[![Build Status][ci-badge]][ci]
 [![npm][npm-badge]][npm]
 [![react-native][rn-badge]][rn]
 [![MIT][license-badge]][license]
@@ -16,6 +17,8 @@ A set of UI components, in the purpose of introducing [Material Design][md] to a
 [license]: https://raw.githubusercontent.com/xinthink/react-native-material-kit/master/LICENSE.md
 [gitter-badge]: https://img.shields.io/gitter/room/xinthink/react-native-material-kit.svg
 [gitter-rnmk]: https://gitter.im/xinthink/react-native-material-kit
+[ci-badge]: https://travis-ci.org/xinthink/react-native-material-kit.svg?branch=master
+[ci]: https://travis-ci.org/xinthink/react-native-material-kit
 
 ## Getting Started
 
