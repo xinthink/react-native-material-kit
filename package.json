@@ -3,7 +3,7 @@
   "version": "0.5.1",
   "description": "Bringing Material Design to React Native",
   "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "typings": "lib/react-native-material-kit.d.ts",
   "author": "Yingxin Wu <yingxinwu.g@gmail.com>",
   "contributors": [
     "Quentin Valmori (https://github.com/Crash--)",
@@ -28,6 +28,7 @@
     "url": "git://github.com/xinthink/react-native-material-kit.git"
   },
   "devDependencies": {
+    "@microsoft/api-documenter": "^7.3.11",
     "@microsoft/api-extractor": "^7.3.4",
     "@react-native-community/eslint-config": "^0.0.5",
     "@types/jest": "^24.0.16",
@@ -41,8 +42,6 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
-    "gulp": "^3.9.0",
-    "gulp-docco": "0.0.4",
     "jest": "^24.8.0",
     "react-native-typescript-transformer": "^1.2.10",
     "react-test-renderer": "^16.8.6",
@@ -63,6 +62,9 @@
     "lint": "tslint -p .",
     "test": "jest",
     "build": "yarn lint && tsc",
-    "build-with-docs": "yarn build && api-extractor run --local --verbose"
+    "build-docs": "yarn clean && yarn setup && yarn build && api-extractor run --local --verbose && yarn api-md",
+    "clean": "rm -rf lib temp etc dist docs",
+    "setup": "mkdir temp etc dist docs",
+    "api-md": "api-documenter markdown --input-folder temp --output-folder docs"
   }
 }

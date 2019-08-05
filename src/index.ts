@@ -1,40 +1,13 @@
 /**
- * Created by ywu on 15/6/1.
+ * react-native-material-kit, the toolkit introducing {@link https://material.io/design/introduction/ | Material Design} to {@link https://facebook.github.io/react-native/ | React Native}.
+ *
+ * Author: ywu on 15/6/1.
+ * @packageDocumentation
  */
-export {default as mdl} from './mdl'
-export {default as MKColor} from './MKColor'
 
-export * from './theme'
+// FIXME: api-extractor error: Unable to analyze the export "default"...
+import MKColor from './MKColor';
+export { MKColor };
 
-// Shortcuts
-export {
-  Button,
-  ButtonProps,
-  ButtonStyles,
-  ColoredRaisedButton,
-  RaisedButton,
-  AccentRaisedButton,
-  FlatButton,
-  Fab,
-  ColoredFab,
-  AccentFab,
-
-  CheckedEvent,
-  CheckedListener,
-  Checkbox,
-  CheckboxProps,
-  IconToggle,
-  IconToggleProps,
-  RadioButton,
-  RadioButtonGroup,
-  RadioButtonProps,
-  Ripple,
-  RippleProps,
-  Switch,
-  SwitchProps,
-
-  // Progress as MKProgress,
-  // Slider as MKSlider,
-  // RangeSlider as MKRangeSlider,
-  // Spinner as MKSpinner,
-} from './mdl'
+export * from './theme';
+export * from './mdl';

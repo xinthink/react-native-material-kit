@@ -1,45 +1,9 @@
 /**
+ * The default palette.
+ * @public
  * Created by ywu on 15/7/16.
  */
-interface Palette {
-  Amber: string
-  Blue: string
-  BlueGrey: string
-  Brown: string
-  Cyan: string
-  DeepOrange: string
-  DeepPurple: string
-  Green: string
-  Grey: string
-  Indigo: string
-  LightBlue: string
-  LightGreen: string
-  Lime: string
-  Orange: string
-  Pink: string
-  Purple: string
-  Red: string
-  Silver: string
-  Teal: string
-  Yellow: string
-
-  Transparent: string
-
-  // RGB values
-  RGBAmber: string
-  RGBIndigo: string
-  RGBPink: string
-  RGBPurple: string
-  RGBTeal: string
-
-  // MDL palette (subset)
-  palette_blue_400: string
-  palette_green_500: string
-  palette_red_500: string
-  palette_yellow_600: string
-}
-
-const MkColor: Palette = {
+const MkColor = {
   Amber: '#FFC107',
   Blue: '#2196F3',
   BlueGrey: '#607D8B',
@@ -77,4 +41,4 @@ const MkColor: Palette = {
   palette_yellow_600: 'rgb(253,216,53)',
 };
 
-export default MkColor
+export default MkColor;

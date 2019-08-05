@@ -27,7 +27,10 @@ import Ripple, { RippleProps } from './Ripple';
 
 const DEFAULT_EXTRA_RIPPLE_RADII = 5;
 
-// ## <section id='props'>Props</section>
+/**
+ * ## <section id='props'>Props</section>
+ * @public
+ */
 export type CheckboxProps = {
   // Color of the border (outer circle), when checked
   borderOnColor?: string;
@@ -76,9 +79,9 @@ const defaultProps: CheckboxProps = {
   },
 };
 
-//
-// ## <section id='Checkbox'>Checkbox</section>
-// The `Checkbox` component.
+/**
+ * The `Checkbox` component.
+ */
 export default class Checkbox extends Component<CheckboxProps, CheckboxState> {
   // ## <section id='defaults'>Defaults</section>
   static defaultProps: CheckboxProps = defaultProps;

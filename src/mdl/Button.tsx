@@ -1,59 +1,81 @@
-//
-// MDL-style Button component.
-//
-// - @see [MDL Button](http://www.getmdl.io/components/index.html#buttons-section)
-// - [Props](#props)
-// - [Defaults](#defaults)
-// - [Built-in builders](#builders)
-//
-// Created by ywu on 15/7/2.
-//
-
-import React, {Component, SFC} from 'react'
-
+/**
+ * MDL-style Button component.
+ *
+ * Refer to [MDL Button](http://www.getmdl.io/components/index.html#buttons-section).
+ *
+ * Created by ywu on 15/7/2.
+ */
+import React, { Component, SFC } from 'react';
 import {
   LayoutChangeEvent,
   TextStyle,
   TouchableWithoutFeedback,
   TouchableWithoutFeedbackProps,
-} from 'react-native'
+} from 'react-native';
 
-import MKColor from '../MKColor'
-import {AttrValue, getTheme, Theme} from '../theme'
-import * as utils from '../utils'
-import Ripple, {RippleProps} from './Ripple'
+import MKColor from '../MKColor';
+import { AttrValue, getTheme, Theme } from '../theme';
+import * as utils from '../utils';
+import Ripple, { RippleProps } from './Ripple';
 
-// ## <section id='props'>ButtonProps</section>
+/** Props of {@link Button}, which extends {@link RippleProps} and {@link @types/react-native#TouchableWithoutFeedbackProps | TouchableWithoutFeedbackProps} */
 export interface ButtonProps extends TouchableWithoutFeedbackProps, RippleProps {
-  // Whether this's a FAB
-  fab?: boolean
+  /**
+   * Whether this's a FAB.
+   * @defaultValue `false`
+   */
+  fab?: boolean;
 
-  // Whether the button is enabled
-  enabled?: boolean
+  /**
+   * Whether the button is enabled.
+   * @defaultValue `true`
+   */
+  enabled?: boolean;
 }
 
+/**
+ * State of {@link Button}
+ * @internal
+ */
 interface ButtonState {
-  width: number
-  height: number
+  width: number;
+  height: number;
 }
 
+/**
+ * Default props, see {@link Button.defaultProps}
+ */
+const defaultProps: ButtonProps = {
+  ...Ripple.defaultProps,
+  enabled: true,
+  fab: false,
+  pointerEvents: 'box-only',
+};
 
-//
-// ## <section id='Button'>Button</section>
-// The `Button` component. With configurable shadow, ripple effect, and FAB style.
-//
+// (Most of them are defined as functions, in order to lazy-resolve the theme)
+// default button props
+const defaultStyle: ButtonProps = {
+  style: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 8,
+  },
+};
+
+/**
+ * The `Button` component.
+ *
+ * @remarks
+ * With configurable shadow, ripple effect, and FAB style. See {@link ButtonProps} for the available props.
+ *
+ * Refer to {@link https://material.io/design/components/buttons.html# | Guideline} or {@link https://getmdl.io/components/index.html#buttons-section | MDL implementation}
+ */
 export default class Button extends Component<ButtonProps, ButtonState> {
+  /** Default props */
+  static defaultProps: ButtonProps = defaultProps;
 
-  // ## <section id='defaults'>Defaults</section>
-  static defaultProps: ButtonProps = {
-    // [Ripple defaults](Ripple.html#defaults)...
-    ...Ripple.defaultProps,
-    enabled: true,
-    fab: false,
-    pointerEvents: 'box-only',
-  };
-
-  theme: Theme;
+  /** Reference to App's {@link Theme} */
+  private theme: Theme;
 
   constructor(props: ButtonProps) {
     super(props);
@@ -64,15 +86,7 @@ export default class Button extends Component<ButtonProps, ButtonState> {
     };
   }
 
-  _onLayout = ({nativeEvent: {layout: {width, height}}}: LayoutChangeEvent) => {
-    if (width !== this.state.width || height !== this.state.height) {
-      this.setState({
-        height,
-        width,
-      });
-    }
-  };
-
+  /** {@inheritDoc @types/react#Component.render} */
   render() {
     const touchableProps: TouchableWithoutFeedbackProps = {};
     if (this.props.enabled) {
@@ -113,35 +127,45 @@ export default class Button extends Component<ButtonProps, ButtonState> {
       </TouchableWithoutFeedback>
     );
   }
+
+  /** `onLayout` handler */
+  private _onLayout = ({nativeEvent: {layout: {width, height}}}: LayoutChangeEvent) => {
+    if (width !== this.state.width || height !== this.state.height) {
+      this.setState({
+        height,
+        width,
+      });
+    }
+  };
 }
 
-// --------------------------
-// Pre-defined button variances.
-export const RaisedButton: SFC<ButtonProps> = props =>
-  customizedButton(raisedButton(), props);
+/** Default raised button */
+export const RaisedButton: SFC<ButtonProps> = props => customizedButton(raisedButton(), props);
 
+/** Primary raised button */
 export const ColoredRaisedButton: SFC<ButtonProps> = props =>
   customizedButton(coloredRaisedButton(), props);
 
+/** Raised button with Accent color */
 export const AccentRaisedButton: SFC<ButtonProps> = props =>
   customizedButton(accentRaisedButton(), props);
 
-export const FlatButton: SFC<ButtonProps> = props =>
-  customizedButton(flatButton(), props);
+/** Flat button (text button) */
+export const FlatButton: SFC<ButtonProps> = props => customizedButton(flatButton(), props);
 
-export const Fab: SFC<ButtonProps> = props =>
-  customizedButton(fab(), props);
+/** Default floating action button */
+export const Fab: SFC<ButtonProps> = props => customizedButton(fab(), props);
 
-export const ColoredFab: SFC<ButtonProps> = props =>
-  customizedButton(coloredFab(), props);
+/** Primary floating action button */
+export const ColoredFab: SFC<ButtonProps> = props => customizedButton(coloredFab(), props);
 
-export const AccentFab: SFC<ButtonProps> = props =>
-  customizedButton(accentFab(), props);
+/** Accent colored floating action button */
+export const AccentFab: SFC<ButtonProps> = props => customizedButton(accentFab(), props);
 
 // Factory method to create a button variance
 function customizedButton(
-  {style: baseStyle, ...baseProps}: ButtonProps,
-  {style: customStyle, ...customProps}: ButtonProps
+  { style: baseStyle, ...baseProps }: ButtonProps,
+  { style: customStyle, ...customProps }: ButtonProps
 ): JSX.Element {
   return <Button
     {...baseProps}
@@ -149,16 +173,6 @@ function customizedButton(
     style={[baseStyle, customStyle]}
   />;
 }
-
-// (Most of them are defined as functions, in order to lazy-resolve the theme)
-// default button props
-const button: ButtonProps = {
-  style: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 8,
-  },
-};
 
 // Text style for buttons, default color is `black`
 function buttonText(theme = getTheme(), color: AttrValue = 'black'): TextStyle {
@@ -194,20 +208,25 @@ function raisedButton(theme = getTheme()): ButtonProps {
 }
 
 // Props for colored raised button
-function coloredRaisedButton(theme = getTheme(),
-                             backgroundColor: AttrValue = theme.primaryColor): ButtonProps {
-  const {style, ...props} = button;
+function coloredRaisedButton(
+  theme = getTheme(),
+  backgroundColor: AttrValue = theme.primaryColor
+): ButtonProps {
+  const { style, ...props } = defaultStyle;
   return {
     ...props,
-    style: [style, {
-      backgroundColor: backgroundColor as string,
-      borderRadius: 2,
-      elevation: 4,
-      shadowColor: 'black',
-      shadowOffset: {width: 0, height: 0.5},
-      shadowOpacity: 0.7,
-      shadowRadius: 1,
-    }],
+    style: [
+      style,
+      {
+        backgroundColor: backgroundColor as string,
+        borderRadius: 2,
+        elevation: 4,
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 0.5 },
+        shadowOpacity: 0.7,
+        shadowRadius: 1,
+      },
+    ],
   };
 }
 
@@ -215,39 +234,46 @@ function accentRaisedButton(theme = getTheme()): ButtonProps {
   return coloredRaisedButton(theme, theme.accentColor);
 }
 
-function flatButton(theme = getTheme(),
-                    rippleColor: AttrValue = theme.bgPlain): ButtonProps {
-  const {style, ...props} = button;
+function flatButton(theme = getTheme(), rippleColor: AttrValue = theme.bgPlain): ButtonProps {
+  const { style, ...props } = defaultStyle;
   return {
     ...props,
     maskColor: rippleColor as string,
     rippleColor: rippleColor as string,
     shadowAniEnabled: false,
-    style: [style, {
-      backgroundColor: MKColor.Transparent,
-      borderRadius: 2,
-    }],
+    style: [
+      style,
+      {
+        backgroundColor: MKColor.Transparent,
+        borderRadius: 2,
+      },
+    ],
   };
 }
 
-function coloredFab(theme = getTheme(),
-                    backgroundColor: AttrValue = theme.primaryColor): ButtonProps {
-  const {style, ...props} = button;
+function coloredFab(
+  theme = getTheme(),
+  backgroundColor: AttrValue = theme.primaryColor
+): ButtonProps {
+  const { style, ...props } = defaultStyle;
   return {
     ...props,
     rippleLocation: 'center',
-    style: [style, {
-      backgroundColor: backgroundColor as string,
-      elevation: 4,
-      shadowColor: 'black',
-      shadowOffset: {width: 0, height: 0.5},
-      shadowOpacity: 0.4,
-      shadowRadius: 1,
+    style: [
+      style,
+      {
+        backgroundColor: backgroundColor as string,
+        elevation: 4,
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 0.5 },
+        shadowOpacity: 0.4,
+        shadowRadius: 1,
 
-      borderRadius: 24,
-      height: 48,
-      width: 48,
-    }],
+        borderRadius: 24,
+        height: 48,
+        width: 48,
+      },
+    ],
   };
 }
 
@@ -263,7 +289,7 @@ function fab(theme = getTheme()): ButtonProps {
   };
 }
 
-// Pre-defined Button props/styles for common cases
+/** Pre-defined Button props/styles for common cases */
 export const ButtonStyles = {
   buttonText,
   buttonTextAccent,
