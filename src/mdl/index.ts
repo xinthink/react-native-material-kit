@@ -18,6 +18,8 @@ import IconToggle from './IconToggle';
 import RadioButton from './RadioButton';
 import RadioButtonGroup from './RadioButtonGroup';
 import Ripple from './Ripple';
+// @ts-ignore
+import Spinner from './Spinner';
 import Switch from './Switch';
 
 export {
@@ -30,12 +32,12 @@ export {
   Fab,
   FlatButton,
   RaisedButton,
-
   Checkbox,
   IconToggle,
   RadioButton,
   RadioButtonGroup,
   Ripple,
+  Spinner,
   Switch,
 };
 
@@ -45,5 +47,6 @@ export { CheckboxProps } from './Checkbox';
 export { IconToggleProps } from './IconToggle';
 export { RadioButtonProps } from './RadioButton';
 export { RippleProps } from './Ripple';
+export { SpinnerProps } from './spinner_common';
 export { SwitchProps } from './Switch';
 export * from '../types';
