@@ -5,8 +5,4 @@ cache: yarn
 script: yarn build
 
 notifications:
-  email: false
-  webhooks:
-    urls:
-      - https://us-central1-hook-a4883.cloudfunctions.net/travisTelegram
-    on_success: always
+  webhooks: https://us-central1-hook-a4883.cloudfunctions.net/travisTelegram
