@@ -20,7 +20,7 @@ const MKSpinner = requireNativeComponent<SpinnerProps>('MKSpinner');
  * @remarks
  * See {@link SpinnerProps} for the available props.
  *
- * Refer to {@link https://material.io/design/components/progress-indicators.html# | Guideline} or {@link http://www.getmdl.io/components/index.html#loading-section/spinner | MDL implementation}
+ * Refer to {@link https://material.io/design/components/progress-indicators.html#circular-progress-indicators | Guideline} or {@link http://www.getmdl.io/components/index.html#loading-section/spinner | MDL implementation}
  */
 export default function Spinner(props: SpinnerProps): JSX.Element {
   const theme = getTheme();
