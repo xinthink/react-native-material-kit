@@ -15,6 +15,8 @@ import Button, {
 
 import Checkbox from './Checkbox';
 import IconToggle from './IconToggle';
+import IndeterminateProgress from './IndeterminateProgress';
+import Progress from './Progress';
 import RadioButton from './RadioButton';
 import RadioButtonGroup from './RadioButtonGroup';
 import Ripple from './Ripple';
@@ -34,6 +36,8 @@ export {
   RaisedButton,
   Checkbox,
   IconToggle,
+  IndeterminateProgress,
+  Progress,
   RadioButton,
   RadioButtonGroup,
   Ripple,
@@ -45,6 +49,7 @@ export {
 export { ButtonProps } from './Button';
 export { CheckboxProps } from './Checkbox';
 export { IconToggleProps } from './IconToggle';
+export { ProgressProps, SimpleProgressProps } from './progress_common';
 export { RadioButtonProps } from './RadioButton';
 export { RippleProps } from './Ripple';
 export { SpinnerProps } from './spinner_common';
