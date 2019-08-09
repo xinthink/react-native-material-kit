@@ -1,7 +1,7 @@
 /**
  * MDL-style Button component.
  *
- * Refer to [MDL Button](http://www.getmdl.io/components/index.html#buttons-section).
+ * Refer to {@link http://www.getmdl.io/components/index.html#buttons-section | MDL Button} .
  *
  * Created by ywu on 15/7/2.
  */
@@ -116,20 +116,17 @@ export default class Button extends Component<ButtonProps, ButtonState> {
 
     return (
       <TouchableWithoutFeedback {...touchableProps}>
-        <Ripple
-          {...this.props}
-          {...maskProps}
-          style={[
-            this.props.style,
-            fabStyle,
-          ]}
-        />
+        <Ripple {...this.props} {...maskProps} style={[this.props.style, fabStyle]} />
       </TouchableWithoutFeedback>
     );
   }
 
   /** `onLayout` handler */
-  private _onLayout = ({nativeEvent: {layout: {width, height}}}: LayoutChangeEvent) => {
+  private _onLayout = ({
+    nativeEvent: {
+      layout: { width, height },
+    },
+  }: LayoutChangeEvent) => {
     if (width !== this.state.width || height !== this.state.height) {
       this.setState({
         height,
@@ -167,11 +164,7 @@ function customizedButton(
   { style: baseStyle, ...baseProps }: ButtonProps,
   { style: customStyle, ...customProps }: ButtonProps
 ): JSX.Element {
-  return <Button
-    {...baseProps}
-    {...customProps}
-    style={[baseStyle, customStyle]}
-  />;
+  return <Button {...baseProps} {...customProps} style={[baseStyle, customStyle]} />;
 }
 
 // Text style for buttons, default color is `black`

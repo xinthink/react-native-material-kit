@@ -1,17 +1,9 @@
-//
-// Reusable Ripple layout
-//
-// - [Props](#props)
-// - [Defaults](#defaults)
-//
-// Created by ywu on 15/8/2.
-//
-
-import React, {
-  Component,
-  createRef,
-} from 'react'
-
+/**
+ * Reusable Ripple layout
+ *
+ * Created by ywu on 15/8/2.
+ */
+import React, { Component, createRef } from 'react';
 import {
   Animated,
   findNodeHandle,
@@ -19,88 +11,91 @@ import {
   LayoutRectangle,
   MeasureOnSuccessCallback,
   NativeModules,
-  Platform, StyleProp, ViewStyle,
-} from 'react-native'
+  Platform,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 
-import MKTouchable, {
-  MKTouchableProps,
-  TouchEvent,
-} from '../internal/MKTouchable'
-import {RippleLocation} from '../MKPropTypes'
+import MKTouchable, { MKTouchableProps, TouchEvent } from '../internal/MKTouchable';
+import { RippleLocation } from '../MKPropTypes';
 
 const UIManager = NativeModules.UIManager;
 
-// ## <section id='props'>Props</section>
+/** Props of {@link Ripple } */
 export type RippleProps = {
-  // Color of the `Ripple` layer
-  rippleColor?: string,
+  /** Color of the `Ripple` layer */
+  rippleColor?: string;
 
-  // Duration of the ripple effect, in milliseconds
-  rippleDuration?: number,
+  /** Duration of the ripple effect, in milliseconds */
+  rippleDuration?: number;
 
-  // Hot-spot position of the ripple effect, [available values](../MKPropTypes.html#RippleLocation)
-  rippleLocation?: RippleLocation,
+  /** Hot-spot position of the ripple effect, see {@link RippleLocation} */
+  rippleLocation?: RippleLocation;
 
-  // Whether a `Mask` layer should be used, to clip the ripple to the container’s bounds,
-  // default is `true`
-  maskEnabled?: boolean,
+  /**
+   * Whether a `Mask` layer should be used, to clip the ripple to the container’s bounds, default is `true`
+   * @defaultValue `true`
+   */
+  maskEnabled?: boolean;
 
-  // Color of the `Mask` layer
-  maskColor?: string,
+  /** Color of the `Mask` layer */
+  maskColor?: string;
 
-  // Border width TODO move to `style`?
+  /** Border width TODO move to `style`? */
   borderWidth?: number;
 
-  // Border radius of the `Mask` layer
-  maskBorderRadius?: number,
+  /** Border radius of the `Mask` layer */
+  maskBorderRadius?: number;
 
-  // Border radius of the `Mask` layer, in percentage (of min(width, height))
-  maskBorderRadiusInPercent?: number,
+  /** Border radius of the `Mask` layer, in percentage (of min(width, height)) */
+  maskBorderRadiusInPercent?: number;
 
-  // Duration of the mask effect (alpha), in milliseconds
-  maskDuration?: number,
+  /** Duration of the mask effect (alpha), in milliseconds */
+  maskDuration?: number;
 
-  // Animating the shadow (on pressed/released) or not
-  shadowAniEnabled?: boolean,
+  /** Animating the shadow (on pressed/released) or not */
+  shadowAniEnabled?: boolean;
 
-  disabled?: boolean,
-} & MKTouchableProps
+  /** Whether the component is disabled */
+  disabled?: boolean;
+} & MKTouchableProps;
 
+/** State of the {@link Ripple} */
 interface RippleState {
-  width: number,
-  height: number,
-  maskBorderRadius: number,
-  shadowOffsetY: number,
+  width: number;
+  height: number;
+  maskBorderRadius: number;
+  shadowOffsetY: number;
   ripple: {
-    radii: number,
-    dia: number,
+    radii: number;
+    dia: number;
     offset: {
-      top: number,
-      left: number,
-    },
-  },
+      top: number;
+      left: number;
+    };
+  };
 }
 
+/** Default props of {@link Ripple} */
 const defaultProps: RippleProps = {
   borderWidth: 0,
   disabled: false,
   maskBorderRadius: 2,
   maskBorderRadiusInPercent: 0,
-  maskColor: 'rgba(255,255,255,0.15)',
+  maskColor: 'rgba(255, 255, 255, 0.15)',
   maskDuration: 200,
   maskEnabled: true,
-  rippleColor: 'rgba(255,255,255,0.2)',
+  rippleColor: 'rgba(255, 255, 255, 0.2)',
   rippleDuration: 200,
   rippleLocation: 'tapLocation',
   shadowAniEnabled: true,
-}
+};
 
-//
-// ## <section id='Ripple'>Ripple</section>
-// Reusable `Ripple` effect.
-//
+/**
+ * Reusable `Ripple` effect.
+ */
 export default class Ripple extends Component<RippleProps, RippleState> {
-  // ## <section id='defaults'>Defaults</section>
+  /** Default props */
   static defaultProps: RippleProps = defaultProps;
 
   private containerRef = createRef<Component>();
@@ -127,12 +122,17 @@ export default class Ripple extends Component<RippleProps, RippleState> {
     };
   }
 
+  /**
+   * Measure the size of the `Ripple`.
+   * @param cb {@link MeasureOnSuccessCallback | measurement callback}
+   */
   measure(cb: MeasureOnSuccessCallback) {
-    return this.containerRef.current &&
-      UIManager.measure(findNodeHandle(this.containerRef.current), cb);
+    // eslint-disable-next-line prettier/prettier
+    return this.containerRef.current && UIManager.measure(
+      findNodeHandle(this.containerRef.current) || 0, cb);
   }
 
-  // Start the ripple effect
+  /** Start the ripple effect */
   showRipple() {
     this._animatedAlpha.setValue(1);
     this._animatedRippleScale.setValue(0.3);
@@ -159,7 +159,7 @@ export default class Ripple extends Component<RippleProps, RippleState> {
     });
   }
 
-  // Stop the ripple effect
+  /** Stop the ripple effect */
   hideRipple() {
     this._pendingRippleAni = () => {
       // hide the ripple layer
@@ -183,6 +183,7 @@ export default class Ripple extends Component<RippleProps, RippleState> {
     }
   }
 
+  /** {@inheritDoc @types/react#Component.render} */
   render() {
     const shadowStyle: StyleProp<ViewStyle> = {};
     if (this.props.shadowAniEnabled) {
@@ -226,9 +227,7 @@ export default class Ripple extends Component<RippleProps, RippleState> {
               ...this.state.ripple.offset,
               backgroundColor: this.props.rippleColor,
               borderRadius: this.state.ripple.radii,
-              transform: [
-                { scale: this._animatedRippleScale },
-              ],
+              transform: [{ scale: this._animatedRippleScale }],
             }}
           />
         </Animated.View>
@@ -259,6 +258,7 @@ export default class Ripple extends Component<RippleProps, RippleState> {
     let maskBorderRadius = this.props.maskBorderRadius || 0;
 
     if (maskRadiiPercent) {
+      // eslint-disable-next-line prettier/prettier
       maskBorderRadius = Math.min(width, height) * maskRadiiPercent / 100;
     }
 
@@ -277,14 +277,17 @@ export default class Ripple extends Component<RippleProps, RippleState> {
       hotSpotX = width / 2;
       hotSpotY = height / 2;
     }
-    const offsetX = Math.max(hotSpotX, (width - hotSpotX));
-    const offsetY = Math.max(hotSpotY, (height - hotSpotY));
+    const offsetX = Math.max(hotSpotX, width - hotSpotX);
+    const offsetY = Math.max(hotSpotY, height - hotSpotY);
 
     // FIXME Workaround for Android not respect `overflow`
     // @see https://github.com/facebook/react-native/issues/3198
-    if (Platform.OS === 'android'
-        && this.props.rippleLocation === 'center'
-        && this.props.maskEnabled && maskRadiusPercent > 0) {
+    if (
+      Platform.OS === 'android' &&
+      this.props.rippleLocation === 'center' &&
+      this.props.maskEnabled &&
+      maskRadiusPercent > 0
+    ) {
       // limit ripple to the bounds of mask
       radii = maskBorderRadius;
     } else {
@@ -305,7 +308,9 @@ export default class Ripple extends Component<RippleProps, RippleState> {
 
   // Touch events handling
   private _onTouchEvent = (evt: TouchEvent) => {
-    if (this.props.disabled) return;
+    if (this.props.disabled) {
+      return;
+    }
 
     switch (evt.type) {
       case 'TOUCH_DOWN':
