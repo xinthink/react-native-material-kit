@@ -35,7 +35,12 @@ npm-debug.log
 local.properties
 .gradle/
 
-lib/**/*.d.ts
-lib/**/*.ts.map
-lib/**/*.js.map
-!lib/react-native-material-kit.d.ts
+src/
+.eslintignore
+.eslintrc.js
+.gitattributes
+.prettierignore
+.vscode/
+travis.yml
+tslint.json
+__tests__/
