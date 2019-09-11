@@ -10,18 +10,10 @@
 // Created by ywu on 15/8/3.
 //
 
-import React, {
-  Component,
-} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  Animated,
-  TextInput,
-  View,
-  NativeModules,
-  findNodeHandle,
-} from 'react-native';
+import { Animated, findNodeHandle, NativeModules, TextInput, View } from 'react-native';
 
 import { pick } from 'ramda';
 import * as MKPropTypes from '../MKPropTypes';
@@ -64,7 +56,7 @@ class FloatingLabel extends Component {
     const height = layout.height;
 
     if (width && !this.offsetX) {
-      this.offsetX = ((width - (width * 0.8)) / 2 * -1) - x;
+      this.offsetX = ((width - width * 0.8) / 2) * -1 - x;
     }
 
     if (height && !this.placeholderHeight) {
@@ -91,16 +83,18 @@ class FloatingLabel extends Component {
       return [];
     }
 
-    return [Animated.sequence([
-      Animated.timing(this.state.opacity, {
-        toValue: 1,
-        duration: this.props.opacityAniDur,
-      }),
-      Animated.timing(this.state.progress, {
-        toValue: 0,
-        duration: this.props.floatingLabelAniDuration,
-      }),
-    ])];
+    return [
+      Animated.sequence([
+        Animated.timing(this.state.opacity, {
+          toValue: 1,
+          duration: this.props.opacityAniDur,
+        }),
+        Animated.timing(this.state.progress, {
+          toValue: 0,
+          duration: this.props.floatingLabelAniDuration,
+        }),
+      ]),
+    ];
   }
 
   aniSinkLabel() {
@@ -108,16 +102,18 @@ class FloatingLabel extends Component {
       return [];
     }
 
-    return [Animated.sequence([
-      Animated.timing(this.state.progress, {
-        toValue: 1,
-        duration: this.props.floatingLabelAniDuration,
-      }),
-      Animated.timing(this.state.opacity, {
-        toValue: 0,
-        duration: this.props.opacityAniDur,
-      }),
-    ])];
+    return [
+      Animated.sequence([
+        Animated.timing(this.state.progress, {
+          toValue: 1,
+          duration: this.props.floatingLabelAniDuration,
+        }),
+        Animated.timing(this.state.opacity, {
+          toValue: 0,
+          duration: this.props.opacityAniDur,
+        }),
+      ]),
+    ];
   }
 
   render() {
@@ -138,7 +134,12 @@ class FloatingLabel extends Component {
 
     const labelX = this.state.progress.interpolate({
       inputRange: [0, 1],
-      outputRange: [this.offsetX, 0],
+      outputRange: [
+        this.props.floatingOffsetX || this.props.floatingOffsetX === 0
+          ? this.props.floatingOffsetX
+          : this.offsetX,
+        0,
+      ],
     });
 
     return (
@@ -146,21 +147,19 @@ class FloatingLabel extends Component {
         ref="label"
         pointerEvents="none"
         allowFontScaling={this.props.allowFontScaling}
-
-        style={[{
-          backgroundColor: MKColor.Transparent,
-          position: 'absolute',
-          top: labelY,
-          left: labelX,
-          color: labelColor,
-          opacity: this.state.opacity,
-          fontSize: 16,
-          transform: [
-            { scale: labelScale },
-          ],
-          marginBottom: this.props.floatingLabelBottomMargin,
-        },
-        this.props.floatingLabelFont,
+        style={[
+          {
+            backgroundColor: MKColor.Transparent,
+            position: 'absolute',
+            top: labelY,
+            left: labelX,
+            color: labelColor,
+            opacity: this.state.opacity,
+            fontSize: 16,
+            transform: [{ scale: labelScale }],
+            marginBottom: this.props.floatingLabelBottomMargin,
+          },
+          this.props.floatingLabelFont,
         ]}
         onLayout={this._onLabelLayout}
       >
@@ -174,6 +173,9 @@ class FloatingLabel extends Component {
 FloatingLabel.publicPropTypes = {
   // Enable floating label effect
   floatingLabelEnabled: PropTypes.bool,
+
+  // OffsetX of floating
+  floatingOffsetX: PropTypes.number,
 
   // Duration of floating transition, also affect underline animation
   floatingLabelAniDuration: PropTypes.number,
@@ -202,7 +204,6 @@ FloatingLabel.defaultProps = {
   floatingLabelAniDuration: 200,
   opacityAniDur: 0,
 };
-
 
 //
 // ## <section id='Underline'>Underline</section>
@@ -262,16 +263,19 @@ class Underline extends Component {
 
   // the colorful forefront line, animation enabled
   renderUnderline() {
-    return this.props.underlineEnabled && (
-      <Animated.View
-        style={{
-          position: 'absolute',
-          backgroundColor: this.props.highlightColor,
-          height: this.props.underlineSize,
-          left: this.animatedLeft,
-          width: this.animatedLineLength,
-        }}
-      />);
+    return (
+      this.props.underlineEnabled && (
+        <Animated.View
+          style={{
+            position: 'absolute',
+            backgroundColor: this.props.highlightColor,
+            height: this.props.underlineSize,
+            left: this.animatedLeft,
+            width: this.animatedLineLength,
+          }}
+        />
+      )
+    );
   }
 
   render() {
@@ -311,7 +315,6 @@ Underline.defaultProps = {
   underlineAniDur: FloatingLabel.defaultProps.floatingLabelAniDuration,
   underlineSize: 2,
 };
-
 
 //
 // ## <section id='Textfield'>Textfield</section>
@@ -358,8 +361,7 @@ class Textfield extends Component {
   }
 
   componentWillMount() {
-    this.bufferedValue = this.props.value || this.props.text
-    || this.props.defaultValue;
+    this.bufferedValue = this.props.value || this.props.text || this.props.defaultValue;
     this._originPlaceholder = this.props.placeholder;
   }
 
@@ -377,18 +379,18 @@ class Textfield extends Component {
 
   // property initializers begin
 
-  _onTextChange = (text) => {
+  _onTextChange = text => {
     this.bufferedValue = text;
     this._callback('onTextChange', text);
     this._callback('onChangeText', text);
   };
 
-  _onFocus = (e) => {
+  _onFocus = e => {
     this._aniStartHighlight(true);
     this._callback('onFocus', e);
   };
 
-  _onBlur = (e) => {
+  _onBlur = e => {
     this._aniStopHighlight();
     this._callback('onBlur', e);
   };
@@ -418,7 +420,10 @@ class Textfield extends Component {
 
   _onInputMeasured(left, top, width, height) {
     Object.assign(this.inputFrame, {
-      left, top, width, height,
+      left,
+      top,
+      width,
+      height,
     });
     this.refs.underline.updateLineLength(width, () => {
       if (this.bufferedValue || this.isFocused()) {
@@ -448,7 +453,9 @@ class Textfield extends Component {
 
       // and show floating label
       // FIXME workaround https://github.com/facebook/react-native/issues/3220
-      if (this.refs.floatingLabel) this.refs.floatingLabel.updateText(this._originPlaceholder);
+      if (this.refs.floatingLabel) {
+        this.refs.floatingLabel.updateText(this._originPlaceholder);
+      }
     }
 
     // stretch the underline if enabled
@@ -510,7 +517,7 @@ class Textfield extends Component {
       // the floating label
       const props = Object.assign(
         pick(['tintColor', 'highlightColor', 'floatingLabelFont'], tfTheme),
-        utils.extractProps(this, FloatingLabel.propTypes),
+        utils.extractProps(this, FloatingLabel.propTypes)
       );
 
       floatingLabel = (
@@ -525,8 +532,7 @@ class Textfield extends Component {
 
     const underlineProps = Object.assign(
       pick(['tintColor', 'highlightColor'], tfTheme),
-      utils.extractProps(this, ['tintColor',
-        'highlightColor', 'underlineSize', 'underlineEnabled']),
+      utils.extractProps(this, ['tintColor', 'highlightColor', 'underlineSize', 'underlineEnabled'])
     );
     const inputProps = utils.extractProps(this, {
       ...TextInput.propTypes,
@@ -540,15 +546,16 @@ class Textfield extends Component {
           ref="input"
           {...inputProps}
           {...this.props.additionalInputProps}
-          style={[{
-            backgroundColor: MKColor.Transparent,
-            alignSelf: 'stretch',
-            paddingTop: 2,
-            paddingBottom: 2,
-            marginTop: this.state.inputMarginTop,
-          },
-          this.theme.textfieldStyle.textInputStyle,
-          this.props.textInputStyle,
+          style={[
+            {
+              backgroundColor: MKColor.Transparent,
+              alignSelf: 'stretch',
+              paddingTop: 2,
+              paddingBottom: 2,
+              marginTop: this.state.inputMarginTop,
+            },
+            this.theme.textfieldStyle.textInputStyle,
+            this.props.textInputStyle,
           ]}
           onChangeText={this._onTextChange}
           onFocus={this._onFocus}
@@ -627,13 +634,10 @@ Textfield.defaultProps = {
   underlineEnabled: true,
 };
 
-
 // --------------------------
 // Builder
 //
-const {
-  Builder,
-} = require('../builder');
+const { Builder } = require('../builder');
 
 //
 // ## Textfield builder
@@ -667,7 +671,6 @@ class TextfieldBuilder extends Builder {
 // define builder method for each prop
 TextfieldBuilder.defineProps(Textfield.propTypes);
 
-
 // ----------
 // ## <section id="builders">Built-in builders</section>
 //
@@ -678,7 +681,6 @@ function textfield() {
 function textfieldWithFloatingLabel() {
   return textfield().withFloatingLabelEnabled(true);
 }
-
 
 // ## Public interface
 module.exports = Textfield;
