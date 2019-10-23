@@ -20,6 +20,7 @@ import Progress from './Progress';
 import RadioButton from './RadioButton';
 import RadioButtonGroup from './RadioButtonGroup';
 import Ripple from './Ripple';
+import Slider from './Slider';
 // @ts-ignore
 import Spinner from './Spinner';
 import Switch from './Switch';
@@ -41,6 +42,7 @@ export {
   RadioButton,
   RadioButtonGroup,
   Ripple,
+  Slider,
   Spinner,
   Switch,
 };
@@ -52,6 +54,7 @@ export { IconToggleProps } from './IconToggle';
 export { ProgressProps, SimpleProgressProps } from './progress_common';
 export { RadioButtonProps } from './RadioButton';
 export { RippleProps } from './Ripple';
+export { SliderProps } from './Slider';
 export { SpinnerProps } from './spinner_common';
 export { SwitchProps } from './Switch';
 export * from '../types';

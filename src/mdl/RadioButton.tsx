@@ -220,7 +220,7 @@ export default class RadioButton extends Component<RadioButtonProps, RadioButton
   };
 
   // Touch events handling
-  private onTouch = ({type}: TouchEvent) => {
+  private onTouch = ({ type }: TouchEvent) => {
     if (type === 'TOUCH_UP') {
       if (!this.state.checked) {
         this.confirmToggle();
