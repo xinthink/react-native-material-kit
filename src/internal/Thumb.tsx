@@ -31,6 +31,8 @@ const TRACK_EXTRA_MARGIN_H = 5;
 /** Gesture event callback for the `Thumb` component. see {@link GestureResponderEvent} */
 export type ThumbGestureCallback = (thumb: Thumb, event: GestureResponderEvent) => void;
 
+export type NullableThumb = Thumb | null | undefined;
+
 /** Props of {@link Thumb}, which extends {@link @types/react-native#ViewProps | ViewProps}  */
 export interface ThumbProps extends ViewProps {
   /** Callback to handle onPanResponderGrant gesture */
@@ -74,7 +76,8 @@ export default class Thumb extends Component<ThumbProps, ThumbState> {
   static defaultProps = defaultProps;
 
   /** current x-axis position */
-  private x = 0;
+  x = 0;
+
   private _radii = 0;
   private _dia = 0;
   private _containerRadii = 0;

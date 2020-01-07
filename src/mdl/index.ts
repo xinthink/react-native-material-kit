@@ -19,6 +19,7 @@ import IndeterminateProgress from './IndeterminateProgress';
 import Progress from './Progress';
 import RadioButton from './RadioButton';
 import RadioButtonGroup from './RadioButtonGroup';
+import RangeSlider from './RangeSlider';
 import Ripple from './Ripple';
 import Slider from './Slider';
 // @ts-ignore
@@ -41,6 +42,7 @@ export {
   Progress,
   RadioButton,
   RadioButtonGroup,
+  RangeSlider,
   Ripple,
   Slider,
   Spinner,
@@ -53,6 +55,7 @@ export { CheckboxProps } from './Checkbox';
 export { IconToggleProps } from './IconToggle';
 export { ProgressProps, SimpleProgressProps } from './progress_common';
 export { RadioButtonProps } from './RadioButton';
+export { RangeSliderProps } from './RangeSlider';
 export { RippleProps } from './Ripple';
 export { SliderProps } from './Slider';
 export { SpinnerProps } from './spinner_common';

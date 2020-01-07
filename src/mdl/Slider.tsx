@@ -30,7 +30,7 @@ const THUMB_BORDER_WIDTH = 2;
 const TRACK_EXTRA_MARGIN_V = 5;
 const TRACK_EXTRA_MARGIN_H = 5;
 
-/** Props of {@link Slider}, which extends {@link @types/react-native#ViewProps | ViewProps} */
+/** Props of {@link Slider} */
 export interface SliderProps extends ViewProps {
   /**
    * Minimum value of the range, default is `0`.
@@ -77,7 +77,7 @@ export interface SliderProps extends ViewProps {
   /** Callback when the value is confirmed */
   onConfirm?: (value: number) => void;
 
-  /** Step value of the RangeSlider, must be a divisor of max */
+  /** Step value of the Slider, must be a divisor of max */
   step?: number;
 }
 
