@@ -25,6 +25,7 @@ import Slider from './Slider';
 // @ts-ignore
 import Spinner from './Spinner';
 import Switch from './Switch';
+import Textfield from './Textfield';
 
 export {
   AccentFab,
@@ -47,6 +48,7 @@ export {
   Slider,
   Spinner,
   Switch,
+  Textfield,
 };
 
 // Types
@@ -60,4 +62,5 @@ export { RippleProps } from './Ripple';
 export { SliderProps } from './Slider';
 export { SpinnerProps } from './spinner_common';
 export { SwitchProps } from './Switch';
+export { TextfieldProps } from './Textfield';
 export * from '../types';
