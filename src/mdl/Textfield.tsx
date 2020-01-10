@@ -26,9 +26,6 @@ import CompositeAnimation = Animated.CompositeAnimation;
 
 /** Props of the {@link Textfield} component */
 export interface TextfieldProps extends TextInputProps, FloatingLabelPublicProps, UnderlinePublicProps {
-  /** Initial text of the input, alias to `value` */
-  text?: string;
-
   /** alias to `onChangeText` */
   onTextChange?: (text: string) => void;
 
@@ -93,7 +90,6 @@ export default class Textfield extends Component<TextfieldProps, TextfieldState>
   private underlineRef = createRef<Underline>();
   private anim?: CompositeAnimation;
   private _bufferedValue: NullableString;
-  private _originPlaceholder: NullableString;
 
   constructor(props: TextfieldProps) {
     super(props);
@@ -115,7 +111,11 @@ export default class Textfield extends Component<TextfieldProps, TextfieldState>
   }
 
   private set placeholder(placeholder: string) {
-    this.inputRef.current && this.inputRef.current.setNativeProps({ placeholder });
+    this.inputRef.current &&
+      this.inputRef.current.setNativeProps({
+        placeholder,
+        text: this._bufferedValue,
+      });
   }
 
   /**
@@ -141,16 +141,21 @@ export default class Textfield extends Component<TextfieldProps, TextfieldState>
   }
 
   UNSAFE_componentWillMount() {
-    this.bufferedValue = this.props.value || this.props.text || this.props.defaultValue;
-    this._originPlaceholder = this.props.placeholder;
+    this.bufferedValue = this.props.value || this.props.defaultValue;
   }
 
   UNSAFE_componentWillReceiveProps(nextProps: TextfieldProps) {
-    const newText = nextProps.value || nextProps.text || nextProps.defaultValue;
+    const newText = nextProps.value || nextProps.defaultValue;
     if (newText) {
       this.bufferedValue = newText;
     }
-    this._originPlaceholder = nextProps.placeholder;
+
+    if (nextProps.value) {
+      this.bufferedValue = nextProps.value;
+    } else if (nextProps.defaultValue && this.props.defaultValue !== nextProps.defaultValue) {
+      // use defaultValue if it's changed
+      this.bufferedValue = nextProps.defaultValue;
+    }
   }
 
   componentDidMount() {
@@ -271,7 +276,7 @@ export default class Textfield extends Component<TextfieldProps, TextfieldState>
       // and show floating label
       // FIXME workaround https://github.com/facebook/react-native/issues/3220
       if (this.labelRef.current) {
-        this.labelRef.current.updateLabel(this._originPlaceholder || '');
+        this.labelRef.current.updateLabel(this.props.placeholder || '');
       }
     }
 
@@ -289,7 +294,7 @@ export default class Textfield extends Component<TextfieldProps, TextfieldState>
       const onEnd = () => {
         if (this.props.floatingLabelEnabled) {
           // show fixed placeholder after floating label collapsed
-          this.placeholder = this._originPlaceholder || '';
+          this.placeholder = this.props.placeholder || '';
 
           // and hide floating label
           // FIXME workaround https://github.com/facebook/react-native/issues/3220
