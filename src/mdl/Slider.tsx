@@ -378,22 +378,18 @@ export default class Slider extends Component<SliderProps> {
     this.thumbRef.current && this.thumbRef.current.confirmMoveTo();
   }
 
-  // when thumb radii updated, re-calc the dimens
+  // when thumb radii updated, re-calc the dimensions
   private _onThumbRadiiUpdate(props: SliderProps) {
     this._thumbRadiiWithBorder = (props.thumbRadius || 6) + THUMB_BORDER_WIDTH;
     this._trackMarginV =
-      this._thumbRadiiWithBorder * THUMB_SCALE_RATIO +
-      TRACK_EXTRA_MARGIN_V -
-      (props.trackSize || 2) / 2;
+      this._thumbRadiiWithBorder * THUMB_SCALE_RATIO + TRACK_EXTRA_MARGIN_V - (props.trackSize || 2) / 2;
     this._trackMarginH = this._thumbRadiiWithBorder * THUMB_SCALE_RATIO + TRACK_EXTRA_MARGIN_H;
   }
 
   private _verifyStep() {
     const divisor = this.props.max / (this.props.step || 1);
     if (divisor % 1 !== 0) {
-      throw new Error(
-        `Given step ( ${this.props.step} ) must be a divisor of max ( ${this.props.max} )`
-      );
+      throw new Error(`Given step ( ${this.props.step} ) must be a divisor of max ( ${this.props.max} )`);
     }
   }
 }

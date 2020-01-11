@@ -5,7 +5,6 @@
 import Button, {
   AccentFab,
   AccentRaisedButton,
-  ButtonStyles,
   ColoredFab,
   ColoredRaisedButton,
   Fab,
@@ -31,7 +30,6 @@ export {
   AccentFab,
   AccentRaisedButton,
   Button,
-  ButtonStyles,
   ColoredFab,
   ColoredRaisedButton,
   Fab,
@@ -52,7 +50,7 @@ export {
 };
 
 // Types
-export { ButtonProps } from './Button';
+export { ButtonProps, ButtonStyles } from './Button';
 export { CheckboxProps } from './Checkbox';
 export { IconToggleProps } from './IconToggle';
 export { ProgressProps, SimpleProgressProps } from './progress_common';

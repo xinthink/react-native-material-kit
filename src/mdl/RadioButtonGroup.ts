@@ -1,11 +1,11 @@
-import {Prediction} from '../types';
-import RadioButton from './RadioButton'
+import { Prediction } from '../types';
+import RadioButton from './RadioButton';
 
-type Pred = Prediction<RadioButton>
+type Pred = Prediction<RadioButton>;
 
-//
-// ## <section id='Group'>Group</section>
-// Managing a group of radio buttons.
+/**
+ * Managing a group of radio buttons.
+ */
 export default class RadioButtonGroup {
   private readonly onAdd?: Pred;
   private readonly onRemove?: Pred;
@@ -33,7 +33,9 @@ export default class RadioButtonGroup {
   }
 
   onChecked(btn: RadioButton, checked: boolean) {
-    if (checked) this.buttons.forEach(it => (it !== btn) && it.confirmUncheck());
+    if (checked) {
+      this.buttons.forEach(it => it !== btn && it.confirmUncheck());
+    }
   }
 
   private canAdd(btn: RadioButton): boolean {

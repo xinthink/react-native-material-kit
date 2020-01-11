@@ -52,7 +52,6 @@ const defaultProps: ButtonProps = {
   pointerEvents: 'box-only',
 };
 
-// (Most of them are defined as functions, in order to lazy-resolve the theme)
 // default button props
 const defaultStyle: ButtonProps = {
   style: {
@@ -140,12 +139,10 @@ export default class Button extends Component<ButtonProps, ButtonState> {
 export const RaisedButton: SFC<ButtonProps> = props => customizedButton(raisedButton(), props);
 
 /** Primary raised button */
-export const ColoredRaisedButton: SFC<ButtonProps> = props =>
-  customizedButton(coloredRaisedButton(), props);
+export const ColoredRaisedButton: SFC<ButtonProps> = props => customizedButton(coloredRaisedButton(), props);
 
 /** Raised button with Accent color */
-export const AccentRaisedButton: SFC<ButtonProps> = props =>
-  customizedButton(accentRaisedButton(), props);
+export const AccentRaisedButton: SFC<ButtonProps> = props => customizedButton(accentRaisedButton(), props);
 
 /** Flat button (text button) */
 export const FlatButton: SFC<ButtonProps> = props => customizedButton(flatButton(), props);
@@ -159,7 +156,7 @@ export const ColoredFab: SFC<ButtonProps> = props => customizedButton(coloredFab
 /** Accent colored floating action button */
 export const AccentFab: SFC<ButtonProps> = props => customizedButton(accentFab(), props);
 
-// Factory method to create a button variance
+/** Factory method to create a button variance */
 function customizedButton(
   { style: baseStyle, ...baseProps }: ButtonProps,
   { style: customStyle, ...customProps }: ButtonProps
@@ -167,7 +164,7 @@ function customizedButton(
   return <Button {...baseProps} {...customProps} style={[baseStyle, customStyle]} />;
 }
 
-// Text style for buttons, default color is `black`
+/** Text style for buttons, default color is `black` */
 function buttonText(theme = getTheme(), color: AttrValue = 'black'): TextStyle {
   return {
     color: color as string, // AttrValue resolved to string or number when retrieved from a Theme
@@ -176,22 +173,22 @@ function buttonText(theme = getTheme(), color: AttrValue = 'black'): TextStyle {
   };
 }
 
-// Text style for colored buttons
+/** Text style for colored buttons */
 function coloredButtonText(theme = getTheme()): TextStyle {
   return buttonText(theme, 'white');
 }
 
-// Text style using primary color
+/** Text style using primary color */
 function buttonTextPrimary(theme = getTheme()): TextStyle {
   return buttonText(theme, theme.primaryColor);
 }
 
-// Text style using accent color
+/** Text style using accent color */
 function buttonTextAccent(theme = getTheme()): TextStyle {
   return buttonText(theme, theme.accentColor);
 }
 
-// Props for default raised button
+/** Props for a default raised button */
 function raisedButton(theme = getTheme()): ButtonProps {
   return {
     ...coloredRaisedButton(theme, MKColor.Silver),
@@ -200,7 +197,7 @@ function raisedButton(theme = getTheme()): ButtonProps {
   };
 }
 
-// Props for colored raised button
+/** Props for a colored raised button */
 function coloredRaisedButton(
   theme = getTheme(),
   backgroundColor: AttrValue = theme.primaryColor
@@ -223,10 +220,12 @@ function coloredRaisedButton(
   };
 }
 
+/** Props for an accent-colored raised button */
 function accentRaisedButton(theme = getTheme()): ButtonProps {
   return coloredRaisedButton(theme, theme.accentColor);
 }
 
+/** Props for a default flat button */
 function flatButton(theme = getTheme(), rippleColor: AttrValue = theme.bgPlain): ButtonProps {
   const { style, ...props } = defaultStyle;
   return {
@@ -244,10 +243,8 @@ function flatButton(theme = getTheme(), rippleColor: AttrValue = theme.bgPlain):
   };
 }
 
-function coloredFab(
-  theme = getTheme(),
-  backgroundColor: AttrValue = theme.primaryColor
-): ButtonProps {
+/** Props for a colored floating action button */
+function coloredFab(theme = getTheme(), backgroundColor: AttrValue = theme.primaryColor): ButtonProps {
   const { style, ...props } = defaultStyle;
   return {
     ...props,
@@ -270,10 +267,12 @@ function coloredFab(
   };
 }
 
+/** Props for an accent-colored floating action button */
 function accentFab(theme = getTheme()): ButtonProps {
   return coloredFab(theme, theme.accentColor);
 }
 
+/** Props for a default floating action button */
 function fab(theme = getTheme()): ButtonProps {
   return {
     ...coloredFab(theme, MKColor.Silver),

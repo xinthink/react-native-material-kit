@@ -198,7 +198,7 @@ export default class Thumb extends Component<ThumbProps, ThumbState> {
     );
   }
 
-  // when thumb radii updated, re-calc the dimens
+  // when thumb radii updated, re-calc the dimensions
   private _onRadiiUpdate(props: ThumbProps) {
     this._radii = props.radius || 0;
     this._dia = this._radii * 2;

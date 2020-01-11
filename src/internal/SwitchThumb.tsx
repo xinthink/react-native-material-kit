@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
-
-import {
-  Animated,
-  StyleProp,
-  View,
-  ViewProps,
-  ViewStyle,
-} from 'react-native';
+import { Animated, StyleProp, View, ViewProps, ViewStyle } from 'react-native';
 
 import MKColor from '../MKColor';
 
-export type ThumbProps = {
+export interface ThumbProps extends ViewProps {
   checked: boolean;
   onColor?: string;
   offColor?: string;
@@ -18,7 +11,7 @@ export type ThumbProps = {
   rippleAniDuration: number;
   rippleRadius: number;
   thumbStyle?: StyleProp<ViewStyle>;
-} & ViewProps;
+}
 
 interface ThumbState {
   checked: boolean;
@@ -41,11 +34,12 @@ const defaultProps: ThumbProps = {
   },
 };
 
-// ## <section id='thumb'>Thumb</section>
-// `Thumb` component of the [`Switch`](#switch).
-// Which is displayed as a circle with shadow and ripple effect.
+/***
+ * The `Thumb` part of a {@link Switch}.
+ * Which is displayed as a circle with shadow and ripple effect.
+ */
 export class Thumb extends Component<ThumbProps, ThumbState> {
-  // Default props of `Thumb`
+  /** Default props of `Thumb` */
   static defaultProps: ThumbProps = defaultProps;
 
   private animatedRippleScale = new Animated.Value(0);
@@ -70,23 +64,25 @@ export class Thumb extends Component<ThumbProps, ThumbState> {
     }
   }
 
-  // When a toggle action started.
+  /** When a toggle action started. */
   startToggle() {
     this.showRipple();
   }
 
-  // When a toggle action is finished (confirmed or canceled).
+  /** When a toggle action is finished (confirmed or canceled). */
   endToggle() {
     this.hideRipple();
   }
 
-  // When a toggle action (from the given state) is confirmed.
-  // - {`boolean`} `fromState` the previous state
+  /**
+   * When a toggle action (from the given state) is confirmed.
+   * @param `fromState` the previous state
+   */
   confirmToggle(fromState: boolean) {
     this.setState({ checked: !fromState });
   }
 
-  // Start the ripple effect
+  /** Start the ripple effect */
   showRipple() {
     // scaling up the ripple layer
     this.rippleAni = Animated.parallel([
@@ -110,7 +106,7 @@ export class Thumb extends Component<ThumbProps, ThumbState> {
     });
   }
 
-  // Stop the ripple effect
+  /** Stop the ripple effect */
   hideRipple() {
     this.pendingRippleAni = () => {
       Animated.parallel([
@@ -139,18 +135,21 @@ export class Thumb extends Component<ThumbProps, ThumbState> {
 
     return (
       <View
-        style={[this.props.style, {
-          backgroundColor: MKColor.Transparent,
-          height: rippleSize,
-          position: 'absolute',
-          width: rippleSize,
-        }]}
+        style={[
+          this.props.style,
+          {
+            backgroundColor: MKColor.Transparent,
+            height: rippleSize,
+            position: 'absolute',
+            width: rippleSize,
+          },
+        ]}
       >
         <View // the circle
           style={[
             defaultProps.style,
             this.props.thumbStyle,
-            {backgroundColor: this.state.checked ? this.props.onColor : this.props.offColor},
+            { backgroundColor: this.state.checked ? this.props.onColor : this.props.offColor },
           ]}
         />
         <Animated.View // the ripple layer
@@ -164,9 +163,7 @@ export class Thumb extends Component<ThumbProps, ThumbState> {
             borderRadius: this.props.rippleRadius,
             opacity: this.animatedRippleAlpha,
             position: 'absolute',
-            transform: [
-              { scale: this.animatedRippleScale },
-            ],
+            transform: [{ scale: this.animatedRippleScale }],
           }}
         />
       </View>
@@ -176,4 +173,4 @@ export class Thumb extends Component<ThumbProps, ThumbState> {
 
 // Enable animations on `Thumb`
 const AnimatedThumb = Animated.createAnimatedComponent(Thumb);
-export default AnimatedThumb
+export default AnimatedThumb;

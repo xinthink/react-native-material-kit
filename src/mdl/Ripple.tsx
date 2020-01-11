@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 
 import MKTouchable, { MKTouchableProps, TouchEvent } from '../internal/MKTouchable';
-import { RippleLocation } from '../MKPropTypes';
+import { RippleLocation } from '../types';
 
 const UIManager = NativeModules.UIManager;
 
@@ -252,7 +252,7 @@ export default class Ripple extends Component<RippleProps, RippleState> {
     });
   }
 
-  // update Mask layer's dimen
+  // update Mask layer's dimension
   private _calcMaskLayer(width: number, height: number): { maskBorderRadius: number } {
     const maskRadiiPercent = this.props.maskBorderRadiusInPercent;
     let maskBorderRadius = this.props.maskBorderRadius || 0;
@@ -265,7 +265,7 @@ export default class Ripple extends Component<RippleProps, RippleState> {
     return { maskBorderRadius };
   }
 
-  // update Ripple layer's dimen
+  // update Ripple layer's dimension
   private _calcRippleLayer(x0: number, y0: number) {
     const { width, height, maskBorderRadius } = this.state;
     const maskRadiusPercent = this.props.maskBorderRadiusInPercent || 0;

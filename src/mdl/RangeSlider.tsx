@@ -450,7 +450,7 @@ export default class RangeSlider extends Component<RangeSliderProps> {
     ]).start();
   }
 
-  // when thumb radii updated, re-calc the dimens
+  // when thumb radii updated, re-calc the dimensions
   private _onThumbRadiiUpdate(props: RangeSliderProps) {
     const thumbRadii = props.thumbRadius || 0;
     this._thumbRadiiWithBorder = thumbRadii + THUMB_BORDER_WIDTH;

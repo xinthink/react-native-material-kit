@@ -6,14 +6,7 @@
  * Created by ywu on 15/8/14.
  */
 import React, { Component } from 'react';
-import {
-  Animated,
-  LayoutChangeEvent,
-  RotateTransform,
-  StyleProp,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { Animated, LayoutChangeEvent, RotateTransform, StyleProp, View, ViewStyle } from 'react-native';
 
 import MKColor from '../MKColor';
 import { getTheme, Theme } from '../theme';
@@ -22,17 +15,7 @@ import { defaultProps, SpinnerProps, SpinnerState } from './spinner_common';
 // controlling speed of rotation: percent to degree
 const SPINNER_ROTATE_INTERP = {
   inputRange: [0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1],
-  outputRange: [
-    '0deg',
-    '45deg',
-    '90deg',
-    '135deg',
-    '180deg',
-    '225deg',
-    '270deg',
-    '315deg',
-    '360deg',
-  ],
+  outputRange: ['0deg', '45deg', '90deg', '135deg', '180deg', '225deg', '270deg', '315deg', '360deg'],
 };
 
 const L_ARC_ROTATE_INTERP = {
@@ -81,9 +64,7 @@ export default class Spinner extends Component<SpinnerProps, SpinnerState> {
       <Animated.View // the container layer
         style={[
           {
-            transform: [
-              { rotate: this._animatedContainerAngle.interpolate(SPINNER_ROTATE_INTERP) },
-            ],
+            transform: [{ rotate: this._animatedContainerAngle.interpolate(SPINNER_ROTATE_INTERP) }],
           },
           defaultProps.style,
           this.props.style,

@@ -1,49 +1,39 @@
-//
-// Touchable view, for listening to touch events, but not intercept them.
-//
-// Created by ywu on 15/9/22.
-//
+/**
+ *  Touchable view, for listening to touch events, but not intercept them.
+ *
+ *  Created by ywu on 15/9/22.
+ */
+import React, { Component, forwardRef } from 'react';
+import { NativeSyntheticEvent, requireNativeComponent, ViewProps } from 'react-native';
 
-import React, {
-  Component,
-  forwardRef,
-} from 'react'
+import { partial } from 'ramda';
 
-import {
-  NativeSyntheticEvent,
-  requireNativeComponent,
-  ViewProps,
-} from 'react-native'
+import { convertCoordinate } from '../utils';
 
-import {partial} from 'ramda';
-
-import {convertCoordinate} from '../utils'
-
+/** Touching event emitted by a {@link MKTouchable} */
 export interface TouchEvent {
-  type: 'TOUCH_DOWN' | 'TOUCH_UP' | 'TOUCH_MOVE' | 'TOUCH_CANCEL'
-  x: number
-  y: number
+  type: 'TOUCH_DOWN' | 'TOUCH_UP' | 'TOUCH_MOVE' | 'TOUCH_CANCEL';
+  x: number;
+  y: number;
 }
 
-type NativeTouchEvent = NativeSyntheticEvent<TouchEvent>
+/** Touching event emitted by a {@link MKTouchable} */
+type NativeTouchEvent = NativeSyntheticEvent<TouchEvent>;
 
-// ## <section id='props'>Props</section>
-export type MKTouchableProps = {
-  // Touch events callback
-  onTouch?: (event: TouchEvent) => void,
-} & ViewProps
+/** Props of {@link MKTouchable} */
+export interface MKTouchableProps extends ViewProps {
+  /** Touch events callback */
+  onTouch?: (event: TouchEvent) => void;
+}
 
-//
-// ## <section id='MKTouchable'>MKTouchable</section>
-//
-const MKTouchable = forwardRef<Component, MKTouchableProps>((props, ref) =>
-  <NativeTouchable
-    ref={ref}
-    {...props}
-    onChange={partial(onTouch, [props])}
-  />
-);
+/**
+ * Wrap the native component `MKTouchable`.
+ */
+const MKTouchable = forwardRef<Component, MKTouchableProps>((props, ref) => (
+  <NativeTouchable ref={ref} {...props} onChange={partial(onTouch, [props])} />
+));
 
+/** Touch event handler */
 function onTouch(props: MKTouchableProps, event: NativeTouchEvent) {
   if (props.onTouch) {
     const evt = event.nativeEvent;
@@ -62,4 +52,4 @@ const NativeTouchable = requireNativeComponent('MKTouchable', MKTouchable, {
 });
 
 // ## Public interface
-export default MKTouchable
+export default MKTouchable;
