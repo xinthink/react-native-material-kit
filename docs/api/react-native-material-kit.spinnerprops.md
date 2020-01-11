@@ -4,7 +4,7 @@
 
 ## SpinnerProps interface
 
-Props of [Spinner()](./react-native-material-kit.spinner.md)<!-- -->, which extends 
+Props of [Spinner](./react-native-material-kit.spinner.md)<!-- -->, which extends 
 
 <b>Signature:</b>
 

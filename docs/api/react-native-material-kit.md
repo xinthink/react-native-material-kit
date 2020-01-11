@@ -22,6 +22,7 @@ Author: ywu on 15/6/1.
 |  [RangeSlider](./react-native-material-kit.rangeslider.md) | The <code>RangeSlider</code> component. |
 |  [Ripple](./react-native-material-kit.ripple.md) | Reusable <code>Ripple</code> effect. |
 |  [Slider](./react-native-material-kit.slider.md) | The <code>Slider</code> component. |
+|  [Spinner](./react-native-material-kit.spinner.md) | The default <code>Spinner</code> component. |
 |  [Switch](./react-native-material-kit.switch.md) | The <code>Switch</code> component. |
 |  [Textfield](./react-native-material-kit.textfield.md) | The <code>Textfield</code> component, which has an optional  and . - TODO styling <code>read-only</code> &amp; <code>disabled</code> mode |
 
@@ -31,7 +32,6 @@ Author: ywu on 15/6/1.
 |  --- | --- |
 |  [getTheme()](./react-native-material-kit.gettheme.md) | Retrieve a copy of the current theme |
 |  [setTheme(aTheme)](./react-native-material-kit.settheme.md) | Set the current theme. |
-|  [Spinner(props)](./react-native-material-kit.spinner.md) | The default <code>Spinner</code> component. |
 
 ## Interfaces
 
@@ -47,7 +47,7 @@ Author: ywu on 15/6/1.
 |  [RangeSliderProps](./react-native-material-kit.rangesliderprops.md) | Props of [RangeSlider](./react-native-material-kit.rangeslider.md) |
 |  [SimpleProgressProps](./react-native-material-kit.simpleprogressprops.md) | Basic Props of [Progress](./react-native-material-kit.progress.md)<!-- -->, which extends  |
 |  [SliderProps](./react-native-material-kit.sliderprops.md) | Props of [Slider](./react-native-material-kit.slider.md) |
-|  [SpinnerProps](./react-native-material-kit.spinnerprops.md) | Props of [Spinner()](./react-native-material-kit.spinner.md)<!-- -->, which extends  |
+|  [SpinnerProps](./react-native-material-kit.spinnerprops.md) | Props of [Spinner](./react-native-material-kit.spinner.md)<!-- -->, which extends  |
 |  [SwitchProps](./react-native-material-kit.switchprops.md) | Props of [Switch](./react-native-material-kit.switch.md) |
 |  [TextfieldProps](./react-native-material-kit.textfieldprops.md) | Props of the [Textfield](./react-native-material-kit.textfield.md) component |
 |  [Theme](./react-native-material-kit.theme.md) |  |
