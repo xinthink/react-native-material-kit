@@ -1,6 +1,8 @@
 {
   "files.associations": { "*.json": "jsonc" },
-  "eslint.autoFixOnSave": true,
   "eslint.alwaysShowStatus": true,
-  "eslint.packageManager": "yarn"
+  "eslint.packageManager": "yarn",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }
