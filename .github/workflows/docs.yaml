@@ -1,0 +1,27 @@
+name: docs
+
+on:
+  push:
+    branches: master
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    container:
+      image:  google/dart:dev
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Generate Dart API Docs
+      run: |
+        pub get
+        dartdoc --output build
+        touch build/.nojekyll
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v2.8.0
+      env:
+        PERSONAL_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        PUBLISH_BRANCH: gh-pages
+        PUBLISH_DIR: ./build
+      with:
+        emptyCommits: false

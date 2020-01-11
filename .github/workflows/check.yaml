@@ -1,0 +1,37 @@
+name: check
+
+on:
+  push:
+    branches:
+      - master
+      - 'refs/pull/*'
+      - '!**/publish'
+      - '!publish'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image:  google/dart:dev
+    steps:
+    - uses: actions/checkout@v1
+    - run: pub get
+    - name: Check
+      run: |
+        dartanalyzer --options analysis_options.yaml .
+        pub run test
+
+  coverage:
+    runs-on: ubuntu-latest
+    container:
+      image:  google/dart:dev
+    steps:
+    - uses: actions/checkout@v1
+    - run: pub get
+    - name: Code Coverage
+      run: |
+        pub global activate test_coverage
+        pub global run test_coverage
+    - uses: codecov/codecov-action@v1.0.0
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
