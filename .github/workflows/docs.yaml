@@ -5,7 +5,7 @@ on:
     branches: master
 
 jobs:
-  build:
+  docs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -26,3 +26,10 @@ jobs:
       with:
         emptyCommits: false
         keepFiles: true
+    - name: notification
+      if: cancelled() == false
+      uses: xinthink/action-telegram@v1.1
+      with:
+        botToken: ${{ secrets.TelegramBotToken }}
+        chatId: ${{ secrets.TelegramTarget }}
+        jobStatus: ${{ job.status }}

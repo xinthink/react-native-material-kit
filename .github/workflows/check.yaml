@@ -21,3 +21,10 @@ jobs:
       uses: borales/actions-yarn/@v2.0.0
       with:
         cmd: build
+    - name: notification
+      if: cancelled() == false
+      uses: xinthink/action-telegram@v1.1
+      with:
+        botToken: ${{ secrets.TelegramBotToken }}
+        chatId: ${{ secrets.TelegramTarget }}
+        jobStatus: ${{ job.status }}
