@@ -5,14 +5,11 @@ on:
     branches: publish
 
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
-    container:
-      image:  google/dart:dev
     steps:
     - uses: actions/checkout@v1
-    - run: pub get
-    - name: Publish
-      run: |
-        echo "${{ secrets.PUB_CREDENTIALS }}" | base64 --decode > ~/.pub-cache/credentials.json
-        dartanalyzer --options analysis_options.yaml . && pub run test && pub publish --force
+    - name: Build
+      uses: borales/actions-yarn/@v2.0.0
+      with:
+        cmd: build

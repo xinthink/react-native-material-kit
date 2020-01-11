@@ -61,12 +61,12 @@
   "scripts": {
     "lint": "tslint -p .",
     "test": "jest",
-    "build": "yarn clean-ln && yarn lint && tsc",
-    "build-docs": "yarn clean && yarn setup && yarn build && yarn ln && api-extractor run --local --verbose && yarn api-md",
+    "build": "yarn lint && tsc",
+    "build-docs": "yarn clean && yarn setup && yarn ln && yarn build && api-extractor run --local --verbose && yarn api-md",
     "clean": "rm -rf lib temp etc dist docs && yarn clean-ln",
     "clean-ln": "rm -f src/mdl/Spinner.tsx",
-    "ln": "ln -s Spinner.android.tsx src/mdl/Spinner.tsx",
+    "ln": "ln -f src/mdl/Spinner.ios.tsx src/mdl/Spinner.tsx",
     "setup": "mkdir temp etc dist docs",
-    "api-md": "api-documenter markdown --input-folder temp --output-folder docs"
+    "api-md": "api-documenter markdown --input-folder temp --output-folder docs/api"
   }
 }
