@@ -1,5 +1,8 @@
-# OSX
-#
 .DS_Store
-
 *.bak
+
+# jekyll
+_site
+.jekyll*
+.*-cache
+vendor
