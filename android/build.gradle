@@ -1,18 +1,19 @@
 
 buildscript {
     repositories {
+        google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.0'
+        classpath 'com.android.tools.build:gradle:3.4.1'
     }
 }
 
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion '23.0.3'
+    compileSdkVersion project.hasProperty('compileSdkVersion') ? project.compileSdkVersion : 28
+    if (project.hasProperty('buildToolsVersion')) buildToolsVersion project.buildToolsVersion
 
     defaultConfig {
         minSdkVersion 16
@@ -25,10 +26,13 @@ android {
 
 repositories {
     mavenLocal()
+    google()
     jcenter()
     mavenCentral()
 }
 
 dependencies {
-    compile 'com.facebook.react:react-native:0.+'
+    //noinspection GradleDynamicVersion
+    compileOnly 'com.facebook.react:react-native:+'
+    implementation 'androidx.annotation:annotation:1.1.0'
 }

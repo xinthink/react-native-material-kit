@@ -8,7 +8,7 @@
 
 #import <React/RCTViewManager.h>
 #import <React/RCTEventDispatcher.h>
-#import "UIView+React.h"
+#import <React/UIView+React.h>
 #import "MKTouchable.h"
 #import "RCTComponentEvent.h"
 
@@ -57,10 +57,8 @@ RCT_EXPORT_MODULE()
                            @"x": [NSNumber numberWithFloat:location.x],
                            @"y": [NSNumber numberWithFloat:location.y],
                            };
-    RCTComponentEvent *event = [[RCTComponentEvent alloc] initWithName:@"topChange"
-                                                               viewTag:source.reactTag body:dict];
 
-    [self.bridge.eventDispatcher sendEvent:event];
+    [self.bridge enqueueJSCall:@"RCTEventEmitter" method:@"receiveEvent" args:@[dict[@"target"], RCTNormalizeInputEventName(@"topChange"), dict] completion:NULL];
 }
 
 @end

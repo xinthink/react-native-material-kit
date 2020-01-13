@@ -1,0 +1,35 @@
+name: docs
+
+on:
+  push:
+    branches: master
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install
+      uses: borales/actions-yarn/@v2.0.0
+      with:
+        cmd: install
+    - name: Generate tsdoc
+      uses: borales/actions-yarn/@v2.0.0
+      with:
+        cmd: build-docs
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v2.8.0
+      env:
+        PERSONAL_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        PUBLISH_BRANCH: gh-pages
+        PUBLISH_DIR: ./docs
+      with:
+        emptyCommits: false
+        keepFiles: true
+    - name: notification
+      if: cancelled() == false
+      uses: xinthink/action-telegram@v1.1
+      with:
+        botToken: ${{ secrets.TelegramBotToken }}
+        chatId: ${{ secrets.TelegramTarget }}
+        jobStatus: ${{ job.status }}

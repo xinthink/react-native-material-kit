@@ -34,3 +34,8 @@ npm-debug.log
 # Android
 local.properties
 .gradle/
+
+lib/**/*.d.ts
+lib/**/*.ts.map
+lib/**/*.js.map
+!lib/react-native-material-kit.d.ts

@@ -1,0 +1,30 @@
+name: check
+
+on:
+  push:
+    branches:
+      - master
+      - 'refs/pull/*'
+      - '!**/publish'
+      - '!publish'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install
+      uses: borales/actions-yarn/@v2.0.0
+      with:
+        cmd: install
+    - name: Build
+      uses: borales/actions-yarn/@v2.0.0
+      with:
+        cmd: build
+    - name: notification
+      if: cancelled() == false
+      uses: xinthink/action-telegram@v1.1
+      with:
+        botToken: ${{ secrets.TelegramBotToken }}
+        chatId: ${{ secrets.TelegramTarget }}
+        jobStatus: ${{ job.status }}
