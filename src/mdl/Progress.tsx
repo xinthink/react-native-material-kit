@@ -39,7 +39,7 @@ export default class Progress extends Component<ProgressProps> {
   private _totalLength = 0;
 
   /** height of the progress or line width */
-  private _height = new Animated.Value(0);
+  private _height = 0;
 
   private _animatedLength = new Animated.Value(0);
   private _animatedBufferLength = new Animated.Value(0);
@@ -105,7 +105,7 @@ export default class Progress extends Component<ProgressProps> {
           style={{
             position: 'absolute',
             backgroundColor: bufferColor,
-            width: this._animatedBufferLength,
+            width: 0,
             height: this._height,
           }}
         />
@@ -113,8 +113,11 @@ export default class Progress extends Component<ProgressProps> {
           style={{
             position: 'absolute',
             backgroundColor: progressColor,
-            width: this._animatedLength,
+            width: 1,
             height: this._height,
+            transform: [{
+              scaleX: this._animatedLength
+            }]
           }}
         />
       </View>
@@ -129,7 +132,7 @@ export default class Progress extends Component<ProgressProps> {
   }: LayoutChangeEvent) => {
     if (width > 0 && this._totalLength !== width) {
       this._totalLength = width;
-      this._height.setValue(height);
+      this._height= height;
       this._aniUpdateProgress(this.progress);
       this._aniUpdateBuffer(this.buffer);
     }
@@ -145,6 +148,7 @@ export default class Progress extends Component<ProgressProps> {
       toValue: theProgress * this._totalLength,
       duration: this.props.progressAniDuration || 300,
       easing: Easing.out(Easing.quad),
+      useNativeDriver: true
     }).start();
   }
 
@@ -156,6 +160,7 @@ export default class Progress extends Component<ProgressProps> {
     Animated.timing(this._animatedBufferLength, {
       toValue: buffer * this._totalLength,
       duration: this.props.bufferAniDuration || 200,
+      useNativeDriver: true
     }).start();
   }
 }
