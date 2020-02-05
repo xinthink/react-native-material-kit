@@ -3,7 +3,7 @@
   "version": "0.6.0-dev",
   "description": "Bringing Material Design to React Native",
   "main": "lib/index.js",
-  "typings": "lib/react-native-material-kit.d.ts",
+  "typings": "lib/index.d.ts",
   "author": "Yingxin Wu <yingxinwu.g@gmail.com>",
   "contributors": [
     "Quentin Valmori (https://github.com/Crash--)",
