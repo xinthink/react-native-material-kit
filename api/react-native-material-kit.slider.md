@@ -23,7 +23,6 @@ export default class Slider extends Component<SliderProps>
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [defaultProps](./react-native-material-kit.slider.defaultprops.md) | <code>static</code> | <code>SliderProps</code> | Defaults, see  |
-|  [value](./react-native-material-kit.slider.value.md) |  | <code>number</code> |  |
 
 ## Methods
 

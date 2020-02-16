@@ -23,8 +23,6 @@ export default class RangeSlider extends Component<RangeSliderProps>
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [defaultProps](./react-native-material-kit.rangeslider.defaultprops.md) | <code>static</code> | <code>RangeSliderProps</code> | Defaults, see  |
-|  [maxValue](./react-native-material-kit.rangeslider.maxvalue.md) |  | <code>number</code> | Retrieve the current <code>maxValue</code> |
-|  [minValue](./react-native-material-kit.rangeslider.minvalue.md) |  | <code>number</code> | Retrieve the current <code>minValue</code> |
 
 ## Methods
 

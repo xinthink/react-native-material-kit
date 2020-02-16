@@ -22,10 +22,8 @@ export default class Progress extends Component<ProgressProps>
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [buffer](./react-native-material-kit.progress.buffer.md) |  | <code>number</code> | Get current buffering progress |
 |  [defaultProps](./react-native-material-kit.progress.defaultprops.md) | <code>static</code> | <code>ProgressProps</code> | Defaults, see  |
 |  [Indeterminate](./react-native-material-kit.progress.indeterminate.md) | <code>static</code> | <code>typeof IndeterminateProgress</code> | The indeterminate version of [Progress](./react-native-material-kit.progress.md) |
-|  [progress](./react-native-material-kit.progress.progress.md) |  | <code>number</code> | Get current progress |
 
 ## Methods
 
