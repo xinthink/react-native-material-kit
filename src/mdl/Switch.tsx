@@ -208,7 +208,7 @@ export default class Switch extends Component<SwitchProps, SwitchState> {
     return animatedThumb && (animatedThumb.getNode() as Thumb);
   }
 
-  private getBgColor(theme: Theme): string {
+  private getBgColor(theme: any): string {
     const onColor = this.props.onColor || (theme.onColor as string);
     const offColor = this.props.offColor || (theme.offColor as string);
     return this.state.checked ? onColor : offColor;

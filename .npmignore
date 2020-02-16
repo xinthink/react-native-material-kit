@@ -40,4 +40,5 @@ lib/**/*.ts.map
 lib/**/*.js.map
 !lib/react-native-material-kit.d.ts
 
+src/
 example/
