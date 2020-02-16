@@ -1,6 +1,6 @@
 {
   "name": "react-native-material-kit",
-  "version": "0.6.0-dev",
+  "version": "0.6.0-beta.1",
   "description": "Bringing Material Design to React Native",
   "main": "lib/index.js",
   "typings": "lib/react-native-material-kit.d.ts",
@@ -62,6 +62,7 @@
     "clean": "rm -rf lib temp etc dist docs && yarn clean-ln",
     "clean-ln": "rm -f src/mdl/Spinner.tsx",
     "ln": "ln -f src/mdl/Spinner.ios.tsx src/mdl/Spinner.tsx",
+    "build-publish": "yarn build-docs && yarn clean-ln && rm lib/mdl/Spinner.js",
     "setup": "mkdir temp etc dist docs",
     "api-md": "api-documenter markdown --input-folder temp --output-folder docs/api"
   }
