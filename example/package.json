@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "react-native start",
+    "prestart": "npm run --prefix .. build",
     "cli": "react-native",
     "devices": "xcrun simctl list && adb devices",
     "ios": "yarn cli run-ios",
