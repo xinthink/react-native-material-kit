@@ -1,36 +1,33 @@
-# react-native-material-kit demo
+# Example APP
 
-## RNMK resources
-- [GitHub][RNMK]
-- [Docs (annotated source)][docs]
-- [Change logs][releases]
+## Build & run the example app
 
-## Debugging local RNMK module
+Checkout the [repo] first.
 
-- Checkout [RNMK Demo]
-- Clone [RNMK] into the *Libraries* directory (inside the demo project)
-- Edit `react-native.config.js` file, replace `<absolute_project_root>` with your local project directory
-- Link your local RNMK module to the demo project
-  ```sh
-  cd rnmk-demo
-  yarn
+Build & launch:
 
-  (cd Libraries/react-native-material-kit && yarn && yarn build)
-  (cd iOS && pod install)
-  ```
-- Commands
-  - `yarn start` to start the dev server
-  - `yarn iosx` build your app and starts it on iOS simulator
-  - `yarn android` build your app and starts it on a connected Android emulator or device
-  - or run any `react-native` commands: `yarn cli [options] [command]`
+```sh
+yarn # install dependencies 
 
-## License
-[MIT][license]
+cd example
+yarn # install dependencies of the example app 
+(cd iOS && pod install) # prepare iOS xcode workspace
+yarn start # start the react-native packager
+yarn ios # or yarn android, launch the example app
+```
 
-[RNMK Demo]: https://github.com/xinthink/rnmk-demo
-[RNMK]: https://github.com/xinthink/react-native-material-kit
-[docs]: http://xinthink.github.io/react-native-material-kit/docs/index.html
-[releases]: https://github.com/xinthink/react-native-material-kit/releases
-[license]: https://raw.githubusercontent.com/xinthink/react-native-material-kit/master/LICENSE.md
-[doesn't resolve symbolic links]: https://github.com/facebook/react-native/issues/637
-[ios guide]: https://github.com/xinthink/react-native-material-kit#ios
+Available npm scripts:
+- `yarn start` to start the dev server
+- `yarn ios` build your app and starts it on iOS simulator
+- `yarn iosx` build your app and starts it on iPhone X simulator
+- `yarn android` build your app and starts it on a connected Android emulator or device
+- or run any `react-native` commands: `yarn cli [options] [command]`
+
+## Resources
+
+- :point_right: [Getting Started Guide]
+- :point_right: [API Docs]
+
+[repo]: https://github.com/xinthink/react-native-material-kit
+[Getting Started Guide]: https://github.com/xinthink/react-native-material-kit#getting-started
+[API Docs]: https://rnmk.xinthink.com/api/react-native-material-kit/
