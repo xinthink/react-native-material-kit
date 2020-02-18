@@ -4,9 +4,6 @@ on:
   release:
     types: published
 
-env:
-  NPM_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
-
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -21,7 +18,9 @@ jobs:
       with:
         cmd: build-publish
     - name: Publish
-      run: npm publish
+      run: |
+        echo '//registry.npmjs.org/:_authToken=${{ secrets.NPM_ACCESS_TOKEN }}' >> ~/.npmrc
+        npm publish
     - name: notification
       if: cancelled() == false
       uses: xinthink/action-telegram@v1.1
