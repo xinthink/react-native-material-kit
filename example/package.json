@@ -1,5 +1,5 @@
 {
-  "name": "rnmk_demo",
+  "name": "example",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,12 +7,12 @@
     "prestart": "npm run --prefix .. build",
     "cli": "react-native",
     "devices": "xcrun simctl list && adb devices",
-    "ios": "yarn cli run-ios",
-    "iosx": "yarn ios --simulator='iPhone X'",
+    "ios": "react-native run-ios",
+    "iosx": "react-native run-ios --simulator='iPhone X'",
     "android": "yarn cli run-android",
     "logcat": "adb logcat ReactNativeJS:V RNMK:V AndroidRuntime:E System.out:V System.err:V *:S",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.6",
@@ -29,16 +29,29 @@
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/runtime": "^7.6.2",
-    "@react-native-community/eslint-config": "^0.0.7",
-    "babel-jest": "^25.1.0",
+    "@react-native-community/eslint-config": "^0.0.5",
+    "@types/jest": "^24.0.24",
+    "@types/react-native": "^0.60.25",
+    "@types/react-test-renderer": "16.9.1",
+    "@typescript-eslint/eslint-plugin": "^2.12.0",
+    "@typescript-eslint/parser": "^2.12.0",
+    "babel-jest": "^24.9.0",
     "babel-plugin-module-resolver": "^4.0.0",
-    "escape-string-regexp": "^2.0.0",
     "eslint": "^6.5.1",
-    "jest": "^25.1.0",
-    "metro-react-native-babel-preset": "^0.58.0",
-    "react-test-renderer": "~16.9.0"
+    "jest": "^24.9.0",
+    "metro-react-native-babel-preset": "^0.56.0",
+    "react-test-renderer": "16.9.0",
+    "typescript": "^3.7.3"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }

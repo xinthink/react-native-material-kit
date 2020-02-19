@@ -25,22 +25,13 @@ project.xcworkspace
 # WebStorm/Android/IntelliJ
 #
 *.iml
+.idea/
 build/
 .gradle
 local.properties
-**/.idea/*.iml
-**/.idea/.name
-**/.idea/caches
-# .idea/dictionaries
-**/.idea/gradle.xml
-**/.idea/jsLibraryMappings.xml
-**/.idea/libraries
-**/.idea/misc.xml
-**/.idea/modules.xml
-**/.idea/runConfigurations.xml
-**/.idea/tasks.xml
-**/.idea/vcs.xml
-**/.idea/workspace.xml
+
+# VS Code
+.vscode/
 
 # node.js
 #
