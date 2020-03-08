@@ -369,7 +369,7 @@ const CustomTextfield = mdl.Textfield.textfield()
 the jsx equivalent:
 
 ```jsx
-<MKTextField
+<Textfield
   tintColor={MKColor.Lime}
   textInputStyle={{color: MKColor.Orange}}
   placeholder=“Text…”
