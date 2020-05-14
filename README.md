@@ -10,7 +10,7 @@ A set of UI components, in the purpose of introducing [Material Design][md] to a
 
 [npm-badge]: https://img.shields.io/npm/v/react-native-material-kit.svg
 [npm]: https://www.npmjs.com/package/react-native-material-kit
-[rn-badge]: https://img.shields.io/badge/react--native-v0.56-05A5D1.svg
+[rn-badge]: https://img.shields.io/badge/react--native-v0.61-05A5D1.svg
 [rn]: https://facebook.github.io/react-native
 [md]: http://www.google.com/design/spec/material-design/introduction.html
 [license-badge]: https://img.shields.io/dub/l/vibe-d.svg
@@ -122,7 +122,7 @@ Have fun! :metal:
 - Chat about bugs/features on [Gitter][gitter-rnmk]
 
 [docs]: http://xinthink.github.io/react-native-material-kit/docs/index.html
-[Demo app]: https://github.com/xinthink/rnmk-demo
+[Demo app]: https://github.com/xinthink/react-native-material-kit/tree/master/example
 [debug-with-demo]: https://github.com/xinthink/rnmk-demo#debugging-local-rnmk-module
 [Release Notes]: https://github.com/xinthink/react-native-material-kit/releases
 
@@ -212,7 +212,7 @@ the jsx equivalent:
 [img-buttons]: https://cloud.githubusercontent.com/assets/390805/8888853/69f8d9f8-32f2-11e5-9823-c235ab8c0dd2.gif
 [mdl-buttons]: http://www.getmdl.io/components/index.html#buttons-section
 [mdl-theme]: http://www.getmdl.io/customize/index.html
-[buttons-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/buttons.js
+[buttons-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/example/app/buttons.js
 [issue-3]: https://github.com/xinthink/react-native-material-kit/issues/3
 [button-props-doc]: http://xinthink.github.io/react-native-material-kit/docs/lib/mdl/Button.html#props
 
@@ -245,7 +245,7 @@ const theme = getTheme();
 
 [cards-mdl]: http://www.getmdl.io/components/index.html#cards-section
 [img-cards]: https://cloud.githubusercontent.com/assets/390805/10262736/4411994a-6a07-11e5-8a72-b7a46ba5e4a9.png
-[card-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/cards.js
+[card-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/example/app/cards.js
 
 ### Loading
 [MDL Loading][mdl-loading] components.
@@ -274,7 +274,7 @@ const theme = getTheme();
 [mdl-loading]: http://www.getmdl.io/components/index.html#loading-section
 [progress-demo]: https://cloud.githubusercontent.com/assets/390805/9288698/01e31432-4387-11e5-98e5-85b18471baeb.gif
 [spinner-demo]: https://cloud.githubusercontent.com/assets/390805/9291361/6e7a75bc-43ec-11e5-95be-2b33eb7f8734.gif
-[progress-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/progress.js
+[progress-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/example/app/progress.js
 [prog-props-doc]: http://xinthink.github.io/react-native-material-kit/docs/lib/mdl/Progress.html#props
 [spinner-props-doc]: http://xinthink.github.io/react-native-material-kit/docs/lib/mdl/Spinner.ios.html#props
 
@@ -332,7 +332,7 @@ const SliderWithRange = mdl.RangeSlider.slider()
 [mdl-slider]: http://www.getmdl.io/components/index.html#sliders-section
 [slider-demo]: https://cloud.githubusercontent.com/assets/390805/10123318/6c502e6e-6569-11e5-924a-62c8b850511c.gif
 [range-slider-demo]: https://cloud.githubusercontent.com/assets/16245422/12763284/63a2dafc-c9a8-11e5-8fde-37b6f42a60c2.gif
-[slider-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/sliders.js
+[slider-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/example/app/sliders.js
 [slider-props-doc]: http://xinthink.github.io/react-native-material-kit/docs/lib/mdl/Slider.html#props
 [range-slider-props-doc]: http://xinthink.github.io/react-native-material-kit/docs/lib/mdl/RangeSlider.html#props
 
@@ -369,7 +369,7 @@ const CustomTextfield = mdl.Textfield.textfield()
 the jsx equivalent:
 
 ```jsx
-<MKTextField
+<Textfield
   tintColor={MKColor.Lime}
   textInputStyle={{color: MKColor.Orange}}
   placeholder=“Text…”
@@ -381,7 +381,7 @@ the jsx equivalent:
 
 [mdl-tf]: http://www.getmdl.io/components/#textfields-section
 [img-tf]: https://cloud.githubusercontent.com/assets/390805/9085678/8280484a-3bb1-11e5-9354-a244b0520736.gif
-[tf-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/textfields.js
+[tf-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/example/app/textfields.js
 [tf-props-doc]: http://xinthink.github.io/react-native-material-kit/docs/lib/mdl/Textfield.html#props
 
 ### Toggles
@@ -434,7 +434,7 @@ The two `Text` tags here, similar to [State List][android-state-list] in *Androi
 
 👉 [props reference][switch-js-props-doc] and [example code][toggles-sample]
 
-[toggles-sample]: https://github.com/xinthink/rnmk-demo/blob/master/app/toggles.js
+[toggles-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/example/app/toggles.js
 [switch-js-props-doc]: http://xinthink.github.io/react-native-material-kit/docs/lib/mdl/Switch.html#props
 
 #### Checkbox

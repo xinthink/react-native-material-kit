@@ -1,0 +1,11 @@
+// resolve symbolic links if need
+static def resolve(File dir) {
+    dir.toPath().toAbsolutePath().toFile()
+}
+
+rootProject.name = 'example'
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+include ':app'
+
+include ':RNMaterialKit'
+project(':RNMaterialKit').projectDir = file('../../android')
