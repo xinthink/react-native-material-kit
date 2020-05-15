@@ -52,7 +52,7 @@ lib-cov
 .idea/workspace.xml
 
 rn-cli.config.js
-lib
+# lib
 temp/
 dist/
 etc/
