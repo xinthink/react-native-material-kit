@@ -121,7 +121,7 @@ Have fun! :metal:
 - For contributors, please refer to [How to debug local RNMK module][debug-with-demo]
 - Chat about bugs/features on [Gitter][gitter-rnmk]
 
-[docs]: http://xinthink.github.io/react-native-material-kit/docs/index.html
+[docs]: http://rnmk.xinthink.com/api/react-native-material-kit/
 [Demo app]: https://github.com/xinthink/react-native-material-kit/tree/master/example
 [debug-with-demo]: https://github.com/xinthink/rnmk-demo#debugging-local-rnmk-module
 [Release Notes]: https://github.com/xinthink/react-native-material-kit/releases
@@ -214,7 +214,7 @@ the jsx equivalent:
 [mdl-theme]: http://www.getmdl.io/customize/index.html
 [buttons-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/example/app/buttons.js
 [issue-3]: https://github.com/xinthink/react-native-material-kit/issues/3
-[button-props-doc]: http://xinthink.github.io/react-native-material-kit/docs/lib/mdl/Button.html#props
+[button-props-doc]: http://rnmk.xinthink.com/api/react-native-material-kit.buttonprops/
 
 ### Cards
 [![img-cards]][cards-mdl]
@@ -275,8 +275,8 @@ const theme = getTheme();
 [progress-demo]: https://cloud.githubusercontent.com/assets/390805/9288698/01e31432-4387-11e5-98e5-85b18471baeb.gif
 [spinner-demo]: https://cloud.githubusercontent.com/assets/390805/9291361/6e7a75bc-43ec-11e5-95be-2b33eb7f8734.gif
 [progress-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/example/app/progress.js
-[prog-props-doc]: http://xinthink.github.io/react-native-material-kit/docs/lib/mdl/Progress.html#props
-[spinner-props-doc]: http://xinthink.github.io/react-native-material-kit/docs/lib/mdl/Spinner.ios.html#props
+[prog-props-doc]: http://rnmk.xinthink.com/api/react-native-material-kit.progressprops/
+[spinner-props-doc]: http://rnmk.xinthink.com/api/react-native-material-kit.spinnerprops/
 
 ### Sliders
 [MDL Slider][mdl-slider] components.
@@ -333,8 +333,8 @@ const SliderWithRange = mdl.RangeSlider.slider()
 [slider-demo]: https://cloud.githubusercontent.com/assets/390805/10123318/6c502e6e-6569-11e5-924a-62c8b850511c.gif
 [range-slider-demo]: https://cloud.githubusercontent.com/assets/16245422/12763284/63a2dafc-c9a8-11e5-8fde-37b6f42a60c2.gif
 [slider-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/example/app/sliders.js
-[slider-props-doc]: http://xinthink.github.io/react-native-material-kit/docs/lib/mdl/Slider.html#props
-[range-slider-props-doc]: http://xinthink.github.io/react-native-material-kit/docs/lib/mdl/RangeSlider.html#props
+[slider-props-doc]: http://rnmk.xinthink.com/api/react-native-material-kit.sliderprops/
+[range-slider-props-doc]: http://rnmk.xinthink.com/api/react-native-material-kit.rangesliderprops/
 
 ### Text Fields
 
@@ -382,7 +382,7 @@ the jsx equivalent:
 [mdl-tf]: http://www.getmdl.io/components/#textfields-section
 [img-tf]: https://cloud.githubusercontent.com/assets/390805/9085678/8280484a-3bb1-11e5-9354-a244b0520736.gif
 [tf-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/example/app/textfields.js
-[tf-props-doc]: http://xinthink.github.io/react-native-material-kit/docs/lib/mdl/Textfield.html#props
+[tf-props-doc]: http://rnmk.xinthink.com/api/react-native-material-kit.textfieldprops/
 
 ### Toggles
 
@@ -417,7 +417,7 @@ The two `Text` tags here, similar to [State List][android-state-list] in *Androi
 
 [android-state-list]: http://developer.android.com/guide/topics/resources/drawable-resource.html#StateList
 [rn-icons]: http://xinthink.github.io/react-native-material-kit/docs/lib/mdl/Switch.html
-[icon-toggle-props-doc]: http://xinthink.github.io/react-native-material-kit/docs/lib/mdl/IconToggle.html#props
+[icon-toggle-props-doc]: http://rnmk.xinthink.com/api/react-native-material-kit.icontoggleprops/
 
 #### Switch
 
@@ -435,7 +435,7 @@ The two `Text` tags here, similar to [State List][android-state-list] in *Androi
 👉 [props reference][switch-js-props-doc] and [example code][toggles-sample]
 
 [toggles-sample]: https://github.com/xinthink/react-native-material-kit/blob/master/example/app/toggles.js
-[switch-js-props-doc]: http://xinthink.github.io/react-native-material-kit/docs/lib/mdl/Switch.html#props
+[switch-js-props-doc]: http://rnmk.xinthink.com/api/react-native-material-kit.switchprops/
 
 #### Checkbox
 
@@ -462,7 +462,7 @@ setTheme({checkboxStyle: {
 
 [mdl-checkbox]: http://www.getmdl.io/components/index.html#toggles-section/checkbox
 [img-checkbox]: https://cloud.githubusercontent.com/assets/390805/12009445/0f938cee-acb2-11e5-9732-434382f6cd84.gif
-[checkbox-props-doc]: http://xinthink.github.io/react-native-material-kit/docs/lib/mdl/Checkbox.html#props
+[checkbox-props-doc]: http://rnmk.xinthink.com/api/react-native-material-kit.checkboxprops/
 
 
 #### Radio button
@@ -496,4 +496,4 @@ setTheme({radioStyle: {
 
 [mdl-radio]: http://www.getmdl.io/components/index.html#toggles-section/radio
 [img-radio]: https://cloud.githubusercontent.com/assets/390805/10442805/bdb08bc0-7188-11e5-8565-4ee0049ad590.gif
-[radio-props-doc]: http://xinthink.github.io/react-native-material-kit/docs/lib/mdl/RadioButton.html#props
+[radio-props-doc]: http://rnmk.xinthink.com/api/react-native-material-kit.radiobuttonprops/
